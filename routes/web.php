@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $judul = 'Selamat Datang';
+    return view('welcome', compact('judul'));
 });
 
-Auth::routes();
+Auth::routes();  
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'home', 'middleware' => 'auth'], function(){ 
+    Route::get('/', 'HomeController@index')->name('home'); 
+    Route::resource('/anggota', 'Users\AnggotaController');
+    Route::get('/biodata', 'Users\BiodataController@index')->name('anggota.biodata.index');
+    Route::resource('/profil', 'Users\AkunController');
+});
