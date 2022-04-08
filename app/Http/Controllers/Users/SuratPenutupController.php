@@ -15,6 +15,9 @@ class SuratPenutupController extends Controller
     public function index()
     {
         //
+        $judul = 'Surat Penutup';
+
+        return view('surat.suratpenutup.index', compact('judul'));
     }
 
     /**

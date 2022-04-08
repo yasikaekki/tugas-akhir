@@ -9,7 +9,7 @@
 
         @include('layouts.sidebar')
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper py-5 mt-2">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
@@ -41,48 +41,48 @@
                       <form action="{{route('anggota.store')}}" method="post" enctype="multipart/form-data">
                           @csrf
                           <div class="mb-3 form-group">                 
-                              <div class="form-group">
-                                <label>Nama Lengkap</label>
-                                <input name="nama_lengkap" type="text" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Nama Lengkap">
-                                @error('nama_lengkap')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                              </div>
-                              
-                              <div class="form-group">
-                                <label>Email</label>
-                                <input name="email" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                              </div>
-
-                              <div class="form-group">
-                                <label>Password</label>
-                                <input name="password" type="password" placeholder="Password" class="mb-3 form-control @error('password') is-invalid @enderror">
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                              </div>
-
-                              <div class="form-group">
-                                <label>Konfirmasi Password</label>
-                                <input name="password_konfirmasi" type="password" placeholder="Konfirmasi Password" class="mb-3 form-control @error('password_konfirmasi') is-invalid @enderror">
-                                @error('password_konfirmasi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                              </div>
-                              
-                              <button type="submit" class="btn btn-primary form-control mt-2">Buat akun</button>
+                            <div class="form-group">
+                              <label>Nama Lengkap</label>
+                              <input name="nama_lengkap" type="text" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Nama Lengkap">
+                              @error('nama_lengkap')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
                             </div>
+                            
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input name="email" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
+                              @error('email')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                            </div>
+
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input name="password" type="password" placeholder="Password" class="mb-3 form-control @error('password') is-invalid @enderror">
+                              @error('password')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                            </div>
+
+                            <div class="form-group">
+                              <label>Konfirmasi Password</label>
+                              <input name="password_konfirmasi" type="password" placeholder="Konfirmasi Password" class="mb-3 form-control @error('password_konfirmasi') is-invalid @enderror">
+                              @error('password_konfirmasi')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary form-control mt-2">Buat akun</button>
+                          </div>
                       </form>
                   </div>
               </div>

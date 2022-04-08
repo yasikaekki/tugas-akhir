@@ -15,6 +15,9 @@ class NomorSuratController extends Controller
     public function index()
     {
         //
+        $judul = 'Nomor Surat';
+
+        return view('surat.nosurat.index', compact('judul'));
     }
 
     /**

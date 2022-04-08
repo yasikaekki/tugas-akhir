@@ -2,11 +2,11 @@
   @if($judul == 'Selamat Datang')
   <nav class="navbar navbar-expand navbar-white navbar-light fixed-top shadow">
     <div class="container-fluid">
-      <a href="{{ url('/home') }}" class="nav-link nav-center text-dark fw-bold">UPT KIBT Poliwangi</a>
+      <a href="{{ route('home') }}" class="nav-link nav-center text-dark fw-bold">UPT KIBT Poliwangi</a>
     </div>
   </nav>
   @else
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top shadow">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -14,7 +14,7 @@
       </li>
     </ul>
     <div class="container-fluid">
-      <a href="{{ url('/home') }}" class="nav-link text-dark fw-bold"><p>UPT KIBT Poliwangi</p></a>
+      <a href="{{ route('home') }}" class="nav-link text-dark fw-bold"><p>UPT KIBT Poliwangi</p></a>
     </div>
 
     <!-- Right navbar links -->
