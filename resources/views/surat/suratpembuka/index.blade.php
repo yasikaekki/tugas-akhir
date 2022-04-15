@@ -37,24 +37,20 @@
                             <div class="card p-4">
                                 <div class="card-body">    
                                     <div class="form-group mb-3">
-                                        <label>Nomor Surat</label>
-                                        <input type="text" placeholder="01.01/UPTKIBT/VII/2022" class="mb-3 form-control" disabled>
-                                    </div>       
+                                        <label>Lampiran</label>
+                                        <input type="text" placeholder="Lampiran" class="mb-3 form-control">
+                                    </div>
                                     <div class="form-group mb-3">
-                                        <label for="exampleFormControlSelect1">Jenis Surat</label>
-                                        <select class="form-select form-control mb-3 @error('kode_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="kode_surat">
-                                           {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
-                                           {{-- @foreach ($nomor as $nomors) --}}
-                                            {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
-                                           <option value="">Pemberitahuan</option>
-                                           <option value="">Evaluasi</option>
-                                           {{-- @endforeach --}}
-                                        </select>
-                                        @error('kode_surat')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <label>Perihal</label>
+                                        <input type="text" placeholder="Perihal" class="mb-3 form-control">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Kepada</label>
+                                        <input type="text" placeholder="Kepada" class="mb-3 form-control">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <p class="fw-bold">Isi Surat Pembuka</p>
+                                        <textarea name="" id="" cols="58" rows="5" placeholder="Isi Surat Pembuka"></textarea>
                                     </div>
                                     <div class="form-group mt-5">
                                         <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">

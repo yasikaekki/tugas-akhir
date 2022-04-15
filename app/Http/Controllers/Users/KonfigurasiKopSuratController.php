@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\KonfigurasiKopSurat;
+use Auth;
+use Hash;
+use DB;
 
-class LaporanSuratController extends Controller
+class KonfigurasiKopSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +19,10 @@ class LaporanSuratController extends Controller
     public function index()
     {
         //
-        $judul = 'Laporan Surat Keluar';
+        $judul = 'Konfigurasi Kop Surat';
+        $authuser = Auth::user();
 
-        return view('laporan.index', compact('judul'));
+        return view('konfigurasi.index', compact('judul', 'authuser'));
     }
 
     /**
@@ -27,7 +32,7 @@ class LaporanSuratController extends Controller
      */
     public function create()
     {
-        //
+        //    
     }
 
     /**
@@ -39,6 +44,20 @@ class LaporanSuratController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            //'ubah_foto'=> 'required',
+            'nama_upt'=> 'required',
+            'nama_mentri'=> 'required',
+        ]);
+
+        $kopsurat=new KonfigurasiKopSurat();
+        // $kopsurat->ubah_fotot=$request->ubah_foto;
+        $kopsurat->nama_upt=$request->nama_upt;
+        $kopsurat->nama_mentri=$request->nama_mentri;
+        $kopsurat->created_at=\Carbon\Carbon::now();
+        $kopsurat->save();
+
+        return redirect()->route('konfigurasi.index')->with('sukses', 'kop surat berhasil disimpan');
     }
 
     /**
@@ -73,6 +92,20 @@ class LaporanSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            //'ubah_foto'=> 'required',
+            'nama_upt'=> 'required',
+            'nama_mentri'=> 'required',
+        ]);
+
+        $kopsurat=new KonfigurasiKopSurat();
+        // $kopsurat->ubah_fotot=$request->ubah_foto;
+        $kopsurat->nama_upt=$request->nama_upt;
+        $kopsurat->nama_mentri=$request->nama_mentri;
+        $kopsurat->created_at=\Carbon\Carbon::now();
+        $kopsurat->save();
+
+        return redirect()->route('konfigurasi.index')->with('sukses', 'kop surat berhasil diperbarui');
     }
 
     /**

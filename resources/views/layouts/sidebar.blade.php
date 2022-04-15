@@ -43,7 +43,11 @@
             </a>
           </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+          @if($judul == 'Laporan Surat Keluar')
+            <a href="" class="nav-link active disabled">
+          @else
+            <a href="{{route('laporan.index')}}" class="nav-link">
+          @endif
             <i class="nav-icon fas bi-clipboard2-pulse-fill"></i>
             <p>
                 Laporan Surat Keluar 
@@ -51,7 +55,11 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+          @if($judul == 'Rekapitulasi Surat Keluar')
+            <a href="" class="nav-link active disabled">
+          @else
+            <a href="{{route('rekapitulasi.index')}}" class="nav-link">
+          @endif
             <i class="nav-icon fas bi-clipboard2-data-fill"></i>
             <p>
                 Rekapitulasi Surat Keluar 
@@ -96,7 +104,11 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+          @if($judul == 'Konfigurasi Kop Surat')
+            <a href="" class="nav-link active disabled">
+          @else
+            <a href="{{route('konfigurasi.index')}}" class="nav-link">
+          @endif
             <i class="nav-icon fas fa-solid fa-gear"></i>
             <p>
                 Konfigurasi Kop Surat 

@@ -15,6 +15,9 @@ class RekapitulasiSuratController extends Controller
     public function index()
     {
         //
+        $judul = 'Rekapitulasi Surat Keluar';
+
+        return view('rekapitulasi.index', compact('judul'));
     }
 
     /**

@@ -18,3 +18,19 @@ body{
 .footer-color{
     background-color: rgb(245, 246, 250);
 }
+
+.profile-user {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    height: 150px;
+    width: 150px;
+}
+
+.text18{
+    font-size: 18px;
+}
+
+.text16{
+    font-size: 16px;
+}

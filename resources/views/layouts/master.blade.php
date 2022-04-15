@@ -35,65 +35,65 @@
                     <div class="row">
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-info p-4">
+                            <div class="small-box bg-info">
                             <div class="inner">
                                 <h3></h3>
 
                                 <p>Buat Surat</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-bag my-2"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer my-5">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-success p-4">
+                            <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3><sup style="font-size: 20px"></sup></h3>
 
                                     <p>Laporan Surat Keluar</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    <i class="ion ion-stats-bars my-2"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="{{route('laporan.index')}}" class="small-box-footer my-5">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-danger p-4">
+                            <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3></h3>
 
                                     <p>Rekapitulasi Surat Keluar</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
+                                    <i class="ion ion-pie-graph my-2"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="{{route('rekapitulasi.index')}}" class="small-box-footer my-5">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-warning p-4">
+                            <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3></h3>
 
                                     <p>Anggota</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-person-add my-2"></i>
                                 </div>
-                                <a href="{{route ('anggota.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="{{route ('anggota.index')}}" class="small-box-footer my-5">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <!-- ./col -->                      
+                        <!-- ./col -->                     
                     </div>
                     <div class="row">
                         <section class="col-lg-6 connectedSortable">
@@ -113,7 +113,7 @@
                                     <p class="h1 text-center">115</p>
                                 </div>
                             </div>
-                        </section>
+                        </section> 
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
