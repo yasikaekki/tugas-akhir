@@ -33,37 +33,46 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if(session()->get('sukses'))
+                        <div class="alert alert-success">
+                            {{session()->get('sukses')}}
+                        </div>
+                        @endif
                         <div class="col-lg-6">
-                            <div class="card p-4">
-                                <div class="card-body">    
-                                    <div class="form-group mb-3">
-                                        <label>Nomor Surat</label>
-                                        <input type="text" placeholder="01.01/UPTKIBT/VII/2022" class="mb-3 form-control" disabled>
-                                    </div>       
-                                    <div class="form-group mb-3">
-                                        <label for="exampleFormControlSelect1">Jenis Surat</label>
-                                        <select class="form-select form-control mb-3 @error('kode_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="kode_surat">
-                                           {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
-                                           {{-- @foreach ($nomor as $nomors) --}}
-                                            {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
-                                           <option value="">Pemberitahuan</option>
-                                           <option value="">Evaluasi</option>
-                                           {{-- @endforeach --}}
-                                        </select>
-                                        @error('kode_surat')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group mt-5">
-                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                            <button class="col-md-6 btn btn-primary" type="button">Button</button>
-                                            <a href="{{route('surat.suratpembuka.index')}}" class="col-md-6 btn btn-primary">Button</a>
-                                          </div>
+                            <form action="{{route('nomor.store')}}" method="POST">
+                                @csrf
+                                <div class="card p-4">
+                                    <div class="card-body">    
+                                        <div class="form-group mb-3">
+                                            <label>Nomor Surat</label>
+                                            <input type="text" value="{{$laporan->nomor_surat}}" placeholder="Nomor Surat" class="mb-3 form-control" disabled>
+                                        </div>       
+                                        <div class="form-group mb-3">
+                                            <label for="exampleFormControlSelect1">Jenis Surat</label>
+                                            <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
+                                               {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
+                                               {{-- @foreach ($nomor as $nomors) --}}
+                                                {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
+                                               @foreach($nosurat as $nosurats)
+                                                <option value="{{$nosurats->id_no_surat}}.{{$nosurats->id_kode_surat}}/UPTKIBT">{{$nosurats->jenis_surat}}</option>
+                                               @endforeach
+                                               {{-- @endforeach --}}
+                                            </select>
+                                            @error('nomor_surat')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-5">
+                                            <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
+                                                <a href="{{route('surat.suratpembuka.index')}}" class="col-md-6 btn btn-primary">Button</a>
+                                              </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.row -->

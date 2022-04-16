@@ -34,7 +34,7 @@
           @if($judul == 'Nomor Surat' || $judul == 'Surat Pembuka' || $judul == 'Tubuh Surat' || $judul == 'Surat Penutup')
             <a href="" class="nav-link active disabled">
           @else
-          <a href="{{route('surat.nosurat.index')}}" class="nav-link">
+          <a href="{{route('nomor.index')}}" class="nav-link">
           @endif
               <i class="nav-icon fas bi-file-earmark-text-fill"></i>
               <p>

@@ -14,16 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', function () {
     $judul = 'Selamat Datang';
-    return view('welcome', compact('judul'));
+    if(!Auth::user()){
+        return view('welcome', compact('judul'));
+    }else{
+        return redirect()->route('home');
+    }
 });
 
 // Auth::routes(); 
-Auth::routes(['register' => false, 'verify' => false]); 
+Auth::routes([
+    'register' => false, 
+    'verify' => false,
+    'confirm' => false,
+    'email' => false,
+    'reset' => false
+]); 
 
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){ 
     Route::get('home', 'HomeController@index')->name('home'); 
-    Route::get('surat/nomor', 'Users\NomorSuratController@index')->name('surat.nosurat.index');
-    Route::get('surat/pembuka', 'Users\SuratPembukaController@index')->name('surat.suratpembuka.index');
+    Route::resource('surat/nomor', 'Users\NomorSuratController');
+    Route::resource('surat/pembuka', 'Users\SuratPembukaController');
     Route::get('surat/penutup', 'Users\SuratPenutupController@index')->name('surat.suratpenutup.index');
     Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
     Route::get('rekapitulasi', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.index');

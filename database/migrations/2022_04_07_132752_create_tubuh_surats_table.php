@@ -15,6 +15,7 @@ class CreateTubuhSuratsTable extends Migration
     {
         Schema::create('tubuh_surats', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('user_id')->nullable();
             $table->timestamps();
         });
     }

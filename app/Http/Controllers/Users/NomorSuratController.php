@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\LaporanSurat;
+use App\Model\NomorSurat;
+use App\User;
+use Auth;
+use DB;
 
 class NomorSuratController extends Controller
 {
@@ -16,8 +21,13 @@ class NomorSuratController extends Controller
     {
         //
         $judul = 'Nomor Surat';
+        $authuser = Auth::user();
+        $nosurat = NomorSurat::all();
+        $laporansurat = DB::table('laporan_surats')->select('id')->value('id');
+        $dataterakhir = LaporanSurat::latest()->first();
+        $laporan = LaporanSurat::latest()->first();
 
-        return view('surat.nosurat.index', compact('judul'));
+        return view('surat.nosurat.index', compact('judul', 'nosurat', 'laporan'));
     }
 
     /**
@@ -39,6 +49,18 @@ class NomorSuratController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'nomor_surat'=> 'required',
+        ]);
+
+        $nosurat=new LaporanSurat();
+        $nosurat->user_id = Auth::user()->id;
+        $nosurat->nomor_surat=$request->nomor_surat;
+        $nosurat->created_at=\Carbon\Carbon::now();
+        $nosurat->updated_at=\Carbon\Carbon::now();
+        $nosurat->save();
+
+        return redirect()->route('nomor.index')->with('sukses', 'berhasil disimpan');
     }
 
     /**

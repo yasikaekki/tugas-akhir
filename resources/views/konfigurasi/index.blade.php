@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Nama UPT</label>
-                                            <input type="text" name="nama_upt" placeholder="UPT Kewirausahaan dan Inkubator Bisnis Teknologi Poliwangi" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror">
+                                            <input type="text" name="nama_upt" value="{{$kop->nama_upt}}" placeholder="Nama UPT" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror">
                                             @error('nama_upt')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Nama Kementrian</label>
-                                            <input type="text" name="nama_mentri" placeholder="Nama Kementrian" class="mb-3 form-control @error('nama_mentri') is-invalid @enderror">
+                                            <input type="text" value="{{$kop->nama_mentri}}" name="nama_mentri" placeholder="Nama Kementrian" class="mb-3 form-control @error('nama_mentri') is-invalid @enderror">
                                             @error('nama_mentri')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

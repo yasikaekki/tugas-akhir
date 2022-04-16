@@ -15,6 +15,11 @@ class CreateSuratPembukasTable extends Migration
     {
         Schema::create('surat_pembukas', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('user_id')->nullable();
+            $table->string('lampiran')->nullable();
+            $table->string('perihal')->nullable();
+            $table->string('kepada')->nullable();
+            $table->string('isi_surat_pembuka')->nullable();
             $table->timestamps();
         });
     }

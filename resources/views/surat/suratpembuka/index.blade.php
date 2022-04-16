@@ -33,33 +33,73 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if(session()->get('sukses'))
+                        <div class="alert alert-success">
+                            {{session()->get('sukses')}}
+                        </div>
+                        @endif
                         <div class="col-lg-6">
-                            <div class="card p-4">
-                                <div class="card-body">    
-                                    <div class="form-group mb-3">
-                                        <label>Lampiran</label>
-                                        <input type="text" placeholder="Lampiran" class="mb-3 form-control">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label>Perihal</label>
-                                        <input type="text" placeholder="Perihal" class="mb-3 form-control">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label>Kepada</label>
-                                        <input type="text" placeholder="Kepada" class="mb-3 form-control">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <p class="fw-bold">Isi Surat Pembuka</p>
-                                        <textarea name="" id="" cols="58" rows="5" placeholder="Isi Surat Pembuka"></textarea>
-                                    </div>
-                                    <div class="form-group mt-5">
-                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                            <button class="col-md-6 btn btn-primary" type="button">Button</button>
-                                            <a href="{{route('surat.suratpenutup.index')}}" class="col-md-6 btn btn-primary">Button</a>
-                                          </div>
+                            <form action="{{route ('pembuka.store')}}" method="post">
+                                @csrf
+                                <div class="card p-4">
+                                    <div class="card-body">    
+                                        <div class="form-group mb-3">
+                                            <label for="exampleFormControlSelect1">Lampiran</label>
+                                            <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">
+                                               {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
+                                               {{-- @foreach ($nomor as $nomors) --}}
+                                                {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
+                                                <option value="-" selected>-</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                               {{-- @endforeach --}}
+                                            </select>
+                                            @error('lampiran')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label>Perihal</label>
+                                            <input name="perihal" value="{{$pembuka->perihal}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                            @error('perihal')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label>Kepada</label>
+                                            <input name="kepada" value="{{$pembuka->kepada}}" type="text" placeholder="Kepada" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                            @error('kepada')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <p class="fw-bold">Isi Surat Pembuka</p>
+                                            <textarea name="isi_surat_pembuka" cols="58" rows="5" placeholder="Isi Surat Pembuka" class="mb-3 form-control @error('isi_surat_pembuka') is-invalid @enderror"></textarea>
+                                            @error('isi_surat_pembuka')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-5">
+                                            <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
+                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-6 btn btn-primary">Button</a>
+                                              </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.row -->
