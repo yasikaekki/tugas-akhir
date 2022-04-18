@@ -37,8 +37,8 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::get('surat/penutup', 'Users\SuratPenutupController@index')->name('surat.suratpenutup.index');
     Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
     Route::get('rekapitulasi', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.index');
-    Route::get('anggota', 'Users\AnggotaController@index')->name('anggota.index');
-    Route::get('biodata', 'Users\BiodataController@index')->name('anggota.biodata.index');
+    Route::resource('anggota', 'Users\AnggotaController');
+    Route::get('biodata', 'Users\BiodataController@index');
     Route::resource('konfigurasi', 'Users\KonfigurasiKopSuratController');
     Route::resource('profil', 'Users\AkunController');
 });

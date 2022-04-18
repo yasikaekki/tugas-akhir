@@ -24,7 +24,7 @@
             @else
             <a href="/home" class="nav-link">
             @endif
-            <i class="nav-icon bi bi-house-fill"></i>
+            <i class="nav-icon fas bi-house-fill"></i>
             <p>
                 Beranda
             </p>
@@ -95,7 +95,7 @@
                 @if($judul == 'Biodata Anggota KIBT')
                 <a href="" class="nav-link active disabled">
                 @else
-                <a href="{{route('anggota.biodata.index')}}" class="nav-link">
+                <a href="{{route('anggota.show')}}" class="nav-link">
                 @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Biodata Anggota</p>

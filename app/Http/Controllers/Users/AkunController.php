@@ -22,9 +22,9 @@ class AkunController extends Controller
         $judul = 'Akun';
         $userauth = Auth::user();
         $uid = Auth::user()->id;
-        $user = User::all();
         $akun = Akun::find($uid);
-        return view('profil.index', compact('judul', 'user', 'akun'));
+
+        return view('profil.index', compact('judul', 'akun', 'userauth'));
     }
 
     /**
@@ -68,6 +68,12 @@ class AkunController extends Controller
     public function edit($id)
     {
         //
+        $judul = 'Akun';
+        $userauth = Auth::user();
+        $uid = Auth::user()->id;
+        $akun = Akun::find($uid);
+
+        return view('profil.edit', compact('judul', 'akun','userauth'));
     }
 
     /**

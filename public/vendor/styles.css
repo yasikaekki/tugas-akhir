@@ -34,3 +34,11 @@ body{
 .text16{
     font-size: 16px;
 }
+
+.logo-profil {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    height: 350px;
+    width: 350px;
+}

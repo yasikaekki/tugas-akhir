@@ -52,14 +52,21 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {{-- @foreach($user as $i => $users)
-                                      <tr>
-                                          <td class="text-center">{{$no++}}.</td>
-                                          <td class="text-center">{{$users->name}}</td>
-                                          <td class="text-center">{{$users->email}}</td>
-                                          <td class="text-center">{{$users->email_verified_at}}</td>                                              
+                                      @foreach($akun as $akuns)
+                                      <tr class="text-center">
+                                          <td>{{$no++}}.</td>
+                                          <td></td>
+                                          @foreach($user as $users)
+                                          <td>{{$users->name}}</td>
+                                          @endforeach
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
                                       </tr>
-                                      @endforeach --}}
+                                      @endforeach
                                     </tbody>
                                   </table>
                                 </div>

@@ -21,7 +21,7 @@ class KonfigurasiKopSuratController extends Controller
         //
         $judul = 'Konfigurasi Kop Surat';
         $authuser = Auth::user();
-        $kopid = KonfigurasiKopSurat::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
         $kop = KonfigurasiKopSurat::find($kopid);
 
         return view('konfigurasi.index', compact('judul', 'authuser','kop'));
@@ -86,15 +86,21 @@ class KonfigurasiKopSuratController extends Controller
             'nama_mentri'=> 'required',
         ]);
 
-        $kopsurat=new KonfigurasiKopSurat();
-        $kopsurat->user_id = Auth::user()->id;
-        // $kopsurat->ubah_fotot=$request->ubah_foto;
+        $kopsurat= KonfigurasiKopSurat::find($id);
+        // $kopsurat->ubah_foto=$request->ubah_foto;
         $kopsurat->nama_upt=$request->nama_upt;
         $kopsurat->nama_mentri=$request->nama_mentri;
         $kopsurat->created_at=\Carbon\Carbon::now();
+        $kopsurat->updated_at=\Carbon\Carbon::now();
         $kopsurat->save();
 
-        return redirect()->route('konfigurasi.index')->with('sukses', 'kop surat berhasil diperbarui');
+        if ($kopsurat->nama_upt == null || $kopsurat->nama_mentri == null) {
+            # code...
+            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil disimpan');
+        }else {
+            # code...
+            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil diperbarui');
+        }
     }
 
     /**

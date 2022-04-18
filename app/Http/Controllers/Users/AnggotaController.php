@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Akun;
 use App\User;
 use Auth;
 use Hash;
@@ -21,7 +22,6 @@ class AnggotaController extends Controller
         //
         $judul = 'Anggota KIBT';
         $no = 1;
-        $uid = Auth::user()->id;
         $authuser = Auth::user();
         $user = User::all();
 
@@ -37,11 +37,9 @@ class AnggotaController extends Controller
     {
         //
         $judul = 'Registrasi Anggota KIBT';
-        $user = User::all();
-        $uid = Auth::user()->id;
-        $authuser = Auth::user();
+        $userauth = Auth::user();
 
-        return view('anggota.create', compact('judul'));
+        return view('anggota.create', compact('judul','userauth'));
     }
 
     /**
@@ -68,7 +66,13 @@ class AnggotaController extends Controller
         $user->email_verified_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota.index')->with('sukses', 'akun'. $user->name .'berhasil dibuat');
+        $akun=new Akun();
+        $akun->user_id=$user->id;
+        $akun->created_at=\Carbon\Carbon::now();
+        $akun->updated_at=\Carbon\Carbon::now();
+        $akun->save();
+
+        return redirect()->route('anggota.index')->with('sukses', 'Akun'. $user->name .'berhasil dibuat');
     }
 
     /**
@@ -91,6 +95,10 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         //
+        $judul = 'Ubah Akun';
+        $userauth = Auth::user();
+
+        return view('anggota.edit', compact('judul', 'userauth'));
     }
 
     /**
@@ -103,6 +111,21 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'nama_lengkap'=> 'required',
+            'email'=> 'required|email|unique:users,email',
+            'password'=> 'required|same:password_konfirmasi',
+            'password_konfirmasi'=> 'required',
+        ]);
+
+        $user=User::find($id);
+        $user->name=$request->nama_lengkap;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->created_at=\Carbon\Carbon::now();
+        $user->save();
+
+        return redirect()->route('anggota.index')->with('sukses', 'Akun'. $user->name .'berhasil diubah');
     }
 
     /**
@@ -116,6 +139,6 @@ class AnggotaController extends Controller
         //
         $user = User::find($id);
         $user->delete();
-        return back()->with('hapus', 'Akun admin "'. $user->name .'" berhasil dihapus');
+        return back()->with('hapus', 'Akun "'.$user->name.'" berhasil dihapus');
     }
 }

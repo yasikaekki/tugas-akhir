@@ -13,8 +13,9 @@ class NomorSuratSeeder extends Seeder
     public function run()
     {
         //  
+            $uid = DB::table('users')->select('id')->value('id');
             $nomor = new NomorSurat;
-            $nomor->user_id = 1;
+            $nomor->user_id = $uid;
             $nomor->id_no_surat = 1;
             $nomor->id_kode_surat = 1;
             $nomor->jenis_surat = 'Surat Undangan (SU)';
@@ -23,7 +24,7 @@ class NomorSuratSeeder extends Seeder
             $nomor->save();
 
             $nomor = new NomorSurat;
-            $nomor->user_id = 1;
+            $nomor->user_id = $uid;
             $nomor->id_no_surat = 2;
             $nomor->id_kode_surat = 2;
             $nomor->jenis_surat = 'Surat Keputusan (SK)';
@@ -32,7 +33,7 @@ class NomorSuratSeeder extends Seeder
             $nomor->save();
 
             $nomor = new NomorSurat;
-            $nomor->user_id = 1;
+            $nomor->user_id = $uid;
             $nomor->id_no_surat = 3;
             $nomor->id_kode_surat = 3;
             $nomor->jenis_surat = 'Surat Permohonan (SPm)';
@@ -41,7 +42,7 @@ class NomorSuratSeeder extends Seeder
             $nomor->save();
 
             $nomor = new NomorSurat;
-            $nomor->user_id = 1;
+            $nomor->user_id = $uid;
             $nomor->id_no_surat = 4;
             $nomor->id_kode_surat = 4;
             $nomor->jenis_surat = 'Surat Pemberitahuan (SPb)';

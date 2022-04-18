@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $judul = 'Beranda';
-        $uid = Auth::user();
-        return view('home', compact('judul', 'uid'));
+        $authuser = Auth::user();
+
+        return view('home', compact('judul', 'authuser'));
     }
 }

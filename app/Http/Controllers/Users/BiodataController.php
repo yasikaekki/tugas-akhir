@@ -20,10 +20,11 @@ class BiodataController extends Controller
         //
         $no = 1;
         $judul = 'Biodata Anggota KIBT';
-        $uid = Auth::user()->id;
         $userauth = Auth::user();
+        $akun = Akun::all();
+        $user = User::all();
 
-        return view('anggota.biodata.index', compact('judul'));
+        return view('anggota.biodata.index', compact('judul', 'akun', 'user', 'no'));    
     }
 
     /**

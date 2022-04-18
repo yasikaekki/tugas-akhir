@@ -41,21 +41,27 @@
                                       <tr class="table-secondary text-center">
                                         <th>No.</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Email</th>
                                         <th>Jabatan</th>
                                         <th>NIK/NIP/NIPPPK</th>
-                                        <th>TTD</th>
+                                        <th>Nomor Surat</th>
+                                        <th>Surat Pembuka</th>
+                                        <th>Surat Penutup</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {{-- @foreach($user as $i => $users)
-                                      <tr>
-                                          <td class="text-center">{{$no++}}.</td>
-                                          <td class="text-center">{{$users->name}}</td>
-                                          <td class="text-center">{{$users->email}}</td>
-                                          <td class="text-center">{{$users->email_verified_at}}</td>                                              
+                                      @foreach($laporan as $laporans)
+                                      <tr class="text-center">
+                                          <td>{{$no++}}.</td>
+                                          @foreach($user as $users)
+                                          <td>{{$users->name}}</td>
+                                          <th></th>
+                                          <th></th>                                           
+                                          @endforeach
+                                          <th>{{$laporans->nomor_surat}}</th>
+                                          <th></th>                                           
+                                          <th></th>                                           
                                       </tr>
-                                      @endforeach --}}
+                                      @endforeach
                                     </tbody>
                                   </table>
                                 </div>

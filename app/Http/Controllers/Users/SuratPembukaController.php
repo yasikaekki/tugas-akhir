@@ -20,7 +20,6 @@ class SuratPembukaController extends Controller
     {
         //
         $judul = 'Surat Pembuka';
-        $uid = Auth::user()->id;
         $authuser = Auth::user();
         // $pembuka = DB::table('surat_pembukas')->select('id')->value('id');
         $pembuka = SuratPembuka::latest()->first();

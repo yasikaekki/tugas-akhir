@@ -33,15 +33,15 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <div class="card p-4">                      
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
                                         <img src="{{asset('vendor/user.png')}}" class="profile-user img-circle">                                        
-                                        <h4 class="fs-3">Nama Lengkap</h4>
+                                        <h4 class="fs-3">{{$userauth->name}}</h4>
                                         <p class="text18 text-muted mb-4">Pendidikan</p>                                        
                                     </div>
-                                    <div class="d-grid col-8 mx-auto">                                  
+                                    <div class="d-grid col-12 mx-auto">                                  
                                         <div class="card mb-4">
                                             <div class="card-header bg-light">
                                                 <p class="text-center h5 fw-bold">Biodata Diri</p>
@@ -63,6 +63,11 @@
                                                 <medium class="mb-3">081238398906</medium>
                                             </div>                                           
                                         </div>
+                                        @if($akun->nip == null || $akun->jabatan == null || $akun->gelar == null)
+                                        <a href="{{route('profil.edit',$akun->id)}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
+                                        @else
+                                        <a href="{{route('profil.edit',$akun->id)}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

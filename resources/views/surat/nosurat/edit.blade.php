@@ -39,14 +39,9 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
-                            @if($laporan->nomor_surat == null)
                             <form action="{{route('nomor.update', $authuser->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                            @else
-                            <form action="{{route('nomor.store')}}" method="POST">
-                                @csrf
-                            @endif
                                 <div class="card p-4">
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
@@ -61,9 +56,9 @@
                                                 {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
                                                @foreach($nosurat as $nosurats)
                                                @if($nosurats->id_no_surat < 10 && $nosurats->id_kode_surat < 10)
-                                                <option value="0{{$nosurats->id_no_surat++}}.0{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                                <option value="0{{$nosurats->id_no_surat}}.0{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @else
-                                                <option value="{{$nosurats->id_no_surat++}}.{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                               <option value="{{$nosurats->id_no_surat}}.{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @endif
                                                @endforeach
                                                {{-- @endforeach --}}
@@ -76,7 +71,7 @@
                                         </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
+                                                <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
                                                 <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-info">Selanjutnya</a>
                                             </div>
                                         </div>

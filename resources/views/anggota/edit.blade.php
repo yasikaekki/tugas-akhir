@@ -38,8 +38,9 @@
             <div class="col-lg-6">
                 <div class="card p-4">
                   <div class="card-body">
-                      <form action="{{route('anggota.store')}}" method="post" enctype="multipart/form-data">
-                          @csrf
+                      <form action="{{route('anggota.update', $userauth->id)}}" method="post" enctype="multipart/form-data">
+                        @method('PATCH')
+                        @csrf
                           <div class="mb-3 form-group">                 
                             <div class="form-group">
                               <label>Nama Lengkap</label>
@@ -53,7 +54,7 @@
                             
                             <div class="form-group">
                               <label>Email</label>
-                              <input name="email" value="{{$userauth->email}}" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
+                              <input name="email" type="email" value="{{$userauth->email}}" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
                               @error('email')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

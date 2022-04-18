@@ -70,11 +70,11 @@
                                             </span>
                                             @enderror
                                         </div>
-                                        {{-- @if($kop->nama_upt == null || $kop->nama_mentri == null) --}}
-                                        <button type="submit" class="btn btn-primary form-control mt-2">Simpan</button>
-                                        {{-- @else
-                                        <button type="submit" class="btn btn-primary form-control mt-2">Perbarui</button>
-                                        @endif --}}
+                                        @if($kop->nama_upt == null || $kop->nama_mentri == null)
+                                        <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-check-square-fill"></i> Simpan</button>
+                                        @else
+                                        <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Ubah</button>
+                                        @endif
                                     </div>
                                 </div>
                             </form>
