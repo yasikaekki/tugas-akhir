@@ -39,10 +39,10 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
-                            <form action="{{route('nomor.update', $authuser->id)}}" method="POST">
+                            <form action="{{route('nomor.update', $nomor->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                                <div class="card p-4">
+                                <div class="card border-top-info p-4">
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
                                             <label>Nomor Surat</label>
@@ -51,14 +51,14 @@
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlSelect1">Jenis Surat</label>
                                             <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
-                                               {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
+                                               <option value="null" selected hidden disabled>Pilih</option>
                                                {{-- @foreach ($nomor as $nomors) --}}
                                                 {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
                                                @foreach($nosurat as $nosurats)
-                                               @if($nosurats->id_no_surat < 10 && $nosurats->id_kode_surat < 10)
-                                                <option value="0{{$nosurats->id_no_surat}}.0{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                               @if($nosurats->id_no_surat < 10)
+                                                <option value="0{{$nosurats->id_no_surat}}.0{{$nosurats->id_no_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @else
-                                               <option value="{{$nosurats->id_no_surat}}.{{$nosurats->id_kode_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                                <option value="{{$nosurats->id_no_surat}}.{{$nosurats->id_no_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @endif
                                                @endforeach
                                                {{-- @endforeach --}}
@@ -72,7 +72,11 @@
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                                 <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
-                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-info">Selanjutnya</a>
+                                                @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null)
+                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                @else
+                                                <a href="{{route('pembuka.edit',$pembuka)}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

@@ -37,9 +37,10 @@ class AnggotaController extends Controller
     {
         //
         $judul = 'Registrasi Anggota KIBT';
-        $userauth = Auth::user();
+        $uid = User::all()->last()->id;
+        $anggota = User::find($uid);
 
-        return view('anggota.create', compact('judul','userauth'));
+        return view('anggota.create', compact('judul','anggota'));
     }
 
     /**
@@ -96,9 +97,9 @@ class AnggotaController extends Controller
     {
         //
         $judul = 'Ubah Akun';
-        $userauth = Auth::user();
+        $anggota = User::find($id);
 
-        return view('anggota.edit', compact('judul', 'userauth'));
+        return view('anggota.edit', compact('judul', 'anggota'));
     }
 
     /**
@@ -111,13 +112,6 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'nama_lengkap'=> 'required',
-            'email'=> 'required|email|unique:users,email',
-            'password'=> 'required|same:password_konfirmasi',
-            'password_konfirmasi'=> 'required',
-        ]);
-
         $user=User::find($id);
         $user->name=$request->nama_lengkap;
         $user->email=$request->email;

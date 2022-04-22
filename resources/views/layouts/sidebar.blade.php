@@ -6,7 +6,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{ asset('vendor/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
             <a href="{{route('profil.index')}}" class="d-block">Alexander Pierce</a>
@@ -34,7 +34,7 @@
           @if($judul == 'Nomor Surat' || $judul == 'Surat Pembuka' || $judul == 'Tubuh Surat' || $judul == 'Surat Penutup')
             <a href="" class="nav-link active disabled">
           @else
-          <a href="{{route('nomor.index')}}" class="nav-link">
+            <a href="{{route('nomor.index')}}" class="nav-link">
           @endif
               <i class="nav-icon fas bi-file-earmark-text-fill"></i>
               <p>
@@ -95,7 +95,7 @@
                 @if($judul == 'Biodata Anggota KIBT')
                 <a href="" class="nav-link active disabled">
                 @else
-                <a href="{{route('anggota.show')}}" class="nav-link">
+                <a href="{{route('anggota.biodata.index')}}" class="nav-link">
                 @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Biodata Anggota</p>

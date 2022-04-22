@@ -39,9 +39,15 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
+                            @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null)
+                            <form action="{{route('pembuka.update', $suratpembuka->id)}}" method="POST">
+                                @method('PATCH')
+                                @csrf
+                            @else
                             <form action="{{route ('pembuka.store')}}" method="post">
                                 @csrf
-                                <div class="card p-4">
+                            @endif
+                                <div class="card border-top-info p-4">
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlSelect1">Lampiran</label>
@@ -93,8 +99,13 @@
                                         </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
-                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-6 btn btn-primary">Button</a>
+                                                @if($laporan->nomor_surat == null)
+                                                <a href="{{route('nomor.index')}}" class="col-md-4 btn btn-danger">Kembali</a>
+                                                @else
+                                                <a href="{{route('nomor.edit',$laporan)}}" class="col-md-4 btn btn-danger">Kembali</a>
+                                                @endif
+                                                <button class="col-md-4 btn btn-primary" type="submit">Simpan</button>
+                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-4 btn btn-success">Lanjut</a>
                                               </div>
                                         </div>
                                     </div>

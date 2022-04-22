@@ -34,10 +34,10 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">
-                            <div class="card p-4">                      
+                            <div class="card border-top-info p-4">                      
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
-                                        <img src="{{asset('vendor/user.png')}}" class="profile-user img-circle">                                        
+                                        <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="profile-user img-circle">                                        
                                         <h4 class="fs-3">{{$userauth->name}}</h4>
                                         <p class="text18 text-muted mb-4">Pendidikan</p>                                        
                                     </div>

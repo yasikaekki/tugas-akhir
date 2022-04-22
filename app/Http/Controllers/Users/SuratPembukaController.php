@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\SuratPembuka;
+use App\Model\LaporanSurat;
+use App\Model\NomorSurat;
 use App\User;
 use Auth;
 use DB;
@@ -21,10 +23,13 @@ class SuratPembukaController extends Controller
         //
         $judul = 'Surat Pembuka';
         $authuser = Auth::user();
-        // $pembuka = DB::table('surat_pembukas')->select('id')->value('id');
+        $id = DB::table('laporan_surats')->select('id')->value('id');
+        $pembukaid = SuratPembuka::all()->last()->id;
+        $suratpembuka = SuratPembuka::find($pembukaid);
+        $laporan = LaporanSurat::find($id);
         $pembuka = SuratPembuka::latest()->first();
 
-        return view('surat.suratpembuka.index', compact('judul','pembuka'));
+        return view('surat.suratpembuka.index', compact('judul', 'suratpembuka','pembuka', 'laporan'));
     }
 
     /**
@@ -46,6 +51,8 @@ class SuratPembukaController extends Controller
     public function store(Request $request)
     {
         //
+        $id = DB::table('surat_pembukas')->select('id')->value('id');
+        $pembuka = SuratPembuka::find($id);
         $this->validate($request, [
             'lampiran'=> 'required',
             'perihal'=> 'required',
@@ -63,7 +70,7 @@ class SuratPembukaController extends Controller
         $suratpembuka->updated_at=\Carbon\Carbon::now();
         $suratpembuka->save();
 
-        return redirect()->route('pembuka.index')->with('sukses', 'berhasil disimpan');
+        return redirect()->route('pembuka.edit',$pembuka)->with('sukses', 'Surat Pembuka berhasil disimpan');
     }
 
     /**
@@ -86,6 +93,14 @@ class SuratPembukaController extends Controller
     public function edit($id)
     {
         //
+        $judul = 'Surat Pembuka';
+        $authuser = Auth::user();
+        $noid = DB::table('nomor_surats')->select('id')->value('id');
+        $nomor = NomorSurat::find($noid);
+        $pembuka = SuratPembuka::find($id);
+        $suratpembuka = SuratPembuka::latest()->first();
+
+        return view('surat.suratpembuka.edit', compact('judul','pembuka', 'suratpembuka','nomor'));
     }
 
     /**
@@ -98,6 +113,22 @@ class SuratPembukaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $suratpembuka=SuratPembuka::find($id);
+        $suratpembuka->lampiran=$request->lampiran;
+        $suratpembuka->perihal=$request->perihal;
+        $suratpembuka->kepada=$request->kepada;
+        $suratpembuka->isi_surat_pembuka=$request->isi_surat_pembuka;
+        $suratpembuka->created_at=\Carbon\Carbon::now();
+        $suratpembuka->updated_at=\Carbon\Carbon::now();
+        $suratpembuka->save();
+
+        if ($suratpembuka->lampiran == null || $suratpembuka->perihal == null || $suratpembuka->kepada == null || $suratpembuka->isi_surat_pembuka == null) {
+            # code...
+            return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil disimpan');
+        }else {
+            # code...
+            return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil diperbarui');
+        }
     }
 
     /**

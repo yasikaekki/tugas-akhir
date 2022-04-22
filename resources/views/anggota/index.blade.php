@@ -43,7 +43,7 @@
                       </div>
                       @endif
                         <div class="col-lg-12">
-                            <div class="card p-4">
+                            <div class="card border-top-info p-4">
                                 <div class="card-body">
                                   <div class="d-grid d-md-flex justify-content-md-end">
                                     <a href="{{route ('anggota.create')}}" class="btn btn-success mb-3"><i class="bi bi-plus-square-fill"></i> Tambah</a>

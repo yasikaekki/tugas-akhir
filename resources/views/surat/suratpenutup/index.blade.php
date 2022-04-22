@@ -34,15 +34,16 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-6">
-                            <div class="card p-4">
+                            <div class="card border-top-info p-4">
                                 <div class="card-body">    
                                     <div class="form-group mb-3">
                                         <p class="fw-bold">Isi Surat Penutup</p>
                                         <textarea name="" id="" cols="58" rows="5" placeholder="Isi Surat Penutup"></textarea>
                                     </div>
-                                    <div class="form-group mt-5">
-                                    </div>
-                                    <button class="btn btn-primary btn-block" type="button">Button</button>                               
+                                    <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                        <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-danger">Kembali</a>
+                                        <button class="col-md-6 btn btn-primary" type="submit">Cetak</button>
+                                      </div>                             
                                 </div>
                             </div>
                         </div>

@@ -34,7 +34,7 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-12">
-                            <div class="card p-4">
+                            <div class="card border-top-info p-4">
                                 <div class="card-body">           
                                   <table class="table table-bordered">
                                     <thead>
@@ -44,6 +44,7 @@
                                         <th>Jabatan</th>
                                         <th>NIK/NIP/NIPPPK</th>
                                         <th>Nomor Surat</th>
+                                        <th>Jenis Surat</th>
                                         <th>Surat Pembuka</th>
                                         <th>Surat Penutup</th>
                                       </tr>
@@ -58,8 +59,9 @@
                                           <th></th>                                           
                                           @endforeach
                                           <th>{{$laporans->nomor_surat}}</th>
-                                          <th></th>                                           
-                                          <th></th>                                           
+                                          <th></th>                    
+                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
+                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
                                       </tr>
                                       @endforeach
                                     </tbody>

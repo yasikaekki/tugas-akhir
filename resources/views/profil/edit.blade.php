@@ -34,7 +34,7 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-12">
-                            <div class="card p-4">
+                            <div class="card border-top-info p-4">
                                 <div class="card-body">
                                     <form action="{{route('profil.update',$akun->id)}}" method="post">
                                         @method('PATCH')
@@ -44,19 +44,21 @@
                                                 <div class="col-md-5">
 
                                                     {{-- @if($akun->ubah_foto == null) --}}
-                                                    <img class="logo-profil img-circle" id="logo-image" src="{{asset('vendor/user.png')}}">
+                                                    <img class="logo-profil img-circle" id="logo-image" src="{{ asset('vendor/dist/img/avatar5.png')}}">
                                                     {{-- @else
                                                     <img src="{{asset ('images/'.$akun->ubah_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
                                                     @endif --}}
+                                                    <div class="form-group mt-2">
 
-                                                    <label>Ubah Foto</label>
-                                                    <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
-                                                    {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
-                                                    @error('upload_foto')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        <label>Ubah Foto</label>
+                                                        <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
+                                                        {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
+                                                        @error('upload_foto')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
         
                                                 <div class="col-md-7">

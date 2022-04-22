@@ -6,7 +6,7 @@
     </div>
   </nav>
   @else
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom-primary shadow">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">

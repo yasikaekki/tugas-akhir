@@ -36,14 +36,14 @@
           <!-- table -->
           <div class="row d-flex justify-content-center">            
             <div class="col-lg-6">
-                <div class="card p-4">
+                <div class="card border-top-info p-4">
                   <div class="card-body">
                       <form action="{{route('anggota.store')}}" method="post" enctype="multipart/form-data">
                           @csrf
                           <div class="mb-3 form-group">                 
                             <div class="form-group">
                               <label>Nama Lengkap</label>
-                              <input name="nama_lengkap" value="{{$userauth->name}}" type="text" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Nama Lengkap">
+                              <input name="nama_lengkap" value="{{$anggota->name}}" type="text" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Nama Lengkap">
                               @error('nama_lengkap')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                             
                             <div class="form-group">
                               <label>Email</label>
-                              <input name="email" value="{{$userauth->email}}" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
+                              <input name="email" value="{{$anggota->email}}" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
                               @error('email')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

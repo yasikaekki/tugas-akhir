@@ -20,11 +20,10 @@ class KonfigurasiKopSuratController extends Controller
     {
         //
         $judul = 'Konfigurasi Kop Surat';
-        $authuser = Auth::user();
         $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
         $kop = KonfigurasiKopSurat::find($kopid);
 
-        return view('konfigurasi.index', compact('judul', 'authuser','kop'));
+        return view('konfigurasi.index', compact('judul', 'kop'));
     }
 
     /**
@@ -80,12 +79,6 @@ class KonfigurasiKopSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            //'ubah_foto'=> 'required',
-            'nama_upt'=> 'required',
-            'nama_mentri'=> 'required',
-        ]);
-
         $kopsurat= KonfigurasiKopSurat::find($id);
         // $kopsurat->ubah_foto=$request->ubah_foto;
         $kopsurat->nama_upt=$request->nama_upt;

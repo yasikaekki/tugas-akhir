@@ -39,13 +39,13 @@
                         </div>
                         @endif
                         <div class="col-lg-12">
-                            <form action="{{route('konfigurasi.update', $authuser->id)}}" method="post">
+                            <form action="{{route('konfigurasi.update', $kop->id)}}" method="post">
                                 @method('PATCH')
                                 @csrf
-                                <div class="card p-4">
+                                <div class="card border-top-info p-4">
                                     <div class="card-body box-profile">
                                         <div class="form-group mb-3">
-                                            <img class="profile-user img-circle @error('ubah_foto') is-invalid @enderror" src="{{asset('vendor/user.png')}}" name="ubah_foto">
+                                            <img class="profile-user @error('ubah_foto') is-invalid @enderror" src="{{asset('vendor/dist/img/credit/american-express.png')}}" name="ubah_foto">
                                             @error('ubah_foto')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

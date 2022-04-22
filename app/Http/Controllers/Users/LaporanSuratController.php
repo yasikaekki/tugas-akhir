@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
+use App\Model\NomorSurat;
 use App\Model\Akun;
 use App\User;
 use DB;
@@ -24,8 +25,9 @@ class LaporanSuratController extends Controller
         $user = User::all();
         $akun = Akun::all();
         $laporan = LaporanSurat::all();
+        $nosurat = NomorSurat::all();
 
-        return view('laporan.index', compact('judul', 'no', 'laporan', 'akun','user'));
+        return view('laporan.index', compact('judul', 'nosurat','no', 'laporan', 'akun','user'));
     }
 
     /**
