@@ -39,7 +39,7 @@
               <i class="nav-icon fas bi-file-earmark-text-fill"></i>
               <p>
                 Buat Surat
-            </p>
+              </p>
             </a>
           </li>
         <li class="nav-item">

@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">{{$judul}}</li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -33,39 +33,32 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
-                        @if(session()->get('sukses'))
-                        <div class="alert alert-success">
-                            {{session()->get('sukses')}}
-                        </div>
-                        @endif
                         <div class="col-lg-6">
-                            {{-- @if($nomor->nomor_surat == null) --}}
-                            <form action="{{route('nomor.update', $nomor->id)}}" method="POST">
+                            {{-- @if($laporan->nomor_surat == null)
+                            <form action="{{route('nomor.store')}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                            {{-- @else
+                            @else --}}
                             <form action="{{route('nomor.store')}}" method="POST">
                                 @csrf
-                            @endif --}}
+                            {{-- @endif --}}
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
                                             <label>Nomor Surat</label>
-                                            <input type="text" value="{{$nomor->nomor_surat}}" placeholder="Nomor Surat" class="mb-3 form-control" disabled>
+                                            <input type="text" placeholder="Nomor Surat" class="mb-3 form-control" name="nomor_surat" disabled>
                                         </div>       
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlSelect1">Jenis Surat</label>
                                             <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
-                                               <option value="null" selected hidden disabled>Pilih</option>
-                                               {{-- @foreach ($nomor as $nomors) --}}
-                                                {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
-                                               @foreach($jenissurat as $jenissurats)
-                                               @if($jenissurats->id < 10)
-                                                <option value="0{{$jenissurats->id}}.0{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->jenis_surat}}</option>
-                                               @else
-                                                <option value="{{$jenissurats->id}}.{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->jenis_surat}}</option>
-                                               @endif
-                                               @endforeach
+                                                <option value="null" selected hidden disabled>Pilih</option>
+                                                @foreach($nomor as $nomors)
+                                                @if($nomors->id < 10)
+                                                <option value="0{{$nomors->id}}.0{{$nomors->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nomors->jenis_surat}}</option>
+                                                @else
+                                                <option value="{{$nomors->id}}.{{$nomors->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nomors->jenis_surat}}</option>
+                                                @endif
+                                                @endforeach
                                                {{-- @endforeach --}}
                                             </select>
                                             @error('nomor_surat')
@@ -74,16 +67,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group mt-5">
-                                            <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                @if($nomor->nomor_surat == null)
-                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
-                                                @else
-                                                <button class="col-md-6 btn btn-primary" type="submit">Ubah</button>
-                                                @endif
-                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
-                                            </div>
-                                        </div>
+                                        <button type="submit" class="mt-5 btn btn-success btn-block">Simpan</button>
                                     </div>
                                 </div>
                             </form>

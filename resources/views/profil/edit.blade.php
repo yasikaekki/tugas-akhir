@@ -48,7 +48,7 @@
                                                     {{-- @else
                                                     <img src="{{asset ('images/'.$akun->ubah_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
                                                     @endif --}}
-                                                    <div class="form-group mt-2">
+                                                    <div class="form-group mt-4">
 
                                                         <label>Ubah Foto</label>
                                                         <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
@@ -62,11 +62,32 @@
                                                 </div>
         
                                                 <div class="col-md-7">
-                                                    <!-- 1@foreach($akuncompany as $perusahaan) -->
+                                                    <div class="form-group mb-3">
+                                                        <div class="row">
+                                                            <label>Nama Lengkap, Gelar</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" value="{{$akun->name}}" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama Lengkap">
+                                                                @error('name')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="text" placeholder="Gelar" value="{{$akun->gelar}}" class="form-control @error('gelar') is-invalid @enderror" name="gelar">
+                                                                @error('gelar')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <h6 class="font-italic mt-2"><strong>*nb:</strong> Gunakan singkatan pada gelar, contoh :<strong class="font-italic"> S.Kom., M.Kom.</strong></h6>
+                                                    </div>
                                                     <div class="form-group">
-                                                        <label>Nama Lengkap</label>
-                                                        <input name="nama_lengkap" type="name" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Nama Lengkap" value="{{$userauth->name}}">
-                                                        @error('nama_lengkap')
+                                                        <label>Jabatan</label>
+                                                        <input name="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Jabatan" value="{{$akun->jabatan}}">
+                                                        @error('jabatan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -89,11 +110,11 @@
                                                         @enderror
                                                     </div> --}}
 
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3">
                                                         <div class="row">
                                                             <label>Tempat, Tanggal Lahir</label>
                                                             <div class="col-md-6">
-                                                                <input type="text"  value="{{$akun->tempat_lahir}}" class="mb-3 form-control @error('tempat_lahir') is-invalid @enderror" name="tempat_lahir" placeholder="Tempat Lahir">
+                                                                <input type="text" value="{{$akun->tempat_lahir}}" class="form-control @error('tempat_lahir') is-invalid @enderror" name="tempat_lahir" placeholder="Tempat Lahir">
                                                                 @error('tempat_lahir')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
@@ -101,7 +122,7 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input type="date" value="{{$akun->tanggal_lahir}}" class="mb-3 form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir">
+                                                                <input type="date" value="{{$akun->tanggal_lahir}}" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir">
                                                                 @error('tanggal_lahir')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
@@ -111,25 +132,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Pekerjaan</label>
-                                                        <input name="pekerjaan" placeholder="Pekerjaan" class="mb-3 form-control @error('pekerjaan') is-invalid @enderror" value="{{$akun->pekerjaan}}">
-                                                        @error('pekerjaan')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div> 
-                                                    <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Jenis Kelamin</label>
-                                                        <select name="jenis_kelamin" id="select" class="form-select form-control @error('jenis_kelamin') is-invalid @enderror mb-3" required autocomplete="jenis_kelamin">
-                                                            @if($akun->jenis_kelamin == null)
+                                                        <select name="jenis_kelamin" id="select" class="form-select mb-3 form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
                                                             <option value="null" selected hidden disabled>Pilih</option>
                                                             <option value="laki-laki">Laki-laki</option>
                                                             <option value="perempuan">Perempuan</option>
-                                                            @else
-                                                            <option value="laki-laki">Laki-laki</option>
-                                                            <option value="perempuan">Perempuan</option>
-                                                            @endif
                                                         </select>
                                                         @error('jenis_kelamin')
                                                             <span class="invalid-feedback" role="alert">
@@ -146,21 +153,9 @@
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                    </div>
-                                                    
-                                                    <div class="form-group">
-                                                        <label>Alamat Rumah</label>
-                                                        <input type="text" value="{{$akun->alamat_rumah}}" class="mb-3 form-control @error('alamat_rumah') is-invalid @enderror" placeholder="Alamat Rumah" name="alamat_rumah">
-                                                        @error('alamat_rumah')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                    
+                                                    </div>                                                
                                                     <button type="submit" class="btn btn-primary form-control">Simpan</button>
-                                                </div>
-        
+                                                </div>        
                                             </div>
                                         </div>
                                     </form>

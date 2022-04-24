@@ -15,10 +15,7 @@ class CreateNomorSuratsTable extends Migration
     {
         Schema::create('nomor_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('id_no_surat')->nullable();
-            $table->foreignId('id_kode_surat')->nullable();
-            $table->string('jenis_surat')->nullable();
+            $table->string('jenis_surat');
             $table->timestamps();
         });
     }

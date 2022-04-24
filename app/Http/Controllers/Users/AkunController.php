@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Akun;
 use App\User;
 use Auth;
 use DB;
@@ -20,11 +19,10 @@ class AkunController extends Controller
     {
         //
         $judul = 'Akun';
-        $userauth = Auth::user();
-        $uid = Auth::user()->id;
-        $akun = Akun::find($uid);
+        $uid = Auth::id();
+        $akun = User::find($uid);
 
-        return view('profil.index', compact('judul', 'akun', 'userauth'));
+        return view('profil.index', compact('judul', 'akun'));
     }
 
     /**
@@ -69,11 +67,9 @@ class AkunController extends Controller
     {
         //
         $judul = 'Akun';
-        $userauth = Auth::user();
-        $uid = Auth::user()->id;
-        $akun = Akun::find($uid);
+        $akun = User::find($id);
 
-        return view('profil.edit', compact('judul', 'akun','userauth'));
+        return view('profil.edit', compact('judul', 'akun'));
     }
 
     /**

@@ -22,20 +22,21 @@ class NomorSuratController extends Controller
     public function index()
     {
         //
+        $no =1;
+        $judul = 'Nomor Surat';
         $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
 	    $bulan = $romawi[date('n')];
         $tahun = date('Y');
-        $judul = 'Nomor Surat';
-        $nosurat = NomorSurat::all();
         $laporanid = DB::table('laporan_surats')->select('id')->value('id');
         $pembukaid = DB::table('surat_pembukas')->select('id')->value('id');
         $nomorid = LaporanSurat::all()->last()->id;
-        $no = LaporanSurat::find($nomorid);
+        $jenissurat = NomorSurat::all();
+        // $no = LaporanSurat::find($laporanid);
         $nomor = LaporanSurat::find($laporanid);
         $pembuka = SuratPembuka::find($pembukaid);
-        $laporan = LaporanSurat::find($laporanid);
+        // $laporan = LaporanSurat::find($laporanid);
 
-        return view('surat.nosurat.index', compact('judul', 'tahun', 'no', 'nomor','bulan','nosurat', 'laporan','pembuka'));
+        return view('surat.nosurat.index', compact('judul', 'nomor', 'jenissurat','pembuka', 'bulan', 'tahun'));
     }
 
     /**
@@ -46,6 +47,13 @@ class NomorSuratController extends Controller
     public function create()
     {
         //
+        $judul = 'Buat Nomor Surat';
+        $nomor = NomorSurat::all();
+        $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+	    $bulan = $romawi[date('n')];
+        $tahun = date('Y');
+
+        return view('surat.nosurat.create', compact('judul', 'nomor', 'bulan', 'tahun'));
     }
 
     /**
@@ -60,23 +68,18 @@ class NomorSuratController extends Controller
         $id = DB::table('laporan_surats')->select('id')->value('id');
         $laporan = LaporanSurat::find($id);
         $this->validate($request, [
-            'nomor_surat'=> 'required',
+            'jenis_surat'=> 'required',
         ]);
 
         $nosurat=new LaporanSurat();
         $nosurat->user_id=Auth::user()->id;
         $nosurat->nomor_surat=$request->nomor_surat;
+        $nosurat->jenis_surat=$request->jenis_surat;
         $nosurat->created_at=\Carbon\Carbon::now();
         $nosurat->updated_at=\Carbon\Carbon::now();
         $nosurat->save();
 
-        $pembuka=new SuratPembuka();
-        $pembuka->user_id=Auth::user()->id;
-        $pembuka->created_at=\Carbon\Carbon::now();
-        $pembuka->updated_at=\Carbon\Carbon::now();
-        $pembuka->save();
-
-        return redirect()->route('nomor.edit',$laporan)->with('sukses', 'Nomor surat berhasil disimpan');
+        return redirect()->route('nomor.edit',$laporan->id)->with('sukses', 'Nomor surat berhasil disimpan');
     }
 
     /**
@@ -103,14 +106,14 @@ class NomorSuratController extends Controller
 	    $bulan = $romawi[date('n')];
         $tahun = date('Y');
         $judul = 'Nomor Surat';
-        $uid = LaporanSurat::all()->last()->id;
-        $no = LaporanSurat::find($uid);
+        // $uid = LaporanSurat::all()->last()->id;
+        // $no = LaporanSurat::find($uid);
         $nosurat = NomorSurat::all();
         $nomor = LaporanSurat::find($id);
         $laporan = LaporanSurat::find($id);
         $pembuka = SuratPembuka::find($id);
 
-        return view('surat.nosurat.edit', compact('no','pembuka' ,'judul', 'nomor','bulan', 'tahun', 'nosurat', 'laporan'));
+        return view('surat.nosurat.edit', compact('pembuka' ,'judul', 'nomor','bulan', 'tahun', 'nosurat', 'laporan'));
     }
 
     /**
@@ -123,25 +126,22 @@ class NomorSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'jenis_surat'=> 'required',
+        ]);
+
         $nosurat=LaporanSurat::find($id);
+        // $nosurat->id_no_surat=$jenissurat;
         $nosurat->nomor_surat=$request->nomor_surat;
         $nosurat->created_at=\Carbon\Carbon::now();
         $nosurat->updated_at=\Carbon\Carbon::now();
-        $nosurat->save();
-        $laporan=new LaporanSurat();
-        $laporan->user_id=Auth::user()->id;
-        $laporan->save();
-        $pembuka=new SuratPembuka();
-        $pembuka->user_id=Auth::user()->id;
-        $pembuka->created_at=\Carbon\Carbon::now();
-        $pembuka->updated_at=\Carbon\Carbon::now();
-        $pembuka->save();
-
-        if ($nosurat->nomor_surat == null) {            
-            return redirect()->route('nomor.edit', $id)->with('sukses', 'Nomor surat berhasil disimpan');
-        }else {
-            return redirect()->route('nomor.edit', $id)->with('sukses', 'Nomor surat berhasil diperbarui');
-        }
+        $nosurat->save();                              
+        
+        if ($nosurat->nomor_surat == null) {
+            return redirect()->route('nomor.index')->with('sukses', 'Nomor surat berhasil disimpan');
+        } else {
+            return redirect()->route('nomor.index')->with('sukses', 'Nomor surat berhasil diperbarui');
+        }      
     }
 
     /**

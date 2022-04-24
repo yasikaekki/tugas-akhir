@@ -33,11 +33,6 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
-                        @if(session()->get('sukses'))
-                        <div class="alert alert-success">
-                            {{session()->get('sukses')}}
-                        </div>
-                        @endif
                         <div class="col-lg-6">
                             <form action="{{route('nomor.update', $nomor->id)}}" method="POST">
                                 @method('PATCH')
@@ -55,10 +50,10 @@
                                                {{-- @foreach ($nomor as $nomors) --}}
                                                 {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
                                                @foreach($nosurat as $nosurats)
-                                               @if($nosurats->id_no_surat < 10)
-                                                <option value="0{{$nosurats->id_no_surat}}.0{{$nosurats->id_no_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                               @if($nosurats->id < 10)
+                                                <option value="0{{$nosurats->id}}.0{{$nosurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @else
-                                                <option value="{{$nosurats->id_no_surat}}.{{$nosurats->id_no_surat}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
+                                                <option value="{{$nosurats->id}}.{{$nosurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$nosurats->jenis_surat}}</option>
                                                @endif
                                                @endforeach
                                                {{-- @endforeach --}}

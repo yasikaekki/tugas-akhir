@@ -38,8 +38,8 @@
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
                                         <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="profile-user img-circle">                                        
-                                        <h4 class="fs-3">{{$userauth->name}}</h4>
-                                        <p class="text18 text-muted mb-4">Pendidikan</p>                                        
+                                        <h4 class="fs-3">{{$akun->name}},{{$akun->gelar}}</h4>
+                                        <p class="text18 text-muted mb-4">{{$akun->jabatan}}</p>                                        
                                     </div>
                                     <div class="d-grid col-12 mx-auto">                                  
                                         <div class="card mb-4">
@@ -47,20 +47,20 @@
                                                 <p class="text-center h5 fw-bold">Biodata Diri</p>
                                             </div>
                                             <div class="card-body">
-                                                <medium class="text-muted">Nama Lengkap:</medium>
-                                                <medium class="mb-3">Yasika Ekki Permana</medium>
+                                                <medium class="text-muted">Email:</medium>
+                                                <medium class="mb-3">{{$akun->email}}</medium>
                                                 <hr>
-                                                <medium class="text-muted">Tempat / Tanggal Lahir:</medium>
-                                                <medium class="mb-3">Banyuwangi, 07 Desember 1999</medium>
+                                                <medium class="text-muted">NIK/NIP/NIPPPK:</medium>
+                                                <medium class="mb-3">{{$akun->nip}}</medium>
                                                 <hr>
-                                                <medium class="text-muted">Alamat Rumah:</medium>
-                                                <medium class="mb-3">Dusun Curah Ketangi Rt/Rw 07/01, Desa Setail, Kec. Genteng, Kab. Banyuwangi</medium>
+                                                <medium class="text-muted">Tempat, Tanggal Lahir:</medium>
+                                                <medium class="mb-3">{{$akun->tempat}}, {{$akun->tanggal_lahir}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Jenis Kelamin:</medium>
-                                                <medium class="mb-3">Laki - Laki</medium>
+                                                <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Telepon:</medium>
-                                                <medium class="mb-3">081238398906</medium>
+                                                <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>
                                             </div>                                           
                                         </div>
                                         @if($akun->nip == null || $akun->jabatan == null || $akun->gelar == null)

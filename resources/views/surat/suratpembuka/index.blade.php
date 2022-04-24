@@ -39,16 +39,16 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
-                            @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null)
-                            <form action="{{route('pembuka.update', $suratpembuka->id)}}" method="POST">
+                            {{-- @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null) --}}
+                            <form action="{{route('pembuka.update', $pembuka->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                            @else
+                            {{-- @else
                             <form action="{{route ('pembuka.store')}}" method="post">
                                 @csrf
-                            @endif
+                            @endif --}}
                                 <div class="card border-top-info p-4">
-                                    <div class="card-body">    
+                                    <div class="card-body">
                                         <div class="form-group mb-3">
                                             <label for="exampleFormControlSelect1">Lampiran</label>
                                             <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">
@@ -61,7 +61,6 @@
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
-                                                <option value="6">6</option>
                                                {{-- @endforeach --}}
                                             </select>
                                             @error('lampiran')
@@ -81,7 +80,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Kepada</label>
-                                            <input name="kepada" value="{{$pembuka->kepada}}" type="text" placeholder="Kepada" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                            <input name="kepada" value="{{$pembuka->kepada}}" type="text" placeholder="Kepada" class="mb-3 form-control @error('kepada') is-invalid @enderror">
                                             @error('kepada')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -99,13 +98,9 @@
                                         </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                @if($laporan->nomor_surat == null)
                                                 <a href="{{route('nomor.index')}}" class="col-md-4 btn btn-danger">Kembali</a>
-                                                @else
-                                                <a href="{{route('nomor.edit',$laporan)}}" class="col-md-4 btn btn-danger">Kembali</a>
-                                                @endif
                                                 <button class="col-md-4 btn btn-primary" type="submit">Simpan</button>
-                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-4 btn btn-success">Lanjut</a>
+                                                <a href="{{route('tubuh.index')}}" class="col-md-4 btn btn-success">Lanjut</a>
                                               </div>
                                         </div>
                                     </div>
