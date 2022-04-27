@@ -40,13 +40,15 @@
                                     <thead>
                                       <tr class="table-secondary text-center">
                                         <th>No.</th>
-                                        <th>Nama Lengkap</th>
+                                        <th>Nama Lengkap, Gelar</th>
                                         <th>Jabatan</th>
                                         <th>NIK/NIP/NIPPPK</th>
                                         <th>Nomor Surat</th>
                                         <th>Jenis Surat</th>
                                         <th>Surat Pembuka</th>
+                                        <th>Tubuh Surat</th>
                                         <th>Surat Penutup</th>
+                                        <th>Cetak Surat</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -54,14 +56,22 @@
                                       <tr class="text-center">
                                           <td>{{$no++}}.</td>
                                           @foreach($user as $users)
-                                          <td>{{$users->name}}</td>
-                                          <th></th>
-                                          <th></th>                                           
+                                          <td>{{$users->name}}, {{$users->gelar}}</td>
+                                          <th>{{$users->jabatan}}</th>
+                                          <th>{{$users->no_nip}}</th>                                           
                                           @endforeach
                                           <th>{{$laporans->nomor_surat}}</th>
-                                          <th></th>                    
+					  @if($laporans->id_no_surat == null)
+					  <th></th>
+					  @else
+                                          @foreach($jenissurat as $jenissurats)					 
+					  <th>{{$jenissurats->jenis_surat}}</th>
+                                          @endforeach  
+					  @endif                  
                                           <th><a href="" class="btn btn-success">Lihat</a></th>                                           
                                           <th><a href="" class="btn btn-success">Lihat</a></th>                                           
+                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
+                                          <th><a href="" class="btn btn-success">Cetak</a></th>                                           
                                       </tr>
                                       @endforeach
                                     </tbody>

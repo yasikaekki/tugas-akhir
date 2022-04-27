@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
-use App\Model\Akun;
+use App\Model\LaporanSurat;
+use App\Model\SuratPembuka;
+use App\Model\SuratPenutup;
+use App\Model\TubuhSurat;
+use App\Model\NomorSurat;
 use App\User;
 use Auth;
+use DB;
 
-class BiodataController extends Controller
+class CetakSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +24,9 @@ class BiodataController extends Controller
     public function index()
     {
         //
-        $no = 1;
-        $judul = 'Biodata Anggota KIBT';
-        $userauth = Auth::user();
-        $akun = Akun::all();
-        $user = User::all();
+	$judul = 'Cetak Surat';
 
-        return view('anggota.biodata.index', compact('judul', 'akun', 'user', 'no'));    
+	return view('surat.cetaksurat.index', compact('judul'));
     }
 
     /**

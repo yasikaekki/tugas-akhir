@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">{{$judul}}</li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -39,49 +39,60 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
-                            {{-- @if($nomor->nomor_surat == null) --}}
                             <form action="{{route('nomor.update', $nomor->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                            {{-- @else
-                            <form action="{{route('nomor.store')}}" method="POST">
-                                @csrf
-                            @endif --}}
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
                                             <label>Nomor Surat</label>
-                                            <input type="text" value="{{$nomor->nomor_surat}}" placeholder="Nomor Surat" class="mb-3 form-control" disabled>
-                                        </div>       
-                                        <div class="form-group mb-3">
-                                            <label for="exampleFormControlSelect1">Jenis Surat</label>
-                                            <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
-                                               <option value="null" selected hidden disabled>Pilih</option>
-                                               {{-- @foreach ($nomor as $nomors) --}}
-                                                {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
-                                               @foreach($jenissurat as $jenissurats)
-                                               @if($jenissurats->id < 10)
-                                                <option value="0{{$jenissurats->id}}.0{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->jenis_surat}}</option>
-                                               @else
-                                                <option value="{{$jenissurats->id}}.{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->jenis_surat}}</option>
-                                               @endif
-                                               @endforeach
-                                               {{-- @endforeach --}}
-                                            </select>
-                                            @error('nomor_surat')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <input type="text" value="{{$nomor->nomor_surat}}" placeholder="Nomor Surat" class="form-control" disabled>
                                         </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nomor Surat</label>
+                                                    <input type="text" name="id_no_surat" value="{{$nomor->id_no_surat}}" placeholder="Nomor Urut Surat" class="form-control @error('id_no_surat') is-invalid @enderror">
+                                                    @error('id_no_surat')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Jenis Surat</label>
+                                                    <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
+                                                       <option value="null" selected hidden disabled>Pilih</option>
+                                                       {{-- @foreach ($nomor as $nomors) --}}
+                                                        {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
+                                                       @foreach($jenissurat as $jenissurats)
+                                                       @if($jenissurats->id < 10)
+                                                        <option value="0{{$jenissurats->id}}.0{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->id}}. {{$jenissurats->jenis_surat}}</option>
+                                                       @else
+                                                        <option value="{{$jenissurats->id}}.{{$jenissurats->id}}/UPTKIBT/{{$bulan}}/{{$tahun}}">{{$jenissurats->id}}. {{$jenissurats->jenis_surat}}</option>
+                                                       @endif
+                                                       @endforeach
+                                                       {{-- @endforeach --}}
+                                                    </select>
+                                                    @error('nomor_surat')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>       
+                                        
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                @if($nomor->nomor_surat == null)
-                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
-                                                @else
-                                                <button class="col-md-6 btn btn-primary" type="submit">Ubah</button>
-                                                @endif
+                                                <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
+                                                @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null)
                                                 <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                @else
+                                                <a href="{{route('pembuka.edit',$pembuka)}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

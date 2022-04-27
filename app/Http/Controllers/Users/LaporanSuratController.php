@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
 use App\Model\NomorSurat;
-use App\Model\Akun;
 use App\User;
 use DB;
 
@@ -23,11 +22,13 @@ class LaporanSuratController extends Controller
         $judul = 'Laporan Surat Keluar';
         $no = 1;
         $user = User::all();
-        $akun = Akun::all();
         $laporan = LaporanSurat::all();
         $nosurat = NomorSurat::all();
+        $jenisid = DB::table('laporan_surats')->select('id_no_surat')->value('id_no_surat');
+        $jenis = NomorSurat::all()->where('id', $jenisid);
+        $jenissurat = NomorSurat::find($jenis);
 
-        return view('laporan.index', compact('judul', 'nosurat','no', 'laporan', 'akun','user'));
+        return view('laporan.index', compact('judul', 'nosurat','no', 'jenissurat','laporan', 'user'));
     }
 
     /**

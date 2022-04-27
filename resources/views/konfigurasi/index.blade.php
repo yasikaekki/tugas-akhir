@@ -43,10 +43,12 @@
                                 @method('PATCH')
                                 @csrf
                                 <div class="card border-top-info p-4">
-                                    <div class="card-body box-profile">
+                                    <div class="card-body">
+                                        <img class="logo-upt" src="{{asset('vendor/dist/img/default-150x150.png')}}">
                                         <div class="form-group mb-3">
-                                            <img class="profile-user @error('ubah_foto') is-invalid @enderror" src="{{asset('vendor/dist/img/credit/american-express.png')}}" name="ubah_foto">
-                                            @error('ubah_foto')
+                                            <label>Logo UPT</label>
+                                            <input type="file" name="lokasi_foto" id="logo-image" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror">
+                                            @error('lokasi_foto')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

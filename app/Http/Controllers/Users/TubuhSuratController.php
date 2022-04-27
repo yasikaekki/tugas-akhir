@@ -77,13 +77,6 @@ class TubuhSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'hari'=> 'required',
-            'tanggal'=> 'required',
-            'jam'=> 'required',
-            'acara'=> 'required',
-        ]);
-
         $tubuhsurat=TubuhSurat::find($id);
         $tubuhsurat->hari=$request->hari;
         $tubuhsurat->tanggal=$request->tanggal;

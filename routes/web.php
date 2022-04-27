@@ -35,11 +35,11 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::resource('surat/nomor', 'Users\NomorSuratController');
     Route::resource('surat/pembuka', 'Users\SuratPembukaController');
     Route::resource('surat/tubuh', 'Users\TubuhSuratController');
-    Route::get('surat/penutup', 'Users\SuratPenutupController@index')->name('surat.suratpenutup.index');
+    Route::resource('surat/cetak', 'Users\TubuhSuratController');
+    Route::get('surat/penutup', 'Users\CetakSuratController@index')->name('surat.suratpenutup.index');
     Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
     Route::get('rekapitulasi', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.index');
     Route::resource('anggota', 'Users\AnggotaController');
-    Route::get('biodata', 'Users\BiodataController@index')->name('anggota.biodata.index');
     Route::resource('konfigurasi', 'Users\KonfigurasiKopSuratController');
     Route::resource('profil', 'Users\AkunController');
 });

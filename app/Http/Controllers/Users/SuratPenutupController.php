@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\SuratPenutup;
+use DB;
 
 class SuratPenutupController extends Controller
 {
@@ -73,6 +75,17 @@ class SuratPenutupController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $suratpenutup=SuratPenutup::find($id);
+        $suratpenutup->isi_surat_penutup=$request->isi_surat_penutup;
+        $suratpenutup->created_at=\Carbon\Carbon::now();
+        $suratpenutup->updated_at=\Carbon\Carbon::now();
+        $suratpenutup->save();
+
+        if($suratpenutup->isi_surat_penutup == null){
+            return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil disimpan');
+        }else{
+            return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil diperbarui');
+        }
     }
 
     /**

@@ -126,12 +126,12 @@ class NomorSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'jenis_surat'=> 'required',
-        ]);
+        // $this->validate($request, [
+        //     'jenis_surat'=> 'required',
+        // ]);
 
         $nosurat=LaporanSurat::find($id);
-        // $nosurat->id_no_surat=$jenissurat;
+        $nosurat->id_no_surat=$request->id_no_surat;
         $nosurat->nomor_surat=$request->nomor_surat;
         $nosurat->created_at=\Carbon\Carbon::now();
         $nosurat->updated_at=\Carbon\Carbon::now();

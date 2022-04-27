@@ -115,13 +115,6 @@ class SuratPembukaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'lampiran'=> 'required',
-            'perihal'=> 'required',
-            'kepada'=> 'required',
-            'isi_surat_pembuka'=> 'required',
-        ]);
-
         $suratpembuka=SuratPembuka::find($id);
         $suratpembuka->lampiran=$request->lampiran;
         $suratpembuka->perihal=$request->perihal;

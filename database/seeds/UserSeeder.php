@@ -21,6 +21,11 @@ class UserSeeder extends Seeder
         //
         $user = new User;
         $user->name = 'super admin';
+        $user->gelar = 'S.Kom., M.Kom.';
+        $user->nip = 'NIPPPK';
+        $user->no_nip = 768787;
+        $user->jabatan = 'Ketua Umum';
+        $user->status = 'Aktif';
         $user->email = 'admin@gmail.com';
         $user->password = Hash::make('12345678');
         $user->created_at = \Carbon\Carbon::now();

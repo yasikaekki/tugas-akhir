@@ -19,12 +19,20 @@ body{
     background-color: rgb(245, 246, 250);
 }
 
-.profile-user {
+.logo-upt {
     border: 3px solid #adb5bd;
     margin: 0 auto;
     padding: 3px;
     height: 150px;
     width: 150px;
+}
+
+.logo-ttd {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    height: 100px;
+    width: 100px;
 }
 
 .text18{
@@ -39,8 +47,8 @@ body{
     border: 3px solid #adb5bd;
     margin: 0 auto;
     padding: 3px;
-    height: 350px;
-    width: 350px;
+    height: 300px;
+    width: 300px;
 }
 
 .error {

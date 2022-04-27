@@ -37,9 +37,9 @@
                             <div class="card border-top-info p-4">                      
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
-                                        <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="profile-user img-circle">                                        
-                                        <h4 class="fs-3">{{$akun->name}},{{$akun->gelar}}</h4>
-                                        <p class="text18 text-muted mb-4">{{$akun->jabatan}}</p>                                        
+                                        <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="logo-upt img-circle mb-2">                                        
+                                        <h4 class="fs-3">{{$akun->name}}, {{$akun->gelar}}</h4>
+                                        <p class="fs-5 text-muted mb-4">{{$akun->jabatan}}</p>                                        
                                     </div>
                                     <div class="d-grid col-12 mx-auto">                                  
                                         <div class="card mb-4">
@@ -61,6 +61,12 @@
                                                 <hr>
                                                 <medium class="text-muted">Telepon:</medium>
                                                 <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>
+                                                <hr>
+                                                <medium class="text-muted">Status:</medium>
+                                                <medium class="text-primary fw-bold mb-3">{{$akun->status}}</medium>
+                                                <hr>
+                                                <medium class="text-muted">TTD:</medium>
+                                                <medium class="mb-3"><img src="{{asset('vendor/dist/img/default-150x150.png')}}" class="logo-ttd"></medium>
                                             </div>                                           
                                         </div>
                                         @if($akun->nip == null || $akun->jabatan == null || $akun->gelar == null)

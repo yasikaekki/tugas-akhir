@@ -48,8 +48,18 @@
                                                     {{-- @else
                                                     <img src="{{asset ('images/'.$akun->ubah_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
                                                     @endif --}}
-                                                    <div class="form-group mt-4">
-
+                                                    <div class="form-group">
+                                                        <label>Ubah Foto</label>
+                                                        <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
+                                                        {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
+                                                        @error('upload_foto')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <img class="logo-ttd" id="logo-image" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
+                                                    <div class="form-group">
                                                         <label>Ubah Foto</label>
                                                         <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
                                                         {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
@@ -154,7 +164,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>                                                
-                                                    <button type="submit" class="btn btn-primary form-control">Simpan</button>
+                                                    <button type="submit" class="btn btn-primary form-control mt-5">Simpan</button>
                                                 </div>        
                                             </div>
                                         </div>

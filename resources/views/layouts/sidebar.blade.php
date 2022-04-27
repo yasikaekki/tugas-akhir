@@ -67,41 +67,16 @@
             </a>
         </li>
         <li class="nav-item menu-open">
-            @if($judul == 'Anggota KIBT' || $judul == 'Registrasi Anggota KIBT' || $judul == 'Biodata Anggota KIBT')
+            @if($judul == 'Anggota KIBT' || $judul == 'Registrasi Anggota KIBT')
             <a href="" class="nav-link active disabled">
             @else
-            <a href="" class="nav-link">
+            <a href="{{route('anggota.index')}}" class="nav-link">
             @endif
               <i class="nav-icon fas fa-solid fa-user-group"></i>
               <p>
                 Anggota
-              <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                @if($judul == 'Anggota KIBT')
-                <a href="" class="nav-link active disabled">
-                @else
-                <a href="{{route('anggota.index')}}" class="nav-link">
-                @endif
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Akun Anggota</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                @if($judul == 'Biodata Anggota KIBT')
-                <a href="" class="nav-link active disabled">
-                @else
-                <a href="{{route('anggota.biodata.index')}}" class="nav-link">
-                @endif
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Biodata Anggota</p>
-                </a>
-              </li>
-            </ul>
         </li>
         <li class="nav-item">
           @if($judul == 'Konfigurasi Kop Surat')
