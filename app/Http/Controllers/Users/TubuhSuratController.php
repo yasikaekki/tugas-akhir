@@ -32,6 +32,7 @@ class TubuhSuratController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -54,6 +55,7 @@ class TubuhSuratController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -65,6 +67,7 @@ class TubuhSuratController extends Controller
     public function edit($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -81,14 +84,19 @@ class TubuhSuratController extends Controller
         $tubuhsurat->hari=$request->hari;
         $tubuhsurat->tanggal=$request->tanggal;
         $tubuhsurat->jam=$request->jam;
-        $tubuhsurat->acara=$request->acara;
-        $tubuhsurat->created_at=\Carbon\Carbon::now();
-        $tubuhsurat->updated_at=\Carbon\Carbon::now();
-        $tubuhsurat->save();                              
+        $tubuhsurat->acara=$request->acara;                              
         
         if($tubuhsurat->hari == null || $tubuhsurat->tanggal == null || $tubuhsurat->jam == null || $tubuhsurat->acara == null){
+            
+            $tubuhsurat->created_at=\Carbon\Carbon::now();
+            $tubuhsurat->save();
+            
             return redirect()->route('tubuh.index')->with('sukses', 'Nomor surat berhasil disimpan');
         }else{
+            
+            $tubuhsurat->updated_at=\Carbon\Carbon::now();
+            $tubuhsurat->save();
+            
             return redirect()->route('tubuh.index')->with('sukses', 'Nomor surat berhasil diperbarui');
         }     
     }

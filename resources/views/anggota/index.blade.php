@@ -53,13 +53,7 @@
                                       <tr class="table-secondary text-center">
                                         <th>No.</th>
                                         <th>Nama Lengkap, Gelar</th>
-                                        @if($authuser->nip == null)
-                                          <th>NIK/NIP/NIPPPK</th>
-                                        @else
-                                          @foreach($user as $users)
-                                          <th>{{$users->nip}}</th>
-                                          @endforeach
-                                        @endif
+                                        <th>NIK/NIP/NIPPPK</th>
                                         <th>Jabatan</th>
                                         <th>Status</th>
                                         <th>Email</th>
@@ -83,9 +77,9 @@
                                           <td>{{$users->email_verified_at}}</td> 
                                           <td>
                                             @if($users->id == 1)
-                                            <a href="{{route('anggota.edit',$users->id)}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                            <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                             @else
-                                            <a href="{{route('anggota.edit',$users->id)}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                            <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$no}}"><i class="bi bi-trash3-fill"></i> Hapus</button>
                                             <div class="modal fade" id="staticBackdrop{{$no}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                               <div class="modal-dialog modal-dialog-centered">

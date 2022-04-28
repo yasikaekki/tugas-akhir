@@ -62,30 +62,13 @@
             </p>
             </a>
         </li>
-        <li class="nav-item menu-open">
-            <a href="" class="nav-link">
+        <li class="nav-item">
+            <a href="{{route('anggota.index')}}" class="nav-link">
               <i class="nav-icon fas fa-solid fa-user-group"></i>
               <p>
                 Anggota
-              <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('anggota.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Akun Anggota</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('anggota.biodata.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Biodata Anggota</p>
-                </a>
-              </li>
-            </ul>
         </li>
         <li class="nav-item">
             <a href="{{route('konfigurasi.index')}}" class="nav-link">

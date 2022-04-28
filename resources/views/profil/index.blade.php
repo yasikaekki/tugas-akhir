@@ -70,9 +70,9 @@
                                             </div>                                           
                                         </div>
                                         @if($akun->nip == null || $akun->jabatan == null || $akun->gelar == null)
-                                        <a href="{{route('profil.edit',$akun->id)}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
+                                        <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
                                         @else
-                                        <a href="{{route('profil.edit',$akun->id)}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                        <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                         @endif
                                     </div>
                                 </div>

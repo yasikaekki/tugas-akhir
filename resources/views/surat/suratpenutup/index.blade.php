@@ -43,7 +43,7 @@
                                     <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                         <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger">Kembali</a>
                                         <button class="col-md-4 btn btn-primary" type="submit">Simpan</button>
-					<a href="{{route('cetak.index')}}" class="col-md-4 btn btn-success">Lihat Surat</a>
+					                    <a href="{{route('cetak.index')}}" class="col-md-4 btn btn-success">Lihat Surat</a>
                                       </div>                             
                                 </div>
                             </div>

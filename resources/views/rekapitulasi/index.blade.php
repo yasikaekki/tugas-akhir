@@ -45,14 +45,17 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {{-- @foreach($user as $i => $users)
-                                      <tr>
-                                          <td class="text-center">{{$no++}}.</td>
-                                          <td class="text-center">{{$users->name}}</td>
-                                          <td class="text-center">{{$users->email}}</td>
-                                          <td class="text-center">{{$users->email_verified_at}}</td>                                              
+                                      @foreach($arrbulan as $bulans)
+                                      <tr class="text-center">
+                                          <td>{{$no++}}.</td>
+                                          <td>{{$bulans}}</td>
+                                          @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                          <td><p>Belum ada surat yang dibuat</p></td>
+                                          @else
+                                          <td>{{$jumlahbulan}}</td>
+                                          @endif                                              
                                       </tr>
-                                      @endforeach --}}
+                                      @endforeach
                                     </tbody>
                                   </table>
                                 </div>

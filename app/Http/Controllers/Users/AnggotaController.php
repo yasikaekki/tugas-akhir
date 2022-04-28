@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -19,7 +20,7 @@ class AnggotaController extends Controller
     public function index()
     {
         //
-        $judul = 'Anggota KIBT';
+        $judul = 'Anggota';
         $no = 1;
         $user = User::all();
         $authuser = Auth::user();
@@ -35,7 +36,7 @@ class AnggotaController extends Controller
     public function create()
     {
         //
-        $judul = 'Registrasi Anggota KIBT';
+        $judul = 'Registrasi Akun Anggota';
         $uid = Auth::id();
         $anggota = User::find($uid);
 
@@ -52,33 +53,34 @@ class AnggotaController extends Controller
     {
         //
         $this->validate($request, [
-            'nama_lengkap'=> 'required',
-            'gelar' => 'required',
+            'name'=> 'required',
+            'gelar'=> 'required',
+            'email'=> 'required|email|unique:users,email',
             'jabatan' => 'required',
             'nip' => 'required',
             'status' => 'required',
-            'email'=> 'required|email|unique:users,email',
             'password'=> 'required|same:password_konfirmasi',
             'password_konfirmasi'=> 'required',
         ]);
 
         $user=new User();
-        $user->name=$request->nama_lengkap;
+        $user->name=$request->name;
         $user->gelar=$request->gelar;
+        $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
+        $user->no_nip=$request->no_nip;
         $user->tempat_lahir=$request->tempat_lahir;
         $user->tanggal_lahir=$request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
-        $user->email=$request->email;
         $user->password=Hash::make($request->password);
         $user->created_at=\Carbon\Carbon::now();
         $user->email_verified_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota.index')->with('sukses', 'Akun'. $user->name .'berhasil dibuat');
+        return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
     }
 
     /**
@@ -101,8 +103,9 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         //
-        $judul = 'Ubah Akun';
-        $anggota = User::find($id);
+        $data = Crypt::decrypt($id);
+        $judul = 'Ubah Akun Anggota';
+        $anggota = User::find($data);
 
         return view('anggota.edit', compact('judul', 'anggota'));
     }
@@ -118,21 +121,21 @@ class AnggotaController extends Controller
     {
         //
         $user=User::find($id);
-        $user->name=$request->nama_lengkap;
-        $user->email=$request->email;
+        $user->name=$request->name;
         $user->gelar=$request->gelar;
+        $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
+        $user->no_nip=$request->no_nip;
         $user->tempat_lahir=$request->tempat_lahir;
         $user->tanggal_lahir=$request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
-        $user->password=Hash::make($request->password);
         $user->updated_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota.index')->with('sukses', 'Akun'. $user->name .'berhasil diubah');
+        return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil diubah');
     }
 
     /**
@@ -146,6 +149,6 @@ class AnggotaController extends Controller
         //
         $user = User::find($id);
         $user->delete();
-        return back()->with('hapus', 'Akun "'.$user->name.'" berhasil dihapus');
+        return back()->with('hapus', 'Akun '.$user->name.' berhasil dihapus');
     }
 }

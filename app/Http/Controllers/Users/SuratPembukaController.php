@@ -38,6 +38,7 @@ class SuratPembukaController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -49,30 +50,6 @@ class SuratPembukaController extends Controller
     public function store(Request $request)
     {
         //
-        $id = DB::table('surat_pembukas')->select('id')->value('id');
-        $pembuka = SuratPembuka::find($id);
-        $this->validate($request, [
-            'lampiran'=> 'required',
-            'perihal'=> 'required',
-            'kepada'=> 'required',
-            'isi_surat_pembuka'=> 'required',
-        ]);
-
-        $suratpembuka=new SuratPembuka();
-        $suratpembuka->user_id = Auth::user()->id;
-        $suratpembuka->lampiran=$request->lampiran;
-        $suratpembuka->perihal=$request->perihal;
-        $suratpembuka->kepada=$request->kepada;
-        $suratpembuka->isi_surat_pembuka=$request->isi_surat_pembuka;
-        $suratpembuka->created_at=\Carbon\Carbon::now();
-        $suratpembuka->save();
-
-        // $tubuhsurat=new TubuhSurat();
-        // $tubuhsurat->user_id = Auth::user()->id;
-        // $tubuhsurat->created_at=\Carbon\Carbon::now();
-        // $tubuhsurat->save();
-
-        return redirect()->route('pembuka.edit',$pembuka->id)->with('sukses', 'Surat Pembuka berhasil disimpan');
     }
 
     /**
@@ -84,6 +61,7 @@ class SuratPembukaController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -95,14 +73,7 @@ class SuratPembukaController extends Controller
     public function edit($id)
     {
         //
-        $judul = 'Surat Pembuka';
-        $authuser = Auth::user();
-        $noid = DB::table('nomor_surats')->select('id')->value('id');
-        $nomor = NomorSurat::find($noid);
-        $pembuka = SuratPembuka::find($id);
-        $suratpembuka = SuratPembuka::latest()->first();
-
-        return view('surat.suratpembuka.edit', compact('judul','pembuka', 'suratpembuka','nomor'));
+        return view('errors.404');
     }
 
     /**
@@ -120,13 +91,18 @@ class SuratPembukaController extends Controller
         $suratpembuka->perihal=$request->perihal;
         $suratpembuka->kepada=$request->kepada;
         $suratpembuka->isi_surat_pembuka=$request->isi_surat_pembuka;
-        $suratpembuka->created_at=\Carbon\Carbon::now();
-        $suratpembuka->updated_at=\Carbon\Carbon::now();
-        $suratpembuka->save();
 
         if ($suratpembuka->lampiran == null || $suratpembuka->perihal == null || $suratpembuka->kepada == null || $suratpembuka->isi_surat_pembuka == null) {
+            
+            $suratpembuka->created_at=\Carbon\Carbon::now();
+            $suratpembuka->save();
+            
             return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil disimpan');
         } else {
+            
+            $suratpembuka->updated_at=\Carbon\Carbon::now();
+            $suratpembuka->save();
+            
             return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil diperbarui');
         }
     }

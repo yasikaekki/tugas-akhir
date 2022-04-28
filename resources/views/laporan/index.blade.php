@@ -45,10 +45,7 @@
                                         <th>NIK/NIP/NIPPPK</th>
                                         <th>Nomor Surat</th>
                                         <th>Jenis Surat</th>
-                                        <th>Surat Pembuka</th>
-                                        <th>Tubuh Surat</th>
-                                        <th>Surat Penutup</th>
-                                        <th>Cetak Surat</th>
+                                        <th>Aksi</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -61,17 +58,14 @@
                                           <th>{{$users->no_nip}}</th>                                           
                                           @endforeach
                                           <th>{{$laporans->nomor_surat}}</th>
-					  @if($laporans->id_no_surat == null)
-					  <th></th>
-					  @else
+                                          @if($laporans->id_no_surat == null)
+                                          <th></th>
+                                          @else
                                           @foreach($jenissurat as $jenissurats)					 
-					  <th>{{$jenissurats->jenis_surat}}</th>
+                                          <th>{{$jenissurats->jenis_surat}}</th>
                                           @endforeach  
-					  @endif                  
-                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
-                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
-                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                           
-                                          <th><a href="" class="btn btn-success">Cetak</a></th>                                           
+                                          @endif                  
+                                          <th><a href="" class="btn btn-success">Lihat</a></th>                                          
                                       </tr>
                                       @endforeach
                                     </tbody>

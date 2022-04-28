@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -33,6 +34,8 @@ class AkunController extends Controller
     public function create()
     {
         //
+
+        return view('errors.404');
     }
 
     /**
@@ -55,6 +58,7 @@ class AkunController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -66,8 +70,18 @@ class AkunController extends Controller
     public function edit($id)
     {
         //
-        $judul = 'Akun';
-        $akun = User::find($id);
+        $data = Crypt::decrypt($id);
+        $akun = User::find($data);
+
+        if ($akun->jenis_kelamin == null || $akun->tempat_lahir == null || $akun->tanggal_lahir == null || $akun->telepon == null) {
+            
+            $judul = 'Lengkapi Akun';
+
+        } else {
+                      
+            $judul = 'Perbarui Akun';
+        }
+        
 
         return view('profil.edit', compact('judul', 'akun'));
     }
@@ -82,6 +96,28 @@ class AkunController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user=User::find($id);
+        // $user->lokasi_foto=$request->lokasi_foto;
+        // $user->lokasi_ttd=$request->lokasi_ttd;
+        $user->name=$request->name;
+        $user->gelar=$request->gelar;
+        $user->tempat_lahir=$request->tempat_lahir;
+        $user->tanggal_lahir=$request->tanggal_lahir;
+        $user->jenis_kelamin=$request->jenis_kelamin;
+        $user->telepon=$request->telepon;
+        $user->password=Hash::make($request->password);
+        $user->updated_at=\Carbon\Carbon::now();
+        $user->save();
+
+        if ($user->jenis_kelamin == null || $user->tempat_lahir == null || $user->tanggal_lahir == null || $user->telepon == null) {
+           
+            return redirect()->route('akun.index')->with('sukses', 'Akun '. $user->name .' berhasil dilengkapi');
+
+        } else {
+            
+            return redirect()->route('akun.index')->with('sukses', 'Akun '. $user->name .' berhasil diperbarui');
+
+        }
     }
 
     /**

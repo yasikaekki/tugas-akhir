@@ -80,18 +80,21 @@ class KonfigurasiKopSuratController extends Controller
     {
         //
         $kopsurat= KonfigurasiKopSurat::find($id);
-        // $kopsurat->ubah_foto=$request->ubah_foto;
+        // $kopsurat->lokasi_foto=$request->lokasi_foto;
         $kopsurat->nama_upt=$request->nama_upt;
         $kopsurat->nama_mentri=$request->nama_mentri;
-        $kopsurat->created_at=\Carbon\Carbon::now();
-        $kopsurat->updated_at=\Carbon\Carbon::now();
-        $kopsurat->save();
 
         if ($kopsurat->nama_upt == null || $kopsurat->nama_mentri == null) {
-            # code...
+            
+            $kopsurat->created_at=\Carbon\Carbon::now();
+            $kopsurat->save();
+
             return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil disimpan');
         }else {
-            # code...
+            
+            $kopsurat->updated_at=\Carbon\Carbon::now();
+            $kopsurat->save();
+
             return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil diperbarui');
         }
     }

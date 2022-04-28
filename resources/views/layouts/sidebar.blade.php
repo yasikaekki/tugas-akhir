@@ -66,8 +66,8 @@
             </p>
             </a>
         </li>
-        <li class="nav-item menu-open">
-            @if($judul == 'Anggota KIBT' || $judul == 'Registrasi Anggota KIBT')
+        <li class="nav-item">
+            @if($judul == 'Anggota' || $judul == 'Registrasi Akun Anggota')
             <a href="" class="nav-link active disabled">
             @else
             <a href="{{route('anggota.index')}}" class="nav-link">

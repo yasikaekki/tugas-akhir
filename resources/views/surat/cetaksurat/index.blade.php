@@ -33,9 +33,14 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if(session()->get('sukses'))
+                        <div class="alert alert-success">
+                            {{session()->get('sukses')}}
+                        </div>
+                        @endif
                         <div class="col-lg-6">
                             {{-- @if($cetak->kop == null || $cetak->nomor == null || $cetak->pembuka == null || $cetak->tubuh == null || $cetak->penutup == null) --}}
-                            <form action="" method="post">
+                            <form action="{{route('cetak.store')}}" method="post">
                                 @csrf
                             {{-- @else
                             <form action="" method="post">
@@ -43,8 +48,9 @@
                                 @csrf
                             @endif --}}
                                 <div class="card border-top-info p-4">
-                                    <div class="card-body">    
-                                                                    
+                                    <div class="card-body">
+                                        <a href="{{route('surat.suratpenutup.index')}}" class="btn btn-danger">Kembali</a>    
+                                       <button type="submit" class="btn btn-primary">Cetak Surat</button>                             
                                     </div>
                                 </div>
                             </form>                            

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\LaporanSurat;
+use Auth;
+use DB;
 
 class RekapitulasiSuratController extends Controller
 {
@@ -15,9 +18,18 @@ class RekapitulasiSuratController extends Controller
     public function index()
     {
         //
+        $no = 1;
         $judul = 'Rekapitulasi Surat Keluar';
+        $laporanid = DB::table('laporan_surats')->select('id')->value('id');
+        $laporan = LaporanSurat::find($laporanid);
+        $uid = Auth::id();
+        $arrbulan = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+        $bulan = $arrbulan[date('n')];
+        $tahun = date('Y');
+        $bulanini = DB::table('laporan_surats')->where('user_id',$uid)->orWhere('created_at', $bulan)->get();
+        $jumlahbulan = count($bulanini);
 
-        return view('rekapitulasi.index', compact('judul'));
+        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan'));
     }
 
     /**

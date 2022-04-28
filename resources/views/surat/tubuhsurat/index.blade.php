@@ -53,7 +53,7 @@
                                             <div class="row">
                                                 <label>Hari, Tanggal</label>
                                                 <div class="col-md-6">
-                                                    <input type="text"  value="{{$tubuh->hari}}" class="form-control @error('hari') is-invalid @enderror" name="hari" placeholder="Hari">
+                                                    <input type="text" value="{{$tubuh->hari}}" class="form-control @error('hari') is-invalid @enderror" name="hari" placeholder="Hari">
                                                     @error('hari')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

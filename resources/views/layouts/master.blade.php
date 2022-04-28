@@ -117,21 +117,42 @@
                         </div>
                     </div>
                     <div class="row">
-                        <section class="col-lg-6">
-                            <div class="card border-top-primary p-4">
+                        <section class="col-lg-4">
+                            <div class="card border-top-dark p-4">
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Hari Ini</p>
                                     <hr>
-                                    <p class="h1 text-center">15</p>
+                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @else
+                                    <p class="fs-2 text-center">{{$jumlahhari}}</p>
+                                    @endif
                                 </div>
                             </div>
                         </section>
-                        <section class="col-lg-6">
-                            <div class="card border-top-info p-4">
+                        <section class="col-lg-4">
+                            <div class="card border-top-dark p-4">
+                                <div class="card-body">
+                                    <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Bulan Ini</p>
+                                    <hr>
+                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @else
+                                    <p class="fs-2 text-center">{{$jumlahbulan}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </section> 
+                        <section class="col-lg-4">
+                            <div class="card border-top-dark p-4">
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Tahun Ini</p>
                                     <hr>
-                                    <p class="h1 text-center">115</p>
+                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @else
+                                    <p class="fs-2 text-center">{{$jumlahtahun}}</p>
+                                    @endif
                                 </div>
                             </div>
                         </section> 

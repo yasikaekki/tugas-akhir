@@ -4,7 +4,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>404 | Halaman Tidak Ditemukan | UPT KIBT Poliwangi</title>
+    <title>404 | Halaman Tidak Ditemukan | Sistem Informasi Surat Keluar UPT KIBT Poliwangi</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/styles.css') }}">
     <!-- Google Font: Source Sans Pro -->

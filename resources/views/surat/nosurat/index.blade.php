@@ -48,22 +48,28 @@
                                             <label>Nomor Surat</label>
                                             <input type="text" value="{{$nomor->nomor_surat}}" placeholder="Nomor Surat" class="form-control" disabled>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Nomor Surat</label>
-                                                    <input type="text" name="id_no_surat" value="{{$nomor->id_no_surat}}" placeholder="Nomor Urut Surat" class="form-control @error('id_no_surat') is-invalid @enderror">
+                                        <div class="form-group mb-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlSelect1">Nomor Urut Surat</label>
+                                                    <select class="form-select form-control mb-3 @error('id_no_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="id_no_surat">
+                                                    <option value="null" selected hidden disabled>Pilih</option>
+                                                    {{-- @foreach ($nomor as $nomors) --}}
+                                                        {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
+                                                    @foreach($jenissurat as $jenissurats)
+                                                        <option value="{{$jenissurats->id}}">{{$jenissurats->id}}</option>
+                                                    @endforeach
+                                                    {{-- @endforeach --}}
+                                                    </select>
                                                     @error('id_no_surat')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlSelect1">Jenis Surat</label>
-                                                    <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat">
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlSelect2">Jenis Surat</label>
+                                                    <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat">
                                                        <option value="null" selected hidden disabled>Pilih</option>
                                                        {{-- @foreach ($nomor as $nomors) --}}
                                                         {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
@@ -75,24 +81,24 @@
                                                        @endif
                                                        @endforeach
                                                        {{-- @endforeach --}}
-                                                    </select>
-                                                    @error('nomor_surat')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        </select>
+                                                        @error('nomor_surat')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                 </div>
-                                            </div>
-                                        </div>       
+                                            </div>                                           
+                                        </div>   
                                         
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
-                                                @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null)
-                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                @if($nomor->id_no_surat == null || $nomor->nomor_surat == null)
+                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
                                                 @else
-                                                <a href="{{route('pembuka.edit',$pembuka)}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
                                                 @endif
+                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
                                             </div>
                                         </div>
                                     </div>

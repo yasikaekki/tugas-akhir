@@ -94,7 +94,7 @@
                                                         </div>
                                                         <h6 class="font-italic mt-2"><strong>*nb:</strong> Gunakan singkatan pada gelar, contoh :<strong class="font-italic"> S.Kom., M.Kom.</strong></h6>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3">
                                                         <label>Jabatan</label>
                                                         <input name="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Jabatan" value="{{$akun->jabatan}}">
                                                         @error('jabatan')
@@ -141,7 +141,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3">
                                                         <label for="exampleFormControlSelect1">Jenis Kelamin</label>
                                                         <select name="jenis_kelamin" id="select" class="form-select mb-3 form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
                                                             <option value="null" selected hidden disabled>Pilih</option>

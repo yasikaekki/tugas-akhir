@@ -30,6 +30,7 @@ class SuratPenutupController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -52,6 +53,7 @@ class SuratPenutupController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -63,6 +65,8 @@ class SuratPenutupController extends Controller
     public function edit($id)
     {
         //
+
+        return view('errors.404');
     }
 
     /**
@@ -77,13 +81,18 @@ class SuratPenutupController extends Controller
         //
         $suratpenutup=SuratPenutup::find($id);
         $suratpenutup->isi_surat_penutup=$request->isi_surat_penutup;
-        $suratpenutup->created_at=\Carbon\Carbon::now();
-        $suratpenutup->updated_at=\Carbon\Carbon::now();
-        $suratpenutup->save();
 
         if($suratpenutup->isi_surat_penutup == null){
+            
+            $suratpenutup->created_at=\Carbon\Carbon::now();
+            $suratpenutup->save();
+
             return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil disimpan');
         }else{
+            
+            $suratpenutup->updated_at=\Carbon\Carbon::now();
+            $suratpenutup->save();
+            
             return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil diperbarui');
         }
     }
