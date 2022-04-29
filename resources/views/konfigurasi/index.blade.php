@@ -73,7 +73,7 @@
                                             @enderror
                                         </div>
                                         @if($kop->nama_upt == null || $kop->nama_mentri == null)
-                                        <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-check-square-fill"></i> Simpan</button>
+                                        <button type="submit" class="btn btn-primary form-control mt-2"><i class="fas fa-save"></i> Simpan</button>
                                         @else
                                         <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Ubah</button>
                                         @endif

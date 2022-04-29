@@ -156,7 +156,7 @@
                           @enderror
                         </div>
                         
-                        <button type="submit" class="btn btn-primary form-control mt-2">Perbarui Akun</button>
+                        <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Perbarui Akun</button>
                       </form>
                   </div>
               </div>

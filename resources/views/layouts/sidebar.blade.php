@@ -9,7 +9,7 @@
             <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="{{route('profil.index')}}" class="d-block">Alexander Pierce</a>
+            <a href="{{route('profil.index')}}" class="d-block">{{Auth::user()->name}}, {{Auth::user()->gelar}}</a>
         </div>
     </div>
 

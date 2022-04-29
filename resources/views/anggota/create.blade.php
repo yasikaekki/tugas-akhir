@@ -152,7 +152,7 @@
                             @enderror
                           </div>
                           
-                          <button type="submit" class="btn btn-primary form-control mt-2">Buat akun</button>
+                          <button type="submit" class="btn btn-primary form-control mt-2"><i class="fas fa-save"></i> Buat Akun</button>
                       </form>
                   </div>
               </div>

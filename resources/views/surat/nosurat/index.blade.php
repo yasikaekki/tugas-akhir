@@ -94,11 +94,11 @@
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                                 @if($nomor->id_no_surat == null || $nomor->nomor_surat == null)
-                                                <button class="col-md-6 btn btn-primary" type="submit">Simpan</button>
+                                                <button class="col-md-6 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
                                                 @else
-                                                <button class="col-md-6 btn btn-primary" type="submit">Perbarui</button>
+                                                <button class="col-md-6 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
                                                 @endif
-                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut</a>
+                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                             </div>
                                         </div>
                                     </div>

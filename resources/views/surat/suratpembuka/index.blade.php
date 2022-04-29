@@ -98,9 +98,13 @@
                                         </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <a href="{{route('nomor.index')}}" class="col-md-4 btn btn-danger">Kembali</a>
-                                                <button class="col-md-4 btn btn-primary" type="submit">Simpan</button>
-                                                <a href="{{route('tubuh.index')}}" class="col-md-4 btn btn-success">Lanjut</a>
+                                                <a href="{{route('nomor.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                                @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka === null)
+                                                <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                                @else
+                                                <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
+                                                @endif
+                                                <a href="{{route('tubuh.index')}}" class="col-md-4 btn btn-success">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                               </div>
                                         </div>
                                     </div>

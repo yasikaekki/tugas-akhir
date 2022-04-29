@@ -35,29 +35,46 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-12">
                             <div class="card border-top-info p-4">
-                                <div class="card-body">           
-                                  <table class="table table-bordered">
+                                <div class="card-body">
+                                    <form action="" method="GET" id="formFilter">
+                                        @csrf
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                            <select class="form-select col-md-2" name="year">
+                                                <option value="" disabled hidden selected>Pilih Tahun</option>
+                                                <?php 
+                                                    $year = date('Y');
+                                                    $min = $year;
+                                                    $max = $year + 8;
+                                                    for( $i=$min; $i<=$max; $i++ ) {
+                                                        echo '<option value='.$i.'>'.$i.'</option>';
+                                                    }
+                                                ?>
+                                            </select>
+                                            <button class="btn btn-primary" type="submit" form="formFilter">Tampilkan</button>
+                                        </div>     
+                                    </form>    
+                                    <table class="table table-bordered">
                                     <thead>
-                                      <tr class="table-secondary text-center">
+                                        <tr class="table-secondary text-center">
                                         <th>No.</th>
                                         <th>Bulan</th>
                                         <th>Jumlah Surat Keluar</th>
-                                      </tr>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($arrbulan as $bulans)
-                                      <tr class="text-center">
-                                          <td>{{$no++}}.</td>
-                                          <td>{{$bulans}}</td>
-                                          @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
-                                          <td><p>Belum ada surat yang dibuat</p></td>
-                                          @else
-                                          <td>{{$jumlahbulan}}</td>
-                                          @endif                                              
-                                      </tr>
-                                      @endforeach
+                                        @foreach($arrbulan as $bulans)
+                                        <tr class="text-center">
+                                            <td>{{$no++}}.</td>
+                                            <td>{{$bulans}}</td>
+                                            @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                            <td><p>Belum ada surat yang dibuat</p></td>
+                                            @else
+                                            <td>{{$jumlahbulan}}</td>
+                                            @endif                                              
+                                        </tr>
+                                        @endforeach
                                     </tbody>
-                                  </table>
+                                    </table>
                                 </div>
                             </div>
                         </div>

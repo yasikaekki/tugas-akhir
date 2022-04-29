@@ -90,9 +90,9 @@
                                         </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger">Kembali</a>
-                                                <button class="col-md-4 btn btn-primary" type="submit">Simpan</button>
-                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-4 btn btn-success">Lanjut</a>
+                                                <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                                <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                                <a href="{{route('surat.suratpenutup.index')}}" class="col-md-4 btn btn-success">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                             </div>
                                         </div>
                                     </div>

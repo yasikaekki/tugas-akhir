@@ -105,17 +105,20 @@ class AkunController extends Controller
         $user->tanggal_lahir=$request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
-        $user->password=Hash::make($request->password);
-        $user->updated_at=\Carbon\Carbon::now();
-        $user->save();
 
         if ($user->jenis_kelamin == null || $user->tempat_lahir == null || $user->tanggal_lahir == null || $user->telepon == null) {
            
-            return redirect()->route('akun.index')->with('sukses', 'Akun '. $user->name .' berhasil dilengkapi');
+            $user->created_at=\Carbon\Carbon::now();
+            $user->save();
+
+            return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil dilengkapi');
 
         } else {
             
-            return redirect()->route('akun.index')->with('sukses', 'Akun '. $user->name .' berhasil diperbarui');
+            $user->updated_at=\Carbon\Carbon::now();
+            $user->save();
+
+            return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil diperbarui');
 
         }
     }

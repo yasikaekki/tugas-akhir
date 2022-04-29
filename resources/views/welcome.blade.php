@@ -17,7 +17,7 @@
                                 <div class="card-body">
                                     <p class="mb-5">Silahkan login untuk melanjutkan</p>
                                     <div class="d-grid mx-auto">
-                                        <a href="{{route('login')}}" class="mt-2 btn btn-primary">Masuk</a>
+                                        <a href="{{route('login')}}" class="mt-2 btn btn-primary"><i class="fa fa-sign-in"></i> Masuk</a>
                                     </div>
                                 </div>
                             </div>

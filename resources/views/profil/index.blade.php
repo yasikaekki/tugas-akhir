@@ -33,6 +33,11 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if(session()->get('sukses'))
+                        <div class="alert alert-success">
+                            {{session()->get('sukses')}}
+                        </div>
+                        @endif
                         <div class="col-lg-8">
                             <div class="card border-top-info p-4">                      
                                 <div class="card-body">
@@ -50,17 +55,17 @@
                                                 <medium class="text-muted">Email:</medium>
                                                 <medium class="mb-3">{{$akun->email}}</medium>
                                                 <hr>
-                                                <medium class="text-muted">NIK/NIP/NIPPPK:</medium>
-                                                <medium class="mb-3">{{$akun->nip}}</medium>
+                                                <medium class="text-muted">{{$akun->nip}}:</medium>
+                                                <medium class="mb-3">{{$akun->no_nip}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Tempat, Tanggal Lahir:</medium>
-                                                <medium class="mb-3">{{$akun->tempat}}, {{$akun->tanggal_lahir}}</medium>
+                                                <medium class="mb-3">{{$akun->tempat_lahir}}, {{$akun->tanggal_lahir}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Jenis Kelamin:</medium>
                                                 <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Telepon:</medium>
-                                                <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>
+                                                <medium class="mb-3">{{$akun->telepon}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Status:</medium>
                                                 <medium class="text-primary fw-bold mb-3">{{$akun->status}}</medium>
@@ -69,10 +74,10 @@
                                                 <medium class="mb-3"><img src="{{asset('vendor/dist/img/default-150x150.png')}}" class="logo-ttd"></medium>
                                             </div>                                           
                                         </div>
-                                        @if($akun->nip == null || $akun->jabatan == null || $akun->gelar == null)
+                                        @if($akun->tempat_lahir == null || $akun->tanggal_lahir == null || $akun->jenis_kelamin == null || $akun->telepon == null)
                                         <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
                                         @else
-                                        <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                        <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah Profil</a>
                                         @endif
                                     </div>
                                 </div>

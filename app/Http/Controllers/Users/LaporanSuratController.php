@@ -16,7 +16,7 @@ class LaporanSuratController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $judul = 'Laporan Surat Keluar';
@@ -27,6 +27,9 @@ class LaporanSuratController extends Controller
         $noid = DB::table('nomor_surats')->select('id')->value('id');
         $jenis = LaporanSurat::all()->where('id_no_surat', $noid);
         $jenissurat = LaporanSurat::find($jenis);
+        $month = $request->get('month');
+        $year = $request->get('year');
+        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
 
         return view('laporan.index', compact('judul', 'nosurat','no', 'jenissurat','laporan', 'user'));
     }

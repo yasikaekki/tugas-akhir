@@ -57,7 +57,7 @@
                                       </div>
                                     </div>
                                     <div class="mt-3 mb-2">
-                                        <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in"></i> Masuk</button>
                                     </div>
                                   </form>
                                 </div>

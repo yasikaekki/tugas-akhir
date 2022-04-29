@@ -15,7 +15,7 @@ class RekapitulasiSuratController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $no = 1;
@@ -28,6 +28,9 @@ class RekapitulasiSuratController extends Controller
         $tahun = date('Y');
         $bulanini = DB::table('laporan_surats')->where('user_id',$uid)->orWhere('created_at', $bulan)->get();
         $jumlahbulan = count($bulanini);
+        $month = $request->get('month');
+        $year = $request->get('year');
+        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
 
         return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan'));
     }

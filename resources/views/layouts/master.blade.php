@@ -40,11 +40,11 @@
                                     <div class="row no-gutters align-items-center mt-2">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
+                                                Buat Surat</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas bi-file-earmark-text-fill fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -58,11 +58,11 @@
                                     <div class="row no-gutters align-items-center mt-2">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
+                                                Laporan Surat Keluar</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas bi-clipboard2-pulse-fill fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Rekapitulasi Surat Keluar
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
@@ -91,7 +91,7 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas bi-clipboard2-data-fill fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -104,12 +104,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Anggota</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-solid fa-user-group fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

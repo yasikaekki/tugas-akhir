@@ -58,9 +58,13 @@
                                                             </span>
                                                         @enderror
                                                     </div>
+                                                    
+                                                </div>
+        
+                                                <div class="col-md-7">
                                                     <img class="logo-ttd" id="logo-image" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
                                                     <div class="form-group">
-                                                        <label>Ubah Foto</label>
+                                                        <label>Ubah TTD</label>
                                                         <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
                                                         {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
                                                         @error('upload_foto')
@@ -69,9 +73,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                </div>
-        
-                                                <div class="col-md-7">
+
                                                     <div class="form-group mb-3">
                                                         <div class="row">
                                                             <label>Nama Lengkap, Gelar</label>
@@ -94,31 +96,6 @@
                                                         </div>
                                                         <h6 class="font-italic mt-2"><strong>*nb:</strong> Gunakan singkatan pada gelar, contoh :<strong class="font-italic"> S.Kom., M.Kom.</strong></h6>
                                                     </div>
-                                                    <div class="form-group mb-3">
-                                                        <label>Jabatan</label>
-                                                        <input name="jabatan" type="text" class="form-control @error('jabatan') is-invalid @enderror" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Jabatan" value="{{$akun->jabatan}}">
-                                                        @error('jabatan')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-
-                                                    {{-- <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Pendidikan</label>
-                                                        <select name="pendidikan_user" id="select" class="form-control mb-3" required autocomplete="pendidikan">                                                       
-                                                            @if($akun->pendidikan_user == null)
-                                                            <option value="null" selected hidden disabled>Pilih</option>
-                                                            <option value="D3">D3</option>
-                                                            <option value="S1">S1</option>
-                                                            <option value="S2">S2</option>
-                                                        </select>
-                                                        @error('pendidikan_user')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div> --}}
 
                                                     <div class="form-group mb-3">
                                                         <div class="row">
@@ -163,8 +140,12 @@
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                    </div>                                                
-                                                    <button type="submit" class="btn btn-primary form-control mt-5">Simpan</button>
+                                                    </div>
+                                                    @if($akun->tempat_lahir == null || $akun->tanggal_lahir == null || $akun->jenis_kelamin == null || $akun->telepon == null)                                                
+                                                    <button type="submit" class="btn btn-primary form-control mt-3"><i class="fas fa-save"></i> Simpan</button>
+                                                    @else
+                                                    <button type="submit" class="btn btn-primary form-control mt-3"><i class="bi bi-pencil-square"></i> Perbarui</button>
+                                                    @endif
                                                 </div>        
                                             </div>
                                         </div>
