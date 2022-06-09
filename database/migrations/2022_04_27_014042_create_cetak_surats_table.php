@@ -15,12 +15,12 @@ class CreateCetakSuratsTable extends Migration
     {
         Schema::create('cetak_surats', function (Blueprint $table) {
             $table->id();
-	    $table->foreignid('user_id');
-	    $table->foreignid('id_kop_surat');
-	    $table->foreignid('id_no_surat');
-	    $table->foreignid('id_surat_pembuka');
-	    $table->foreignid('id_tubuh_surat');
-	    $table->foreignid('id_surat_penutup');
+            $table->foreignid('user_id');
+            $table->foreignid('konfigurasi_kop_surat_id');
+            $table->foreignid('nomor_surat_id');
+            $table->foreignid('surat_pembuka_id');
+            $table->foreignid('tubuh_surat_id');
+            $table->foreignid('surat_penutup_id');
             $table->timestamps();
         });
     }

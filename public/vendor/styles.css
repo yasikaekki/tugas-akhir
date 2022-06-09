@@ -8,6 +8,10 @@ body{
     margin-top: 3.5rem;
 }
 
+.bg-light2 {
+    background-color: rgb(244, 246, 249);
+}
+
 .nav-center {
     margin-left:auto;
     margin-right: auto;
@@ -35,14 +39,6 @@ body{
     width: 100px;
 }
 
-.text18{
-    font-size: 18px;
-}
-
-.text16{
-    font-size: 16px;
-}
-
 .logo-profil {
     border: 3px solid #adb5bd;
     margin: 0 auto;
@@ -57,6 +53,51 @@ body{
     position: relative;
     line-height: 1;
     width: 12.5rem;
+}
+
+.link:hover{
+    color: black!important;
+    background: none!important;
+}
+
+.btn-dark:hover {
+    color: #343a40!important;
+    background: none!important;
+}
+
+.btn-secondary:hover {
+    color: #6c757d!important;
+    background: none!important;
+}
+
+.btn-light:hover {
+    color: #f8f9fa!important;
+    background: none!important;
+}
+
+.btn-success:hover{
+    color: #28a745!important;
+    background: none!important;
+}
+
+.btn-primary:hover{
+    color: #007bff!important;
+    background: none!important;
+}
+
+.btn-info:hover{
+    color: #17a2b8!important;
+    background: none!important;
+}
+
+.btn-warning:hover{
+    color: #ffc107!important;
+    background: none!important;
+}
+
+.btn-danger:hover{
+    color: #dc3545!important;
+    background: none!important;
 }
 
 .border-top-primary{

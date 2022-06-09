@@ -31,7 +31,7 @@
             </a>
         </li>
         <li class="nav-item">
-          @if($judul == 'Nomor Surat' || $judul == 'Surat Pembuka' || $judul == 'Tubuh Surat' || $judul == 'Surat Penutup')
+          @if($judul == 'Nomor Surat' || $judul == 'Surat Pembuka' || $judul == 'Tubuh Surat' || $judul == 'Surat Penutup' || $judul == 'Cetak Surat')
             <a href="" class="nav-link active disabled">
           @else
             <a href="{{route('nomor.index')}}" class="nav-link">
@@ -67,7 +67,7 @@
             </a>
         </li>
         <li class="nav-item">
-            @if($judul == 'Anggota' || $judul == 'Registrasi Akun Anggota')
+            @if($judul == 'Anggota' || $judul == 'Registrasi Akun Anggota' || $judul == 'Ubah Akun Anggota')
             <a href="" class="nav-link active disabled">
             @else
             <a href="{{route('anggota.index')}}" class="nav-link">

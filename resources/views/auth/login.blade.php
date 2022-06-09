@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('layouts.toplogin')
+    @include('layouts.tittle')
 </head>
 <body>
     @include('layouts.navigation')

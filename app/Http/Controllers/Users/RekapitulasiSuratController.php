@@ -30,9 +30,9 @@ class RekapitulasiSuratController extends Controller
         $jumlahbulan = count($bulanini);
         $month = $request->get('month');
         $year = $request->get('year');
-        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
+        $rekap = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
 
-        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan'));
+        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan', 'rekap'));
     }
 
     /**

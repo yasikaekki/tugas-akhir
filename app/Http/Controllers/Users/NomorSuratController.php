@@ -93,8 +93,8 @@ class NomorSuratController extends Controller
     {
         //
         $nosurat=LaporanSurat::find($id);
-        $nosurat->id_no_surat=$request->id_no_surat;
-        $nosurat->nomor_surat=$request->nomor_surat;                        
+        $nosurat->nomor_surat_id=$request->nomor_surat_id;
+        $nosurat->no_surat=$request->no_surat;                        
         
         if ($nosurat->nomor_surat == null) {
             

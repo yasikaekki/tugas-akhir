@@ -38,7 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function akun(){
-        return $this->hasOne('App\Model\Akun');
+    public function laporan_surat(){
+        return $this->belongsTo('App\Model\LaporanSurat');
+    }
+
+    public function nomor_surat(){
+        return $this->belongsTo('App\Model\NomorSurat');
     }
 }

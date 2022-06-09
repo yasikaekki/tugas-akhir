@@ -15,12 +15,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('anggota.index')}}" class="link">Anggota</a></li>
+                        <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -135,26 +136,6 @@
                           @enderror
                         </div>
                         @endif
-
-                        <div class="form-group mb-3">
-                          <label>Password</label>
-                          <input name="password" type="password" placeholder="Password" class="mb-3 form-control @error('password') is-invalid @enderror">
-                          @error('password')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                          @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
-                          <label>Konfirmasi Password</label>
-                          <input name="password_konfirmasi" type="password" placeholder="Konfirmasi Password" class="mb-3 form-control @error('password_konfirmasi') is-invalid @enderror">
-                          @error('password_konfirmasi')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                          @enderror
-                        </div>
                         
                         <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Perbarui Akun</button>
                       </form>

@@ -15,12 +15,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
+                        <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -33,9 +33,21 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if($surat->no_surat == null || $surat->nomor_surat_id == null)
+                        <div class="col-lg-7">
+                            <div class="card mt-5 p-5">
+                              <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                  <h1 class="display-4 text-warning"><i class="bi bi-emoji-frown"></i></h1>
+                                </div>
+                                <p class="fs-5 text-center">Mohon maaf<br>Sepertinya belum ada data apapun</p>
+                              </div> 
+                            </div>
+                        </div>
+                        @else
                         <div class="col-lg-12">
                             <div class="card border-top-info p-4">
-                                <div class="card-body">  
+                                <div class="card-body">
                                     <form action="" method="GET" id="formFilter">
                                         @csrf
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
@@ -66,30 +78,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($laporan as $laporans)
+                                        @foreach($laporan as $users)
+                                        {{-- @foreach($laporans as $users) --}}
                                         <tr class="text-center">
                                             <td>{{$no++}}.</td>
-                                            @foreach($user as $users)
                                             <td>{{$users->name}}, {{$users->gelar}}</td>
-                                            <th>{{$users->jabatan}}</th>
-                                            <th>{{$users->no_nip}}</th>                                           
-                                            @endforeach
-                                            <th>{{$laporans->nomor_surat}}</th>
-                                            @if($laporans->id_no_surat == null)
-                                            <th></th>
-                                            @else
-                                            @foreach($jenissurat as $jenissurats)					 
-                                            <th>{{$jenissurats->jenis_surat}}</th>
-                                            @endforeach  
-                                            @endif                  
-                                            <th><a href="" class="btn btn-success">Lihat</a></th>                                          
+                                            <td>{{$users->jabatan}}</td>
+                                            <td>{{$users->no_nip}}</td>
+                                            <td>{{$users->laporan_surat->no_surat}}</td>				 
+                                            <td>{{$users->laporan_surat->nomor_surat->jenis_surat}}</td>             
+                                            <td><a href="" class="btn btn-success">Lihat</a></td>    
                                         </tr>
+                                        {{-- @endforeach                                       --}}
                                         @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <!-- /.row -->
                     </div>

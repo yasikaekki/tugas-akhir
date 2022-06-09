@@ -59,7 +59,7 @@ class AnggotaController extends Controller
             'jabatan' => 'required',
             'nip' => 'required',
             'status' => 'required',
-            'password'=> 'required|same:password_konfirmasi',
+            'password'=> 'required|same:password_konfirmasi|min:8',
             'password_konfirmasi'=> 'required',
         ]);
 

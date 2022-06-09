@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
-use App\Model\NomorSurat;
 use App\User;
+use Auth;
 use DB;
 
 class LaporanSuratController extends Controller
@@ -21,17 +21,13 @@ class LaporanSuratController extends Controller
         //
         $judul = 'Laporan Surat Keluar';
         $no = 1;
-        $user = User::all();
-        $laporan = LaporanSurat::all();
-        $nosurat = NomorSurat::all();
-        $noid = DB::table('nomor_surats')->select('id')->value('id');
-        $jenis = LaporanSurat::all()->where('id_no_surat', $noid);
-        $jenissurat = LaporanSurat::find($jenis);
-        $month = $request->get('month');
+        $laporan = User::all();
+        $jenisid = DB::table('laporan_surats')->select('id')->value('id');
+        $surat = LaporanSurat::find($jenisid);
         $year = $request->get('year');
-        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
+        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->get();
 
-        return view('laporan.index', compact('judul', 'nosurat','no', 'jenissurat','laporan', 'user'));
+        return view('laporan.index', compact('judul', 'surat', 'no', 'laporan'));
     }
 
     /**

@@ -15,12 +15,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
+                        <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -46,13 +46,13 @@
                                     <div class="card-body">    
                                         <div class="form-group mb-3">
                                             <label>Nomor Surat</label>
-                                            <input type="text" value="{{$nomor->nomor_surat}}" placeholder="Nomor Surat" class="form-control" disabled>
+                                            <input type="text" value="{{$nomor->no_surat}}" placeholder="Nomor Surat" class="form-control" disabled>
                                         </div>
                                         <div class="form-group mb-3">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="exampleFormControlSelect1">Nomor Urut Surat</label>
-                                                    <select class="form-select form-control mb-3 @error('id_no_surat') is-invalid @enderror" id="exampleFormControlSelect1" name="id_no_surat">
+                                                    <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="nomor_surat_id">
                                                     <option value="null" selected hidden disabled>Pilih</option>
                                                     {{-- @foreach ($nomor as $nomors) --}}
                                                         {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
@@ -61,7 +61,7 @@
                                                     @endforeach
                                                     {{-- @endforeach --}}
                                                     </select>
-                                                    @error('id_no_surat')
+                                                    @error('nomor_surat_id')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -69,7 +69,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="exampleFormControlSelect2">Jenis Surat</label>
-                                                    <select class="form-select form-control mb-3 @error('nomor_surat') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat">
+                                                    <select class="form-select form-control @error('no_surat') is-invalid @enderror" id="exampleFormControlSelect2" name="no_surat">
                                                        <option value="null" selected hidden disabled>Pilih</option>
                                                        {{-- @foreach ($nomor as $nomors) --}}
                                                         {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
@@ -82,18 +82,19 @@
                                                        @endforeach
                                                        {{-- @endforeach --}}
                                                         </select>
-                                                        @error('nomor_surat')
+                                                        @error('no_surat')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                 </div>
-                                            </div>                                           
+                                            </div>
+                                            <h6 class="font-italic mt-2"><strong>*nb:</strong> Nomor urut surat harus sama dengan jenis surat, contoh :<strong class="font-italic"> Nomor Urut Surat 1, Jenis Surat Undangan (SU)</strong></h6>                                           
                                         </div>   
                                         
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                @if($nomor->id_no_surat == null || $nomor->nomor_surat == null)
+                                                @if($nomor->no_surat_id == null || $nomor->no_surat == null)
                                                 <button class="col-md-6 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
                                                 @else
                                                 <button class="col-md-6 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>

@@ -15,12 +15,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
+                        <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -46,7 +46,7 @@
                             <div class="card border-top-info p-4">
                                 <div class="card-body">
                                   <div class="d-grid d-md-flex justify-content-md-end">
-                                    <a href="{{route ('anggota.create')}}" class="btn btn-success mb-3"><i class="bi bi-plus-square-fill"></i> Tambah</a>
+                                    <a href="{{route ('anggota.create')}}" class="btn btn-success mb-3"><i class="fas fa-solid fa-square-plus"></i> Tambah</a>
                                   </div>              
                                   <table class="table table-bordered">
                                     <thead>
@@ -76,7 +76,7 @@
                                           <td>{{$users->email}}</td>
                                           <td>{{$users->email_verified_at}}</td> 
                                           <td>
-                                            @if($users->id == 1)
+                                            @if($users->id == 1 || $users->status == 'Aktif')
                                             <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                             @else
                                             <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>

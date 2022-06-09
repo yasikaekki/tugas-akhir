@@ -15,12 +15,15 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('nomor.index')}}" class="link">Nomor Surat</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('pembuka.index')}}" class="link">Surat Pembuka</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('tubuh.index')}}" class="link">Tubuh Surat</a></li>
+                        <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
