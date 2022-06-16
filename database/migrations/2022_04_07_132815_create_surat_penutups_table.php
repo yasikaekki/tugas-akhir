@@ -15,7 +15,8 @@ class CreateSuratPenutupsTable extends Migration
     {
         Schema::create('surat_penutups', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id')->nullable();
+            $table->foreignid('user_id');
+            $table->string('isi_surat_penutup')->nullable();
             $table->timestamps();
         });
     }

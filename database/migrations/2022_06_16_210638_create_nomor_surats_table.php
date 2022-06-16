@@ -15,7 +15,7 @@ class CreateNomorSuratsTable extends Migration
     {
         Schema::create('nomor_surats', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_surat');
+            $table->string('jenis_surat')->nullable();
             $table->timestamps();
         });
     }

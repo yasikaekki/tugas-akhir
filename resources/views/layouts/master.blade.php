@@ -37,14 +37,17 @@
                             <div class="card border-left-primary h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Buat Surat</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas bi-file-earmark-text-fill fa-2x text-gray-300"></i>
-                                        </div>
+                                        <a href="{{route('nomor.index')}}">
+                                            <div class="row">
+                                                <div class="col mr-2">
+                                                    <div class="h5 mt-4 font-weight-bold text-primary text-uppercase mb-1">Buat Surat</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas bi-file-earmark-text-fill fa-2x text-dark mt-3"></i>
+                                                </div>
+                                            </div>
+                                            
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -55,14 +58,18 @@
                             <div class="card border-left-success h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Laporan Surat Keluar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas bi-clipboard2-pulse-fill fa-2x text-gray-300"></i>
-                                        </div>
+                                        <a href="{{route('laporan.index')}}">
+                                            <div class="row">
+                                                <div class="col mr-2">
+                                                    <div class="h6 font-weight-bold text-success text-uppercase mt-3 mb-1">
+                                                        Laporan Surat Keluar</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas bi-clipboard2-pulse-fill fa-2x text-dark mt-3"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -73,25 +80,18 @@
                             <div class="card border-left-info h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Rekapitulasi Surat Keluar
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                        <a href="{{route('rekapitulasi.index')}}">
+                                            <div class="row">
+                                                <div class="col mr-2">
+                                                    <div class="h6 font-weight-bold text-info text-uppercase mt-3 mb-1">Rekapitulasi Surat Keluar
                                                     </div>
                                                 </div>
+                                                <div class="col-auto">
+                                                    <i class="fas bi-clipboard2-data-fill fa-2x text-dark mt-3"></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas bi-clipboard2-data-fill fa-2x text-gray-300"></i>
-                                        </div>
+                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -102,13 +102,17 @@
                             <div class="card border-left-warning h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Anggota</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-solid fa-user-group fa-2x text-gray-300"></i>
-                                        </div>
+                                        <a href="{{route('anggota.index')}}">
+                                            <div class="row">
+                                                <div class="col mr-2">
+                                                    <div class="h5 font-weight-bold text-warning text-uppercase mt-4 mb-1"> Anggota</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-solid fa-user-group fa-2x text-dark mt-3"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -120,11 +124,11 @@
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Hari Ini</p>
                                     <hr>
-                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    @empty($laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$jumlahhari}}</p>
-                                    @endif
+                                    <p class="fs-2 text-center">{{$hariini->count('id')}}</p>
+                                    @endempty
                                 </div>
                             </div>
                         </section>
@@ -133,24 +137,24 @@
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Bulan Ini</p>
                                     <hr>
-                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    @empty($laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$jumlahbulan}}</p>
-                                    @endif
+                                    <p class="fs-2 text-center">{{$bulanini->count('id')}}</p>
+                                    @endempty
                                 </div>
                             </div>
-                        </section> 
+                        </section>
                         <section class="col-lg-4">
                             <div class="card border-top-dark p-4">
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Tahun Ini</p>
                                     <hr>
-                                    @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
+                                    @empty($laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$jumlahtahun}}</p>
-                                    @endif
+                                    <p class="fs-2 text-center">{{$tahunini->count('id')}}</p>
+                                    @endempty
                                 </div>
                             </div>
                         </section> 

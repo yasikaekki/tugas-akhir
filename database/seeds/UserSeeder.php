@@ -6,6 +6,7 @@ use App\Model\RekapitulasiSurat;
 use App\Model\SuratPembuka;
 use App\Model\TubuhSurat;
 use App\Model\SuratPenutup;
+use App\Model\CetakSurat;
 use App\Model\LaporanSurat;
 use App\User;
 
@@ -32,30 +33,35 @@ class UserSeeder extends Seeder
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->save();
 
-        $kop = new SuratPembuka;
-        $kop->user_id = $user->id;
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $pembuka = new SuratPembuka;
+        $pembuka->user_id = $user->id;
+        $pembuka->created_at = \Carbon\Carbon::now();
+        $pembuka->save();
 
-        $kop = new TubuhSurat;
-        $kop->user_id = $user->id;
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $tubuh = new TubuhSurat;
+        $tubuh->user_id = $user->id;
+        $tubuh->created_at = \Carbon\Carbon::now();
+        $tubuh->save();
 
-        $kop = new SuratPenutup;
-        $kop->user_id = $user->id;
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $penutup = new SuratPenutup;
+        $penutup->user_id = $user->id;
+        $penutup->created_at = \Carbon\Carbon::now();
+        $penutup->save();
 
-        $kop = new LaporanSurat;
-        $kop->user_id = $user->id;
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $cetak = new CetakSurat;
+        $cetak->user_id = $user->id;
+        $cetak->created_at = \Carbon\Carbon::now();
+        $cetak->save();
 
-        $kop = new RekapitulasiSurat;
-        $kop->user_id = $user->id;
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $laporan = new LaporanSurat;
+        $laporan->user_id = $user->id;
+        $laporan->created_at = \Carbon\Carbon::now();
+        $laporan->save();
+
+        $laporan = new RekapitulasiSurat;
+        $laporan->user_id = $user->id;
+        $laporan->created_at = \Carbon\Carbon::now();
+        $laporan->save();
 
         $kop = new KonfigurasiKopSurat;
         $kop->user_id = $user->id;

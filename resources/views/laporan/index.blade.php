@@ -33,7 +33,7 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
-                        @if($surat->no_surat == null || $surat->nomor_surat_id == null)
+                        @if($isi->no_surat == null || $isi->nomor_surat_id == null)
                         <div class="col-lg-7">
                             <div class="card mt-5 p-5">
                               <div class="card-body p-4">
@@ -74,22 +74,23 @@
                                             <th>NIK/NIP/NIPPPK</th>
                                             <th>Nomor Surat</th>
                                             <th>Jenis Surat</th>
-                                            <th>Aksi</th>
+                                            <th>Tanggal Buat</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($laporan as $users)
-                                        {{-- @foreach($laporans as $users) --}}
+                                            {{-- {{$laporan->nomor_surat}} --}}
+                                        @foreach($laporan as $laporans)
+                                        @if(!is_null($laporans->no_surat && $laporans->nomor_surat_id))
                                         <tr class="text-center">
                                             <td>{{$no++}}.</td>
-                                            <td>{{$users->name}}, {{$users->gelar}}</td>
-                                            <td>{{$users->jabatan}}</td>
-                                            <td>{{$users->no_nip}}</td>
-                                            <td>{{$users->laporan_surat->no_surat}}</td>				 
-                                            <td>{{$users->laporan_surat->nomor_surat->jenis_surat}}</td>             
-                                            <td><a href="" class="btn btn-success">Lihat</a></td>    
+                                            <td>{{$laporans->user->name}}, {{$laporans->user->gelar}}</td>
+                                            <td>{{$laporans->user->jabatan}}</td>
+                                            <td>{{$laporans->user->no_nip}}</td>
+                                            <td>{{$laporans->no_surat}}</td>
+                                            <td>{{$laporans->nomor_surat->jenis_surat}}</td>  
+                                            <td>{{$laporans->created_at->formatLocalized('%A, %d %B %Y')}}</td>      
                                         </tr>
-                                        {{-- @endforeach                                       --}}
+                                        @endif
                                         @endforeach
                                         </tbody>
                                     </table>

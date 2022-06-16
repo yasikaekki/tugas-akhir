@@ -61,18 +61,75 @@
                                         <th>Jumlah Surat Keluar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach($arrbulan as $bulans)
-                                        <tr class="text-center">
-                                            <td>{{$no++}}.</td>
-                                            <td>{{$bulans}}</td>
-                                            @if($laporan->id_no_surat == null || $laporan->nomor_surat == null)
-                                            <td><p>Belum ada surat yang dibuat</p></td>
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>Januari</td>
+                                            @if($rekap1->count('id') != 0)
+                                            <td>{{$rekap1->count('id')}}</td>
                                             @else
-                                            <td>{{$jumlahbulan}}</td>
-                                            @endif                                              
+                                            <td>Belum ada surat yang dibuat</td>
+                                            @endif
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>Februari</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.</td>
+                                            <td>Maret</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4.</td>
+                                            <td>April</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5.</td>
+                                            <td>Mei</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6.</td>
+                                            <td>Juni</td>
+                                            @if($rekap6->count('id') != 0)
+                                            <td>{{$rekap6->count('id')}}</td>
+                                            @else
+                                            <td>Belum ada surat yang dibuat</td>
+                                            @endif                                             
+                                        </tr>
+                                        <tr>
+                                            <td>7.</td>
+                                            <td>Juli</td>
+                                            <td>0</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>8.</td>
+                                            <td>Agustus</td>
+                                            <td>0</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>9.</td>
+                                            <td>September</td>
+                                            <td>0</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>10.</td>
+                                            <td>Oktober</td>
+                                            <td>0</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>11.</td>
+                                            <td>November</td>
+                                            <td>0</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>12.</td>
+                                            <td>Desember</td>
+                                            <td>0</td>                                             
+                                        </tr>
                                     </tbody>
                                     </table>
                                 </div>

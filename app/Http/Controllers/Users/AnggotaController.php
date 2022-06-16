@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\LaporanSurat;
+use App\Model\SuratPembuka;
+use App\Model\SuratPenutup;
+use App\Model\TubuhSurat;
 use App\User;
 use Auth;
 use Hash;
@@ -58,6 +62,7 @@ class AnggotaController extends Controller
             'email'=> 'required|email|unique:users,email',
             'jabatan' => 'required',
             'nip' => 'required',
+            'no_nip' => 'required|min:12',
             'status' => 'required',
             'password'=> 'required|same:password_konfirmasi|min:8',
             'password_konfirmasi'=> 'required',
@@ -79,6 +84,26 @@ class AnggotaController extends Controller
         $user->created_at=\Carbon\Carbon::now();
         $user->email_verified_at=\Carbon\Carbon::now();
         $user->save();
+
+        $nomor = new LaporanSurat();
+        $nomor->user_id = $user->id;
+        $nomor->created_at=\Carbon\Carbon::now();
+        $nomor->save();
+
+        $pembuka = new SuratPembuka();
+        $pembuka->user_id = $user->id;
+        $pembuka->created_at=\Carbon\Carbon::now();
+        $pembuka->save();
+
+        $tubuh = new TubuhSurat();
+        $tubuh->user_id = $user->id;
+        $tubuh->created_at=\Carbon\Carbon::now();
+        $tubuh->save();
+
+        $penutup = new SuratPenutup();
+        $penutup->user_id = $user->id;
+        $penutup->created_at=\Carbon\Carbon::now();
+        $penutup->save();
 
         return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
     }
@@ -120,6 +145,10 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'no_nip' => 'required|min:12',
+        ]);
+
         $user=User::find($id);
         $user->name=$request->name;
         $user->gelar=$request->gelar;

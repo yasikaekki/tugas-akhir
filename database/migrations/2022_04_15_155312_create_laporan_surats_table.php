@@ -15,8 +15,11 @@ class CreateLaporanSuratsTable extends Migration
     {
         Schema::create('laporan_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id')->nullable();
+            $table->foreignid('user_id');
             $table->foreignid('nomor_surat_id')->nullable();
+            $table->foreignid('surat_pembuka_id')->nullable();
+            $table->foreignid('tubuh_surat_id')->nullable();
+            $table->foreignid('surat_penutup_id')->nullable();
             $table->string('no_surat')->nullable();
             $table->timestamps();
         });

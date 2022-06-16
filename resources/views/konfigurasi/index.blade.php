@@ -39,7 +39,7 @@
                         </div>
                         @endif
                         <div class="col-lg-12">
-                            <form action="{{route('konfigurasi.update', $kop->id)}}" method="post">
+                            <form action="{{route('konfigurasi.update', $kop->id)}}" method="post" enctype="multipart/form-data">
                                 @method('PATCH')
                                 @csrf
                                 <div class="card border-top-info p-4">

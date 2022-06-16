@@ -19,15 +19,23 @@ class LaporanSuratController extends Controller
     public function index(Request $request)
     {
         //
+        // if ($request) {
+        //     $fitur_cari = DB::table('users')->where('name','like','%'.$request->hasil_cari.'%')->where('role', 'user')->orderBy('created_at','desc')->where('deleted_at', null)
+        //     ->paginate(10);
+        //     $fitur_cari->appends($request->all());
+        // }
+        
         $judul = 'Laporan Surat Keluar';
+        $uid = Auth::id();
         $no = 1;
-        $laporan = User::all();
-        $jenisid = DB::table('laporan_surats')->select('id')->value('id');
-        $surat = LaporanSurat::find($jenisid);
-        $year = $request->get('year');
-        $inboxs = LaporanSurat::whereYear('created_at', '=', $year)->get();
-
-        return view('laporan.index', compact('judul', 'surat', 'no', 'laporan'));
+        $laporan = laporanSurat::all();
+        $jenisid = LaporanSurat::all()->where('user_id', $uid);
+        $surat = count($jenisid);
+        $isiid = LaporanSurat::all()->last()->id;
+        $isi= LaporanSurat::find($isiid);
+        $tahun = date('Y');
+        $default = LaporanSurat::whereYear('created_at', '=', $tahun)->get();
+        return view('laporan.index', compact('judul', 'surat', 'no', 'isi', 'laporan'));
     }
 
     /**

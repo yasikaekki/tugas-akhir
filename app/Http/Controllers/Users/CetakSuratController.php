@@ -26,8 +26,9 @@ class CetakSuratController extends Controller
     {
         //
         $judul = 'Cetak Surat';
-        $cetakid = DB::table('cetak_surats')->select('id')->value('id');
+        $cetakid = CetakSurat::get()->last()->id;
         $cetak = CetakSurat::find($cetakid);
+        $cetaksurat = CetakSurat::all();
 
         return view('surat.cetaksurat.index', compact('judul', 'cetak'));
     }
@@ -56,6 +57,11 @@ class CetakSuratController extends Controller
         $nomor->created_at = \Carbon\Carbon::now();
         $nomor->save();
 
+        $rekapitulasi = new RekapitulasiSurat();
+        $rekapitulasi->user_id = Auth::id();
+        $rekapitulasi->created_at = \Carbon\Carbon::now();
+        $rekapitulasi->save();
+
         $pembuka = new SuratPembuka();
         $pembuka->user_id = Auth::id();
         $pembuka->created_at = \Carbon\Carbon::now();
@@ -67,6 +73,11 @@ class CetakSuratController extends Controller
         $tubuh->save();
 
         $penutup = new SuratPenutup();
+        $penutup->user_id = Auth::id();
+        $penutup->created_at = \Carbon\Carbon::now();
+        $penutup->save();
+
+        $penutup = new CetakSurat();
         $penutup->user_id = Auth::id();
         $penutup->created_at = \Carbon\Carbon::now();
         $penutup->save();

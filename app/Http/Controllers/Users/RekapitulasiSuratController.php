@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
 use Auth;
@@ -20,19 +21,16 @@ class RekapitulasiSuratController extends Controller
         //
         $no = 1;
         $judul = 'Rekapitulasi Surat Keluar';
-        $laporanid = DB::table('laporan_surats')->select('id')->value('id');
-        $laporan = LaporanSurat::find($laporanid);
+        $laporan = RekapitulasiSurat::all();
         $uid = Auth::id();
         $arrbulan = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
         $bulan = $arrbulan[date('n')];
         $tahun = date('Y');
         $bulanini = DB::table('laporan_surats')->where('user_id',$uid)->orWhere('created_at', $bulan)->get();
         $jumlahbulan = count($bulanini);
-        $month = $request->get('month');
-        $year = $request->get('year');
-        $rekap = LaporanSurat::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
-
-        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan', 'rekap'));
+        $rekap1 = RekapitulasiSurat::whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', 01)->get();
+        $rekap6 = RekapitulasiSurat::whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', 06)->get();
+        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan', 'rekap1','rekap6'));
     }
 
     /**

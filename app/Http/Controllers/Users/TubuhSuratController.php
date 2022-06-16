@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\TubuhSurat;
+use Auth;
 use DB;
 
 class TubuhSuratController extends Controller
@@ -18,10 +19,13 @@ class TubuhSuratController extends Controller
     {
         //
         $judul = 'Tubuh Surat';
-        $tubuhid = DB::table('tubuh_surats')->select('id')->value('id');
-        $tubuh = TubuhSurat::find($tubuhid);
+        $uid = Auth::id();
+        $tubuhid = TubuhSurat::all()->where('user_id', $uid);
+        $tubuh = count($tubuhid);
+        $isiid = TubuhSurat::all()->last()->id;
+        $isi= TubuhSurat::find($isiid);
 
-        return view('surat.tubuhsurat.index',compact('judul','tubuh'));
+        return view('surat.tubuhsurat.index',compact('judul','isi','tubuh'));
     }
 
     /**
@@ -81,9 +85,8 @@ class TubuhSuratController extends Controller
     {
         //
         $tubuhsurat=TubuhSurat::find($id);
-        $tubuhsurat->hari=$request->hari;
-        $tubuhsurat->tanggal=$request->tanggal;
-        $tubuhsurat->jam=$request->jam;
+        $tubuhsurat->tanggal=\Carbon\Carbon::now()->formatLocalized('%A, %d %B %Y');
+        $tubuhsurat->jam=\Carbon\Carbon::now()->isoFormat('H:m');
         $tubuhsurat->acara=$request->acara;                              
         
         if($tubuhsurat->hari == null || $tubuhsurat->tanggal == null || $tubuhsurat->jam == null || $tubuhsurat->acara == null){

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\SuratPembuka;
 use App\Model\LaporanSurat;
-use App\Model\NomorSurat;
+use App\NomorSurat;
 use App\User;
 use Auth;
 use DB;
@@ -21,19 +21,15 @@ class NomorSuratController extends Controller
     public function index()
     {
         //
-        $no =1;
+        $uid = Auth::id();
         $judul = 'Nomor Surat';
-        $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
-	    $bulan = $romawi[date('n')];
-        $tahun = date('Y');
-        $laporanid = DB::table('laporan_surats')->select('id')->value('id');
-        $pembukaid = DB::table('surat_pembukas')->select('id')->value('id');
+        $laporan = NomorSurat::all();
+        $laporanid = LaporanSurat::all();
+        $noid = count($laporanid);
         $nomorid = LaporanSurat::all()->last()->id;
-        $jenissurat = NomorSurat::all();
-        $nomor = LaporanSurat::find($laporanid);
-        $pembuka = SuratPembuka::find($pembukaid);
+        $nomor= LaporanSurat::find($nomorid);
 
-        return view('surat.nosurat.index', compact('judul', 'nomor', 'jenissurat','pembuka', 'bulan', 'tahun'));
+        return view('surat.nosurat.index', compact('judul', 'nomor','noid','laporan'));
     }
 
     /**
@@ -92,11 +88,16 @@ class NomorSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+	    $bulan = $romawi[date('n')];
         $nosurat=LaporanSurat::find($id);
+        $all = LaporanSurat::all();
+        $kode = count($all);
         $nosurat->nomor_surat_id=$request->nomor_surat_id;
-        $nosurat->no_surat=$request->no_surat;                        
+        $kodesurat = $request->no_surat.$kode.".".$nosurat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
+        $nosurat->no_surat=$kodesurat;                        
         
-        if ($nosurat->nomor_surat == null) {
+        if ($nosurat->nomor_surat_id == null  && $nosurat->no_surat == null) {
             
             $nosurat->created_at=\Carbon\Carbon::now();
             $nosurat->save();

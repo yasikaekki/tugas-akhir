@@ -37,7 +37,7 @@
                         <div class="col-lg-12">
                             <div class="card border-top-info p-4">
                                 <div class="card-body">
-                                    <form action="{{route('profil.update',$akun->id)}}" method="post">
+                                    <form action="{{route('profil.update',$akun->id)}}" method="post" enctype="multipart/form-data">
                                         @method('PATCH')
                                         @csrf
                                         <div class="mb-3 form-group">
@@ -51,24 +51,21 @@
                                                     @endif --}}
                                                     <div class="form-group">
                                                         <label>Ubah Foto</label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
-                                                        {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
-                                                        @error('upload_foto')
+                                                        <input type="file" accept="image/png, image/jpeg" name="lokasi_foto" class="form-control @error('lokasi_foto') is-invalid @enderror">
+                                                        @error('lokasi_foto')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    
                                                 </div>
         
                                                 <div class="col-md-7">
                                                     <img class="logo-ttd" id="logo-image" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
                                                     <div class="form-group">
                                                         <label>Ubah TTD</label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="upload_foto" class="form-control @error('upload_foto') is-invalid @enderror">
-                                                        {{-- <input value="{{asset ('images/'.$akun->ubah_foto)}}" type="file" accept="image/png, image/jpeg" name="upload_foto" id="preview" class="form-control @error('upload_foto') is-invalid @enderror"> --}}
-                                                        @error('upload_foto')
+                                                        <input type="file" accept="image/png, image/jpeg" name="lokasi_ttd" class="form-control @error('lokasi_ttd') is-invalid @enderror">
+                                                        @error('lokasi_ttd')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -122,9 +119,14 @@
                                                     <div class="form-group mb-3">
                                                         <label for="exampleFormControlSelect1">Jenis Kelamin</label>
                                                         <select name="jenis_kelamin" id="select" class="form-select mb-3 form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
+                                                            @if($akun->jenis_kelamin == null)
                                                             <option value="null" selected hidden disabled>Pilih</option>
                                                             <option value="laki-laki">Laki-laki</option>
                                                             <option value="perempuan">Perempuan</option>
+                                                            @else
+                                                            <option value="laki-laki">Laki-laki</option>
+                                                            <option value="perempuan">Perempuan</option>
+                                                            @endif
                                                         </select>
                                                         @error('jenis_kelamin')
                                                             <span class="invalid-feedback" role="alert">

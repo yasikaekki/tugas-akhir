@@ -74,11 +74,11 @@
                                                 <medium class="mb-3"><img src="{{asset('vendor/dist/img/default-150x150.png')}}" class="logo-ttd"></medium>
                                             </div>                                           
                                         </div>
-                                        @if($akun->tempat_lahir == null || $akun->tanggal_lahir == null || $akun->jenis_kelamin == null || $akun->telepon == null)
+                                        @empty(!$akun)
                                         <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
                                         @else
                                         <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah Profil</a>
-                                        @endif
+                                        @endempty
                                     </div>
                                 </div>
                             </div>

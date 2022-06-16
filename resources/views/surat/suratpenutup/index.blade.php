@@ -36,20 +36,38 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
+                        @if(session()->get('sukses'))
+                        <div class="alert alert-success">
+                            {{session()->get('sukses')}}
+                        </div>
+                        @endif
                         <div class="col-lg-6">
-                            <div class="card border-top-info p-4">
-                                <div class="card-body">    
-                                    <div class="form-group mb-3">
-                                        <p class="fw-bold">Isi Surat Penutup</p>
-                                        <textarea name="" id="" cols="58" rows="5" placeholder="Isi Surat Penutup"></textarea>
+                            <form action="{{route('penutup.update', $penutup)}}" method="post">
+                                @method('PATCH')
+                                @csrf
+                                <div class="card border-top-info p-4">
+                                    <div class="card-body">    
+                                        <div class="form-group mb-3">
+                                            <p class="fw-bold">Isi Surat Penutup</p>
+                                            <textarea name="isi_surat_penutup" id="" cols="58" rows="5" placeholder="Isi Surat Penutup"></textarea>
+                                            @error('isi_surat_penutup')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                            <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                            @if($isi->surat_penutup == null)
+                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                            @else
+                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
+                                            @endif
+                                            <a href="{{route('cetak.index')}}" class="col-md-4 btn btn-success"><i class="bi bi-file-earmark-pdf-fill"></i> Lihat Surat</a>
+                                          </div>                             
                                     </div>
-                                    <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                        <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
-                                        <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
-					                    <a href="{{route('cetak.index')}}" class="col-md-4 btn btn-success"><i class="bi bi-file-earmark-pdf-fill"></i> Lihat Surat</a>
-                                      </div>                             
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.row -->

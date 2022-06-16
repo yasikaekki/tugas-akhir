@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\SuratPenutup;
+use Auth;
 use DB;
 
 class SuratPenutupController extends Controller
@@ -18,8 +19,13 @@ class SuratPenutupController extends Controller
     {
         //
         $judul = 'Surat Penutup';
+        $uid = Auth::id();
+        $penutupid = SuratPenutup::all()->where('user_id', $uid);
+        $penutup = count($penutupid);
+        $isiid = SuratPenutup::all()->last()->id;
+        $isi= SuratPenutup::find($isiid);
 
-        return view('surat.suratpenutup.index', compact('judul'));
+        return view('surat.suratpenutup.index', compact('judul', 'isi','penutup'));
     }
 
     /**
@@ -87,13 +93,13 @@ class SuratPenutupController extends Controller
             $suratpenutup->created_at=\Carbon\Carbon::now();
             $suratpenutup->save();
 
-            return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil disimpan');
+            return redirect()->route('penutup.index')->with('sukses', 'Penutup surat berhasil disimpan');
         }else{
             
             $suratpenutup->updated_at=\Carbon\Carbon::now();
             $suratpenutup->save();
             
-            return redirect()->route('penutup.index')->with('sukses', 'Nomor surat berhasil diperbarui');
+            return redirect()->route('penutup.index')->with('sukses', 'Penutup surat berhasil diperbarui');
         }
     }
 

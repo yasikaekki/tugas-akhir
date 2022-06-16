@@ -15,11 +15,11 @@ class CreateTubuhSuratsTable extends Migration
     {
         Schema::create('tubuh_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id')->nullable();
-            $table->string('hari')->nullable();
+            $table->foreignid('user_id');
             $table->string('tanggal')->nullable();
             $table->string('acara')->nullable();
             $table->string('tempat')->nullable();
+            $table->string('jam')->nullable();
             $table->timestamps();
         });
     }

@@ -39,10 +39,26 @@ class User extends Authenticatable
     ];
 
     public function laporan_surat(){
-        return $this->belongsTo('App\Model\LaporanSurat');
+        return $this->hasMany('App\Model\LaporanSurat');
+    }
+
+    public function rekapitulasi_surat(){
+        return $this->hasMany('App\Model\RekapitulasiSurat');
     }
 
     public function nomor_surat(){
-        return $this->belongsTo('App\Model\NomorSurat');
+        return $this->hasMany('App\NomorSurat');
+    }
+
+    public function surat_pembuka(){
+        return $this->hasMany('App\Model\SuratPembuka');
+    }
+
+    public function surat_penutup(){
+        return $this->hasMany('App\Model\SuratPenutup');
+    }
+    
+    public function cetak_surat(){
+        return $this->hasMany('App\Model\CetakSurat');
     }
 }

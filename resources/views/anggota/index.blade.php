@@ -74,7 +74,7 @@
                                           <td><span class="badge bg-danger mb-3">{{$users->status}}</span></td>
                                           @endif
                                           <td>{{$users->email}}</td>
-                                          <td>{{$users->email_verified_at}}</td> 
+                                          <td>{{$users->email_verified_at->formatLocalized('%A, %d %B %Y')}}</td> 
                                           <td>
                                             @if($users->id == 1 || $users->status == 'Aktif')
                                             <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>

@@ -14,16 +14,16 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <h1 class="m-0">{{$judul}}</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-7">
+                    <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
                         <li class="breadcrumb-item"><a href="{{route('nomor.index')}}" class="link">Nomor Surat</a></li>
                         <li class="breadcrumb-item"><a href="{{route('pembuka.index')}}" class="link">Surat Pembuka</a></li>
                         <li class="breadcrumb-item"><a href="{{route('tubuh.index')}}" class="link">Tubuh Surat</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('surat.suratpenutup.index')}}" class="link">Surat Penutup</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('penutup.index')}}" class="link">Surat Penutup</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -53,8 +53,12 @@
                             @endif --}}
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
-                                        <a href="{{route('surat.suratpenutup.index')}}" class="btn btn-danger">Kembali</a>    
-                                       <button type="submit" class="btn btn-primary">Cetak Surat</button>                             
+                                        <a href="{{route('penutup.index')}}" class="btn btn-danger">Kembali</a>    
+                                       @if(!is_null($cetak->konfigurasi_kop_surat && $cetak->laporan_surat && $cetak->laporan_surat && $cetak->laporan_surat))
+                                        <button type="submit" class="btn btn-primary">Cetak Surat</button>                             
+                                        @else 
+                                        <button type="submit" class="btn btn-primary disabled">Cetak Surat</button>
+                                        @endif
                                     </div>
                                 </div>
                             </form>                            

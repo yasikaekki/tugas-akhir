@@ -16,11 +16,11 @@ class CreateCetakSuratsTable extends Migration
         Schema::create('cetak_surats', function (Blueprint $table) {
             $table->id();
             $table->foreignid('user_id');
-            $table->foreignid('konfigurasi_kop_surat_id');
-            $table->foreignid('nomor_surat_id');
-            $table->foreignid('surat_pembuka_id');
-            $table->foreignid('tubuh_surat_id');
-            $table->foreignid('surat_penutup_id');
+            $table->foreignid('konfigurasi_kop_surat_id')->nullable();
+            $table->foreignid('laporan_surat_id')->nullable();
+            $table->foreignid('surat_pembuka_id')->nullable();
+            $table->foreignid('tubuh_surat_id')->nullable();
+            $table->foreignid('surat_penutup_id')->nullable();
             $table->timestamps();
         });
     }

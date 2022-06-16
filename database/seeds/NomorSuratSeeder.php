@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\NomorSurat;
+use App\NomorSurat;
 
 class NomorSuratSeeder extends Seeder
 {
@@ -13,94 +13,21 @@ class NomorSuratSeeder extends Seeder
     public function run()
     {
         //
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Undangan (SU)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
+        $array = [
+            'Surat Undangan (SU)', 'Surat Keputusan (SK)', 'Surat Permohonan (SPm)', 
+            'Surat Pemberitahuan (SPb)', 'Berita Acara (BA)', 'Sertifikat (SRT)',
+            'Sertifikat (SRT)', 'Surat Pernyataan (SPn)', 'Surat Tugas (ST)',
+            'Surat Keterangan (SKet)', 'Surat Rekomendasi (SR)', 'Kuitansi (K)',
+            'Perjanjian Kerja (PK)', 'Surat Pengantar (SPeng)', 'Surat Peminjaman (SPp)'
 
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Keputusan (SK)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
+        ];
 
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Permohonan (SPm)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Pemberitahuan (SPb)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Berita Acara (BA)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Sertifikat (SRT)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Pernyataan (SPn)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Tugas (ST)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;            
-        $nomor->jenis_surat = 'Surat Keterangan (SKet)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;
-        $nomor->jenis_surat = 'Surat Rekomendasi (SR)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;
-        $nomor->jenis_surat = 'Surat Balasan (SB)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;
-        $nomor->jenis_surat = 'Kuitansi (K)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;;
-        $nomor->jenis_surat = 'Perjanjian Kerja (PK)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;
-        $nomor->jenis_surat = 'Surat Pengantar (SPeng)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new NomorSurat;
-        $nomor->jenis_surat = 'Surat Peminjaman (SPp)';
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->updated_at = \Carbon\Carbon::now();
-        $nomor->save();
+        foreach ($array as $i) {
+            $nomor = new NomorSurat;            
+            $nomor->jenis_surat = $i;
+            $nomor->created_at = \Carbon\Carbon::now();
+            $nomor->updated_at = \Carbon\Carbon::now();
+            $nomor->save();
+        }
     }
 }

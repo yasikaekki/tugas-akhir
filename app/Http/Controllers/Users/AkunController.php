@@ -97,12 +97,20 @@ class AkunController extends Controller
     {
         //
         $user=User::find($id);
-        // $user->lokasi_foto=$request->lokasi_foto;
-        // $user->lokasi_ttd=$request->lokasi_ttd;
         $user->name=$request->name;
+        $file = $request->file('lokasi_foto');
+        $file_ttd = $request->file('lokasi_ttd');
+        $nama_file = time() . "." . $file->getClientOriginalExtension();
+        $ttd = time() . "." . $file_ttd->getClientOriginalExtension();
+        $tujuan_upload = 'assets/profil/';
+        $tujuan_uploadku = 'assets/ttd/';
+        $file->move($tujuan_upload, $nama_file);
+        $file_ttd->move($tujuan_uploadku, $ttd);
+        $user->lokasi_foto = $nama_file;
+        $user->lokasi_ttd = $ttd;
         $user->gelar=$request->gelar;
         $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir=$request->tanggal_lahir;
+        $user->tanggal_lahir=\Carbon\Carbon::now()->formatLocalized('%d %B %Y');
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
 

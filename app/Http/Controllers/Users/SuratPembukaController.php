@@ -22,12 +22,15 @@ class SuratPembukaController extends Controller
     {
         //
         $judul = 'Surat Pembuka';
-        $laporanid = DB::table('laporan_surats')->select('id')->value('id');
-        $pembukaid = SuratPembuka::all()->last()->id;
-        $pembuka = SuratPembuka::find($pembukaid);
-        $laporan = LaporanSurat::find($laporanid);
+        $uid = Auth::id();
+        $laporanid = SuratPembuka::all()->where('user_id', $uid);
+        $pembukaid = SuratPembuka::all()->where('user_id', $uid);
+        $pembuka = count($pembukaid);
+        $laporan = count($laporanid);
+        $isiid = SuratPembuka::all()->last()->id;
+        $isi= SuratPembuka::find($isiid);
 
-        return view('surat.suratpembuka.index', compact('judul', 'pembuka', 'laporan'));
+        return view('surat.suratpembuka.index', compact('judul', 'isi','pembuka', 'laporan'));
     }
 
     /**
@@ -97,13 +100,13 @@ class SuratPembukaController extends Controller
             $suratpembuka->created_at=\Carbon\Carbon::now();
             $suratpembuka->save();
             
-            return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil disimpan');
+            return redirect()->route('pembuka.index')->with('sukses', 'Surat pembuka berhasil disimpan');
         } else {
             
             $suratpembuka->updated_at=\Carbon\Carbon::now();
             $suratpembuka->save();
             
-            return redirect()->route('pembuka.edit',$id)->with('sukses', 'Surat pembuka berhasil diperbarui');
+            return redirect()->route('pembuka.index')->with('sukses', 'Surat pembuka berhasil diperbarui');
         }
     }
 

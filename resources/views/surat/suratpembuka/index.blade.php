@@ -41,7 +41,7 @@
                         @endif
                         <div class="col-lg-6">
                             {{-- @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null) --}}
-                            <form action="{{route('pembuka.update', $pembuka->id)}}" method="POST">
+                            <form action="{{route('pembuka.update', $pembuka)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
                             {{-- @else
@@ -56,7 +56,7 @@
                                                {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
                                                {{-- @foreach ($nomor as $nomors) --}}
                                                 {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
-                                                <option value="-" selected>-</option>
+                                                <option value="-">-</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Perihal</label>
-                                            <input name="perihal" value="{{$pembuka->perihal}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                            <input name="perihal" value="{{$isi->perihal}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
                                             @error('perihal')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Kepada</label>
-                                            <input name="kepada" value="{{$pembuka->kepada}}" type="text" placeholder="Kepada" class="mb-3 form-control @error('kepada') is-invalid @enderror">
+                                            <input name="kepada" value="{{$isi->kepada}}" type="text" placeholder="Kepada" class="mb-3 form-control @error('kepada') is-invalid @enderror">
                                             @error('kepada')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <p class="fw-bold">Isi Surat Pembuka</p>
-                                            <textarea name="isi_surat_pembuka" cols="58" rows="5" placeholder="Isi Surat Pembuka" class="mb-3 form-control @error('isi_surat_pembuka') is-invalid @enderror"></textarea>
+                                            <textarea name="isi_surat_pembuka" cols="58" rows="5" placeholder="Isi Surat Pembuka" class="mb-3 form-control @error('isi_surat_pembuka') is-invalid @enderror" value="{{$isi->isi_surat_pembuka}}"></textarea>
                                             @error('isi_surat_pembuka')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                                 <a href="{{route('nomor.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
-                                                @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka === null)
+                                                @if($isi->lampiran ==  null || $isi->perihal == null || $isi->kepada == null || $isi->isisuratpembuka == null)
                                                 <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
                                                 @else
                                                 <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
