@@ -15,7 +15,6 @@ class CreateKonfigurasiKopSuratsTable extends Migration
     {
         Schema::create('konfigurasi_kop_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
             $table->string('nama_upt')->nullable();
             $table->string('nama_mentri')->nullable();
             $table->string('lokasi_foto')->nullable();

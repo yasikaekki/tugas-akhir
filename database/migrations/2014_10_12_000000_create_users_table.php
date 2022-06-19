@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('konfigurasi_kop_surat_id')->nullable();
             $table->string('name')->nullable();
             $table->string('nip')->nullable();
             $table->integer('no_nip')->nullable();
@@ -23,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('tempat_lahir')->nullable();
             $table->string('tanggal_lahir')->nullable();
             $table->string('jenis_kelamin')->nullable();
-            $table->integer('telepon')->nullable();
+            $table->float('telepon',13,2)->nullable();
             $table->string('status')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

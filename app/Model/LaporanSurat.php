@@ -21,4 +21,16 @@ class LaporanSurat extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function rekapitulasi_surat(){
+        return $this->belongsTo('App\Model\RekapitulasiSurat');
+    }
+
+    public function bulan(){
+        return $this->hasMany('App\Bulan');
+    }
+
+    public function tahun(){
+        return $this->hasMany('App\Tahun');
+    }
 }

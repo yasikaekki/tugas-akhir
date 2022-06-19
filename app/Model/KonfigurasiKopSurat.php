@@ -13,4 +13,9 @@ class KonfigurasiKopSurat extends Model
     {
        return $this->hasMany('App\Model\CetakSurat');
     }
+
+    public function konfigurasi_kop_surat()
+    {
+       return $this->hasMany('App\Model\KonfigurasiKopSurat');
+    }
 }

@@ -110,7 +110,7 @@ class AkunController extends Controller
         $user->lokasi_ttd = $ttd;
         $user->gelar=$request->gelar;
         $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir=\Carbon\Carbon::now()->formatLocalized('%d %B %Y');
+        $user->tanggal_lahir=$request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
 

@@ -15,6 +15,7 @@ class CreateTahunsTable extends Migration
     {
         Schema::create('tahuns', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('laporan_surat_id')->nullable();
             $table->string('list_tahun');
             $table->timestamps();
         });

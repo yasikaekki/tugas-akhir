@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         $user = new User;
         $user->name = 'super admin';
         $user->gelar = 'S.Kom., M.Kom.';
+        $user->konfigurasi_kop_surat_id = 1;
         $user->nip = 'NIPPPK';
         $user->no_nip = 768787;
         $user->jabatan = 'Ketua Umum';
@@ -58,13 +59,8 @@ class UserSeeder extends Seeder
         $laporan->created_at = \Carbon\Carbon::now();
         $laporan->save();
 
-        $laporan = new RekapitulasiSurat;
-        $laporan->user_id = $user->id;
-        $laporan->created_at = \Carbon\Carbon::now();
-        $laporan->save();
-
         $kop = new KonfigurasiKopSurat;
-        $kop->user_id = $user->id;
+        $kop->id = 1;
         $kop->created_at = \Carbon\Carbon::now();
         $kop->save();
     }

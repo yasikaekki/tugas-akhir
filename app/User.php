@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Auth;
 
 class User extends Authenticatable
@@ -37,6 +38,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->atributes['created_at'])->translatedFormat('l, d F Y');
+    }
+
+    public function rekapitulasi_kop_surat(){
+        return $this->belongsTo('App\Model\KonfigurasiKopSurat');
+    }
 
     public function laporan_surat(){
         return $this->hasMany('App\Model\LaporanSurat');

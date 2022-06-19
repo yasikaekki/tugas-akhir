@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
 use App\Model\SuratPembuka;
@@ -11,6 +10,8 @@ use App\Model\SuratPenutup;
 use App\Model\TubuhSurat;
 use App\Model\NomorSurat;
 use App\Model\CetakSurat;
+use App\Bulan;
+use App\Tahun;
 use App\User;
 use Auth;
 use DB;
@@ -29,8 +30,9 @@ class CetakSuratController extends Controller
         $cetakid = CetakSurat::get()->last()->id;
         $cetak = CetakSurat::find($cetakid);
         $cetaksurat = CetakSurat::all();
+        $kode = count($cetaksurat);
 
-        return view('surat.cetaksurat.index', compact('judul', 'cetak'));
+        return view('surat.cetaksurat.index', compact('judul', 'cetak', 'kode'));
     }
 
     /**
@@ -52,37 +54,6 @@ class CetakSuratController extends Controller
     public function store(Request $request)
     {
         //
-        $nomor = new LaporanSurat();
-        $nomor->user_id = Auth::id();
-        $nomor->created_at = \Carbon\Carbon::now();
-        $nomor->save();
-
-        $rekapitulasi = new RekapitulasiSurat();
-        $rekapitulasi->user_id = Auth::id();
-        $rekapitulasi->created_at = \Carbon\Carbon::now();
-        $rekapitulasi->save();
-
-        $pembuka = new SuratPembuka();
-        $pembuka->user_id = Auth::id();
-        $pembuka->created_at = \Carbon\Carbon::now();
-        $pembuka->save();
-
-        $tubuh = new TubuhSurat();
-        $tubuh->user_id = Auth::id();
-        $tubuh->created_at = \Carbon\Carbon::now();
-        $tubuh->save();
-
-        $penutup = new SuratPenutup();
-        $penutup->user_id = Auth::id();
-        $penutup->created_at = \Carbon\Carbon::now();
-        $penutup->save();
-
-        $penutup = new CetakSurat();
-        $penutup->user_id = Auth::id();
-        $penutup->created_at = \Carbon\Carbon::now();
-        $penutup->save();
-
-        return redirect()->route('cetak.index')->with('sukses', 'Surat berhasil dicetak');
     }
 
     /**
@@ -117,27 +88,46 @@ class CetakSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $nomor = NomorSurat::find($id);
-        $nomor->user_id = $request->user_id;
-        $nomor->created_at = Carbon\Carbon::now();
+        $array= array(2022=>1,2,3,4,5,6,7,8,9);
+        $tahun = $array[date('Y')];
+        $bulan = date('n');
+        $nomor = new LaporanSurat();
+        $nomor->user_id = Auth::id();
+        $nomor->created_at = \Carbon\Carbon::now();
         $nomor->save();
 
-        $pembuka = SuratPembuka::find($id);
-        $pembuka->user_id = $request->user_id;
-        $pembuka->created_at = Carbon\Carbon::now();
+        $rekap = LaporanSurat::find($id);
+        $listbulan = Bulan::find($bulan);
+        $listbulan->laporan_surat_id = $rekap->id;
+        $listbulan->created_at = \Carbon\Carbon::now();
+        $listbulan->save();
+
+        $listbulan = Tahun::find($tahun);
+        $listbulan->laporan_surat_id = $rekap->id;
+        $listbulan->created_at = \Carbon\Carbon::now();
+        $listbulan->save();
+
+        $pembuka = new SuratPembuka();
+        $pembuka->user_id = Auth::id();
+        $pembuka->created_at = \Carbon\Carbon::now();
         $pembuka->save();
 
-        $tubuh = TubuhSurat::find($id);
-        $tubuh->user_id = $request->user_id;
-        $tubuh->created_at = Carbon\Carbon::now();
+        $tubuh = new TubuhSurat();
+        $tubuh->user_id = Auth::id();
+        $tubuh->created_at = \Carbon\Carbon::now();
         $tubuh->save();
 
-        $penutup = SuratPenutup::find($id);
-        $penutup->user_id = $request->user_id;
-        $penutup->created_at = Carbon\Carbon::now();
+        $penutup = new SuratPenutup();
+        $penutup->user_id = Auth::id();
+        $penutup->created_at = \Carbon\Carbon::now();
         $penutup->save();
 
-        return redirect()->route('cetak.index')->with('sukses', 'Surat berhasil diperbarui');
+        $penutup = new CetakSurat();
+        $penutup->user_id = Auth::id();
+        $penutup->created_at = \Carbon\Carbon::now();
+        $penutup->save();
+
+        return redirect()->route('cetak.index')->with('sukses', 'Surat berhasil dicetak');
     }
 
     /**

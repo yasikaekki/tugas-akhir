@@ -44,7 +44,8 @@
                         @endif
                         <div class="col-lg-6">
                             {{-- @if($cetak->kop == null || $cetak->nomor == null || $cetak->pembuka == null || $cetak->tubuh == null || $cetak->penutup == null) --}}
-                            <form action="{{route('cetak.store')}}" method="post">
+                            <form action="{{route('cetak.update', $kode)}}" method="post">
+                                @method('PATCH')
                                 @csrf
                             {{-- @else
                             <form action="" method="post">

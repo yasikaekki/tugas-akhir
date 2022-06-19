@@ -124,7 +124,7 @@
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Hari Ini</p>
                                     <hr>
-                                    @empty($laporan)
+                                    @empty(!$laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
                                     <p class="fs-2 text-center">{{$hariini->count('id')}}</p>
@@ -137,7 +137,7 @@
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Bulan Ini</p>
                                     <hr>
-                                    @empty($laporan)
+                                    @empty(!$laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
                                     <p class="fs-2 text-center">{{$bulanini->count('id')}}</p>
@@ -150,7 +150,7 @@
                                 <div class="card-body">
                                     <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Tahun Ini</p>
                                     <hr>
-                                    @empty($laporan)
+                                    @empty(!$laporan)
                                     <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
                                     @else
                                     <p class="fs-2 text-center">{{$tahunini->count('id')}}</p>

@@ -15,6 +15,7 @@ class CreateBulansTable extends Migration
     {
         Schema::create('bulans', function (Blueprint $table) {
             $table->id();
+            $table->foreignid('laporan_surat_id')->nullable();
             $table->string('nama_bulan');
             $table->timestamps();
         });

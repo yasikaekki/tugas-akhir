@@ -21,13 +21,21 @@ class AnggotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $judul = 'Anggota';
         $no = 1;
         $user = User::all();
         $authuser = Auth::user();
+
+        if($request->fitur_cari){
+            $user=  DB::table('users')->where('name','like','%'.$request->fitur_cari.'%')
+            ->orWhere('gelar','like','%'.$request->fitur_cari.'%')
+            ->orWhere('jabatan','like','%'.$request->fitur_cari.'%')
+            ->orderBy('created_at','desc')
+            ->paginate(5);
+        } 
 
         return view('anggota.index', compact('judul', 'no', 'user', 'authuser'));
     }
@@ -71,6 +79,7 @@ class AnggotaController extends Controller
         $user=new User();
         $user->name=$request->name;
         $user->gelar=$request->gelar;
+        $user->konfigurasi_kop_surat_id = $user->id;
         $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
@@ -87,6 +96,11 @@ class AnggotaController extends Controller
 
         $nomor = new LaporanSurat();
         $nomor->user_id = $user->id;
+        $nomor->created_at=\Carbon\Carbon::now();
+        $nomor->save();
+
+        $nomor = new RekapitulasiSurat();
+        $nomor->rekapitulasi_surat_id = $nomor->id;
         $nomor->created_at=\Carbon\Carbon::now();
         $nomor->save();
 

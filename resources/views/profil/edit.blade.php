@@ -44,10 +44,10 @@
                                             <div class="row">
                                                 <div class="col-md-5">
 
-                                                    {{-- @if($akun->ubah_foto == null) --}}
+                                                    {{-- @if($akun->lokasi_foto == null) --}}
                                                     <img class="logo-profil img-circle" id="logo-image" src="{{ asset('vendor/dist/img/avatar5.png')}}">
                                                     {{-- @else
-                                                    <img src="{{asset ('images/'.$akun->ubah_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
+                                                    <img src="{{asset ('images/'.$akun->lokasi_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
                                                     @endif --}}
                                                     <div class="form-group">
                                                         <label>Ubah Foto</label>

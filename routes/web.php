@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $judul = 'Selamat Datang';
     if(!Auth::user()){
-        return view('welcome', compact('judul'));
+        return redirect()->route('login');
     }else{
         return redirect()->route('home');
     }
@@ -41,5 +41,5 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::get('rekapitulasi', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.index');
     Route::resource('anggota', 'Users\AnggotaController');
     Route::resource('konfigurasi', 'Users\KonfigurasiKopSuratController');
-    Route::resource('profil', 'Users\AkunController');
+    Route::resource('profil', 'Users\ProfilController');
 });

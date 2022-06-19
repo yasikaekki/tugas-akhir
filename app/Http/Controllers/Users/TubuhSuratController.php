@@ -85,8 +85,8 @@ class TubuhSuratController extends Controller
     {
         //
         $tubuhsurat=TubuhSurat::find($id);
-        $tubuhsurat->tanggal=\Carbon\Carbon::now()->formatLocalized('%A, %d %B %Y');
-        $tubuhsurat->jam=\Carbon\Carbon::now()->isoFormat('H:m');
+        $tubuhsurat->tanggal=$request->jam;
+        $tubuhsurat->jam=$request->jam;
         $tubuhsurat->acara=$request->acara;                              
         
         if($tubuhsurat->hari == null || $tubuhsurat->tanggal == null || $tubuhsurat->jam == null || $tubuhsurat->acara == null){

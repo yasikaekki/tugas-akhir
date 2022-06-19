@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
 use Auth;
@@ -33,9 +32,9 @@ class HomeController extends Controller
         $hari = date('d');
         $bulan = date('m');
         $tahun = date('Y');
-        $hariini = RekapitulasiSurat::whereDay('created_at', '=', $hari)->get();
-        $bulanini = RekapitulasiSurat::whereMonth('created_at', '=', $bulan)->get();
-        $tahunini = RekapitulasiSurat::whereYear('created_at', '=', $tahun)->get();
+        $hariini = LaporanSurat::whereDay('created_at', '=', $hari)->get();
+        $bulanini = LaporanSurat::whereMonth('created_at', '=', $bulan)->get();
+        $tahunini = LaporanSurat::whereYear('created_at', '=', $tahun)->get();
 
         return view('home', compact('judul', 'hariini', 'bulanini','tahunini', 'laporan'));
     }

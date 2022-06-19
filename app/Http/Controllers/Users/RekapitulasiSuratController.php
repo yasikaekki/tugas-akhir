@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
 use App\Model\LaporanSurat;
+use App\Tahun;
+use App\Bulan;
 use Auth;
 use DB;
 
@@ -21,16 +22,22 @@ class RekapitulasiSuratController extends Controller
         //
         $no = 1;
         $judul = 'Rekapitulasi Surat Keluar';
-        $laporan = RekapitulasiSurat::all();
+        $laporan = LaporanSurat::all();
         $uid = Auth::id();
-        $arrbulan = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-        $bulan = $arrbulan[date('n')];
-        $tahun = date('Y');
-        $bulanini = DB::table('laporan_surats')->where('user_id',$uid)->orWhere('created_at', $bulan)->get();
-        $jumlahbulan = count($bulanini);
-        $rekap1 = RekapitulasiSurat::whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', 01)->get();
-        $rekap6 = RekapitulasiSurat::whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', 06)->get();
-        return view('rekapitulasi.index', compact('no' ,'judul', 'laporan', 'jumlahbulan', 'arrbulan', 'rekap1','rekap6'));
+        $array= array(2022=>1,2,3,4,5,6,7,8,9);
+        $data = $array[date('Y')];
+        $listbulan = Bulan::all();
+        $bulan = date('n');
+        $tahun = Tahun::all();
+        $laporanid = count($laporan);
+        $rekapitulasi = $laporan->where('id', $laporanid);
+        $kata = $request->fitur_filter;
+        $keywoard = Tahun::find($kata);
+        if($request->fitur_filter){
+            $tahun= Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
+        } 
+        $rekap1 = LaporanSurat::whereYear('created_at', '=', 2022)->whereMonth('created_at', '=', 06)->get();
+        return view('rekapitulasi.index', compact('no' ,'judul','listbulan', 'keywoard','data','tahun','rekapitulasi'));
     }
 
     /**

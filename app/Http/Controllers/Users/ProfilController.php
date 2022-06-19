@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Users;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\KonfigurasiKopSurat;
+use App\User;
 use Auth;
-use Hash;
 use DB;
 
-class KonfigurasiKopSuratController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,11 @@ class KonfigurasiKopSuratController extends Controller
     public function index()
     {
         //
-        $judul = 'Konfigurasi Kop Surat';
-        $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop = KonfigurasiKopSurat::find($kopid);
+        $judul = 'Akun';
+        $uid = Auth::id();
+        $akun = User::find($uid);
 
-        return view('konfigurasi.index', compact('judul', 'kop'));
+        return view('profil.index', compact('judul', 'akun'));
     }
 
     /**
@@ -33,7 +33,7 @@ class KonfigurasiKopSuratController extends Controller
      */
     public function create()
     {
-        //    
+        //
     }
 
     /**
@@ -67,6 +67,12 @@ class KonfigurasiKopSuratController extends Controller
     public function edit($id)
     {
         //
+        $judul = 'Lengkapi Akun';
+
+        $data = Crypt::decrypt($id);
+        $akun = User::find($data);
+
+        return view('profil.edit', compact('judul', 'akun'));
     }
 
     /**
@@ -79,26 +85,30 @@ class KonfigurasiKopSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $kopsurat= KonfigurasiKopSurat::find($id);
+        $user=User::find($id);
+        
+        $file_foto = $request->file('lokasi_foto');
+        $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
+        $upload_foto = 'assets/foto profil/';
+        $file_foto->move($upload_foto, $nama_foto);
+        $user->lokasi_foto = $nama_foto;
 
-        $file = $request->file('lokasi_foto');
-        $nama_file = time() . "." . $file->getClientOriginalExtension();
-        $tujuan_upload = 'assets/logo kop/';
-        $file->move($tujuan_upload, $nama_file);
-        $kopsurat->lokasi_foto = $nama_file;
+        $file_ttd = $request->file('lokasi_ttd');
+        $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
+        $upload_ttd = 'assets/foto ttd/';
+        $file_ttd->move($upload_ttd, $nama_ttd);
+        $user->lokasi_ttd = $nama_ttd;
 
-        $kopsurat->nama_upt=$request->nama_upt;
-        $kopsurat->nama_mentri=$request->nama_mentri;
+        $user->gelar=$request->gelar;
+        $user->tempat_lahir=$request->tempat_lahir;
+        $user->tanggal_lahir=$request->tanggal_lahir;
+        $user->jenis_kelamin=$request->jenis_kelamin;
+        $user->telepon=$request->telepon;
 
-        if ($kopsurat->nama_upt == null || $kopsurat->nama_mentri == null) {
-            $kopsurat->created_at=\Carbon\Carbon::now();
-            $kopsurat->save();
-            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil disimpan');      
-        }else {   
-            $kopsurat->updated_at=\Carbon\Carbon::now();
-            $kopsurat->save();
-            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil diperbarui');
-        }
+        $user->created_at=\Carbon\Carbon::now();
+        $user->save();
+
+        return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil dilengkapi');
     }
 
     /**
