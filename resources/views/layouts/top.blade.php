@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="{{ asset('vendor/plugins/fontawesome-free/css/all.min.css')}}">
 <!-- bootstrap icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <!-- bootstrap 5 -->
 <link href="{{ asset('vendor/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 <!-- iCheck -->

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\LaporanSurat;
+use App\NomorSurat;
 use App\Tahun;
 use App\Bulan;
 use Auth;
@@ -21,23 +21,31 @@ class RekapitulasiSuratController extends Controller
     {
         //
         $no = 1;
-        $judul = 'Rekapitulasi Surat Keluar';
-        $laporan = LaporanSurat::all();
-        $uid = Auth::id();
-        $array= array(2022=>1,2,3,4,5,6,7,8,9);
-        $data = $array[date('Y')];
+        $judul = 'Rekapitulasi Bulan';
         $listbulan = Bulan::all();
-        $bulan = date('n');
         $tahun = Tahun::all();
-        $laporanid = count($laporan);
-        $rekapitulasi = $laporan->where('id', $laporanid);
         $kata = $request->fitur_filter;
         $keywoard = Tahun::find($kata);
         if($request->fitur_filter){
-            $tahun= Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
+            $tahun = Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
+            $filter_surat = NomorSurat::all()->where('id', $request->fitur_filter);
         } 
-        $rekap1 = LaporanSurat::whereYear('created_at', '=', 2022)->whereMonth('created_at', '=', 06)->get();
-        return view('rekapitulasi.index', compact('no' ,'judul','listbulan', 'keywoard','data','tahun','rekapitulasi'));
+        return view('rekapitulasi.bulan.index', compact('no' ,'judul','listbulan', 'keywoard','tahun'));
+    }
+
+    public function jenis_surat(Request $request) 
+    {
+        $no = 1;
+        $judul = 'Rekapitulasi Jenis Surat';
+        $nomor = NomorSurat::all();
+        $tahun = Tahun::all();
+        $kata = $request->fitur_filter;
+        $keywoard = Tahun::find($kata);
+        // if($request->fitur_filter){
+        //     $tahun = Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
+        //     $filter_surat = NomorSurat::all()->where('id', $request->fitur_filter);
+        // } 
+        return view('rekapitulasi.jenis_surat.index', compact('no' ,'judul','nomor','keywoard','tahun'));
     }
 
     /**

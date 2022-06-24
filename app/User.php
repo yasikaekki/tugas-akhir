@@ -39,33 +39,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->atributes['created_at'])->translatedFormat('l, d F Y');
-    }
-
-    public function rekapitulasi_kop_surat(){
-        return $this->belongsTo('App\Model\KonfigurasiKopSurat');
-    }
-
-    public function laporan_surat(){
-        return $this->hasMany('App\Model\LaporanSurat');
-    }
-
-    public function rekapitulasi_surat(){
-        return $this->hasMany('App\Model\RekapitulasiSurat');
-    }
-
-    public function nomor_surat(){
-        return $this->hasMany('App\NomorSurat');
-    }
-
-    public function surat_pembuka(){
-        return $this->hasMany('App\Model\SuratPembuka');
-    }
-
-    public function surat_penutup(){
-        return $this->hasMany('App\Model\SuratPenutup');
+    public function buat_surat(){
+        return $this->hasMany('App\Model\BuatSurat');
     }
     
     public function cetak_surat(){

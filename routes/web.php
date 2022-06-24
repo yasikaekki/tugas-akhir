@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Model\CetakSurat;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    $judul = 'Selamat Datang';
     if(!Auth::user()){
         return redirect()->route('login');
     }else{
@@ -32,13 +32,14 @@ Auth::routes([
 
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){ 
     Route::get('home', 'HomeController@index')->name('home'); 
-    Route::resource('surat/nomor', 'Users\NomorSuratController');
-    Route::resource('surat/pembuka', 'Users\SuratPembukaController');
-    Route::resource('surat/tubuh', 'Users\TubuhSuratController');
-    Route::resource('surat/cetak', 'Users\CetakSuratController');
-    Route::resource('surat/penutup', 'Users\SuratPenutupController');
+    Route::resource('surat', 'Users\BuatSuratController');
+    Route::resource('surat-agenda', 'Users\TubuhSuratController');
+    Route::resource('surat-cetak', 'Users\CetakSuratController');
+    Route::resource('list-surat', 'Users\ListSuratController');
+    Route::get('surat-cetak/invoice', 'Users\CetakSuratController@invoice')->name('print');
     Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
-    Route::get('rekapitulasi', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.index');
+    Route::get('rekapitulasi-bulan', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.bulan.index');
+    Route::get('rekapitulasi-jenis-surat', 'Users\RekapitulasiSuratController@jenis_surat')->name('rekapitulasi.jenis_surat.index');
     Route::resource('anggota', 'Users\AnggotaController');
     Route::resource('konfigurasi', 'Users\KonfigurasiKopSuratController');
     Route::resource('profil', 'Users\ProfilController');

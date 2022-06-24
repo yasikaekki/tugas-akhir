@@ -66,26 +66,16 @@
                                         </div>     
                                     </form>
                                     @if($laporan->count() == 0)
-                                    <tr class="table-secondary text-center">
-                                        <th>No.</th>
-                                        <th>Nama Lengkap, Gelar</th>
-                                        <th>Jabatan</th>
-                                        <th>NIK/NIP/NIPPPK</th>
-                                        <th>Nomor Surat</th>
-                                        <th>Jenis Surat</th>
-                                        <th>Tanggal Buat</th>
-                                    </tr>
-                                    <h3 class="text-center text-warning fw-bold mt-3">Tidak menemukan data apapun</h3>
                                     @else
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr class="table-secondary text-center">
                                             <th>No.</th>
                                             <th>Nomor Surat</th>
-                                            <th>Jenis Surat</th>
-                                            <th>Lampiran</th>
-                                            <th>Perihal</th>
                                             <th>Tanggal</th>
+                                            <th>Pembuat</th>
+                                            <th>Penerima</th>
+                                            <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -94,10 +84,14 @@
                                         <tr class="text-center">
                                             <td>{{$no++}}.</td>
                                             <td>{{$laporans->no_surat}}</td>
-                                            <td>{{$laporans->nomor_surat->jenis_surat}}</td>  
-                                            <td>{{$laporans->lampiran}}</td>
-                                            <td>{{$laporans->perihal}}</td>  
-                                            <td>{{$laporans->created_at->translatedFormat('l, d F Y')}}</td>      
+                                            <td>{{$laporans->created_at->translatedFormat('l, d F Y')}}</td>  
+                                            <td>{{$laporans->user->name}}</td> 
+                                            <td>{{$laporans->kepada}}</td>
+                                            <td>
+                                                <a href="" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                                <a href="" class="btn btn-success"><i class="bi bi-envelope-open-fill"></i> Lihat</a>
+                                                <a href="" class="btn btn-warning"><i class="fas fa-print"></i> Cetak</a>
+                                            </td>
                                         </tr>
                                         @endif
                                         @endforeach

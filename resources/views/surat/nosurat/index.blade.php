@@ -38,7 +38,7 @@
                             {{session()->get('sukses')}}
                         </div>
                         @endif
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             {{-- @if($)
                             <form action="{{route('nomor.store')}}" method="POST">
                                 @csrf
@@ -46,45 +46,102 @@
                             <form action="{{route('nomor.update', $noid)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
-                            {{-- @endif --}}
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
-                                        <div class="form-group mb-3">
-                                            <label>Nomor Surat</label>
-                                            <input type="text" value="{{$nomor->no_surat}}" placeholder="Nomor Surat" class="form-control" disabled>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="exampleFormControlSelect2">Jenis Surat</label>
-                                            <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
-                                            @if($nomor->jenis_surat == null)
-                                            <option value="null" selected hidden disabled>Pilih</option>
-                                            @foreach($laporan as $nomors)
-                                                <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
-
-                                            @endforeach
-                                            @else
-                                            @foreach($laporan as $nomors)
-                                                <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
-
-                                            @endforeach
-                                            @endif
-                                            </select>
-                                            @error('nomor_surat_id')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror                                           
-                                        </div>   
-                                        
-                                        <div class="form-group mt-5">
-                                            <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                @if($nomor->nomor_surat_id == null || $nomor->no_surat  == null)
-                                                <button class="col-md-6 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
-                                                @else
-                                                <button class="col-md-6 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
-                                                @endif
-                                                <a href="{{route('pembuka.index')}}" class="col-md-6 btn btn-success">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                        <div class="row d-flex">
+                                            <div class="col-sm-3">
+                                                <label>Nomor Surat</label>
+                                                <label class="mt-4-5">Jenis Surat</label><br>
+                                                <label class="mt-4-5">Perihal</label><br>
+                                                <label class="mt-4-5">Lampiran</label><br>
+                                                <label class="mt-3-5">Kepada</label>
                                             </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" value="{{$nomor->no_surat}}" placeholder="Nomor Surat" class="form-control mb-3" disabled>
+                                                <div class="form-group mb-3">
+                                                    <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
+                                                        @if($nomor->jenis_surat == null)
+                                                        <option value="null" selected hidden disabled>Pilih</option>
+                                                        @foreach($laporan as $nomors)
+                                                            <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
+            
+                                                        @endforeach
+                                                        @else
+                                                        @foreach($laporan as $nomors)
+                                                            <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
+            
+                                                        @endforeach
+                                                        @endif
+                                                        </select>
+                                                        @error('nomor_surat_id')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror       
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <input name="perihal" value="" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                                    @error('perihal')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    
+                                                    <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">
+                                                       {{-- <option value="null" selected hidden disabled>Pilih</option> --}}
+                                                       {{-- @foreach ($nomor as $nomors) --}}
+                                                        {{-- <option value="{{$nomors->id}}">{{$nomors->kode_surat}}</option>  --}}
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                       {{-- @endforeach --}}
+                                                    </select>
+                                                    @error('lampiran')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    
+                                                    <input name="kepada" value="" type="text" placeholder="Kepada" class="mb-3 form-control @error('kepada') is-invalid @enderror">
+                                                    @error('kepada')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group mt-2">
+                                                    <label>Isi Surat Pembuka</label>
+                                                    <input name="isi_surat_pembuka" placeholder="Isi Surat Pembuka" class="mb-3 form-control @error('isi_surat_pembuka') is-invalid @enderror" value="">
+                                                    @error('isi_surat_pembuka')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group mt-2">
+                                                    <label>Isi Surat Pembuka</label>
+                                                    <input name="isi_surat_pembuka" placeholder="Isi Surat Pembuka" class="mb-3 form-control @error('isi_surat_pembuka') is-invalid @enderror" value="">
+                                                    @error('isi_surat_pembuka')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Cetak Surat</button>
                                         </div>
                                     </div>
                                 </div>

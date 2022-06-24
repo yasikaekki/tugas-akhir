@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuratPenutupsTable extends Migration
+class CreateRekapitulasiSuratsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSuratPenutupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_penutups', function (Blueprint $table) {
+        Schema::create('rekapitulasi_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id');
-            $table->string('isi_surat_penutup')->nullable();
+            $table->foreignid('buat_surat_id')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateSuratPenutupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_penutups');
+        Schema::dropIfExists('rekapitulasi_surats');
     }
 }

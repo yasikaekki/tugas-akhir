@@ -25,7 +25,7 @@ class TubuhSuratController extends Controller
         $isiid = TubuhSurat::all()->last()->id;
         $isi= TubuhSurat::find($isiid);
 
-        return view('surat.tubuhsurat.index',compact('judul','isi','tubuh'));
+        return view('agenda.index',compact('judul','isi','tubuh'));
     }
 
     /**
@@ -85,22 +85,23 @@ class TubuhSuratController extends Controller
     {
         //
         $tubuhsurat=TubuhSurat::find($id);
-        $tubuhsurat->tanggal=$request->jam;
+        $tubuhsurat->tanggal=\Carbon\Carbon::parse($request->tanggal)->translatedFormat("l, d F Y");
         $tubuhsurat->jam=$request->jam;
         $tubuhsurat->acara=$request->acara;                              
+        $tubuhsurat->tempat=$request->tempat;                              
         
         if($tubuhsurat->hari == null || $tubuhsurat->tanggal == null || $tubuhsurat->jam == null || $tubuhsurat->acara == null){
             
             $tubuhsurat->created_at=\Carbon\Carbon::now();
             $tubuhsurat->save();
             
-            return redirect()->route('tubuh.index')->with('sukses', 'Nomor surat berhasil disimpan');
+            return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil disimpan');
         }else{
             
             $tubuhsurat->updated_at=\Carbon\Carbon::now();
             $tubuhsurat->save();
             
-            return redirect()->route('tubuh.index')->with('sukses', 'Nomor surat berhasil diperbarui');
+            return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil diperbarui');
         }     
     }
 

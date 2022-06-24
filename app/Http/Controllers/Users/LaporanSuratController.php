@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\LaporanSurat;
+use App\Model\BuatSurat;
 use App\User;
 use Auth;
 use DB;
@@ -19,23 +19,24 @@ class LaporanSuratController extends Controller
     public function index(Request $request)
     {
         //
-        // if ($request) {
-        //     $fitur_cari = DB::table('users')->where('name','like','%'.$request->hasil_cari.'%')->where('role', 'user')->orderBy('created_at','desc')->where('deleted_at', null)
+        // if ($request->fitur_cari) {
+        //     $laporan = LaporanSurat::all()->with('user')->where('name','like','%'.$request->fitur_cari.'%')
+        //     ->orWhere('gelar','like','%'.$request->fitur_cari.'%')
+        //     ->orWhere('jabatan','like','%'.$request->fitur_cari.'%')
+        //     ->orWhere('no_surat','like','%'.$request->fitur_cari.'%')
+        //     ->orWhere('no_nip','like','%'.$request->fitur_cari.'%')
+        //     ->orderBy('created_at','desc')
         //     ->paginate(10);
-        //     $fitur_cari->appends($request->all());
         // }
         
         $judul = 'Laporan Surat Keluar';
         $uid = Auth::id();
         $no = 1;
-        $laporan = laporanSurat::all();
-        $jenisid = LaporanSurat::all()->where('user_id', $uid);
-        $surat = count($jenisid);
-        $isiid = LaporanSurat::all()->last()->id;
-        $isi= LaporanSurat::find($isiid);
+        $laporan = BuatSurat::all();
+        $surat = count($laporan);
+        $data= BuatSurat::find($surat);
         $tahun = date('Y');
-        $default = LaporanSurat::whereYear('created_at', '=', $tahun)->get();
-        return view('laporan.index', compact('judul', 'surat', 'no', 'isi', 'laporan'));
+        return view('laporan.index', compact('judul', 'surat', 'no', 'data', 'laporan'));
     }
 
     /**

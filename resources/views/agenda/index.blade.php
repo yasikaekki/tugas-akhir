@@ -78,6 +78,15 @@
                                                 </span>
                                             @enderror
                                         </div>
+                                        <div class="form-group mb-3">
+                                            <label>Tempat</label>
+                                            <input name="tempat" value="{{$isi->tempat}}" type="text" placeholder="Acara" class="mb-3 form-control @error('tempat') is-invalid @enderror">
+                                            @error('tempat')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                         <div class="form-group mt-5">
                                             <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                                 <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>

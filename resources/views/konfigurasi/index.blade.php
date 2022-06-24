@@ -44,16 +44,55 @@
                                 @csrf
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
-                                        <img class="logo-upt" src="{{asset('vendor/dist/img/default-150x150.png')}}">
+                                        @if($kop->lokasi_foto == null)
+                                        <img class="logo-upt" id="logo-image" src="{{asset('vendor/dist/img/default-150x150.png')}}">
+                                        @else
+                                        <img class="logo-upt" id="logo-image" src="/assets/logo upt/{{$kop->lokasi_foto}}">
+                                        @endif
                                         <div class="form-group mb-3">
                                             <label>Logo UPT</label>
-                                            <input type="file" name="lokasi_foto" id="logo-image" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror">
+                                            <input type="file" id="preview" name="lokasi_foto" id="logo-image" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror">
                                             @error('lokasi_foto')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
+
+                                        <script>
+                                            $("#preview").change(function(event) {  
+                                                RecurFadeIn();
+                                                readURL(this);    
+                                            });
+                                            $("#preview").on('click',function(event){
+                                                RecurFadeIn();
+                                            });
+                                            function readURL(input) {    
+                                                if (input.files && input.files[0]) {   
+                                                var reader = new FileReader();
+                                                var filename = $("#preview").val();
+                                                filename = filename.substring(filename.lastIndexOf('\\')+1);
+                                                reader.onload = function(e) {
+                                                    debugger;      
+                                                    $('#logo-image').attr('src', e.target.result);
+                                                    $('#logo-image').hide();
+                                                    $('#logo-image').fadeIn(500);      
+                                                    // $('.custom-file-label').text(filename);             
+                                                }
+                                                reader.readAsDataURL(input.files[0]);    
+                                                } 
+                                                $(".alert").removeClass("loading").hide();
+                                            }
+                                            function RecurFadeIn(){ 
+                                                // console.log('ran');
+                                                FadeInAlert();  
+                                            }
+                                            function FadeInAlert(){
+                                                $(".alert").show();
+                                                // $(".alert").text(text).addClass("loading");  
+                                            }
+                                        </script>
+
                                         <div class="form-group mb-3">
                                             <label>Nama UPT</label>
                                             <input type="text" name="nama_upt" value="{{$kop->nama_upt}}" placeholder="Nama UPT" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror">

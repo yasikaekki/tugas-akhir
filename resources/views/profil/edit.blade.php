@@ -51,26 +51,94 @@
                                                     @endif --}}
                                                     <div class="form-group">
                                                         <label>Ubah Foto</label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="lokasi_foto" class="form-control @error('lokasi_foto') is-invalid @enderror">
-                                                        @error('lokasi_foto')
+                                                        <input type="file" accept="image/png, image/jpeg" name="gambar_profil" class="form-control @error('gambar_profil') is-invalid @enderror" id="preview">
+                                                        @error('gambar_profil')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                     </div>
+
+                                                    <script>
+                                                        $("#preview").change(function(event) {  
+                                                            RecurFadeIn();
+                                                            readURL(this);    
+                                                        });
+                                                        $("#preview").on('click',function(event){
+                                                            RecurFadeIn();
+                                                        });
+                                                        function readURL(input) {    
+                                                            if (input.files && input.files[0]) {   
+                                                            var reader = new FileReader();
+                                                            var filename = $("#preview").val();
+                                                            filename = filename.substring(filename.lastIndexOf('\\')+1);
+                                                            reader.onload = function(e) {
+                                                                debugger;      
+                                                                $('#logo-image').attr('src', e.target.result);
+                                                                $('#logo-image').hide();
+                                                                $('#logo-image').fadeIn(500);      
+                                                                // $('.custom-file-label').text(filename);             
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);    
+                                                            } 
+                                                            $(".alert").removeClass("loading").hide();
+                                                        }
+                                                        function RecurFadeIn(){ 
+                                                            // console.log('ran');
+                                                            FadeInAlert();  
+                                                        }
+                                                        function FadeInAlert(){
+                                                            $(".alert").show();
+                                                            // $(".alert").text(text).addClass("loading");  
+                                                        }
+                                                    </script>
                                                 </div>
         
                                                 <div class="col-md-7">
-                                                    <img class="logo-ttd" id="logo-image" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
+                                                    <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
                                                     <div class="form-group">
                                                         <label>Ubah TTD</label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="lokasi_ttd" class="form-control @error('lokasi_ttd') is-invalid @enderror">
-                                                        @error('lokasi_ttd')
+                                                        <input type="file" accept="image/png, image/jpeg" id="preview-ttd" name="gambar_ttd" class="form-control @error('gambar_ttd') is-invalid @enderror">
+                                                        @error('gambar_ttd')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                     </div>
+
+                                                    <script>
+                                                        $("#preview-ttd").change(function(event) {  
+                                                            RecurFadeIn();
+                                                            readURL(this);    
+                                                        });
+                                                        $("#preview-ttd").on('click',function(event){
+                                                            RecurFadeIn();
+                                                        });
+                                                        function readURL(input) {    
+                                                            if (input.files && input.files[0]) {   
+                                                            var reader = new FileReader();
+                                                            var filename = $("#preview-ttd").val();
+                                                            filename = filename.substring(filename.lastIndexOf('\\')+1);
+                                                            reader.onload = function(e) {
+                                                                debugger;      
+                                                                $('#logo-ttd').attr('src', e.target.result);
+                                                                $('#logo-ttd').hide();
+                                                                $('#logo-ttd').fadeIn(500);      
+                                                                // $('.custom-file-label').text(filename);             
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);    
+                                                            } 
+                                                            $(".alert").removeClass("loading").hide();
+                                                        }
+                                                        function RecurFadeIn(){ 
+                                                            // console.log('ran');
+                                                            FadeInAlert();  
+                                                        }
+                                                        function FadeInAlert(){
+                                                            $(".alert").show();
+                                                            // $(".alert").text(text).addClass("loading");  
+                                                        }
+                                                    </script>
 
                                                     <div class="form-group mb-3">
                                                         <div class="row">
@@ -119,14 +187,9 @@
                                                     <div class="form-group mb-3">
                                                         <label for="exampleFormControlSelect1">Jenis Kelamin</label>
                                                         <select name="jenis_kelamin" id="select" class="form-select mb-3 form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
-                                                            @if($akun->jenis_kelamin == null)
                                                             <option value="null" selected hidden disabled>Pilih</option>
                                                             <option value="laki-laki">Laki-laki</option>
                                                             <option value="perempuan">Perempuan</option>
-                                                            @else
-                                                            <option value="laki-laki">Laki-laki</option>
-                                                            <option value="perempuan">Perempuan</option>
-                                                            @endif
                                                         </select>
                                                         @error('jenis_kelamin')
                                                             <span class="invalid-feedback" role="alert">

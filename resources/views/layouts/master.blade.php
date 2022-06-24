@@ -37,13 +37,13 @@
                             <div class="card border-left-primary h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <a href="{{route('nomor.index')}}">
+                                        <a href="{{route('surat.index')}}">
                                             <div class="row">
                                                 <div class="col mr-2">
                                                     <div class="h5 mt-4 font-weight-bold text-primary text-uppercase mb-1">Buat Surat</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas bi-file-earmark-text-fill fa-2x text-dark mt-3"></i>
+                                                    <i class="fas fa-solid fa-file-pen fa-2x text-dark mt-3"></i>
                                                 </div>
                                             </div>
                                             
@@ -80,7 +80,7 @@
                             <div class="card border-left-info h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <a href="{{route('rekapitulasi.index')}}">
+                                        <a href="{{route('rekapitulasi.bulan.index')}}">
                                             <div class="row">
                                                 <div class="col mr-2">
                                                     <div class="h6 font-weight-bold text-info text-uppercase mt-3 mb-1">Rekapitulasi Surat Keluar
@@ -122,39 +122,39 @@
                         <section class="col-lg-4">
                             <div class="card border-top-dark p-4">
                                 <div class="card-body">
-                                    <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Hari Ini</p>
+                                    <p class="h5 mt-2 mb-3 text-center">Surat Keluar Hari Ini</p>
                                     <hr>
-                                    @empty(!$laporan)
-                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @if($hariini->count() != 0)
+                                    <p class="fs-5 text-center">{{$hariini->count('nomor_surat_id')}}</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$hariini->count('id')}}</p>
-                                    @endempty
+                                    <p class="fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @endif
                                 </div>
                             </div>
                         </section>
                         <section class="col-lg-4">
                             <div class="card border-top-dark p-4">
                                 <div class="card-body">
-                                    <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Bulan Ini</p>
+                                    <p class="h5 mt-2 mb-3 text-center">Surat Keluar Bulan Ini</p>
                                     <hr>
-                                    @empty(!$laporan)
-                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @if($bulanini->count() != 0)
+                                    <p class="fs-5 text-center">{{$bulanini->count('nomor_surat_id')}}</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$bulanini->count('id')}}</p>
-                                    @endempty
+                                    <p class="fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @endif
                                 </div>
                             </div>
                         </section>
                         <section class="col-lg-4">
                             <div class="card border-top-dark p-4">
                                 <div class="card-body">
-                                    <p class="h5 mt-2 mb-3 text-center">Jumlah Surat Keluar Tahun Ini</p>
+                                    <p class="h5 mt-2 mb-3 text-center">Surat Keluar Tahun Ini</p>
                                     <hr>
-                                    @empty(!$laporan)
-                                    <p class="fw-bold mt-4 fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @if($tahunini->count() != 0)
+                                    <p class="fs-5 text-center">{{$tahunini->count('nomor_surat_id')}}</p>
                                     @else
-                                    <p class="fs-2 text-center">{{$tahunini->count('id')}}</p>
-                                    @endempty
+                                    <p class="fs-5 text-center">Belum ada surat yang dibuat</p>
+                                    @endif
                                 </div>
                             </div>
                         </section> 

@@ -12,6 +12,7 @@ use App\Model\TubuhSurat;
 use App\User;
 use Auth;
 use Hash;
+use PDF;
 use DB;
 
 class AnggotaController extends Controller
@@ -67,40 +68,43 @@ class AnggotaController extends Controller
         $this->validate($request, [
             'name'=> 'required',
             'gelar'=> 'required',
-            'email'=> 'required|email|unique:users,email',
             'jabatan' => 'required',
             'nip' => 'required',
-            'no_nip' => 'required|min:12',
+            'no_nip' => 'required|max:14',
+            'telepon' => 'required|max:14',
             'status' => 'required',
-            'password'=> 'required|same:password_konfirmasi|min:8',
-            'password_konfirmasi'=> 'required',
-        ]);
+        ],
+        [
+            'name.required'=>'Nama Lengkap harus diisi',
+            'gelar.required'=>'Gelar harus diisi',
+            'jabatan.required'=>'Jabatan harus diisi',
+            'nip.required'=>'Kolom ini harus diisi',
+            'no_nip.required'=>'Kolom ini harus diisi',
+            'telepon.required'=>'Telepon harus diisi',
+            'status.required'=>'Kolom ini harus diisi',
+        ]
+    );
 
         $user=new User();
         $user->name=$request->name;
         $user->gelar=$request->gelar;
         $user->konfigurasi_kop_surat_id = $user->id;
-        $user->email=$request->email;
+        // $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
-        $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir=$request->tanggal_lahir;
-        $user->jenis_kelamin=$request->jenis_kelamin;
+        // $user->tempat_lahir=$request->tempat_lahir;
+        // $user->tanggal_lahir=$request->tanggal_lahir;
+        // $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
-        $user->password=Hash::make($request->password);
+        // $user->password=Hash::make($request->password);
         $user->created_at=\Carbon\Carbon::now();
-        $user->email_verified_at=\Carbon\Carbon::now();
+        // $user->email_verified_at=\Carbon\Carbon::now();
         $user->save();
 
         $nomor = new LaporanSurat();
         $nomor->user_id = $user->id;
-        $nomor->created_at=\Carbon\Carbon::now();
-        $nomor->save();
-
-        $nomor = new RekapitulasiSurat();
-        $nomor->rekapitulasi_surat_id = $nomor->id;
         $nomor->created_at=\Carbon\Carbon::now();
         $nomor->save();
 
@@ -159,20 +163,20 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request,[
-            'no_nip' => 'required|min:12',
-        ]);
+        // $this->validate($request,[
+        //     'no_nip' => 'required|min:12',
+        // ]);
 
         $user=User::find($id);
         $user->name=$request->name;
         $user->gelar=$request->gelar;
-        $user->email=$request->email;
+        // $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
-        $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir=$request->tanggal_lahir;
-        $user->jenis_kelamin=$request->jenis_kelamin;
+        // $user->tempat_lahir=$request->tempat_lahir;
+        // $user->tanggal_lahir=$request->tanggal_lahir;
+        // $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
         $user->updated_at=\Carbon\Carbon::now();

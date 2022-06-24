@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\KonfigurasiKopSurat;
-use App\Model\CetakSurat;
+use App\Model\BuatSurat;
+use App\User;
 use Auth;
-use Hash;
 use DB;
 
-class KonfigurasiKopSuratController extends Controller
+class ListSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +19,13 @@ class KonfigurasiKopSuratController extends Controller
     public function index()
     {
         //
-        $judul = 'Konfigurasi Kop Surat';
-        $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop = KonfigurasiKopSurat::find($kopid);
+        $judul = "List Surat Keluar";
+        $no = 1;
+        $laporan = BuatSurat::all();
+        $surat = count($laporan);
+        $data= BuatSurat::find($surat);
 
-        return view('konfigurasi.index', compact('judul', 'kop'));
+        return view('list-surat.index', compact('judul', 'surat', 'no', 'data', 'laporan'));
     }
 
     /**
@@ -34,7 +35,7 @@ class KonfigurasiKopSuratController extends Controller
      */
     public function create()
     {
-        //    
+        //
     }
 
     /**
@@ -80,35 +81,6 @@ class KonfigurasiKopSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'lokasi_foto'=> 'required',
-        ],
-        [
-            'lokasi_foto.required'=> 'logo kop harus diisi',
-        ]
-    );
-
-        $kopsurat= KonfigurasiKopSurat::find($id);
-
-        $file = $request->file('lokasi_foto');
-        $nama_file = time() . "." . $file->getClientOriginalExtension();
-        $tujuan_upload = 'assets/logo upt/';
-        $file->move($tujuan_upload, $nama_file);
-
-        $kopsurat->lokasi_foto = $nama_file;
-    
-        $kopsurat->nama_upt=$request->nama_upt;
-        $kopsurat->nama_mentri=$request->nama_mentri;
-
-        if ($kopsurat->nama_upt == null || $kopsurat->nama_mentri == null) {
-            $kopsurat->created_at=\Carbon\Carbon::now();
-            $kopsurat->save();
-            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil disimpan');      
-        }else {   
-            $kopsurat->updated_at=\Carbon\Carbon::now();
-            $kopsurat->save();
-            return redirect()->route('konfigurasi.index')->with('sukses', 'Kop surat berhasil diperbarui');
-        }
     }
 
     /**

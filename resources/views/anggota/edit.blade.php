@@ -67,22 +67,12 @@
                           </div>
 
                         <div class="form-group mb-3">
-                            <label>Email</label>
-                            <input name="email" value="{{$anggota->email}}" type="email" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
                           <div class="row">
                               <label>NIK/NIP/NIPPPK</label>
                               <div class="col-md-6">
                                 <select name="nip" id="select" class="form-select form-control @error('nip') is-invalid @enderror">
-                                @if($anggota->nip == null)
                                 <option value="null" selected hidden disabled>Pilih</option>
+                                @if($anggota->nip == 'NIK')
                                 <option value="NIK">NIK</option>
                                 <option value="NIP">NIP</option>
                                 <option value="NIPPPK">NIPPPK</option>
@@ -91,7 +81,6 @@
                                 <option value="NIPPPK">NIPPPK</option>
                                 @elseif($anggota->nip == 'NIPPPK')
                                 <option value="NIPPPK">NIPPPK</option>
-                                @else
                                 @endif
                               </select>
                               @error('nip')
@@ -114,7 +103,6 @@
                         <div class="form-group mb-3">
                             <label>Jabatan</label>
                             <select name="jabatan" id="select" class="form-select mb-3 form-control @error('jabatan') is-invalid @enderror">
-                                @if($anggota->jabatan == null)
                                 <option value="null" selected hidden disabled>Pilih</option>
                                 <option value="Ketua Umum">Ketua Umum</option>
                                 <option value="Wakil Ketua">Wakil Ketua</option>
@@ -122,14 +110,6 @@
                                 <option value="Sekretaris II">Sekretaris II</option>
                                 <option value="Bendahara I">Bendahara I</option>
                                 <option value="Bendahara II">Bendahara II</option>
-                                @else
-                                <option value="Ketua Umum">Ketua Umum</option>
-                                <option value="Wakil Ketua">Wakil Ketua</option>
-                                <option value="Sekretaris I">Sekretaris I</option>
-                                <option value="Sekretaris II">Sekretaris II</option>
-                                <option value="Bendahara I">Bendahara I</option>
-                                <option value="Bendahara II">Bendahara II</option>
-                                @endif
                             </select>
                             @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
@@ -142,22 +122,27 @@
                         <div class="form-group">
                           <label>Status</label>
                           <select name="status" id="select" class="form-select mb-3 form-control @error('status') is-invalid @enderror">
-                            @if($anggota->status == null)
                             <option value="null" selected hidden disabled>Pilih</option>
                             <option value="Aktif">Aktif</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
-                            @else
-                            <option value="Aktif">Aktif</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
-                            @endif
-                          </select>
-                          @error('status')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
-                        </div>
+                            </select>
+                            @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
                         @endif
+
+                        <div class="form-group mb-3">
+                            <label>Telepon</label>
+                            <input name="telepon" value="{{$anggota->telepon}}" type="text" placeholder="Telepon" class="mb-3 form-control @error('telepon') is-invalid @enderror">
+                            @error('telepon')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                         
                         <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Perbarui Akun</button>
                       </form>

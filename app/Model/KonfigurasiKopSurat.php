@@ -9,13 +9,13 @@ class KonfigurasiKopSurat extends Model
     //
     protected $fillable = ['user_id', 'lokasi_foto'];
 
-    public function cetak_surat()
-    {
-       return $this->hasMany('App\Model\CetakSurat');
-    }
+   public function user(){
+      return $this->belongsTo('App\User');
+   }
 
-    public function konfigurasi_kop_surat()
-    {
-       return $this->hasMany('App\Model\KonfigurasiKopSurat');
-    }
+   public function cetak_surat()
+   {
+       return $this->hasMany('App\Model\CetakSurat');
+   }
+
 }

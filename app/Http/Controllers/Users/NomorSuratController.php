@@ -24,11 +24,9 @@ class NomorSuratController extends Controller
         $uid = Auth::id();
         $judul = 'Nomor Surat';
         $laporan = NomorSurat::all();
-        $laporanid = LaporanSurat::all()->where('user_id', $uid);
-        // $data = $laporan->where('user_id', $uid);
+        $laporanid = LaporanSurat::all();
         $noid = count($laporanid);
-        $nomorid = LaporanSurat::get()->last()->id;
-        $nomor= LaporanSurat::find($nomorid);
+        $nomor = LaporanSurat::find($noid);
 
         return view('surat.nosurat.index', compact('judul', 'nomor','noid','laporan'));
     }

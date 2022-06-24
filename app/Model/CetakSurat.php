@@ -18,16 +18,11 @@ class CetakSurat extends Model
        return $this->belongsTo('App\Model\KonfigurasiKopSurat');
     }
 
-    public function laporan_surat()
-    {
-       return $this->belongsTo('App\Model\LaporanSurat');
+    public function buat_surat(){
+        return $this->belongsTo('App\Model\BuatSurat');
     }
 
-    public function surat_pembuka(){
-        return $this->belongsTo('App\Model\SuratPembuka');
-    }
-
-    public function surat_penutup(){
-        return $this->belongsTo('App\Model\SuratPenutup');
+    public function tubuh_surat(){
+        return $this->belongsTo('App\Model\TubuhSurat');
     }
 }

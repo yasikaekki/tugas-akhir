@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                   <div class="d-grid d-md-flex justify-content-md-end">
                                     <a href="{{route ('anggota.create')}}" class="btn btn-success mb-3"><i class="fas fa-solid fa-square-plus"></i> Tambah</a>
-                                  </div>  
+                                  </div>
                                   @if($user->count() == 0)       
                                   <table class="table table-bordered">
                                     <thead>
@@ -73,8 +73,7 @@
                                         <th>NIK/NIP/NIPPPK</th>
                                         <th>Jabatan</th>
                                         <th>Status</th>
-                                        <th>Email</th>
-                                        <th>Verifikasi Email</th>
+                                        <th>Telepon</th>
                                         <th>Aksi</th>
                                       </tr>
                                     </thead>
@@ -90,8 +89,7 @@
                                           @else
                                           <td><span class="badge bg-danger mb-3">{{$users->status}}</span></td>
                                           @endif
-                                          <td>{{$users->email}}</td>
-                                          <td>{{$users->email_verified_at}}</td> 
+                                          <td>{{$users->telepon}}</td> 
                                           <td>
                                             @if($users->id == 1 || $users->status == 'Aktif')
                                             <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>

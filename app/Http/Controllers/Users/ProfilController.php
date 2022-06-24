@@ -85,23 +85,34 @@ class ProfilController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'gambar_profil'=> 'required',
+            'gambar_ttd'=> 'required',
+        ],
+        [
+            'gambar_profil.required'=> 'Foto profil harus diisi',
+            'gambar_ttd.required'=> 'Foto ttd harus diisi',
+        ]
+    );
+            
         $user=User::find($id);
+        $user->name = $request->name;
         
-        $file_foto = $request->file('lokasi_foto');
+        $file_foto = $request->file('gambar_profil');
         $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
         $upload_foto = 'assets/foto profil/';
         $file_foto->move($upload_foto, $nama_foto);
-        $user->lokasi_foto = $nama_foto;
+        $user->gambar_profil = $nama_foto;
 
-        $file_ttd = $request->file('lokasi_ttd');
+        $file_ttd = $request->file('gambar_ttd');
         $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
         $upload_ttd = 'assets/foto ttd/';
         $file_ttd->move($upload_ttd, $nama_ttd);
-        $user->lokasi_ttd = $nama_ttd;
+        $user->gambar_ttd = $nama_ttd;
 
         $user->gelar=$request->gelar;
         $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir=$request->tanggal_lahir;
+        $user->tanggal_lahir= \Carbon\Carbon::parse($request->tanggal_lahir)->translatedFormat("d F Y");
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
 

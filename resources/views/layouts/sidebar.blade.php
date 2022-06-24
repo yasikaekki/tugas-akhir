@@ -6,8 +6,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+          @if(Auth::user()->gambar_profil == null)
             <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
-        </div>
+          @endif
+          </div>
         <div class="info">
             <a href="{{route('profil.index')}}" class="d-block">{{Auth::user()->name}}, {{Auth::user()->gelar}}</a>
         </div>
@@ -31,12 +33,13 @@
             </a>
         </li>
         <li class="nav-item">
-          @if($judul == 'Nomor Surat' || $judul == 'Surat Pembuka' || $judul == 'Tubuh Surat' || $judul == 'Surat Penutup' || $judul == 'Cetak Surat')
+          @if($judul == 'Buat Surat' || $judul == 'Cetak Surat')
             <a href="" class="nav-link active disabled">
           @else
-            <a href="{{route('nomor.index')}}" class="nav-link">
+            <a href="{{route('surat.index')}}" class="nav-link">
           @endif
-              <i class="nav-icon fas bi-file-earmark-text-fill"></i>
+              
+              <i class="nav-icon fas fa-solid fa-file-pen"></i>
               <p>
                 Buat Surat
               </p>
@@ -55,16 +58,51 @@
             </a>
         </li>
         <li class="nav-item">
-          @if($judul == 'Rekapitulasi Surat Keluar')
+          @if($judul == 'List Surat Keluar')
             <a href="" class="nav-link active disabled">
           @else
-            <a href="{{route('rekapitulasi.index')}}" class="nav-link">
+            <a href="{{route('list-surat.index')}}" class="nav-link">
+          @endif
+            <i class="nav-icon fas fa-solid fa-file-lines"></i>
+            <p>
+                List Surat Keluar 
+            </p>
+            </a>
+        </li>
+        <li class="nav-item menu-open">
+          @if($judul == 'Rekapitulasi Bulan' || $judul == 'Rekapitulasi Jenis Surat')
+            <a href="" class="nav-link active disabled">
+          @else
+            <a href="" class="nav-link">
           @endif
             <i class="nav-icon fas bi-clipboard2-data-fill"></i>
             <p>
                 Rekapitulasi Surat Keluar 
+                <i class="right fas fa-angle-left"></i>
             </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                @if($judul == 'Rekapitulasi Bulan')
+                  <a href="{{route('rekapitulasi.bulan.index')}}" class="nav-link active">
+                @else
+                  <a href="{{route('rekapitulasi.bulan.index')}}" class="nav-link">
+                @endif  
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bulan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                @if($judul == 'Rekapitulasi Jenis Surat')
+                  <a href="{{route('rekapitulasi.jenis_surat.index')}}" class="nav-link active">
+                @else
+                  <a href="{{route('rekapitulasi.jenis_surat.index')}}" class="nav-link">
+                @endif
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jenis Surat</p>
+                </a>
+              </li>
+            </ul>
         </li>
         <li class="nav-item">
             @if($judul == 'Anggota' || $judul == 'Registrasi Akun Anggota' || $judul == 'Ubah Akun Anggota')

@@ -63,6 +63,7 @@
                                             @else
                                             <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
                                             @endif
+                                            {{-- <a href="{{ url('surat/cetak') }}" target="_blank" class="col-md-4 btn btn-success"><i class="bi bi-file-earmark-pdf-fill"></i> Cetak Surat</a> --}}
                                             <a href="{{route('cetak.index')}}" class="col-md-4 btn btn-success"><i class="bi bi-file-earmark-pdf-fill"></i> Lihat Surat</a>
                                           </div>                             
                                     </div>

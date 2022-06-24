@@ -16,8 +16,8 @@ class NomorSuratSeeder extends Seeder
         $array = [
             'Surat Undangan (SU)', 'Surat Keputusan (SK)', 'Surat Permohonan (SPm)', 
             'Surat Pemberitahuan (SPb)', 'Berita Acara (BA)', 'Sertifikat (SRT)',
-            'Sertifikat (SRT)', 'Surat Pernyataan (SPn)', 'Surat Tugas (ST)',
-            'Surat Keterangan (SKet)', 'Surat Rekomendasi (SR)', 'Kuitansi (K)',
+            'Surat Pernyataan (SPn)', 'Surat Tugas (ST)', 'Surat Keterangan (SKet)', 
+            'Surat Rekomendasi (SR)', 'Surat Balasan (SB)' , 'Kuitansi (K)',
             'Perjanjian Kerja (PK)', 'Surat Pengantar (SPeng)', 'Surat Peminjaman (SPp)'
 
         ];

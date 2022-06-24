@@ -65,16 +65,6 @@
                           </div>
 
                           <div class="form-group mb-3">
-                            <label>Email</label>
-                            <input name="email" type="email" value="{{old('email')}}" placeholder="Email" class="mb-3 form-control @error('email') is-invalid @enderror">
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                          </div>
-
-                          <div class="form-group mb-3">
                             <div class="row">
                                 <label>NIK/NIP/NIPPPK</label>
                                 <div class="col-md-6">
@@ -134,19 +124,9 @@
                           </div>
 
                           <div class="form-group mb-3">
-                            <label>Password</label>
-                            <input name="password" type="password" placeholder="Password" class="mb-3 form-control @error('password') is-invalid @enderror">
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                          </div>
-
-                          <div class="form-group mb-3">
-                            <label>Konfirmasi Password</label>
-                            <input name="password_konfirmasi" type="password" placeholder="Konfirmasi Password" class="mb-3 form-control @error('password_konfirmasi') is-invalid @enderror">
-                            @error('password_konfirmasi')
+                            <label>Telepon</label>
+                            <input name="telepon" type="text" placeholder="Telepon" class="mb-3 form-control @error('telepon') is-invalid @enderror">
+                            @error('telepon')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

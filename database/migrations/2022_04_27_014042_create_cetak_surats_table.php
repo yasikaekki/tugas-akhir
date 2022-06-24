@@ -17,10 +17,8 @@ class CreateCetakSuratsTable extends Migration
             $table->id();
             $table->foreignid('user_id');
             $table->foreignid('konfigurasi_kop_surat_id')->nullable();
-            $table->foreignid('laporan_surat_id')->nullable();
-            $table->foreignid('surat_pembuka_id')->nullable();
+            $table->foreignid('buat_surat_id')->nullable();
             $table->foreignid('tubuh_surat_id')->nullable();
-            $table->foreignid('surat_penutup_id')->nullable();
             $table->timestamps();
         });
     }

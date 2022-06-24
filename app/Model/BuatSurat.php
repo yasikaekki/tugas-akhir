@@ -4,13 +4,18 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SuratPenutup extends Model
+class BuatSurat extends Model
 {
     //
-    protected $fillable = ['user_id', 'laporan_surat_id', 'surat_pembuka_id', 'surat_penutup_id'];
-    
     public function user(){
         return $this->belongsTo('App\User');
+    }
+    public function nomor_surat(){
+        return $this->belongsTo('App\NomorSurat');
+    }
+
+    public function tubuh_surat(){
+        return $this->hasMany('App\Model\TubuhSurat');
     }
 
     public function cetak_surat(){

@@ -3,6 +3,13 @@ body{
     font-size: 17px;
 }
 
+.mt-3-5 {
+    margin-top: 20px;
+}
+.mt-4-5 {
+    margin-top: 25px;
+}
+
 .main{
     padding: 60px;
     margin-top: 3.5rem;
