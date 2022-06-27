@@ -39,44 +39,31 @@
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                             <select class="form-select col-md-2" name="fitur_filter" data-dependent="state">
                                                 <option value="" disabled hidden selected>Pilih Tahun</option>
-                                                @foreach ($tahun as $alltahun)
-                                                <option value="{{$alltahun->id}}">{{$alltahun->list_tahun}}</option>
-                                                @endforeach
+                                                {{-- @empty($keywoard) --}}
+                                                    @foreach ($tahun as $alltahun)
+                                                    <option value="{{$alltahun->id}}">{{$alltahun->list_tahun}}</option>
+                                                    @endforeach
+                                                {{-- @else
+                                                    @foreach($year as $years)
+                                                    <option value="{{$years->id}}">{{$years->list_tahun}}</option>
+                                                    @endforeach
+                                                @endempty --}}
+                                                {{-- @else
+                                                <?php 
+                                                    require_once("App\Tahun.php");
+
+                                                    $tahun = Tahun::all();
+                                                    foreach ($tahun as $alltahun) {
+                                                        echo '<option value='.$alltahun->id.'>'.$alltahun->list_tahun.'</option>';
+                                                    }
+                                                ?>
+                                                @endif --}}
                                             </select>
                                             <button class="btn btn-primary" type="submit"><i class="bi bi-sliders"></i> Tampilkan</button>
                                         </div>     
                                     </form>
 
-                                    <script>
-                                        $(document).ready(function(){
-
-                                            $('form').submit(function() {
-
-                                                $.ajax({
-                                                    url     : $(this).attr('action'),
-                                                    type    : $(this).attr('method'),
-                                                    data    : $(this).serialize(),
-                                                    success : function(data) {
-                                                        
-
-                                                        // $.each(data, function(key, values){
-                                                        //     nama_bulan = data[key].nama_bulan;
-                                                        //     laporan_surat_id = data[key].laporan_surat_id;
-                                                        //     $('tbody').append('<tr>\
-                                                        //         <td>'+parseInt(key+1)+'</td>\
-                                                        //         <td>'+nama_bulan+'</td>\
-                                                        //     </tr>')
-                                                        // });
-                                                    }
-                                                });
-
-                                                return false;
-                                            });
-
-                                        });
-                                    </script>
-
-                                    @if($tahun->count() == 0)
+                                    @if($keywoard->rekapitulasi_surat_id == 0)
                                     <h3 class="fw-bold text-center mb-3">Tahun {{$keywoard->list_tahun}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -89,7 +76,6 @@
                                     </table>
                                     <h3 class="text-center text-warning fw-bold mt-3">Tidak menemukan data apapun</h3>
                                     @else
-                    
                                     <h3 class="fw-bold text-center mb-3">Tahun {{date('Y')}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -114,6 +100,7 @@
                                         @endforeach
                                     </tbody>
                                     </table>
+                                    
                                     @endif
                                     
                                 </div>

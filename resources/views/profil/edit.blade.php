@@ -44,11 +44,11 @@
                                             <div class="row">
                                                 <div class="col-md-5">
 
-                                                    {{-- @if($akun->lokasi_foto == null) --}}
-                                                    <img class="logo-profil img-circle" id="logo-image" src="{{ asset('vendor/dist/img/avatar5.png')}}">
-                                                    {{-- @else
-                                                    <img src="{{asset ('images/'.$akun->lokasi_foto)}}" id="logo-image" class="mb-4 img-responsive logo-profile-user img-circle" alt="Logo">
-                                                    @endif --}}
+                                                    @if($akun->gambar_profil == null)
+                                                    <img class="logo-profil img-circle" id="logo-image" src="{{ asset('vendor/dist/img/user.png')}}">
+                                                    @else
+                                                    <img src="/assets/gambar profil/{{$akun->lokasi_foto}}" id="logo-image" class="mb-4 logo-profil img-circle">
+                                                    @endif
                                                     <div class="form-group">
                                                         <label>Ubah Foto</label>
                                                         <input type="file" accept="image/png, image/jpeg" name="gambar_profil" class="form-control @error('gambar_profil') is-invalid @enderror" id="preview">
@@ -95,7 +95,11 @@
                                                 </div>
         
                                                 <div class="col-md-7">
-                                                    <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/default-150x150.png')}}">
+                                                    @if($akun->gambar_ttd == null)
+                                                    <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/ttd.png')}}">
+                                                    @else
+                                                    <img class="logo-ttd" id="logo-ttd" src="/assets/foto ttd/{{$akun->gambar_profil}}">
+                                                    @endif
                                                     <div class="form-group">
                                                         <label>Ubah TTD</label>
                                                         <input type="file" accept="image/png, image/jpeg" id="preview-ttd" name="gambar_ttd" class="form-control @error('gambar_ttd') is-invalid @enderror">

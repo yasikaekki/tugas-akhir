@@ -20,8 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('nomor.index')}}" class="link">Nomor Surat</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('pembuka.index')}}" class="link">Surat Pembuka</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('surat.index')}}" class="link">Buat Surat</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -42,7 +41,7 @@
                         @endif
                         <div class="col-lg-6">
                             {{-- @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null) --}}
-                            <form action="{{route('tubuh.update', $tubuh)}}" method="POST">
+                            <form action="{{route('surat-agenda.update', $isi->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
                             {{-- @else
@@ -53,7 +52,7 @@
                                     <div class="card-body">
                                         <div class="form-group mb-3">
                                             <label>Hari, Tanggal</label>
-                                            <input type="date" min="2022-06-22" value="{{$isi->tanggal}}" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal">
+                                            <input type="date" min="{{date('Y-m-d')}}" value="{{$isi->tanggal}}" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal">
                                             @error('tanggal')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -80,23 +79,21 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Tempat</label>
-                                            <input name="tempat" value="{{$isi->tempat}}" type="text" placeholder="Acara" class="mb-3 form-control @error('tempat') is-invalid @enderror">
+                                            <input name="tempat" value="{{$isi->tempat}}" type="text" placeholder="Tempat" class="mb-3 form-control @error('tempat') is-invalid @enderror">
                                             @error('tempat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group mt-5">
-                                            <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                                <a href="{{route('pembuka.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
-                                                @if($isi->tanggal == null || $isi->jam == null || $isi->acara == null)           
-                                                <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
-                                                @else
-                                                <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
-                                                @endif
-                                                <a href="{{route('penutup.index')}}" class="col-md-4 btn btn-success">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
-                                            </div>
+                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                            <a href="{{route('surat.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                            @if($isi->tanggal == null || $isi->jam == null || $isi->acara == null || $isi->tempat == null)           
+                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                            @else
+                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
+                                            @endif
+                                            <a href="{{route('surat-cetak.index')}}" class="col-md-4 btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                         </div>
                                     </div>
                                 </div>

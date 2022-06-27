@@ -33,7 +33,7 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
-                        @if($data->id == 1 && $data->nomor_surat_id == null)
+                        @empty($data)
                         <div class="col-lg-7">
                             <div class="card mt-5 p-5">
                               <div class="card-body p-4">
@@ -48,23 +48,17 @@
                         <div class="col-lg-12">
                             <div class="card border-top-info p-4">
                                 <div class="card-body">
-                                    <form action="" method="GET" id="formFilter">
-                                        @csrf
+                                    <form action="{{route('laporan.index')}}" method="GET">
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                                            <select class="form-select col-md-2" name="year">
-                                                <option value="" disabled hidden selected>Pilih Tahun</option>
-                                                <?php 
-                                                    $year = date('Y');
-                                                    $min = $year;
-                                                    $max = $year + 8;
-                                                    for( $i=$min; $i<=$max; $i++ ) {
-                                                        echo '<option value='.$i.'>'.$i.'</option>';
-                                                    }
-                                                ?>
+                                            <select class="form-select col-md-2" name="filter_sort">
+                                                <option disabled hidden selected>Pilih</option>
+                                                <option value="1">Terbaru</option>
+                                                <option value="2">Terlama</option>
                                             </select>
-                                            <button class="btn btn-primary" type="submit" form="formFilter"><i class="bi bi-sliders"></i> Tampilkan</button>
+                                            <button class="btn btn-primary" type="submit"><i class="bi bi-sliders"></i> Urutkan</button>
                                         </div>     
                                     </form>
+
                                     @if($laporan->count() == 0)
                                     <tr class="table-secondary text-center">
                                         <th>No.</th>
@@ -85,21 +79,23 @@
                                             <th>Jenis Surat</th>
                                             <th>Lampiran</th>
                                             <th>Perihal</th>
+                                            <th>Isi Pembuka</th>
+                                            <th>Isi Penutup</th>
                                             <th>Tanggal</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($laporan as $laporans)
-                                        @if(!is_null($laporans->nomor_surat_id))
                                         <tr class="text-center">
                                             <td>{{$no++}}.</td>
-                                            <td>{{$laporans->no_surat}}</td>
-                                            <td>{{$laporans->nomor_surat->jenis_surat}}</td>  
-                                            <td>{{$laporans->lampiran}}</td>
-                                            <td>{{$laporans->perihal}}</td>  
-                                            <td>{{$laporans->created_at->translatedFormat('l, d F Y')}}</td>      
+                                            <td>{{$laporans->cetak_surat->buat_surat->no_surat}}</td>
+                                            <td>{{$laporans->cetak_surat->buat_surat->nomor_surat->jenis_surat}}</td>  
+                                            <td>{{$laporans->cetak_surat->buat_surat->lampiran}}</td>
+                                            <td>{{$laporans->cetak_surat->buat_surat->perihal}}</td>  
+                                            <td>{{$laporans->cetak_surat->buat_surat->isi_pembuka}}</td>  
+                                            <td>{{$laporans->cetak_surat->buat_surat->isi_penutup}}</td>  
+                                            <td>{{$laporans->cetak_surat->created_at->translatedFormat('l, d F Y')}}</td>      
                                         </tr>
-                                        @endif
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -107,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        @endempty
                     </div>
                     <!-- /.row -->
                     </div>

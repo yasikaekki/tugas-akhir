@@ -25,12 +25,19 @@ class RekapitulasiSuratController extends Controller
         $listbulan = Bulan::all();
         $tahun = Tahun::all();
         $kata = $request->fitur_filter;
-        $keywoard = Tahun::find($kata);
+        $array = array(2022=>1,2,3,4,5,6,7,8,9);
+        $year = $array[date('Y')];
+        $keywoard = Tahun::find($year);
         if($request->fitur_filter){
-            $tahun = Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
-            $filter_surat = NomorSurat::all()->where('id', $request->fitur_filter);
-        } 
-        return view('rekapitulasi.bulan.index', compact('no' ,'judul','listbulan', 'keywoard','tahun'));
+            $keywoard = Tahun::find($kata);
+            $tahun = Tahun::all()->where('id', $request->fitur_filter);
+            if($keywoard->rekapitulasi_surat_id == null) {
+                $tahun =Tahun::all();
+            }else {
+                $tahun =Tahun::all();
+            }
+        }
+        return view('rekapitulasi.bulan.index', compact('no', 'year','judul','listbulan', 'keywoard','tahun'));
     }
 
     public function jenis_surat(Request $request) 
@@ -40,11 +47,18 @@ class RekapitulasiSuratController extends Controller
         $nomor = NomorSurat::all();
         $tahun = Tahun::all();
         $kata = $request->fitur_filter;
-        $keywoard = Tahun::find($kata);
-        // if($request->fitur_filter){
-        //     $tahun = Tahun::all()->where('rekapitulasi_surat_id', $request->fitur_filter);
-        //     $filter_surat = NomorSurat::all()->where('id', $request->fitur_filter);
-        // } 
+        $array = array(2022=>1,2,3,4,5,6,7,8,9);
+        $year = $array[date('Y')];
+        $keywoard = Tahun::find($year);
+        if($request->fitur_filter){
+            $keywoard = Tahun::find($kata);
+            $tahun = Tahun::all()->where('id', $request->fitur_filter);
+            if($keywoard->rekapitulasi_surat_id == null) {
+                $tahun =Tahun::all();
+            }else {
+                $tahun =Tahun::all();
+            }
+        } 
         return view('rekapitulasi.jenis_surat.index', compact('no' ,'judul','nomor','keywoard','tahun'));
     }
 

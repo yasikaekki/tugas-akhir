@@ -7,7 +7,9 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           @if(Auth::user()->gambar_profil == null)
-            <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('vendor/dist/img/user.png')}}" class="img-circle elevation-2">
+          @else
+            <img src="/assets/gambar profil/{{Auth::user()->gambar_profil}}" class="img-circle elevation-2">
           @endif
           </div>
         <div class="info">
@@ -58,7 +60,7 @@
             </a>
         </li>
         <li class="nav-item">
-          @if($judul == 'List Surat Keluar')
+          @if($judul == 'List Surat Keluar' || $judul == 'Detail Surat Keluar')
             <a href="" class="nav-link active disabled">
           @else
             <a href="{{route('list-surat.index')}}" class="nav-link">

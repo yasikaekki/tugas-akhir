@@ -36,7 +36,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::resource('surat-agenda', 'Users\TubuhSuratController');
     Route::resource('surat-cetak', 'Users\CetakSuratController');
     Route::resource('list-surat', 'Users\ListSuratController');
-    Route::get('surat-cetak/invoice', 'Users\CetakSuratController@invoice')->name('print');
+    Route::get('printme', 'Users\CetakSuratController@printme')->name('cetak.print');
     Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
     Route::get('rekapitulasi-bulan', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.bulan.index');
     Route::get('rekapitulasi-jenis-surat', 'Users\RekapitulasiSuratController@jenis_surat')->name('rekapitulasi.jenis_surat.index');

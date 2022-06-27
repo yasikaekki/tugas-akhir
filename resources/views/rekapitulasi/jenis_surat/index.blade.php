@@ -47,36 +47,8 @@
                                         </div>     
                                     </form>
 
-                                    <script>
-                                        $(document).ready(function(){
-
-                                            $('form').submit(function() {
-
-                                                $.ajax({
-                                                    url     : $(this).attr('action'),
-                                                    type    : $(this).attr('method'),
-                                                    data    : $(this).serialize(),
-                                                    success : function(data) {
-                                                        
-
-                                                        // $.each(data, function(key, values){
-                                                        //     nama_bulan = data[key].nama_bulan;
-                                                        //     laporan_surat_id = data[key].laporan_surat_id;
-                                                        //     $('tbody').append('<tr>\
-                                                        //         <td>'+parseInt(key+1)+'</td>\
-                                                        //         <td>'+nama_bulan+'</td>\
-                                                        //     </tr>')
-                                                        // });
-                                                    }
-                                                });
-
-                                                return false;
-                                            });
-
-                                        });
-                                    </script>
-
-                                    {{-- @if($tahun->count() == 0)
+                                    @if($keywoard->rekapitulasi_surat_id == null)
+                                    
                                     <h3 class="fw-bold text-center mb-3">Tahun {{$keywoard->list_tahun}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -88,8 +60,7 @@
                                     </thead>
                                     </table>
                                     <h3 class="text-center text-warning fw-bold mt-3">Tidak menemukan data apapun</h3>
-                                    @else --}}
-                    
+                                    @else 
                                     <h3 class="fw-bold text-center mb-3">Tahun {{date('Y')}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -114,7 +85,7 @@
                                         @endforeach
                                     </tbody>
                                     </table>
-                                    {{-- @endif --}}
+                                    @endif
                                     
                                 </div>
                             </div>

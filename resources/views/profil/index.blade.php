@@ -42,7 +42,11 @@
                             <div class="card border-top-info p-4">                      
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
-                                        <img src="{{ asset('vendor/dist/img/avatar5.png')}}" class="logo-upt img-circle mb-2">                                        
+                                        @if($akun->gambar_profil == null)
+                                        <img src="{{ asset('vendor/dist/img/user.png')}}" class="logo-upt img-circle mb-2">   
+                                        @else    
+                                        <img src="/assets/foto profil/{{$akun->gambar_profil}}" class="logo-upt img-circle mb-2"> 
+                                        @endif                                
                                         <h4 class="fs-3">{{$akun->name}}, {{$akun->gelar}}</h4>
                                         <p class="fs-5 text-muted mb-4">{{$akun->jabatan}}</p>                                        
                                     </div>
@@ -71,7 +75,11 @@
                                                 <medium class="text-primary fw-bold mb-3">{{$akun->status}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">TTD:</medium>
-                                                <medium class="mb-3"><img src="{{asset('vendor/dist/img/default-150x150.png')}}" class="logo-ttd"></medium>
+                                                @if($akun->gambar_ttd == null)
+                                                <medium class="mb-3"><img src="{{asset('vendor/dist/img/ttd.png')}}" class="logo-ttd"></medium>
+                                                @else
+                                                <medium class="mb-3"><img src="/assets/foto ttd/{{$akun->gambar_ttd}}" class="logo-ttd"></medium>
+                                                @endif
                                             </div>                                           
                                         </div>
                                         @empty(!$akun)

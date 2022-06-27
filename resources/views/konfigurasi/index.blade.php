@@ -45,7 +45,7 @@
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
                                         @if($kop->lokasi_foto == null)
-                                        <img class="logo-upt" id="logo-image" src="{{asset('vendor/dist/img/default-150x150.png')}}">
+                                        <img class="logo-upt" id="logo-image" src="{{asset('vendor/dist/img/upt.png')}}">
                                         @else
                                         <img class="logo-upt" id="logo-image" src="/assets/logo upt/{{$kop->lokasi_foto}}">
                                         @endif

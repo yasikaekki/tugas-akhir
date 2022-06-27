@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\BuatSurat;
+use App\Model\LaporanSurat;
 use App\User;
 use Auth;
 use DB;
@@ -30,12 +30,17 @@ class LaporanSuratController extends Controller
         // }
         
         $judul = 'Laporan Surat Keluar';
-        $uid = Auth::id();
         $no = 1;
-        $laporan = BuatSurat::all();
+        $laporan = LaporanSurat::all();
         $surat = count($laporan);
-        $data= BuatSurat::find($surat);
-        $tahun = date('Y');
+        $data= LaporanSurat::find($surat);
+
+        if($request->filter_sort == 1){
+            $laporan = LaporanSurat::orderBy('created_at', 'asc')->paginate(5);
+        }elseif ($request->filter_sort == 2) {
+            $laporan = LaporanSurat::orderBy('created_at', 'desc')->paginate(5);
+        }
+
         return view('laporan.index', compact('judul', 'surat', 'no', 'data', 'laporan'));
     }
 

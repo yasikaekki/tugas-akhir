@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade as PDF;
 use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
 use App\Model\KonfigurasiKopSurat;
 use App\Model\BuatSurat;
+use App\Model\LaporanSurat;
 use App\Model\TubuhSurat;
 use App\NomorSurat;
 use App\Model\CetakSurat;
@@ -15,6 +15,7 @@ use App\Bulan;
 use App\Tahun;
 use App\User;
 use Auth;
+use PDF;
 use DB;
 
 class CetakSuratController extends Controller
@@ -27,10 +28,10 @@ class CetakSuratController extends Controller
     public function index()
     {
         //
-        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,";
-        $kop2 = "RISET, DAN TEKNOLOGI";
-        $kop3 = "POLITEKNIK NEGERI BANYUWANGI";
+        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
+        $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
         $upt = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $kop3 = "UPT KEWIRAUSAHAAN DAN INKUBATOR BISNIS TEKNOLOGI";
         $kop4 = KonfigurasiKopSurat::find($upt);
         $kop5 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
         $kop6 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
@@ -44,11 +45,11 @@ class CetakSuratController extends Controller
         return view('cetak.index', compact('judul', 'cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
     }
 
-    public function invoice(){
-        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,";
-        $kop2 = "RISET, DAN TEKNOLOGI";
-        $kop3 = "POLITEKNIK NEGERI BANYUWANGI";
+    public function printme(){
+        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
+        $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
         $upt = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $kop3 = "UPT KEWIRAUSAHAAN DAN INKUBATOR BISNIS TEKNOLOGI";
         $kop4 = KonfigurasiKopSurat::find($upt);
         $kop5 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
         $kop6 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
@@ -58,10 +59,8 @@ class CetakSuratController extends Controller
         $surat = BuatSurat::all();
         $data = count($cetaksurat);
         $cetak = CetakSurat::find($data);
-
-        $url = PDF::loadview('cetak.index', compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
-        
-        return $url->download('cetak-surat-pdf');
+        return view('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
+        // $url = PDF::loadview('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
         // return $url->stream();
     }
 
@@ -73,6 +72,7 @@ class CetakSuratController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -95,6 +95,7 @@ class CetakSuratController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -106,6 +107,7 @@ class CetakSuratController extends Controller
     public function edit($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -122,20 +124,10 @@ class CetakSuratController extends Controller
         $tahun = $array[date('Y')];
         $bulan = date('n');
 
-        $kop=KonfigurasiKopSurat::find($id);
-
-        $laporan = BuatSurat::find($id);
+        $cetak = CetakSurat::find($id);
         $rekap = new RekapitulasiSurat();
-        $rekap->buat_surat_id = $laporan->id;
+        $rekap->cetak_surat_id = $cetak->id;
         $rekap->save();
-
-        $listbulan = Bulan::find($bulan);
-        $listbulan->rekapitulasi_surat_id = $rekap->id;
-        $listbulan->save();
-
-        $listbulan = Tahun::find($tahun);
-        $listbulan->rekapitulasi_surat_id = $rekap->id;
-        $listbulan->save();
 
         $surat = new BuatSurat();
         $surat->user_id = Auth::id();
@@ -143,26 +135,39 @@ class CetakSuratController extends Controller
         $surat->save();
 
         $tubuh = new TubuhSurat();
-        $tubuh->buat_surat_id = $surat->id;
+        $tubuh->created_at = \Carbon\Carbon::now();
         $tubuh->save();
 
-        $cetak=CetakSurat::find($id);
-        $cetak->created_at = \Carbon\Carbon::now();
-        $cetak->save();
+        $kode=BuatSurat::find($id);
+        $nomor=NomorSurat::find($kode->nomor_surat_id);
+        if ($nomor->cetak_surat_id == null) {
+            # code...
+            $nomor->cetak_surat_id = 1;
+        } else {
+            # code...
+            $nomor->cetak_surat_id = $kode->id+1;
+        }
+        $nomor->save();
 
         $cetakbaru = new CetakSurat();
         $cetakbaru->user_id = Auth::id();
-        $cetakbaru->konfigurasi_kop_surat_id = $kop->id;
-        $cetakbaru->buat_surat_id = $surat->id;
         $cetakbaru->created_at = \Carbon\Carbon::now();
         $cetakbaru->save();
 
-        $kode = BuatSurat::find($id);
-        $nomor=NomorSurat::find($kode->nomor_surat_id);
-        $nomor->cetak_surat_id = $cetak->id;
-        $nomor->save();
+        $cetakbaru = new LaporanSurat();
+        $cetakbaru->cetak_surat_id = $cetak->id;
+        $cetakbaru->created_at = \Carbon\Carbon::now();
+        $cetakbaru->save();
 
-        return redirect()->route('surat-cetak.index')->with('sukses', 'Surat berhasil dicetak');
+        $listbulan = Bulan::find($bulan);
+        $listbulan->rekapitulasi_surat_id = $rekap->id;
+        $listbulan->save();
+
+        $listtahun = Tahun::find($tahun);
+        $listtahun->rekapitulasi_surat_id = $rekap->id;
+        $listtahun->save();
+
+        return redirect()->route('home')->with('sukses', 'Surat berhasil dicetak');
     }
 
     /**

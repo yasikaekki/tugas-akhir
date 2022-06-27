@@ -15,7 +15,7 @@ class CreateRekapitulasiSuratsTable extends Migration
     {
         Schema::create('rekapitulasi_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('buat_surat_id')->nullable();
+            $table->foreignid('cetak_surat_id')->nullable();
             $table->timestamps();
         });
     }

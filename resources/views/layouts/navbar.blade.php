@@ -20,7 +20,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      @if($judul == 'Anggota' || $judul == 'Laporan Surat Keluar' || $judul == 'Rekapitulasi Surat Keluar')
+      @if($judul == 'Anggota')
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>

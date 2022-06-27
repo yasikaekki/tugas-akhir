@@ -160,11 +160,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if($surat)
-                                        <button type="submit" class="form-control btn btn-primary"><i class="fas fa-save"></i> Simpan Surat</button>
-                                        @else
-                                        <button type="submit" class="btn btn-primary form-control"><i class="bi bi-pencil-square"></i> Ubah Surat</button>
-                                        @endif
+                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-end">
+                                            @if($surat->nomor_surat_id == null || $surat->no_surat == null ||$surat->lampiran == null || $surat->perihal == null || $surat->kepada == null || $surat->isi_pembuka ==null || $surat->isi_penutup == null)
+                                            <button class="col-md-3 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                            @else
+                                            <button class="col-md-3 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
+                                            @endif
+
+                                            @if($cetak->tubuh_surat_id == null)
+                                            <a href="{{route('surat-cetak.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                            @else
+                                            <a href="{{route('surat-agenda.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </form>

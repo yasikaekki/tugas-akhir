@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Model\KonfigurasiKopSurat;
 use App\Model\BuatSurat;
 use App\Model\TubuhSurat;
 use App\Model\CetakSurat;
@@ -26,13 +27,17 @@ class BuatSuratController extends Controller
         $arrpembuka = [
             'Bersama surat ini Kami ingin memberi tahukan bahwa',
             'Bersama ini Kami UPT Kewirausahaan dan Inkubator Bisnis Teknologi Politeknik Negeri Banyuwangi ingin mengajukan permohonan',
-            'Sehubungan dengan salah satu tugas UPT Kewirausahaan dan Inkubator Bisnis Teknologi ialah sebagai inkubator bisnis teknologi (Inkubistek) di Politeknik Negeri Banyuwangi. Untuk menunjang tugas tersebut, perlu diadakan tugas berupa'
+            'Sehubungan dengan salah satu tugas UPT Kewirausahaan dan Inkubator Bisnis Teknologi ialah sebagai inkubator bisnis teknologi (Inkubistek) di Politeknik Negeri Banyuwangi. Untuk menunjang tugas tersebut, perlu diadakan tugas berupa',
+            'Bersama Ini Kami UPT Kewirausahaan dan Inkubator Bisnis Teknologi Politeknik Negeri Banyuwangi memberitahukan, sehubungan dengan adanya rangkaian kegiatan Program Inkubator Bisnis Teknologi dan Kewirausahaan, Kami ingin menyelenggarakan',
+            'Sehubungan dengan akan dilaksanakannya kegiatan Evaluasi dan Pemaparan PROKER (Program Kerja) yang diselenggarakan oleh UPT Kewirausahaan dan Inkubator Bisnis Teknologi Politeknik Negeri Banyuwangi, maka dengan ini kami mengundang Bapak dan Memohon dengan hormat kehadiran Bapak dalam acara tersebut yang akan dilaksanakan pada:',
+            'Bersama Ini Kami UPT Kewirausahaan dan Inkubator Bisnis Teknologi Politeknik Negeri Banyuwangi ingin mengajukan permohonan peminjaman Alat, dengan adanya rangkaian Program Fasilitasi Inkubator, Kami ingin menyelenggarakan Evaluasi dan Pemaparan PROKER (Program Kerja), Untuk mendukung terselenggaranya kegiatan, Kami mohon untuk dijinkan menggunakan alat sebagaimana yang terlampir guna sebagai pendukung kelancaran acara tersebut. Kegiatan ini akan dilaksanakan pada:',
         ];
 
         $arrpenutup = [
             'Demikian surat ini Kami sampaikan. Atas segala perhatian dan kerjasama Anda, kami ucapkan terima kasih.',
             'Demikianlah surat pemberitahuan ini Kami sampaikan, atas perhatian dan kerjasamanya, Kami ucapkan terima kasih.',
-            'Demikian surat pengajuan kegiatan ini Kami sampaikan, atas  perhatian Bapak diucapkan terima kasih.'
+            'Demikian surat pengajuan kegiatan ini Kami sampaikan, atas  perhatian Bapak diucapkan terima kasih.',
+            'Demikian surat undangan ini kami sampaikan, atas perhatian dan kerjasama Bapak kami ucapkan terima kasih',
         ];
 
         $pembuka = Arr::random($arrpembuka);
@@ -44,8 +49,11 @@ class BuatSuratController extends Controller
         $laporan = BuatSurat::all();
         $noid = count($laporan);
         $surat = BuatSurat::find($noid);
+        $cetakall = CetakSurat::all();
+        $cetakid = count($cetakall);
+        $cetak = CetakSurat::find($cetakid);
 
-        return view('surat.index', compact('judul','pembuka' ,'penutup','nomor','noid','laporan','surat'));
+        return view('surat.index', compact('judul', 'cetak','pembuka' ,'penutup','nomor','noid','laporan','surat'));
     }
 
     /**
@@ -56,6 +64,7 @@ class BuatSuratController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -89,6 +98,11 @@ class BuatSuratController extends Controller
     public function edit($id)
     {
         //
+        $judul ="Ubah Surat Keluar";
+        $data = Crypt::decrypt($id);
+        $surat = BuatSurat::find($data);
+
+        return view('surat.index', compact('judul','surat'));
     }
 
     /**
@@ -119,17 +133,14 @@ class BuatSuratController extends Controller
         $surat->created_at=\Carbon\Carbon::now();
         $surat->save();
 
-        $agenda = TubuhSurat::find($id);
-        $tujuan = new TubuhSurat();
+        $tujuan = TubuhSurat::find($id);
         $tujuan->buat_surat_id = $request->buat_surat_id;
-        $tujuan->tanggal=\Carbon\Carbon::parse($request->tanggal)->translatedFormat('l, d F Y');
-        $tujuan->jam=$request->jam;
-        $tujuan->acara=$request->acara;
-        $tujuan->tempat=$request->tempat;
         $tujuan->save();
 
         $isi = CetakSurat::find($id);
-        $isi->buat_surat_id = $agenda->id;
+        $isi->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');;
+        $isi->buat_surat_id = $tujuan->id;
+        $isi->tubuh_surat_id = $tujuan->buat_surat_id;
         $isi->save();
         
         return redirect()->route('surat.index')->with('sukses', 'Surat berhasil dibuat');

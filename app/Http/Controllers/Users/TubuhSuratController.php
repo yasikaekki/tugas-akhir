@@ -19,11 +19,9 @@ class TubuhSuratController extends Controller
     {
         //
         $judul = 'Tubuh Surat';
-        $uid = Auth::id();
-        $tubuhid = TubuhSurat::all()->where('user_id', $uid);
+        $tubuhid = TubuhSurat::all();
         $tubuh = count($tubuhid);
-        $isiid = TubuhSurat::all()->last()->id;
-        $isi= TubuhSurat::find($isiid);
+        $isi= TubuhSurat::find($tubuh);
 
         return view('agenda.index',compact('judul','isi','tubuh'));
     }

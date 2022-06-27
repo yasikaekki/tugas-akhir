@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTubuhSuratsTable extends Migration
+class CreateLaporanSuratsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateTubuhSuratsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tubuh_surats', function (Blueprint $table) {
+        Schema::create('laporan_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('buat_surat_id')->nullable();
-            $table->string('tanggal')->nullable();
-            $table->string('acara')->nullable();
-            $table->string('tempat')->nullable();
-            $table->string('jam')->nullable();
+            $table->foreignid('cetak_surat_id')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateTubuhSuratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tubuh_surats');
+        Schema::dropIfExists('laporan_surats');
     }
 }

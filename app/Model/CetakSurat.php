@@ -9,6 +9,9 @@ class CetakSurat extends Model
     //
     protected $fillable = ['user_id','konfigurasi_kop_surat_id','laporan_surat_id', 'surat_pembuka_id', 'tubuh_surat_id', 'surat_penutup_id'];
     
+    public function laporan_surat(){
+        return $this->hasMany('App\model\LaporanSurat');
+    }
     public function user(){
         return $this->belongsTo('App\User');
     }
