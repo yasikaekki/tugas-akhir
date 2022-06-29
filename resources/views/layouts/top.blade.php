@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{$judul}} | Sistem Informasi Surat Keluar UPT KIBT Poliwangi</title>
+<link rel="icon" href="{{asset('vendor/dist/img/upt.png')}}">
 <!-- CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/styles.css') }}">
 <!-- Google Font: Source Sans Pro -->

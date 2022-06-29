@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class BuatSurat extends Model
 {
     //
-    public function user(){
-        return $this->belongsTo('App\User');
-    }
+    protected $fillable = ['nomor_surat_id'];
+
     public function nomor_surat(){
         return $this->belongsTo('App\NomorSurat');
     }

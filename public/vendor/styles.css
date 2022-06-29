@@ -3,11 +3,13 @@ body{
     font-size: 17px;
 }
 
-.mt-3-5 {
-    margin-top: 20px;
+.img-nav {
+    height: 40px;
+    width: 40px;
 }
-.mt-4-5 {
-    margin-top: 25px;
+
+.nav-home {
+    margin-right: auto;
 }
 
 .main{

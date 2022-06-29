@@ -15,14 +15,13 @@ class CreateBuatSuratsTable extends Migration
     {
         Schema::create('buat_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id')->nullable();
             $table->foreignid('nomor_surat_id')->nullable();
             $table->string('no_surat')->nullable();
             $table->string('perihal')->nullable();
             $table->string('lampiran')->nullable();
             $table->string('kepada')->nullable();
-            $table->string('isi_pembuka',1000)->nullable();
-            $table->string('isi_penutup',1000)->nullable();
+            $table->string('isi_pembuka',555)->nullable();
+            $table->string('isi_penutup',555)->nullable();
             $table->timestamps();
         });
     }

@@ -130,7 +130,6 @@ class CetakSuratController extends Controller
         $rekap->save();
 
         $surat = new BuatSurat();
-        $surat->user_id = Auth::id();
         $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
 
@@ -151,6 +150,7 @@ class CetakSuratController extends Controller
 
         $cetakbaru = new CetakSurat();
         $cetakbaru->user_id = Auth::id();
+        $cetakbaru->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
         $cetakbaru->created_at = \Carbon\Carbon::now();
         $cetakbaru->save();
 

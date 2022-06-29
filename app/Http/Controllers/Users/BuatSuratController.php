@@ -138,7 +138,6 @@ class BuatSuratController extends Controller
         $tujuan->save();
 
         $isi = CetakSurat::find($id);
-        $isi->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');;
         $isi->buat_surat_id = $tujuan->id;
         $isi->tubuh_surat_id = $tujuan->buat_surat_id;
         $isi->save();

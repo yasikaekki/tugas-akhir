@@ -12,6 +12,7 @@ class CetakSurat extends Model
     public function laporan_surat(){
         return $this->hasMany('App\model\LaporanSurat');
     }
+    
     public function user(){
         return $this->belongsTo('App\User');
     }

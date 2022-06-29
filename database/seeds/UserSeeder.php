@@ -33,7 +33,6 @@ class UserSeeder extends Seeder
         $user->save();
 
         $surat = new BuatSurat;
-        $surat->user_id = $user->id;
         $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
 

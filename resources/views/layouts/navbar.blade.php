@@ -1,11 +1,4 @@
   <!-- Navbar -->
-  @if($judul == 'Selamat Datang')
-  <nav class="navbar navbar-expand navbar-white navbar-light fixed-top shadow">
-    <div class="container-fluid">
-      <a href="{{ route('home') }}" class="nav-link nav-center text-dark fw-bold">Sistem Informasi Surat Keluar UPT KIBT Poliwangi</a>
-    </div>
-  </nav>
-  @else
   <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom-primary shadow">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -14,7 +7,8 @@
       </li>
     </ul>
     <div class="container-fluid">
-      <a href="{{ route('home') }}" class="nav-link text-dark fw-bold"><p>Sistem Informasi Surat Keluar UPT KIBT Poliwangi</p></a>
+      <img src="{{asset('vendor/dist/img/upt.png')}}" class="img-nav">
+      <a href="{{ route('home') }}" class="nav-link nav-home text-dark fw-bold"><p>Sistem Informasi Surat Keluar UPT KIBT Poliwangi</p></a>
     </div>
 
     <!-- Right navbar links -->
@@ -44,5 +38,4 @@
       @endif
     </ul>
   </nav>
-  @endif
   <!-- /.navbar -->
