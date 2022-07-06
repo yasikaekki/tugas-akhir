@@ -125,6 +125,7 @@
                                     </tbody>
                                   </table>
                                   @endif
+                                  {{$user->links('layouts.pagination')}}
                                 </div>
                             </div>
                         </div>

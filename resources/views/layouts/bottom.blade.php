@@ -12,7 +12,5 @@
 <script src="{{ asset('vendor/plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{ asset('vendor/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
 <script src="{{ asset('vendor/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('vendor/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('vendor/dist/js/pages/dashboard2.js')}}"></script>

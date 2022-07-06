@@ -63,7 +63,7 @@
                                                 <medium class="mb-3">{{$akun->no_nip}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Tempat, Tanggal Lahir:</medium>
-                                                <medium class="mb-3">{{$akun->tempat_lahir}}, {{$akun->tanggal_lahir}}</medium>
+                                                <medium class="mb-3">{{$akun->tempat_lahir}}, {{strftime("%A, %d %B %Y", strtotime($akun->tanggal_lahir))}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">Jenis Kelamin:</medium>
                                                 <medium class="mb-3">{{$akun->jenis_kelamin}}</medium>

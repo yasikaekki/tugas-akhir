@@ -83,7 +83,7 @@ class TubuhSuratController extends Controller
     {
         //
         $tubuhsurat=TubuhSurat::find($id);
-        $tubuhsurat->tanggal=\Carbon\Carbon::parse($request->tanggal)->translatedFormat("l, d F Y");
+        $tubuhsurat->tanggal=$request->tanggal;
         $tubuhsurat->jam=$request->jam;
         $tubuhsurat->acara=$request->acara;                              
         $tubuhsurat->tempat=$request->tempat;                              

@@ -35,35 +35,76 @@
                         <div class="col-lg-12">
                             <div class="card border-top-info p-4">
                                 <div class="card-body">
+                                    <div id="grafik"></div>
+                                </div>
+                            </div>
+                            <script src="https://code.highcharts.com/highcharts.js"></script>
+                            <script type="text/javascript">
+                                var rekap =  <?php echo json_encode($arrdata) ?>;
+                                var bulan =  <?php echo json_encode($arrbulan) ?>;
+
+                                Highcharts.chart('grafik', {
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: 'Grafik Rekapitulasi Jenis Surat'
+                                    },
+                                    accessibility: {
+                                        announceNewData: {
+                                            enabled: true
+                                        }
+                                    },
+                                    xAxis: {
+                                        categories: bulan
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: 'Jumlah Surat Keluar Tiap Bulan'
+                                        }
+
+                                    },
+                                    legend: {
+                                        enabled: false
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            borderWidth: 0,
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '{point.y:.f}'
+                                            }
+                                        }
+                                    },
+
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                                        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.f}</b> of total<br/>'
+                                    },
+
+                                    series: [
+                                        {
+                                            colorByPoint: true,
+                                            data: rekap
+                                        }
+                                    ]
+                                });
+                            </script>
+                            <div class="card border-top-info p-4">
+                                <div class="card-body">
                                     <form action="{{route('rekapitulasi.bulan.index')}}" method="GET">
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                             <select class="form-select col-md-2" name="fitur_filter" data-dependent="state">
                                                 <option value="" disabled hidden selected>Pilih Tahun</option>
-                                                {{-- @empty($keywoard) --}}
-                                                    @foreach ($tahun as $alltahun)
-                                                    <option value="{{$alltahun->id}}">{{$alltahun->list_tahun}}</option>
-                                                    @endforeach
-                                                {{-- @else
-                                                    @foreach($year as $years)
-                                                    <option value="{{$years->id}}">{{$years->list_tahun}}</option>
-                                                    @endforeach
-                                                @endempty --}}
-                                                {{-- @else
-                                                <?php 
-                                                    require_once("App\Tahun.php");
-
-                                                    $tahun = Tahun::all();
-                                                    foreach ($tahun as $alltahun) {
-                                                        echo '<option value='.$alltahun->id.'>'.$alltahun->list_tahun.'</option>';
-                                                    }
-                                                ?>
-                                                @endif --}}
+                                                @foreach ($tahun as $alltahun)
+                                                <option value="{{$alltahun->id}}">{{$alltahun->list_tahun}}</option>
+                                                @endforeach
                                             </select>
                                             <button class="btn btn-primary" type="submit"><i class="bi bi-sliders"></i> Tampilkan</button>
                                         </div>     
                                     </form>
 
-                                    @if($keywoard->rekapitulasi_surat_id == 0)
+                                    @if(is_null($keywoard->rekapitulasi_surat_id))
                                     <h3 class="fw-bold text-center mb-3">Tahun {{$keywoard->list_tahun}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -91,8 +132,14 @@
                                         <tr>
                                             <td>{{$no++}}</td>
                                             <td>{{$rekaps->nama_bulan}}</td>
-                                            @if($rekaps->rekapitulasi_surat_id != 0)
-                                            <td>{{$rekaps->rekapitulasi_surat_id}}</td>
+                                            @if($rekaps->tahun_satu != 0 || $rekaps->tahun_dua != 0 || $rekaps->tahun_tiga != 0)
+                                                @if($year == 1)
+                                                <td>{{$rekaps->tahun_satu}}</td>
+                                                @elseif($year == 2)
+                                                <td>{{$rekaps->tahun_dua}}</td>
+                                                @elseif($year == 3)
+                                                <td>{{$rekaps->tahun_tiga}}</td>
+                                                @endif
                                             @else
                                             <td>Belum ada surat yang dibuat</td>
                                             @endif                               

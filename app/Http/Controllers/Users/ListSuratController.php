@@ -11,7 +11,9 @@ use App\Model\BuatSurat;
 use App\Model\TubuhSurat;
 use App\Model\CetakSurat;
 use App\Model\LaporanSurat;
+use App\NomorSurat;
 use App\User;
+use App\Bulan;
 use App\Tahun;
 use Auth;
 use DB;
@@ -45,20 +47,31 @@ class ListSuratController extends Controller
         $pembuka = Arr::random($arrpembuka);
         $penutup = Arr::random($arrpenutup);
         $tahun=Tahun::all();
+        $bulan = Bulan::all();
         $judul = "List Surat Keluar";
         $no = 1;
-        $laporan = LaporanSurat::all();
+        $laporan = LaporanSurat::paginate(6);
         $surat = count($laporan);
         $data= LaporanSurat::find($surat);
+        $nomor = NomorSurat::all();
 
-        if($request->filter_sort == 1){
-            $laporan = LaporanSurat::orderBy('created_at', 'asc')->paginate(5);
-        }elseif ($request->filter_sort == 2) {
-            $laporan = LaporanSurat::orderBy('created_at', 'desc')->paginate(5);
+        // if ($request->fitur_cari) {
+        //     $laporan = DB::table('buat_surats')
+        //     ->where('kepada','like','%'.$request->fitur_cari.'%')
+        //     ->orderBy('created_at','desc')
+        //     ->paginate(6);
+        // }
+        if($request->filter_sort == 'asc'){
+            $laporan = LaporanSurat::orderBy('created_at', 'asc')->paginate(6);
+        }elseif ($request->filter_sort == 'desc') {
+            $laporan = LaporanSurat::orderBy('created_at', 'desc')->paginate(6);
+        }elseif ($request->filter_bulan) {
+            $laporan= LaporanSurat::whereMonth('created_at', $request->filter_bulan)->paginate(6);
+        }elseif ($request->filter_tahun) {
+            $laporan = LaporanSurat::whereYear('created_at', $request->filter_tahun)->paginate(6);
         }
 
-
-        return view('list-surat.index', compact('judul', 'tahun','surat', 'no', 'data', 'laporan', 'pembuka' ,'penutup'));
+        return view('list-surat.index', compact('judul','nomor', 'data','bulan','tahun','no', 'laporan', 'pembuka' ,'penutup'));
     }
 
     /**
@@ -93,7 +106,7 @@ class ListSuratController extends Controller
         //
         $judul ="Detail Surat Keluar";
         $data = Crypt::decrypt($id);
-        $laporans = CetakSurat::find($data);
+        $laporans = BuatSurat::find($data);
 
         $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
         $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
@@ -129,17 +142,41 @@ class ListSuratController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // $kode=BuatSurat::find($id);
-        // $nomor=NomorSurat::find($kode->nomor_surat_id);
-        // if ($nomor->cetak_surat_id == null) {
-        //     # code...
-        //     $nomor->cetak_surat_id = 1;
-        // } else {
-        //     # code...
-        //     $nomor->cetak_surat_id = $kode->id+1;
-        // }
+        $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+	    $bulan = $romawi[date('n')];
+        $array= array(2022=>1,2,3,4,5,6,7,8,9);
+        $tahun = $array[date('Y')];
 
         $surat = BuatSurat::find($id);
+
+        $nomor=NomorSurat::find($surat->nomor_surat_id); //hasil request pertama pada table nomor surat field cetak surat id
+        if ($request->nomor_surat_id) {
+            if ($tahun == 1) {
+                $nomor->tahun_satu = $nomor->tahun_satu-1;
+            }elseif ($tahun == 2) {
+                $nomor->tahun_dua = $nomor->tahun_dua-1;
+            }elseif ($tahun == 3) {
+                $nomor->tahun_tiga = $nomor->tahun_tiga-1;
+            }elseif ($tahun == 4) {
+                $nomor->tahun_empat = $nomor->tahun_empat-1;
+            }elseif ($tahun == 5) {
+                $nomor->tahun_lima = $nomor->tahun_lima-1;
+            }elseif ($tahun == 6) {
+                $nomor->tahun_enam = $nomor->tahun_enam-1;
+            }elseif ($tahun == 7) {
+                $nomor->tahun_tujuh = $nomor->tahun_tujuh-1;
+            }elseif ($tahun == 8) {
+                $nomor->tahun_delapan = $nomor->tahun_delapan-1;
+            }elseif ($tahun == 9) {
+                $nomor->tahun_sembilan = $nomor->tahun_sembilan-1;
+            }
+            $nomor->save();
+        }
+
+        $surat->nomor_surat_id=$request->nomor_surat_id;
+        $kodesurat = $surat->id.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
+        $surat->no_surat=$kodesurat;
+        $surat->lampiran=$request->lampiran;
         $surat->perihal=$request->perihal;
         $surat->kepada=$request->kepada;
         $surat->isi_pembuka=$request->isi_pembuka;   
@@ -147,12 +184,93 @@ class ListSuratController extends Controller
         $surat->created_at=\Carbon\Carbon::now();
         $surat->save();
 
-        $agenda = TubuhSurat::find($id);
+        $newnomor=NomorSurat::find($surat->nomor_surat_id); //hasil request terbaru pada table nomor surat field cetak surat id
+        if ($tahun == 1) {
+            if ($newnomor->tahun_satu == null) {
+                # code...
+                $newnomor->tahun_satu = 1;
+            } else {
+                # code...
+                $newnomor->tahun_satu = $newnomor->tahun_satu+1;
+            }
+        }elseif ($tahun == 2) {
+            if ($newnomor->tahun_dua == null) {
+                # code...
+                $newnomor->tahun_dua = 1;
+            } else {
+                # code...
+                $newnomor->tahun_dua = $newnomor->tahun_dua+1;
+            }
+        }elseif ($tahun == 3) {
+            if ($newnomor->tahun_tiga == null) {
+                # code...
+                $newnomor->tahun_tiga = 1;
+            } else {
+                # code...
+                $newnomor->tahun_tiga = $newnomor->tahun_tiga+1;
+            }
+        }elseif ($tahun == 4) {
+            if ($newnomor->tahun_empat == null) {
+                # code...
+                $newnomor->tahun_empat = 1;
+            } else {
+                # code...
+                $newnomor->tahun_empat = $newnomor->tahun_empat+1;
+            }
+        }elseif ($tahun == 5) {
+            if ($newnomor->tahun_lima == null) {
+                # code...
+                $newnomor->tahun_lima = 1;
+            } else {
+                # code...
+                $newnomor->tahun_lima = $newnomor->tahun_lima+1;
+            }
+        }elseif ($tahun == 6) {
+            if ($newnomor->tahun_enam == null) {
+                # code...
+                $newnomor->tahun_enam = 1;
+            } else {
+                # code...
+                $newnomor->tahun_enam = $newnomor->tahun_enam+1;
+            }
+        }elseif ($tahun == 7) {
+            if ($newnomor->tahun_tujuh == null) {
+                # code...
+                $newnomor->tahun_tujuh = 1;
+            } else {
+                # code...
+                $newnomor->tahun_tujuh = $newnomor->tahun_tujuh+1;
+            }
+        }elseif ($tahun == 8) {
+            if ($newnomor->tahun_delapan == null) {
+                # code...
+                $newnomor->tahun_delapan = 1;
+            } else {
+                # code...
+                $newnomor->tahun_delapan = $newnomor->tahun_delapan+1;
+            }
+        }elseif ($tahun == 9) {
+            if ($newnomor->tahun_sembilan == null) {
+                # code...
+                $newnomor->tahun_sembilan = 1;
+            } else {
+                # code...
+                $newnomor->tahun_sembilan = $newnomor->tahun_sembilan+1;
+            }
+        }
+        $newnomor->save();
+        
+        $agenda = TubuhSurat::find($id); 
+        $agenda->buat_surat_id = $nomor->id;
         $agenda->tanggal = $request->tanggal;
         $agenda->acara = $request->acara;
         $agenda->jam = $request->jam;
         $agenda->tempat = $request->tempat;
         $agenda->save();
+
+        $cetak = CetakSurat::find($id);
+        $cetak->tubuh_surat_id = $request->tubuh_surat_id;
+        $cetak->save();
 
         return redirect()->route('list-surat.index')->with('sukses', 'Surat berhasil diperbarui');
     }

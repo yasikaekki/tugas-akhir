@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
 
         $cetak = new CetakSurat();
         $cetak->user_id = $user->id;
+        $cetak->konfigurasi_kop_surat_id = $kop->id;
         $cetak->created_at = \Carbon\Carbon::now();
         $cetak->save();
     }

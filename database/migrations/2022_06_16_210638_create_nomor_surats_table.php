@@ -15,7 +15,15 @@ class CreateNomorSuratsTable extends Migration
     {
         Schema::create('nomor_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('cetak_surat_id')->nullable();
+            $table->foreignid('tahun_satu')->nullable();
+            $table->foreignid('tahun_dua')->nullable();
+            $table->foreignid('tahun_tiga')->nullable();
+            $table->foreignid('tahun_empat')->nullable();
+            $table->foreignid('tahun_lima')->nullable();
+            $table->foreignid('tahun_enam')->nullable();
+            $table->foreignid('tahun_tujuh')->nullable();
+            $table->foreignid('tahun_delapan')->nullable();
+            $table->foreignid('tahun_sembilan')->nullable();
             $table->string('jenis_surat')->nullable();
             $table->timestamps();
         });

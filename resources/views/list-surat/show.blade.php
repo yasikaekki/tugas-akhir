@@ -54,6 +54,10 @@
         padding-left: 65%;
     }
 
+    .foto-ttd{
+        margin-left: 70%;
+    }
+
     @page {
         size: A4;
         margin: 0;
@@ -170,10 +174,10 @@
                                                 </tr>
                                             </table>
                                             @if($cetak->tubuh_surat_id != null)
-                                            <table width="65%" class="mt-3 mb-5">
+                                            <table width="65%" class="mt-3 mb-3">
                                                 <tr>
                                                     <td width="20%">Hari, Tanggal</td>
-                                                    <td width="86%">: {{$cetak->tubuh_surat->tanggal}}</td>
+                                                    <td width="86%">: {{strftime("%A, %d %B %Y", strtotime($cetak->tubuh_surat->tanggal))}}</td>
                                                 </tr>
                                                 <tr>
                                                 <tr>
@@ -191,7 +195,7 @@
                                                 
                                             </table>
                                             @endif
-                                            <table width="75%">
+                                            <table width="75%" class="mb-5">
                                                 <tr>
                                                     <td>
                                                         <p class="fs-6">{{$cetak->buat_surat->isi_penutup}}</p>
@@ -201,10 +205,15 @@
                                     
                                             <table width="75%" class="mt-5 mb-5">
                                                 <tr>
-                                                    <td><p class="form-ttd text-start mt-5 mb-5">Hormat kami,<br>Ketua UPT Kewirausahaan dan<br>Inkubator Bisnis Teknologi Poliwangi</p></td>
+                                                    <td><p class="form-ttd text-start">Hormat kami,<br>Ketua UPT Kewirausahaan dan<br>Inkubator Bisnis Teknologi Poliwangi</p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><p class="form-ttd text-start mt-5 mt-5">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
+                                                    <td>
+                                                        <img src="/assets/foto ttd/{{$cetak->user->gambar_ttd}}" class="foto-ttd">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p class="form-ttd text-start">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
                                                 </tr>
                                             </table> 
                                         </div>

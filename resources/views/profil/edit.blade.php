@@ -43,53 +43,37 @@
                                         <div class="mb-3 form-group">
                                             <div class="row">
                                                 <div class="col-md-5">
-
                                                     @if($akun->gambar_profil == null)
-                                                    <img class="logo-profil img-circle" id="logo-image" src="{{ asset('vendor/dist/img/user.png')}}">
+                                                    <img class="logo-profil img-circle" src="{{ asset('vendor/dist/img/user.png')}}" id="logo-image">
                                                     @else
-                                                    <img src="/assets/gambar profil/{{$akun->lokasi_foto}}" id="logo-image" class="mb-4 logo-profil img-circle">
+                                                    <img src="/assets/foto profil/{{$akun->gambar_profil}}" class="mb-4 logo-profil img-circle" id="logo-image">
                                                     @endif
                                                     <div class="form-group">
                                                         <label>Ubah Foto</label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="gambar_profil" class="form-control @error('gambar_profil') is-invalid @enderror" id="preview">
+                                                        <input type="file" accept="image/png, image/jpeg" name="gambar_profil" class="form-control @error('gambar_profil') is-invalid @enderror" onchange="previewProfil(event)">
                                                         @error('gambar_profil')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
+                                                        <div></div>
                                                     </div>
 
                                                     <script>
-                                                        $("#preview").change(function(event) {  
-                                                            RecurFadeIn();
-                                                            readURL(this);    
-                                                        });
-                                                        $("#preview").on('click',function(event){
-                                                            RecurFadeIn();
-                                                        });
-                                                        function readURL(input) {    
-                                                            if (input.files && input.files[0]) {   
-                                                            var reader = new FileReader();
-                                                            var filename = $("#preview").val();
-                                                            filename = filename.substring(filename.lastIndexOf('\\')+1);
-                                                            reader.onload = function(e) {
-                                                                debugger;      
-                                                                $('#logo-image').attr('src', e.target.result);
-                                                                $('#logo-image').hide();
-                                                                $('#logo-image').fadeIn(500);      
-                                                                // $('.custom-file-label').text(filename);             
+                                                        var previewProfil = function(event) {
+                                                            var fotoProfil = document.getElementById('logo-image');
+                                                            fotoProfil.src = URL.createObjectURL(event.target.files[0]);
+                                                            fotoProfil.onload = function() {
+                                                                URL.revokeObjectURL(fotoProfil.src) 
                                                             }
-                                                            reader.readAsDataURL(input.files[0]);    
-                                                            } 
-                                                            $(".alert").removeClass("loading").hide();
-                                                        }
-                                                        function RecurFadeIn(){ 
-                                                            // console.log('ran');
-                                                            FadeInAlert();  
-                                                        }
-                                                        function FadeInAlert(){
-                                                            $(".alert").show();
-                                                            // $(".alert").text(text).addClass("loading");  
+                                                        };
+
+                                                        var previewTTD = function(event) {
+                                                            var fotoTTD = document.getElementById('logo-ttd');
+                                                            fotoTTD.src = URL.createObjectURL(event.target.files[0]);
+                                                            fotoTTD.onload = function() {
+                                                                URL.revokeObjectURL(fotoTTD.src) 
+                                                            }
                                                         }
                                                     </script>
                                                 </div>
@@ -98,51 +82,17 @@
                                                     @if($akun->gambar_ttd == null)
                                                     <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/ttd.png')}}">
                                                     @else
-                                                    <img class="logo-ttd" id="logo-ttd" src="/assets/foto ttd/{{$akun->gambar_profil}}">
+                                                    <img class="logo-ttd" id="logo-ttd" src="/assets/foto ttd/{{$akun->gambar_ttd}}">
                                                     @endif
                                                     <div class="form-group">
                                                         <label>Ubah TTD</label>
-                                                        <input type="file" accept="image/png, image/jpeg" id="preview-ttd" name="gambar_ttd" class="form-control @error('gambar_ttd') is-invalid @enderror">
+                                                        <input type="file" accept="image/png, image/jpeg" name="gambar_ttd" class="form-control @error('gambar_ttd') is-invalid @enderror" onchange="previewTTD(event)">
                                                         @error('gambar_ttd')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                     </div>
-
-                                                    <script>
-                                                        $("#preview-ttd").change(function(event) {  
-                                                            RecurFadeIn();
-                                                            readURL(this);    
-                                                        });
-                                                        $("#preview-ttd").on('click',function(event){
-                                                            RecurFadeIn();
-                                                        });
-                                                        function readURL(input) {    
-                                                            if (input.files && input.files[0]) {   
-                                                            var reader = new FileReader();
-                                                            var filename = $("#preview-ttd").val();
-                                                            filename = filename.substring(filename.lastIndexOf('\\')+1);
-                                                            reader.onload = function(e) {
-                                                                debugger;      
-                                                                $('#logo-ttd').attr('src', e.target.result);
-                                                                $('#logo-ttd').hide();
-                                                                $('#logo-ttd').fadeIn(500);      
-                                                                // $('.custom-file-label').text(filename);             
-                                                            }
-                                                            reader.readAsDataURL(input.files[0]);    
-                                                            } 
-                                                            $(".alert").removeClass("loading").hide();
-                                                        }
-                                                        function RecurFadeIn(){ 
-                                                            // console.log('ran');
-                                                            FadeInAlert();  
-                                                        }
-                                                        function FadeInAlert(){
-                                                            $(".alert").show();
-                                                            // $(".alert").text(text).addClass("loading");  
-                                                        }
-                                                    </script>
 
                                                     <div class="form-group mb-3">
                                                         <div class="row">
@@ -191,9 +141,17 @@
                                                     <div class="form-group mb-3">
                                                         <label for="exampleFormControlSelect1">Jenis Kelamin</label>
                                                         <select name="jenis_kelamin" id="select" class="form-select mb-3 form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
+                                                            @if($akun->jenis_kelamin == null)
                                                             <option value="null" selected hidden disabled>Pilih</option>
-                                                            <option value="laki-laki">Laki-laki</option>
-                                                            <option value="perempuan">Perempuan</option>
+                                                            <option value="Laki-Laki">Laki-laki</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                            @elseif($akun->jenis_kelamin == "Laki-Laki")
+                                                            <option value="{{$akun->jenis_kelamin}}" selected>{{$akun->jenis_kelamin}}</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                            @elseif($akun->jenis_kelamin == "Perempuan")
+                                                            <option value="Laki-Laki">Laki-Laki</option>
+                                                            <option value="{{$akun->jenis_kelamin}}" selected>{{$akun->jenis_kelamin}}</option>
+                                                            @endif
                                                         </select>
                                                         @error('jenis_kelamin')
                                                             <span class="invalid-feedback" role="alert">

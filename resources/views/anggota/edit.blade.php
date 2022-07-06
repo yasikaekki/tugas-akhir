@@ -71,16 +71,15 @@
                               <label>NIK/NIP/NIPPPK</label>
                               <div class="col-md-6">
                                 <select name="nip" id="select" class="form-select form-control @error('nip') is-invalid @enderror">
-                                <option value="null" selected hidden disabled>Pilih</option>
                                 @if($anggota->nip == 'NIK')
-                                <option value="NIK">NIK</option>
+                                <option value="{{$anggota->nip}}" selected>{{$anggota->nip}}</option>
                                 <option value="NIP">NIP</option>
                                 <option value="NIPPPK">NIPPPK</option>
                                 @elseif($anggota->nip == 'NIP')
-                                <option value="NIP">NIP</option>
+                                <option value="{{$anggota->nip}}" selected>{{$anggota->nip}}</option>
                                 <option value="NIPPPK">NIPPPK</option>
                                 @elseif($anggota->nip == 'NIPPPK')
-                                <option value="NIPPPK">NIPPPK</option>
+                                <option value="{{$anggota->nip}}" selected>{{$anggota->nip}}</option>
                                 @endif
                               </select>
                               @error('nip')
@@ -103,13 +102,64 @@
                         <div class="form-group mb-3">
                             <label>Jabatan</label>
                             <select name="jabatan" id="select" class="form-select mb-3 form-control @error('jabatan') is-invalid @enderror">
-                                <option value="null" selected hidden disabled>Pilih</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                @if($anggota->jabatan == "Ketua Umum")
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="Sekretaris I">Sekretaris I</option>
+                                <option value="Sekretaris II">Sekretaris II</option>
+                                <option value="Bendahara I">Bendahara I</option>
+                                <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Wakil Ketua")
+                                <option value="Ketua Umum">Ketua Umum</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Sekretaris I">Sekretaris I</option>
+                                <option value="Sekretaris II">Sekretaris II</option>
+                                <option value="Bendahara I">Bendahara I</option>
+                                <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Sekretaris I")
+                                <option value="Ketua Umum">Ketua Umum</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Sekretaris II">Sekretaris II</option>
+                                <option value="Bendahara I">Bendahara I</option>
+                                <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Sekretaris II")
+                                <option value="Ketua Umum">Ketua Umum</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="Sekretaris I">Sekretaris I</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Bendahara I">Bendahara I</option>
+                                <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Bendahara I")
+                                <option value="Ketua Umum">Ketua Umum</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="Sekretaris I">Sekretaris I</option>
+                                <option value="Sekretaris II">Sekretaris II</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Bendahara II")
+                                <option value="Ketua Umum">Ketua Umum</option>
+                                <option value="Wakil Ketua">Wakil Ketua</option>
+                                <option value="Sekretaris I">Sekretaris I</option>
+                                <option value="Sekretaris II">Sekretaris II</option>
+                                <option value="Bendahara I">Bendahara I</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                <option value="Anggota">Anggota</option>
+                                @elseif($anggota->jabatan == "Anggota")
                                 <option value="Ketua Umum">Ketua Umum</option>
                                 <option value="Wakil Ketua">Wakil Ketua</option>
                                 <option value="Sekretaris I">Sekretaris I</option>
                                 <option value="Sekretaris II">Sekretaris II</option>
                                 <option value="Bendahara I">Bendahara I</option>
                                 <option value="Bendahara II">Bendahara II</option>
+                                <option value="{{$anggota->jabatan}}" selected>{{$anggota->jabatan}}</option>
+                                @endif
                             </select>
                             @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
@@ -122,9 +172,13 @@
                         <div class="form-group">
                           <label>Status</label>
                           <select name="status" id="select" class="form-select mb-3 form-control @error('status') is-invalid @enderror">
-                            <option value="null" selected hidden disabled>Pilih</option>
-                            <option value="Aktif">Aktif</option>
+                            @if($anggota->status == "Aktif")
+                            <option value="{{$anggota->status}}" selected>{{$anggota->status}}</option>
                             <option value="Tidak Aktif">Tidak Aktif</option>
+                            @elseif($anggota->status == "Tidak Aktif")
+                            <option value="Aktif">Aktif</option>
+                            <option value="{{$anggota->status}}" selected>{{$anggota->status}}</option>
+                            @endif
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

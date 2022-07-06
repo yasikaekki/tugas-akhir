@@ -123,7 +123,8 @@ class BuatSuratController extends Controller
         $kode = count($all);
 
         $surat->nomor_surat_id=$request->nomor_surat_id;
-        $kodesurat = $request->no_surat.$kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
+        $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
+        
         $surat->no_surat=$kodesurat;   
         $surat->lampiran=$request->lampiran;
         $surat->perihal=$request->perihal;

@@ -59,10 +59,23 @@
                                                 <div class="form-group mb-3">
                                                     <label>Jenis Surat</label>
                                                     <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
-                                                    <option value="null" selected hidden disabled>Pilih</option>
-                                                    @foreach($nomor as $nomors)
+                                                    @if($surat->nomor_surat_id == null)
+                                                        <option selected hidden disabled>Pilih</option>
+                                                        @foreach($nomor as $nomors)
                                                         <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
+                                                        @endforeach
+
+                                                    @else
+                                                    
+                                                    @foreach($nomor as $nomors)
+                                                        @if($surat->nomor_surat_id == $nomors->id)
+                                                        <option value="{{$surat->nomor_surat_id}}" selected>{{$nomors->id}}. {{$surat->nomor_surat->jenis_surat}}</option>
+                                                        @else
+                                                        <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
+                                                        @endif
                                                     @endforeach
+
+                                                    @endif
                                                     </select>
                                                     @error('nomor_surat_id')
                                                         <span class="invalid-feedback" role="alert">
@@ -77,13 +90,57 @@
                                                 <div class="form-group mb-3">
                                                     <label>Lampiran</label>
                                                     <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">                                                   
-                                                        <option value="null" selected hidden disabled>Pilih</option>
+                                                        @if($surat->lampiran == null)
+                                                        <option selected hidden disabled>Pilih</option>
                                                         <option value="-">-</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
                                                         <option value="4">4</option>
+                                                        <option value="5">5</option>               
+                                                        @elseif($surat->lampiran == "-")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
                                                         <option value="5">5</option>
+                                                        @elseif($surat->lampiran == "1")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="-">-</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        @elseif($surat->lampiran == "2")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        @elseif($surat->lampiran == "3")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        @elseif($surat->lampiran == "4")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="5">5</option>
+                                                        @elseif($surat->lampiran == "5")
+                                                        <option value="{{$surat->lampiran}}" selected>{{$surat->lampiran}}</option>
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        @endif
                                                     </select>
                                                     @error('lampiran')
                                                         <span class="invalid-feedback" role="alert">
@@ -96,9 +153,17 @@
                                                 <div class="form-group mb-3">
                                                     <label>Agenda</label>
                                                     <select class="form-select form-control mb-3 @error('buat_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="buat_surat_id">                                                   
-                                                        <option value="null" selected hidden disabled>Pilih</option>
+                                                        @if($cetak->tubuh_surat_id == null)
+                                                        <option selected hidden disabled>Pilih</option>
                                                         <option value="{{$noid}}">Acara</option>
                                                         <option value="">Tidak Ada Acara</option>
+                                                        @elseif($cetak->tubuh_surat_id == $noid)
+                                                        <option value="{{$noid}}" selected>Acara</option>
+                                                        <option value="">Tidak Ada Acara</option>
+                                                        @elseif($cetak->id != null)
+                                                        <option value="{{$noid}}">Acara</option>
+                                                        <option value="" selected>Tidak Ada Acara</option>
+                                                        @endif
                                                     </select>
                                                     @error('buat_surat_id')
                                                         <span class="invalid-feedback" role="alert">

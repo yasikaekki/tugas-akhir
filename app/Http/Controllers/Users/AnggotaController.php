@@ -27,7 +27,7 @@ class AnggotaController extends Controller
         //
         $judul = 'Anggota';
         $no = 1;
-        $user = User::all();
+        $user = User::paginate(6);
         $authuser = Auth::user();
 
         if($request->fitur_cari){
@@ -35,7 +35,7 @@ class AnggotaController extends Controller
             ->orWhere('gelar','like','%'.$request->fitur_cari.'%')
             ->orWhere('jabatan','like','%'.$request->fitur_cari.'%')
             ->orderBy('created_at','desc')
-            ->paginate(5);
+            ->paginate(6);
         } 
 
         return view('anggota.index', compact('judul', 'no', 'user', 'authuser'));

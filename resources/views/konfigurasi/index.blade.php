@@ -45,13 +45,13 @@
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
                                         @if($kop->lokasi_foto == null)
-                                        <img class="logo-upt" id="logo-image" src="{{asset('vendor/dist/img/upt.png')}}">
+                                        <img class="logo-upt" id="logo-kop" src="{{asset('vendor/dist/img/upt.png')}}">
                                         @else
-                                        <img class="logo-upt" id="logo-image" src="/assets/logo upt/{{$kop->lokasi_foto}}">
+                                        <img class="logo-upt" id="logo-kop" src="/assets/logo upt/{{$kop->lokasi_foto}}">
                                         @endif
                                         <div class="form-group mb-3">
                                             <label>Logo UPT</label>
-                                            <input type="file" id="preview" name="lokasi_foto" id="logo-image" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror">
+                                            <input type="file" id="preview" name="lokasi_foto" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror" onchange="previewKop(event)">
                                             @error('lokasi_foto')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -60,37 +60,13 @@
                                         </div>
 
                                         <script>
-                                            $("#preview").change(function(event) {  
-                                                RecurFadeIn();
-                                                readURL(this);    
-                                            });
-                                            $("#preview").on('click',function(event){
-                                                RecurFadeIn();
-                                            });
-                                            function readURL(input) {    
-                                                if (input.files && input.files[0]) {   
-                                                var reader = new FileReader();
-                                                var filename = $("#preview").val();
-                                                filename = filename.substring(filename.lastIndexOf('\\')+1);
-                                                reader.onload = function(e) {
-                                                    debugger;      
-                                                    $('#logo-image').attr('src', e.target.result);
-                                                    $('#logo-image').hide();
-                                                    $('#logo-image').fadeIn(500);      
-                                                    // $('.custom-file-label').text(filename);             
+                                            var previewKop = function(event) {
+                                                var logoKop = document.getElementById('logo-kop');
+                                                logoKop.src = URL.createObjectURL(event.target.files[0]);
+                                                logoKop.onload = function() {
+                                                    URL.revokeObjectURL(logoKop.src) 
                                                 }
-                                                reader.readAsDataURL(input.files[0]);    
-                                                } 
-                                                $(".alert").removeClass("loading").hide();
-                                            }
-                                            function RecurFadeIn(){ 
-                                                // console.log('ran');
-                                                FadeInAlert();  
-                                            }
-                                            function FadeInAlert(){
-                                                $(".alert").show();
-                                                // $(".alert").text(text).addClass("loading");  
-                                            }
+                                            };
                                         </script>
 
                                         <div class="form-group mb-3">

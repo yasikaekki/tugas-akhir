@@ -56,12 +56,12 @@ class CetakSuratController extends Controller
 
         $judul = 'Cetak Surat';
         $cetaksurat = CetakSurat::all();
-        $surat = BuatSurat::all();
         $data = count($cetaksurat);
         $cetak = CetakSurat::find($data);
         return view('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
         // $url = PDF::loadview('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
-        // return $url->stream();
+        // $url->setPaper('A4','potrait');
+        // return $url->stream($data->buat_surat->no_surat.$data->buat_surat->nomor_surat->jenis_surat.'.pdf');
     }
 
     /**
@@ -125,42 +125,129 @@ class CetakSuratController extends Controller
         $bulan = date('n');
 
         $cetak = CetakSurat::find($id);
+        $cetak->created_at = \Carbon\Carbon::now();
+        $cetak->save();
+
         $rekap = new RekapitulasiSurat();
         $rekap->cetak_surat_id = $cetak->id;
         $rekap->save();
 
         $surat = new BuatSurat();
-        $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
 
         $tubuh = new TubuhSurat();
-        $tubuh->created_at = \Carbon\Carbon::now();
         $tubuh->save();
 
         $kode=BuatSurat::find($id);
+        $kode->created_at = \Carbon\Carbon::now();
+        $kode->save();
+
         $nomor=NomorSurat::find($kode->nomor_surat_id);
-        if ($nomor->cetak_surat_id == null) {
-            # code...
-            $nomor->cetak_surat_id = 1;
-        } else {
-            # code...
-            $nomor->cetak_surat_id = $kode->id+1;
+        if ($tahun == 1) {
+            if ($nomor->tahun_satu == null) {
+                # code...
+                $nomor->tahun_satu = 1;
+            } else {
+                # code...
+                $nomor->tahun_satu = $nomor->tahun_satu+1;
+            }
+        }elseif ($tahun == 2) {
+            if ($nomor->tahun_dua == null) {
+                # code...
+                $nomor->tahun_dua = 1;
+            } else {
+                # code...
+                $nomor->tahun_dua = $nomor->tahun_dua+1;
+            }
+        }elseif ($tahun == 3) {
+            if ($nomor->tahun_tiga == null) {
+                # code...
+                $nomor->tahun_tiga = 1;
+            } else {
+                # code...
+                $nomor->tahun_tiga = $nomor->tahun_tiga+1;
+            }
+        }elseif ($tahun == 4) {
+            if ($nomor->tahun_empat == null) {
+                # code...
+                $nomor->tahun_empat = 1;
+            } else {
+                # code...
+                $nomor->tahun_empat = $nomor->tahun_empat+1;
+            }
+        }elseif ($tahun == 5) {
+            if ($nomor->tahun_lima == null) {
+                # code...
+                $nomor->tahun_lima = 1;
+            } else {
+                # code...
+                $nomor->tahun_lima = $nomor->tahun_lima+1;
+            }
+        }elseif ($tahun == 6) {
+            if ($nomor->tahun_enam == null) {
+                # code...
+                $nomor->tahun_enam = 1;
+            } else {
+                # code...
+                $nomor->tahun_enam = $nomor->tahun_enam+1;
+            }
+        }elseif ($tahun == 7) {
+            if ($nomor->tahun_tujuh == null) {
+                # code...
+                $nomor->tahun_tujuh = 1;
+            } else {
+                # code...
+                $nomor->tahun_tujuh = $nomor->tahun_tujuh+1;
+            }
+        }elseif ($tahun == 8) {
+            if ($nomor->tahun_delapan == null) {
+                # code...
+                $nomor->tahun_delapan = 1;
+            } else {
+                # code...
+                $nomor->tahun_delapan = $nomor->tahun_delapan+1;
+            }
+        }elseif ($tahun == 9) {
+            if ($nomor->tahun_sembilan == null) {
+                # code...
+                $nomor->tahun_sembilan = 1;
+            } else {
+                # code...
+                $nomor->tahun_sembilan = $nomor->tahun_sembilan+1;
+            }
         }
+        
         $nomor->save();
 
         $cetakbaru = new CetakSurat();
         $cetakbaru->user_id = Auth::id();
         $cetakbaru->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $cetakbaru->created_at = \Carbon\Carbon::now();
         $cetakbaru->save();
 
-        $cetakbaru = new LaporanSurat();
-        $cetakbaru->cetak_surat_id = $cetak->id;
-        $cetakbaru->created_at = \Carbon\Carbon::now();
-        $cetakbaru->save();
+        $laporan = new LaporanSurat();
+        $laporan->cetak_surat_id = $cetak->id;
+        $laporan->save();
 
         $listbulan = Bulan::find($bulan);
-        $listbulan->rekapitulasi_surat_id = $rekap->id;
+        if ($tahun == 1) {
+            $listbulan->tahun_satu = $rekap->id;
+        }elseif ($tahun == 2) {
+            $listbulan->tahun_dua = $rekap->id;
+        }elseif ($tahun == 3) {
+            $listbulan->tahun_tiga = $rekap->id;
+        }elseif ($tahun == 4) {
+            $listbulan->tahun_empat = $rekap->id;
+        }elseif ($tahun == 5) {
+            $listbulan->tahun_lima = $rekap->id;
+        }elseif ($tahun == 6) {
+            $listbulan->tahun_enam = $rekap->id;
+        }elseif ($tahun == 7) {
+            $listbulan->tahun_tujuh = $rekap->id;
+        }elseif ($tahun == 8) {
+            $listbulan->tahun_delapan = $rekap->id;
+        }elseif ($tahun == 9) {
+            $listbulan->tahun_sembilan = $rekap->id;
+        }
         $listbulan->save();
 
         $listtahun = Tahun::find($tahun);
