@@ -109,7 +109,6 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-12">
-                            {{-- @if($cetak->kop == null || $cetak->nomor == null || $cetak->pembuka == null || $cetak->tubuh == null || $cetak->penutup == null) --}}
                             <div class="card border-top-info p-4">
                                 
                                 <div class="card-body">
@@ -118,21 +117,13 @@
                                         <div class="kerangka">
                                             <table class="kop">
                                                 <tr>
-                                                    @if($cetak->konfigurasi_kop_surat->lokasi_foto == null)
-                                                    <td><img src="{{asset('vendor/dist/img/upt.png')}}" class="mb-5"></td>
-                                                    @else
                                                     <td><img src="/assets/logo upt/{{$cetak->konfigurasi_kop_surat->lokasi_foto}}" class="mb-5"></td>
-                                                    @endif
                                                     <td class="garis">
                                                         <p class="fs-5" style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{{$kop1}}</p>
                                                         <p class="fs-5">{{$kop2}}</p>
-                                                        @if($kop4->nama_upt == null)
-                                                        <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$kop3}}</p>
-                                                        @else
-                                                        <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$kop4->nama_upt}}</p>
-                                                        @endif
-                                                        <p class="fs-7" style="line-height: 10px;">{{$kop5}}</p>
-                                                        <p class="fs-7">{{$kop6}}</p>
+                                                        <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$cetak->konfigurasi_kop_surat->nama_upt}}</p>
+                                                        <p class="fs-7" style="line-height: 10px;">{{$kop3}}</p>
+                                                        <p class="fs-7">{{$kop4}}</p>
                                                     </td>
                                                     <td><img src="{{asset('vendor/dist/img/poliwangi.png')}}" class="mb-5"></td>
                                                 </tr>
@@ -140,27 +131,27 @@
                                     
                                             <table width="75%" class="mt-3">
                                                 <tr>
-                                                    <td class="text-end text-right fs-6">Banyuwangi, {{$cetak->buat_surat->created_at->translatedFormat('d F Y')}}</td>
+                                                    <td class="text-end text-right fs-6">Banyuwangi, {{$cetak->created_at->translatedFormat('d F Y')}}</td>
                                                 </tr>
                                             </table>
                                             <table width="75%" class="mt-3">
                                                 <tr>
                                                     <td>Nomor</td>
-                                                    <td width="86%">: {{$cetak->buat_surat->no_surat}}</td>
+                                                    <td width="86%">: {{$cetak->no_surat}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Lampiran</td>
-                                                    <td width="86%">: {{$cetak->buat_surat->lampiran}}</td>
+                                                    <td width="86%">: {{$cetak->lampiran}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Hal</td>
-                                                    <td width="86%">: {{$cetak->buat_surat->perihal}}</td>
+                                                    <td width="86%">: {{$cetak->perihal}}</td>
                                                 </tr>
                                             </table>
                                             <table class="mt-3" width="75%">
                                                 <tr>
                                                    <td>
-                                                       <p class="fs-6">Kpd yth.<br>{{$cetak->buat_surat->kepada}}<br>di Tempat</p>
+                                                       <p class="fs-6">Kpd yth.<br>{{$cetak->kepada}}<br>di Tempat</p>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -169,7 +160,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="fs-6 mb-1">Dengan hormat,</p>
-                                                        <p class="fs-6">{{$cetak->buat_surat->isi_pembuka}}</p>
+                                                        <p class="fs-6">{{$cetak->isi_pembuka}}</p>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -198,7 +189,7 @@
                                             <table width="75%" class="mb-5">
                                                 <tr>
                                                     <td>
-                                                        <p class="fs-6">{{$cetak->buat_surat->isi_penutup}}</p>
+                                                        <p class="fs-6">{{$cetak->isi_penutup}}</p>
                                                     </td>
                                                  </tr>
                                             </table>

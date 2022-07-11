@@ -5,15 +5,7 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\LaporanSurat;
-use App\Model\SuratPembuka;
-use App\Model\SuratPenutup;
-use App\Model\TubuhSurat;
 use App\User;
-use Auth;
-use Hash;
-use PDF;
-use DB;
 
 class AnggotaController extends Controller
 {
@@ -28,7 +20,6 @@ class AnggotaController extends Controller
         $judul = 'Anggota';
         $no = 1;
         $user = User::paginate(6);
-        $authuser = Auth::user();
 
         if($request->fitur_cari){
             $user=  DB::table('users')->where('name','like','%'.$request->fitur_cari.'%')
@@ -38,7 +29,7 @@ class AnggotaController extends Controller
             ->paginate(6);
         } 
 
-        return view('anggota.index', compact('judul', 'no', 'user', 'authuser'));
+        return view('anggota.index', compact('judul', 'no', 'user'));
     }
 
     /**
@@ -50,10 +41,8 @@ class AnggotaController extends Controller
     {
         //
         $judul = 'Registrasi Akun Anggota';
-        $uid = Auth::id();
-        $anggota = User::find($uid);
 
-        return view('anggota.create', compact('judul','anggota'));
+        return view('anggota.create', compact('judul'));
     }
 
     /**
@@ -89,39 +78,13 @@ class AnggotaController extends Controller
         $user->name=$request->name;
         $user->gelar=$request->gelar;
         $user->konfigurasi_kop_surat_id = $user->id;
-        // $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
-        // $user->tempat_lahir=$request->tempat_lahir;
-        // $user->tanggal_lahir=$request->tanggal_lahir;
-        // $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
-        // $user->password=Hash::make($request->password);
         $user->created_at=\Carbon\Carbon::now();
-        // $user->email_verified_at=\Carbon\Carbon::now();
         $user->save();
-
-        $nomor = new LaporanSurat();
-        $nomor->user_id = $user->id;
-        $nomor->created_at=\Carbon\Carbon::now();
-        $nomor->save();
-
-        $pembuka = new SuratPembuka();
-        $pembuka->user_id = $user->id;
-        $pembuka->created_at=\Carbon\Carbon::now();
-        $pembuka->save();
-
-        $tubuh = new TubuhSurat();
-        $tubuh->user_id = $user->id;
-        $tubuh->created_at=\Carbon\Carbon::now();
-        $tubuh->save();
-
-        $penutup = new SuratPenutup();
-        $penutup->user_id = $user->id;
-        $penutup->created_at=\Carbon\Carbon::now();
-        $penutup->save();
 
         return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
     }
@@ -163,20 +126,12 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // $this->validate($request,[
-        //     'no_nip' => 'required|min:12',
-        // ]);
-
         $user=User::find($id);
         $user->name=$request->name;
         $user->gelar=$request->gelar;
-        // $user->email=$request->email;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
-        // $user->tempat_lahir=$request->tempat_lahir;
-        // $user->tanggal_lahir=$request->tanggal_lahir;
-        // $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
         $user->status=$request->status;
         $user->updated_at=\Carbon\Carbon::now();

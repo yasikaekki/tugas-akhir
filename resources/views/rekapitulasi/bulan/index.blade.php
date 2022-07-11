@@ -104,7 +104,7 @@
                                         </div>     
                                     </form>
 
-                                    @if(is_null($keywoard->rekapitulasi_surat_id))
+                                    @if(is_null($keywoard->buat_surat_id))
                                     <h3 class="fw-bold text-center mb-3">Tahun {{$keywoard->list_tahun}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
@@ -117,7 +117,7 @@
                                     </table>
                                     <h3 class="text-center text-warning fw-bold mt-3">Tidak menemukan data apapun</h3>
                                     @else
-                                    <h3 class="fw-bold text-center mb-3">Tahun {{date('Y')}}</h3>   
+                                    <h3 class="fw-bold text-center mb-3">Tahun {{$keywoard->list_tahun}}</h3>   
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr class="table-secondary text-center">
@@ -132,17 +132,79 @@
                                         <tr>
                                             <td>{{$no++}}</td>
                                             <td>{{$rekaps->nama_bulan}}</td>
-                                            @if($rekaps->tahun_satu != 0 || $rekaps->tahun_dua != 0 || $rekaps->tahun_tiga != 0)
-                                                @if($year == 1)
-                                                <td>{{$rekaps->tahun_satu}}</td>
-                                                @elseif($year == 2)
-                                                <td>{{$rekaps->tahun_dua}}</td>
-                                                @elseif($year == 3)
-                                                <td>{{$rekaps->tahun_tiga}}</td>
+                                            @if($keywoard->id == 1)
+                                            <td>
+                                                @if($rekaps->tahun_satu == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_satu}}
                                                 @endif
-                                            @else
-                                            <td>Belum ada surat yang dibuat</td>
-                                            @endif                               
+                                            </td> 
+                                            @elseif($keywoard->id == 2)  
+                                            <td>
+                                                @if($rekaps->tahun_dua == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_dua}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 3)  
+                                            <td>
+                                                @if($rekaps->tahun_tiga == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_tiga}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 4)  
+                                            <td>
+                                                @if($rekaps->tahun_empat == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_empat}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 5)  
+                                            <td>
+                                                @if($rekaps->tahun_lima == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_lima}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 6)  
+                                            <td>
+                                                @if($rekaps->tahun_enam == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_enam}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 7)  
+                                            <td>
+                                                @if($rekaps->tahun_tujuh == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_tujuh}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 8)  
+                                            <td>
+                                                @if($rekaps->tahun_delapan == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_delapan}}
+                                                @endif
+                                            </td> 
+                                            @elseif($keywoard->id == 9)  
+                                            <td>
+                                                @if($rekaps->tahun_sembilan == null)   
+                                                Belum ada surat yang dikeluarkan
+                                                @else
+                                                {{$rekaps->tahun_sembilan}}
+                                                @endif
+                                            </td> 
+                                            @endif                   
                                         </tr>
                                         @endforeach
                                     </tbody>

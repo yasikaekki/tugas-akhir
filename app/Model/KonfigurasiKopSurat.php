@@ -9,7 +9,7 @@ class KonfigurasiKopSurat extends Model
     //
    public function cetak_surat()
    {
-       return $this->hasMany('App\Model\CetakSurat');
+       return $this->hasMany('App\Model\BuatSurat');
    }
 
 }

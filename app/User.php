@@ -42,8 +42,4 @@ class User extends Authenticatable
     public function buat_surat(){
         return $this->hasMany('App\Model\BuatSurat');
     }
-    
-    public function cetak_surat(){
-        return $this->hasMany('App\Model\CetakSurat');
-    }
 }

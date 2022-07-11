@@ -6,17 +6,13 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use App\Model\KonfigurasiKopSurat;
 use App\Model\BuatSurat;
 use App\Model\TubuhSurat;
-use App\Model\CetakSurat;
 use App\Model\LaporanSurat;
 use App\NomorSurat;
 use App\User;
 use App\Bulan;
 use App\Tahun;
-use Auth;
-use DB;
 
 class ListSuratController extends Controller
 {
@@ -110,15 +106,12 @@ class ListSuratController extends Controller
 
         $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
         $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
-        $upt = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop3 = "UPT KEWIRAUSAHAAN DAN INKUBATOR BISNIS TEKNOLOGI";
-        $kop4 = KonfigurasiKopSurat::find($upt);
-        $kop5 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop6 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
-        $cetak = CetakSurat::find($data);
+        $kop3 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
+        $kop4 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
+        $cetak = BuatSurat::find($data);
 
 
-        return view('list-surat.show', compact('judul','laporans','cetak', 'data','kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
+        return view('list-surat.show', compact('judul','laporans','cetak', 'data','kop1', 'kop2', 'kop3','kop4'));
     }
 
     /**
@@ -176,6 +169,7 @@ class ListSuratController extends Controller
         $surat->nomor_surat_id=$request->nomor_surat_id;
         $kodesurat = $surat->id.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
         $surat->no_surat=$kodesurat;
+        $surat->tubuh_surat_id = $request->tubuh_surat_id;
         $surat->lampiran=$request->lampiran;
         $surat->perihal=$request->perihal;
         $surat->kepada=$request->kepada;
@@ -261,16 +255,11 @@ class ListSuratController extends Controller
         $newnomor->save();
         
         $agenda = TubuhSurat::find($id); 
-        $agenda->buat_surat_id = $nomor->id;
         $agenda->tanggal = $request->tanggal;
         $agenda->acara = $request->acara;
         $agenda->jam = $request->jam;
         $agenda->tempat = $request->tempat;
         $agenda->save();
-
-        $cetak = CetakSurat::find($id);
-        $cetak->tubuh_surat_id = $request->tubuh_surat_id;
-        $cetak->save();
 
         return redirect()->route('list-surat.index')->with('sukses', 'Surat berhasil diperbarui');
     }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\RekapitulasiSurat;
 use App\NomorSurat;
 use App\Tahun;
 use App\Bulan;
@@ -29,43 +28,65 @@ class RekapitulasiSuratController extends Controller
         $array = array(2022=>1,2,3,4,5,6,7,8,9);
         $year = $array[date('Y')];
         $keywoard = Tahun::find($year);
-
         $arrdata = array();
         $arrbulan = array();
         foreach ($listbulan as $rekaps) {
             $arrbulan[] = $rekaps->nama_bulan;
-            if ($year == 1) {
+            if ($keywoard->id == 1) {
                 $arrdata[] = $rekaps->tahun_satu;
-            }elseif ($year == 2) {
+            }elseif ($keywoard->id == 2) {
                 $arrdata[] = $rekaps->tahun_dua;
-            }elseif ($year == 3) {
+            }elseif ($keywoard->id == 3) {
                 $arrdata[] = $rekaps->tahun_tiga;
-            }elseif ($year == 4) {
+            }elseif ($keywoard->id == 4) {
                 $arrdata[] = $rekaps->tahun_empat;
-            }elseif ($year == 5) {
+            }elseif ($keywoard->id == 5) {
                 $arrdata[] = $rekaps->tahun_lima;
-            }elseif ($year == 6) {
+            }elseif ($keywoard->id == 6) {
                 $arrdata[] = $rekaps->tahun_enam;
-            }elseif ($year == 7) {
+            }elseif ($keywoard->id == 7) {
                 $arrdata[] = $rekaps->tahun_tujuh;
-            }elseif ($year == 8) {
+            }elseif ($keywoard->id == 8) {
                 $arrdata[] = $rekaps->tahun_delapan;
-            }elseif ($year == 9) {
+            }elseif ($keywoard->id == 9) {
                 $arrdata[] = $rekaps->tahun_sembilan;
             }
-            
         }
 
         if($request->fitur_filter){
             $keywoard = Tahun::find($kata);
             $tahun = Tahun::all()->where('id', $request->fitur_filter);
+            $arrdata = array();
+            $arrbulan = array();
+            foreach ($listbulan as $rekaps) {
+                $arrbulan[] = $rekaps->nama_bulan;
+                if ($keywoard->id == 1) {
+                    $arrdata[] = $rekaps->tahun_satu;
+                }elseif ($keywoard->id == 2) {
+                    $arrdata[] = $rekaps->tahun_dua;
+                }elseif ($keywoard->id == 3) {
+                    $arrdata[] = $rekaps->tahun_tiga;
+                }elseif ($keywoard->id == 4) {
+                    $arrdata[] = $rekaps->tahun_empat;
+                }elseif ($keywoard->id == 5) {
+                    $arrdata[] = $rekaps->tahun_lima;
+                }elseif ($keywoard->id == 6) {
+                    $arrdata[] = $rekaps->tahun_enam;
+                }elseif ($keywoard->id == 7) {
+                    $arrdata[] = $rekaps->tahun_tujuh;
+                }elseif ($keywoard->id == 8) {
+                    $arrdata[] = $rekaps->tahun_delapan;
+                }elseif ($keywoard->id == 9) {
+                    $arrdata[] = $rekaps->tahun_sembilan;
+                }
+            }
             if($keywoard->rekapitulasi_surat_id == null) {
                 $tahun =Tahun::all();
             }else {
                 $tahun =Tahun::all();
             }
         }
-        return view('rekapitulasi.bulan.index', compact('no','arrdata','arrbulan' ,'year','judul','listbulan', 'keywoard','tahun'));
+        return view('rekapitulasi.bulan.index', compact('no','arrdata','arrbulan' ,'judul','listbulan', 'keywoard','tahun'));
     }
 
     public function jenis_surat(Request $request) 
@@ -82,23 +103,23 @@ class RekapitulasiSuratController extends Controller
         $arrnomor = array();
         $arrjenis = array();
         foreach ($nomor as $nomors) {
-            if ($year == 1) {
+            if ($keywoard->id == 1) {
                 $arrnomor[] = $nomors->tahun_satu;
-            }elseif ($year == 2) {
+            }elseif ($keywoard->id == 2) {
                 $arrnomor[] = $nomors->tahun_dua;
-            }elseif ($year == 3) {
+            }elseif ($keywoard->id == 3) {
                 $arrnomor[] = $nomors->tahun_tiga;
-            }elseif ($year == 4) {
+            }elseif ($keywoard->id == 4) {
                 $arrnomor[] = $nomors->tahun_empat;
-            }elseif ($year == 5) {
+            }elseif ($keywoard->id == 5) {
                 $arrnomor[] = $nomors->tahun_lima;
-            }elseif ($year == 6) {
+            }elseif ($keywoard->id == 6) {
                 $arrnomor[] = $nomors->tahun_enam;
-            }elseif ($year == 7) {
+            }elseif ($keywoard->id == 7) {
                 $arrnomor[] = $nomors->tahun_tujuh;
-            }elseif ($year == 8) {
+            }elseif ($keywoard->id == 8) {
                 $arrnomor[] = $nomors->tahun_delapan;
-            }elseif ($year == 9) {
+            }elseif ($keywoard->id == 9) {
                 $arrnomor[] = $nomors->tahun_sembilan;
             }
             $arrjenis[] = $nomors->jenis_surat;
@@ -107,13 +128,37 @@ class RekapitulasiSuratController extends Controller
         if($request->fitur_filter){
             $keywoard = Tahun::find($kata);
             $tahun = Tahun::all()->where('id', $request->fitur_filter);
+            $arrnomor = array();
+            $arrjenis = array();
+            foreach ($nomor as $nomors) {
+                if ($keywoard->id == 1) {
+                    $arrnomor[] = $nomors->tahun_satu;
+                }elseif ($keywoard->id == 2) {
+                    $arrnomor[] = $nomors->tahun_dua;
+                }elseif ($keywoard->id == 3) {
+                    $arrnomor[] = $nomors->tahun_tiga;
+                }elseif ($keywoard->id == 4) {
+                    $arrnomor[] = $nomors->tahun_empat;
+                }elseif ($keywoard->id == 5) {
+                    $arrnomor[] = $nomors->tahun_lima;
+                }elseif ($keywoard->id == 6) {
+                    $arrnomor[] = $nomors->tahun_enam;
+                }elseif ($keywoard->id == 7) {
+                    $arrnomor[] = $nomors->tahun_tujuh;
+                }elseif ($keywoard->id == 8) {
+                    $arrnomor[] = $nomors->tahun_delapan;
+                }elseif ($keywoard->id == 9) {
+                    $arrnomor[] = $nomors->tahun_sembilan;
+                }
+                $arrjenis[] = $nomors->jenis_surat;
+            }
             if($keywoard->rekapitulasi_surat_id == null) {
                 $tahun =Tahun::all();
             }else {
                 $tahun =Tahun::all();
             }
         } 
-        return view('rekapitulasi.jenis_surat.index', compact('no','year' ,'arrjenis','arrnomor','judul','nomor','keywoard','tahun'));
+        return view('rekapitulasi.jenis_surat.index', compact('no','arrjenis','arrnomor','judul','nomor','keywoard','tahun'));
     }
 
     /**

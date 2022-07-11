@@ -124,37 +124,37 @@
                                         @foreach($laporan as $laporans)
                                         <tr class="text-center hasil-filter">
                                             <td>{{$no++}}.</td>
-                                            <td>{{$laporans->cetak_surat->buat_surat->no_surat}}</td>
-                                            <td>{{$laporans->cetak_surat->buat_surat->nomor_surat->jenis_surat}}</td>  
-                                            <td>{{$laporans->cetak_surat->buat_surat->lampiran}}</td>
-                                            <td>{{$laporans->cetak_surat->buat_surat->perihal}}</td>
-                                            @if($laporans->cetak_surat->tubuh_surat_id != null)  
-                                            <td>{{$laporans->cetak_surat->tubuh_surat->acara}}</td>  
+                                            <td>{{$laporans->buat_surat->no_surat}}</td>
+                                            <td>{{$laporans->buat_surat->nomor_surat->jenis_surat}}</td>  
+                                            <td>{{$laporans->buat_surat->lampiran}}</td>
+                                            <td>{{$laporans->buat_surat->perihal}}</td>
+                                            @if($laporans->tubuh_surat_id != null)  
+                                            <td>{{$laporans->tubuh_surat->acara}}</td>  
                                             @else
                                             <td>Tidak ada agenda</td>
                                             @endif
-                                            @if(strlen($laporans->cetak_surat->buat_surat->isi_pembuka) > 70)
+                                            @if(strlen($laporans->buat_surat->isi_pembuka) > 70)
                                             <td>
-                                                {{substr($laporans->cetak_surat->buat_surat->isi_pembuka,0,70)}}
+                                                {{substr($laporans->buat_surat->isi_pembuka,0,70)}}
                                                 <span class="read-more-show hide_content">... Read More</i></span>
-                                                <span class="read-more-content"> {{substr($laporans->cetak_surat->buat_surat->isi_pembuka,70,strlen($laporans->cetak_surat->buat_surat->isi_pembuka))}} 
+                                                <span class="read-more-content">{{substr($laporans->buat_surat->isi_pembuka,70,strlen($laporans->buat_surat->isi_pembuka))}} 
                                                 <span class="read-more-hide hide_content">Read Less</span> </span>
                                             </td>
                                             @else  
                                             <td>
-                                                {{$laporans->cetak_surat->buat_surat->isi_pembuka}}
+                                                {{$laporans->buat_surat->isi_pembuka}}
                                             </td> 
                                             @endif 
-                                            @if(strlen($laporans->cetak_surat->buat_surat->isi_penutup) > 70)
+                                            @if(strlen($laporans->buat_surat->isi_penutup) > 70)
                                             <td>
-                                                {{substr($laporans->cetak_surat->buat_surat->isi_penutup,0,70)}}
+                                                {{substr($laporans->buat_surat->isi_penutup,0,70)}}
                                                 <span class="read-more-show hide_content">... Read More</i></span>
-                                                <span class="read-more-content"> {{substr($laporans->cetak_surat->buat_surat->isi_penutup,70,strlen($laporans->cetak_surat->buat_surat->isi_penutup))}} 
+                                                <span class="read-more-content">{{substr($laporans->buat_surat->isi_penutup,70,strlen($laporans->buat_surat->isi_penutup))}} 
                                                 <span class="read-more-hide hide_content">Read Less</span> </span>
                                             </td> 
                                             @else
                                             <td>
-                                                {{$laporans->cetak_surat->buat_surat->isi_penutup}}
+                                                {{$laporans->buat_surat->isi_penutup}}
                                             </td>
                                             @endif
                                             {{-- <td>{{$laporans->cetak_surat->created_at->translatedFormat('l, d F Y')}}</td>       --}}

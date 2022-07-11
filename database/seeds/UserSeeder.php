@@ -32,22 +32,18 @@ class UserSeeder extends Seeder
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->save();
 
+        $kop = new KonfigurasiKopSurat();
+        $kop->created_at = \Carbon\Carbon::now();
+        $kop->save();
+
         $surat = new BuatSurat;
+        $surat->user_id = $user->id;
+        $surat->konfigurasi_kop_surat_id = $kop->id;
         $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
 
         $surat = new TubuhSurat();
         $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
-
-        $kop = new KonfigurasiKopSurat();
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
-
-        $cetak = new CetakSurat();
-        $cetak->user_id = $user->id;
-        $cetak->konfigurasi_kop_surat_id = $kop->id;
-        $cetak->created_at = \Carbon\Carbon::now();
-        $cetak->save();
     }
 }

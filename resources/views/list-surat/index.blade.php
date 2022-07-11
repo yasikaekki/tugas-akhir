@@ -110,20 +110,20 @@
                                         @foreach($laporan as $laporans)
                                         <tr class="text-center">
                                             <td>{{$no++}}.</td>
-                                            <td>{{$laporans->cetak_surat->buat_surat->no_surat}}</td>
-                                            <td>{{$laporans->cetak_surat->created_at->translatedFormat('l, d F Y')}}</td>  
-                                            <td>{{$laporans->cetak_surat->user->name}}, {{$laporans->cetak_surat->user->gelar}} Selaku Ketua UPT KIBT Poliwangi</td> 
-                                            <td>{{$laporans->cetak_surat->buat_surat->kepada}}</td>
+                                            <td>{{$laporans->buat_surat->no_surat}}</td>
+                                            <td>{{$laporans->buat_surat->created_at->translatedFormat('l, d F Y')}}</td>  
+                                            <td>{{$laporans->buat_surat->user->name}}, {{$laporans->buat_surat->user->gelar}} Selaku Ketua UPT KIBT Poliwangi</td> 
+                                            <td>{{$laporans->buat_surat->kepada}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$laporans->id}}"><i class="bi bi-pencil-square"></i> Ubah</button>
-                                                <a href="{{route('list-surat.show', Crypt::encrypt($laporans->id))}}" class="btn btn-success"><i class="bi bi-envelope-open-fill"></i> Lihat</a>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$laporans->buat_surat->id}}"><i class="bi bi-pencil-square"></i> Ubah</button>
+                                                <a href="{{route('list-surat.show', Crypt::encrypt($laporans->buat_surat->id))}}" class="btn btn-success"><i class="bi bi-envelope-open-fill"></i> Lihat</a>
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade " id="exampleModal{{$laporans->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade " id="exampleModal{{$laporans->buat_surat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form action="{{route('list-surat.update',$laporans->id)}}" method="post">
+                                                    <form action="{{route('list-surat.update',$laporans->buat_surat->id)}}" method="post">
                                                         @method('PATCH')
                                                         @csrf
                                                         <div class="modal-header">
@@ -139,7 +139,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label>Nomor Surat</label>
-                                                                                    <input type="text" placeholder="Nomor Surat" value="{{$laporans->cetak_surat->buat_surat->no_surat}}" name="perihal" class="form-control" disabled>
+                                                                                    <input type="text" placeholder="Nomor Surat" value="{{$laporans->buat_surat->no_surat}}" name="perihal" class="form-control" disabled>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -147,8 +147,8 @@
                                                                                     <label>Jenis Surat</label>
                                                                                     <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
                                                                                     @foreach($nomor as $nomors)
-                                                                                        @if($laporans->cetak_surat->buat_surat->nomor_surat_id == $nomors->id)
-                                                                                        <option value="{{$laporans->cetak_surat->buat_surat->nomor_surat_id}}" selected>{{$nomors->id}}. {{$laporans->cetak_surat->buat_surat->nomor_surat->jenis_surat}}</option>
+                                                                                        @if($laporans->buat_surat->nomor_surat_id == $nomors->id)
+                                                                                        <option value="{{$laporans->buat_surat->nomor_surat_id}}" selected>{{$nomors->id}}. {{$laporans->buat_surat->nomor_surat->jenis_surat}}</option>
                                                                                         <option hidden></option>
                                                                                         @else
                                                                                         <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
@@ -162,43 +162,43 @@
                                                                                     <div class="form-group mb-3">
                                                                                         <label>Lampiran</label>
                                                                                         <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">                                                   
-                                                                                            @if($laporans->cetak_surat->buat_surat->lampiran == "-")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @if($laporans->buat_surat->lampiran == "-")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
-                                                                                            @elseif($laporans->cetak_surat->buat_surat->lampiran == "1")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @elseif($laporans->buat_surat->lampiran == "1")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
-                                                                                            @elseif($laporans->cetak_surat->buat_surat->lampiran == "2")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @elseif($laporans->buat_surat->lampiran == "2")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
-                                                                                            @elseif($laporans->cetak_surat->buat_surat->lampiran == "3")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @elseif($laporans->buat_surat->lampiran == "3")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
-                                                                                            @elseif($laporans->cetak_surat->buat_surat->lampiran == "4")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @elseif($laporans->buat_surat->lampiran == "4")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="5">5</option>
-                                                                                            @elseif($laporans->cetak_surat->buat_surat->lampiran == "5")
-                                                                                            <option value="{{$laporans->cetak_surat->buat_surat->lampiran}}" selected>{{$laporans->cetak_surat->buat_surat->lampiran}}</option>
+                                                                                            @elseif($laporans->buat_surat->lampiran == "5")
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
@@ -219,11 +219,11 @@
                                                                                     <div class="form-group mb-3">
                                                                                         <label>Agenda</label>
                                                                                         <select class="form-select form-control mb-3 @error('tubuh_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="tubuh_surat_id">
-                                                                                            @if($laporans->cetak_surat->tubuh_surat_id == null)
-                                                                                            <option value="{{$laporans->id}}">Acara</option>
+                                                                                            @if($laporans->buat_surat->tubuh_surat_id == null)
+                                                                                            <option value="{{$laporans->buat_surat->id}}">Acara</option>
                                                                                             <option value="" selected>Tidak Ada Acara</option>
-                                                                                            @elseif($laporans->cetak_surat->tubuh_surat_id != null)
-                                                                                            <option value="{{$laporans->id}}" selected>Acara</option>
+                                                                                            @else
+                                                                                            <option value="{{$laporans->buat_surat->id}}" selected>Acara</option>
                                                                                             <option value="">Tidak Ada Acara</option>
                                                                                             @endif
                                                                                         </select>
@@ -238,7 +238,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Perihal</label>
-                                                                                    <input type="text" placeholder="Perihal" value="{{$laporans->cetak_surat->buat_surat->perihal}}" name="perihal" class="form-control @error('perihal') is-invalid @enderror">
+                                                                                    <input type="text" placeholder="Perihal" value="{{$laporans->buat_surat->perihal}}" name="perihal" class="form-control @error('perihal') is-invalid @enderror">
                                                                                     @error('perihal')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -249,7 +249,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Kepada</label>
-                                                                                    <input type="text" name="kepada" value="{{$laporans->cetak_surat->buat_surat->kepada}}" class="form-control @error('kepada') is-invalid @enderror">
+                                                                                    <input type="text" name="kepada" value="{{$laporans->buat_surat->kepada}}" class="form-control @error('kepada') is-invalid @enderror">
                                                                                     @error('kepada')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -257,11 +257,11 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            @if($laporans->cetak_surat->tubuh_surat_id != null)
+                                                                            @if($laporans->buat_surat->tubuh_surat_id != null)
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Hari, Tanggal</label>
-                                                                                    <input type="date" min="{{date('Y-m-d')}}" name="tanggal" value="{{$laporans->cetak_surat->tubuh_surat->tanggal}}" class="form-control @error('tanggal') is-invalid @enderror">
+                                                                                    <input type="date" min="{{date('Y-m-d')}}" name="tanggal" value="{{$laporans->buat_surat->tubuh_surat->tanggal}}" class="form-control @error('tanggal') is-invalid @enderror">
                                                                                     @error('tanggal')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -272,7 +272,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Jam</label>
-                                                                                    <input type="time" value="{{$laporans->cetak_surat->tubuh_surat->jam}}" name="jam" class="form-control @error('jam') is-invalid @enderror">
+                                                                                    <input type="time" value="{{$laporans->buat_surat->tubuh_surat->jam}}" name="jam" class="form-control @error('jam') is-invalid @enderror">
                                                                                     @error('jam')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -283,7 +283,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Acara</label>
-                                                                                    <input type="text" placeholder="Acara" value="{{$laporans->cetak_surat->tubuh_surat->acara}}" name="acara" class="form-control @error('acara') is-invalid @enderror">
+                                                                                    <input type="text" placeholder="Acara" value="{{$laporans->buat_surat->tubuh_surat->acara}}" name="acara" class="form-control @error('acara') is-invalid @enderror">
                                                                                     @error('acara')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -294,7 +294,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label>Tempat</label>
-                                                                                    <input type="text" placeholder="Tempat" value="{{$laporans->cetak_surat->tubuh_surat->tempat}}" name="tempat" class="form-control @error('tempat') is-invalid @enderror">
+                                                                                    <input type="text" placeholder="Tempat" value="{{$laporans->buat_surat->tubuh_surat->tempat}}" name="tempat" class="form-control @error('tempat') is-invalid @enderror">
                                                                                     @error('tempat')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -306,7 +306,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label>Isi Pembuka</label>
-                                                                                    <textarea type="text" placeholder="Isi Pembuka" name="isi_pembuka" style="height: 120px;" class="form-control @error('isi_pembuka') is-invalid @enderror">{{$laporans->cetak_surat->buat_surat->isi_pembuka}}</textarea>
+                                                                                    <textarea type="text" placeholder="Isi Pembuka" name="isi_pembuka" style="height: 120px;" class="form-control @error('isi_pembuka') is-invalid @enderror">{{$laporans->buat_surat->isi_pembuka}}</textarea>
                                                                                     @error('isi_pembuka')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>
@@ -319,7 +319,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label>Isi Penutup</label>
-                                                                                    <textarea type="text" placeholder="Isi Penutup" name="isi_penutup" style="height: 120px;" class="form-control @error('isi_penutup') is-invalid @enderror">{{$laporans->cetak_surat->buat_surat->isi_penutup}}</textarea>
+                                                                                    <textarea type="text" placeholder="Isi Penutup" name="isi_penutup" style="height: 120px;" class="form-control @error('isi_penutup') is-invalid @enderror">{{$laporans->buat_surat->isi_penutup}}</textarea>
                                                                                     @error('isi_penutup')
                                                                                         <span class="invalid-feedback" role="alert">
                                                                                             <strong>{{ $message }}</strong>

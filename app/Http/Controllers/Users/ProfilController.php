@@ -88,10 +88,16 @@ class ProfilController extends Controller
         $this->validate($request, [
             'gambar_profil'=> 'required',
             'gambar_ttd'=> 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
         ],
         [
             'gambar_profil.required'=> 'Foto profil harus diisi',
             'gambar_ttd.required'=> 'Foto ttd harus diisi',
+            'tempat_lahir.required'=> 'Tempat lahir harus diisi',
+            'tanggal_lahir.required'=> 'Tanggal lahir harus diisi',
+            'jenis_kelamin.required'=> 'Jenis kelamin harus diisi',
         ]
     );
             
@@ -112,7 +118,7 @@ class ProfilController extends Controller
 
         $user->gelar=$request->gelar;
         $user->tempat_lahir=$request->tempat_lahir;
-        $user->tanggal_lahir= \Carbon\Carbon::parse($request->tanggal_lahir)->translatedFormat("d F Y");
+        $user->tanggal_lahir= $request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
 

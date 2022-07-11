@@ -38,12 +38,24 @@
                             {{session()->get('sukses')}}
                         </div>
                         @endif
+                        @if(Auth::user()->gambar_ttd == null || $kop->lokasi_foto == null)
+                        <div class="col-lg-7">
+                            <div class="card mt-4 p-5">
+                              <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                  <h1 class="display-4 text-warning"><i class="bi bi-emoji-frown"></i></h1>
+                                </div>
+                                <p class="fs-5 text-center">Mohon maaf<br>Sepertinya belum melengkapi profil atau kop surat</p>
+                                <div class="d-grid gap-2 d-md-flex mx-auto justify-content-center">
+                                    <a href="{{route('profil.index')}}" class="btn btn-primary"><i class="bi bi-person-fill"></i> Profil</a>
+                                    <a href="{{route('konfigurasi.index')}}" class="btn btn-primary"><i class="nav-icon fas fa-solid fa-gear"></i> Kop Surat</a>
+                                </div>
+                              </div> 
+                            </div>
+                        </div>
+                        @else
                         <div class="col-lg-8">
-                            {{-- @if($)
-                            <form action="{{route('nomor.store')}}" method="POST">
-                                @csrf
-                            @else     --}}
-                            <form action="{{route('surat.update', $noid)}}" method="POST">
+                            <form action="{{route('surat.update', $surat->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
                                 <div class="card border-top-info p-4">
@@ -51,8 +63,7 @@
                                         <div class="row d-flex">
                                             <div class="col-sm-6">
                                                 <label>Nomor Surat</label>
-                                                <input type="text" value="{{$surat->no_surat}}" placeholder="Nomor Surat" class="form-control mb-3" disabled>            
-                                                
+                                                <input type="text" value="{{$surat->no_surat}}" placeholder="Nomor Surat" class="form-control mb-3" disabled>                                                           
                                             </div>
 
                                             <div class="col-sm-6">
@@ -152,20 +163,17 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group mb-3">
                                                     <label>Agenda</label>
-                                                    <select class="form-select form-control mb-3 @error('buat_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="buat_surat_id">                                                   
-                                                        @if($cetak->tubuh_surat_id == null)
+                                                    <select class="form-select form-control mb-3 @error('tubuh_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="tubuh_surat_id">                                                   
+                                                        @if($surat->tubuh_surat_id == null)
                                                         <option selected hidden disabled>Pilih</option>
-                                                        <option value="{{$noid}}">Acara</option>
+                                                        <option value="{{$surat->id}}">Acara</option>
                                                         <option value="">Tidak Ada Acara</option>
-                                                        @elseif($cetak->tubuh_surat_id == $noid)
-                                                        <option value="{{$noid}}" selected>Acara</option>
+                                                        @else
+                                                        <option value="{{$surat->id}}" selected>Acara</option>
                                                         <option value="">Tidak Ada Acara</option>
-                                                        @elseif($cetak->id != null)
-                                                        <option value="{{$noid}}">Acara</option>
-                                                        <option value="" selected>Tidak Ada Acara</option>
                                                         @endif
                                                     </select>
-                                                    @error('buat_surat_id')
+                                                    @error('tubuh_surat_id')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -232,7 +240,7 @@
                                             <button class="col-md-3 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
                                             @endif
 
-                                            @if($cetak->tubuh_surat_id == null)
+                                            @if($surat->tubuh_surat_id == null)
                                             <a href="{{route('surat-cetak.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                             @else
                                             <a href="{{route('surat-agenda.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
@@ -242,6 +250,7 @@
                                 </div>
                             </form>
                         </div>
+                        @endif
                     </div>
                     <!-- /.row -->
                     </div>

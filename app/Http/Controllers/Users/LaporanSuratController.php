@@ -33,9 +33,10 @@ class LaporanSuratController extends Controller
         $bulan = Bulan::all();
         $tahun = Tahun::all();
         // if ($request->fitur_cari) {
-        //     $laporan = LaporanSurat::query();
-        //     // $laporan = DB::table('laporan_surats');
-        //     $laporan->cetak_surat->buat_surat->nomor_surat->where('jenis_surat', 'like', '%'.$request->fitur_cari.'%');
+        //     foreach ($laporan as $laporans) {
+        //         $laporan[] = $laporans->id;
+        //     }
+        //     $laporan->buat_surat->nomor_surat->where('jenis_surat', 'like', '%'.$request->fitur_cari.'%');
         //     // ->orWhere('perihal','like','%'.$request->fitur_cari.'%')
         //     // ->orWhere('agenda','like','%'.$request->fitur_cari.'%')
         //     // ->orderBy('created_at','desc')

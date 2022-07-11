@@ -10,12 +10,9 @@ use App\Model\BuatSurat;
 use App\Model\LaporanSurat;
 use App\Model\TubuhSurat;
 use App\NomorSurat;
-use App\Model\CetakSurat;
 use App\Bulan;
 use App\Tahun;
-use App\User;
 use Auth;
-use PDF;
 use DB;
 
 class CetakSuratController extends Controller
@@ -30,38 +27,15 @@ class CetakSuratController extends Controller
         //
         $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
         $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
-        $upt = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop3 = "UPT KEWIRAUSAHAAN DAN INKUBATOR BISNIS TEKNOLOGI";
-        $kop4 = KonfigurasiKopSurat::find($upt);
-        $kop5 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop6 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
+        $kop3 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
+        $kop4 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
 
         $judul = 'Cetak Surat';
-        $cetaksurat = CetakSurat::all();
         $surat = BuatSurat::all();
-        $data = count($cetaksurat);
-        $cetak = CetakSurat::find($data);
+        $data = count($surat);
+        $cetak = BuatSurat::find($data);
 
-        return view('cetak.index', compact('judul', 'cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
-    }
-
-    public function printme(){
-        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
-        $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
-        $upt = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop3 = "UPT KEWIRAUSAHAAN DAN INKUBATOR BISNIS TEKNOLOGI";
-        $kop4 = KonfigurasiKopSurat::find($upt);
-        $kop5 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop6 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
-
-        $judul = 'Cetak Surat';
-        $cetaksurat = CetakSurat::all();
-        $data = count($cetaksurat);
-        $cetak = CetakSurat::find($data);
-        return view('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
-        // $url = PDF::loadview('cetak.print',compact('cetak', 'data', 'kop1', 'kop2', 'kop3','kop4', 'kop5', 'kop6'));
-        // $url->setPaper('A4','potrait');
-        // return $url->stream($data->buat_surat->no_surat.$data->buat_surat->nomor_surat->jenis_surat.'.pdf');
+        return view('cetak.index', compact('judul', 'cetak', 'kop1', 'kop2', 'kop3','kop4'));
     }
 
     /**
@@ -123,17 +97,6 @@ class CetakSuratController extends Controller
         $array= array(2022=>1,2,3,4,5,6,7,8,9);
         $tahun = $array[date('Y')];
         $bulan = date('n');
-
-        $cetak = CetakSurat::find($id);
-        $cetak->created_at = \Carbon\Carbon::now();
-        $cetak->save();
-
-        $rekap = new RekapitulasiSurat();
-        $rekap->cetak_surat_id = $cetak->id;
-        $rekap->save();
-
-        $surat = new BuatSurat();
-        $surat->save();
 
         $tubuh = new TubuhSurat();
         $tubuh->save();
@@ -219,39 +182,75 @@ class CetakSuratController extends Controller
         
         $nomor->save();
 
-        $cetakbaru = new CetakSurat();
-        $cetakbaru->user_id = Auth::id();
-        $cetakbaru->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $cetakbaru->save();
+        $surat = new BuatSurat();
+        $surat->user_id = Auth::id();
+        $surat->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $surat->save();
 
         $laporan = new LaporanSurat();
-        $laporan->cetak_surat_id = $cetak->id;
+        $laporan->buat_surat_id = $kode->id;
         $laporan->save();
 
         $listbulan = Bulan::find($bulan);
         if ($tahun == 1) {
-            $listbulan->tahun_satu = $rekap->id;
+            if ($listbulan->tahun_satu ==null) {
+                $listbulan->tahun_satu = 1;
+            }else {
+                $listbulan->tahun_satu = $listbulan->tahun_satu+1;
+            }
         }elseif ($tahun == 2) {
-            $listbulan->tahun_dua = $rekap->id;
+            if ($listbulan->tahun_dua ==null) {
+                $listbulan->tahun_dua = 1;
+            }else {
+                $listbulan->tahun_dua = $listbulan->tahun_dua+1;
+            }
         }elseif ($tahun == 3) {
-            $listbulan->tahun_tiga = $rekap->id;
+            if ($listbulan->tahun_tiga ==null) {
+                $listbulan->tahun_tiga = 1;
+            }else {
+                $listbulan->tahun_tiga = $listbulan->tahun_dua+1;
+            }
         }elseif ($tahun == 4) {
-            $listbulan->tahun_empat = $rekap->id;
+            if ($listbulan->tahun_empat ==null) {
+                $listbulan->tahun_empat = 1;
+            }else {
+                $listbulan->tahun_empat = $listbulan->tahun_empat+1;
+            };
         }elseif ($tahun == 5) {
-            $listbulan->tahun_lima = $rekap->id;
+            if ($listbulan->tahun_lima ==null) {
+                $listbulan->tahun_lima = 1;
+            }else {
+                $listbulan->tahun_lima = $listbulan->tahun_lima+1;
+            }
         }elseif ($tahun == 6) {
-            $listbulan->tahun_enam = $rekap->id;
+            if ($listbulan->tahun_enam ==null) {
+                $listbulan->tahun_enam = 1;
+            }else {
+                $listbulan->tahun_enam = $listbulan->tahun_enam+1;
+            }
         }elseif ($tahun == 7) {
-            $listbulan->tahun_tujuh = $rekap->id;
+            if ($listbulan->tahun_tujuh ==null) {
+                $listbulan->tahun_tujuh = 1;
+            }else {
+                $listbulan->tahun_tujuh = $listbulan->tahun_tujuh+1;
+            }
         }elseif ($tahun == 8) {
-            $listbulan->tahun_delapan = $rekap->id;
+            if ($listbulan->tahun_delapan ==null) {
+                $listbulan->tahun_delapan = 1;
+            }else {
+                $listbulan->tahun_delapan = $listbulan->tahun_delapan+1;
+            }
         }elseif ($tahun == 9) {
-            $listbulan->tahun_sembilan = $rekap->id;
+            if ($listbulan->tahun_sembilan ==null) {
+                $listbulan->tahun_sembilan = 1;
+            }else {
+                $listbulan->tahun_sembilan = $listbulan->tahun_sembilan+1;
+            }
         }
         $listbulan->save();
 
         $listtahun = Tahun::find($tahun);
-        $listtahun->rekapitulasi_surat_id = $rekap->id;
+        $listtahun->buat_surat_id = $laporan->id;
         $listtahun->save();
 
         return redirect()->route('home')->with('sukses', 'Surat berhasil dicetak');

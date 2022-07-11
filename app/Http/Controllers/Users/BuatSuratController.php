@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Model\KonfigurasiKopSurat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use App\Model\KonfigurasiKopSurat;
 use App\Model\BuatSurat;
-use App\Model\TubuhSurat;
-use App\Model\CetakSurat;
 use App\NomorSurat;
-use App\User;
-use Auth;
 use DB;
 
 class BuatSuratController extends Controller
@@ -43,17 +39,15 @@ class BuatSuratController extends Controller
         $pembuka = Arr::random($arrpembuka);
         $penutup = Arr::random($arrpenutup);
 
-        $uid = Auth::id();
         $judul = 'Buat Surat';
         $nomor= NomorSurat::all();
         $laporan = BuatSurat::all();
         $noid = count($laporan);
         $surat = BuatSurat::find($noid);
-        $cetakall = CetakSurat::all();
-        $cetakid = count($cetakall);
-        $cetak = CetakSurat::find($cetakid);
+        $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $kop =KonfigurasiKopSurat::find($kopid);
 
-        return view('surat.index', compact('judul', 'cetak','pembuka' ,'penutup','nomor','noid','laporan','surat'));
+        return view('surat.index', compact('judul', 'kop','pembuka' ,'penutup','nomor','laporan','surat'));
     }
 
     /**
@@ -123,8 +117,8 @@ class BuatSuratController extends Controller
         $kode = count($all);
 
         $surat->nomor_surat_id=$request->nomor_surat_id;
-        $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');      
-        
+        $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');   
+        $surat->tubuh_surat_id = $request->tubuh_surat_id;
         $surat->no_surat=$kodesurat;   
         $surat->lampiran=$request->lampiran;
         $surat->perihal=$request->perihal;
@@ -133,15 +127,6 @@ class BuatSuratController extends Controller
         $surat->isi_penutup=$request->isi_penutup;                  
         $surat->created_at=\Carbon\Carbon::now();
         $surat->save();
-
-        $tujuan = TubuhSurat::find($id);
-        $tujuan->buat_surat_id = $request->buat_surat_id;
-        $tujuan->save();
-
-        $isi = CetakSurat::find($id);
-        $isi->buat_surat_id = $tujuan->id;
-        $isi->tubuh_surat_id = $tujuan->buat_surat_id;
-        $isi->save();
         
         return redirect()->route('surat.index')->with('sukses', 'Surat berhasil dibuat');
     }
