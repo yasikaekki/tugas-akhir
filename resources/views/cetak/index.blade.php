@@ -42,18 +42,21 @@
         text-align: center;
         line-height: 5px;
     }
-    .fs-7 {
-        font-size: 13px;
-    }
     .titik-dua {
         margin-left: 5px;
     }
-
+    .fs-7 {
+        font-size: 13px;
+    }
     .form-ttd{
         padding-left: 65%;
     }
+
     .foto-ttd{
-        margin-left: 70%;
+        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->lokasi_stempel}}'),url('/assets/foto ttd/{{$cetak->user->gambar_ttd}}');
+        background-repeat: no-repeat;
+        background-size: 10rem 10rem,8rem 8rem;
+        background-position: 25rem 5rem,29rem 6rem;;
     }
 
     @page {
@@ -72,6 +75,9 @@
             position: absolute;
             top: 0px;
             left: 0px;
+        }
+        .foto-ttd{
+            -webkit-print-color-adjust: exact;
         }
     }
   </style>
@@ -93,7 +99,7 @@
                     <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('surat.index')}}" class="link">Buat Surat</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('buat-surat.index')}}" class="link">Buat Surat</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -131,11 +137,11 @@
                                             <div class="kerangka">
                                                 <table class="kop">
                                                     <tr>
-                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_kop_surat->lokasi_foto}}" class="mb-5"></td>
+                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->lokasi_foto}}" class="mb-5"></td>
                                                         <td class="garis">
                                                             <p class="fs-5" style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{{$kop1}}</p>
                                                             <p class="fs-5">{{$kop2}}</p>
-                                                            <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$cetak->konfigurasi_kop_surat->nama_upt}}</p>
+                                                            <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$cetak->konfigurasi_surat->nama_upt}}</p>
                                                             <p class="fs-7" style="line-height: 10px;">{{$kop3}}</p>
                                                             <p class="fs-7">{{$kop4}}</p>
                                                         </td>
@@ -174,7 +180,7 @@
                                                     <tr>
                                                         <td>
                                                             <p class="fs-6 mb-1">Dengan hormat,</p>
-                                                            <p class="fs-6">{{$cetak->isi_pembuka}}</p>
+                                                            <p class="fs-6">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_pembuka}}</p>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -203,39 +209,29 @@
                                                 <table width="75%">
                                                     <tr>
                                                         <td>
-                                                            <p class="fs-6">{{$cetak->isi_penutup}}</p>
+                                                            <p class="fs-6">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_penutup}}</p>
                                                         </td>
                                                      </tr>
                                                 </table>
                                         
-                                                <table width="75%" class="mt-5 mb-5">
+                                                <table width="75%" class="mt-5 mb-5 foto-ttd">
                                                     <tr>
-                                                        <td><p class="form-ttd text-start">Hormat kami,<br>Ketua UPT Kewirausahaan dan<br>Inkubator Bisnis Teknologi Poliwangi</p></td>
+                                                        <td><p class="form-ttd" style="margin-bottom: 4rem;">Hormat kami,<br>Ketua UPT Kewirausahaan dan<br>Inkubator Bisnis Teknologi Poliwangi</p></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <img src="/assets/foto ttd/{{$cetak->user->gambar_ttd}}" class="foto-ttd">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><p class="form-ttd text-start">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
+                                                        <td><p class="form-ttd" style="margin-top: 4rem;">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
                                                     </tr>
                                                 </table> 
                                             </div>
                                         </div>
                                         
-                                        <div class="mt-3 d-grid gap-2 d-md-flex mx-auto" id="editor">
+                                        <div class="mt-3 d-grid gap-2 d-md-flex mx-auto">
                                             @if($cetak->tubuh_surat_id == null)
-                                            <a href="{{route('surat.index')}}" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>   
+                                            <a href="{{route('buat-surat.index')}}" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>   
                                             @else
                                             <a href="{{route('surat-agenda.index')}}" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
                                             @endif
-                                            @if(!is_null($cetak->konfigurasi_kop_surat && $cetak->laporan_surat && $cetak->laporan_surat && $cetak->laporan_surat))
-                                            {{-- <a href="{{route('cetak.print')}}" class="col-md-3 btn btn-primary"><i class="fas fa-print"></i> Cetak Surat</a>                         --}}
                                             <button type="submit" onclick="window.print()" class="btn btn-primary col-md-3"><i class="fas fa-print""></i> Cetak Surat</button>
-                                            @else
-                                            <button type="submit" class="btn btn-primary disabled col-md-3">Cetak Surat</button>
-                                            @endif
                                         </div>
 
                                     </div>
@@ -254,5 +250,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
+</body>
     @include('layouts.bottom')
 </html>

@@ -38,7 +38,7 @@
           @if($judul == 'Buat Surat' || $judul == 'Cetak Surat')
             <a href="" class="nav-link active disabled">
           @else
-            <a href="{{route('surat.index')}}" class="nav-link">
+            <a href="{{route('buat-surat.index')}}" class="nav-link">
           @endif
               
               <i class="nav-icon fas fa-solid fa-file-pen"></i>
@@ -110,7 +110,7 @@
             @if($judul == 'Anggota' || $judul == 'Registrasi Akun Anggota' || $judul == 'Ubah Akun Anggota')
             <a href="" class="nav-link active disabled">
             @else
-            <a href="{{route('anggota.index')}}" class="nav-link">
+            <a href="{{route('anggota-upt-kibt-poliwangi.index')}}" class="nav-link">
             @endif
               <i class="nav-icon fas fa-solid fa-user-group"></i>
               <p>
@@ -119,14 +119,14 @@
             </a>
         </li>
         <li class="nav-item">
-          @if($judul == 'Konfigurasi Kop Surat')
+          @if($judul == 'Konfigurasi Surat')
             <a href="" class="nav-link active disabled">
           @else
-            <a href="{{route('konfigurasi.index')}}" class="nav-link">
+            <a href="{{route('konfigurasi-surat.index')}}" class="nav-link">
           @endif
             <i class="nav-icon fas fa-solid fa-gear"></i>
             <p>
-                Konfigurasi Kop Surat 
+                Konfigurasi Surat 
             </p>
             </a>
         </li>

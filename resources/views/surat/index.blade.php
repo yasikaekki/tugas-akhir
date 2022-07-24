@@ -38,24 +38,24 @@
                             {{session()->get('sukses')}}
                         </div>
                         @endif
-                        @if(Auth::user()->gambar_ttd == null || $kop->lokasi_foto == null)
+                        @if(Auth::user()->gambar_ttd == null || $konfigurasi->lokasi_foto == null || $konfigurasi->lokasi_stempel == null)
                         <div class="col-lg-7">
                             <div class="card mt-4 p-5">
                               <div class="card-body p-4">
                                 <div class="text-center mb-4">
                                   <h1 class="display-4 text-warning"><i class="bi bi-emoji-frown"></i></h1>
                                 </div>
-                                <p class="fs-5 text-center">Mohon maaf<br>Sepertinya belum melengkapi profil atau kop surat</p>
+                                <p class="fs-5 text-center">Mohon maaf<br>Sepertinya belum melengkapi profil atau konfigurasi surat</p>
                                 <div class="d-grid gap-2 d-md-flex mx-auto justify-content-center">
                                     <a href="{{route('profil.index')}}" class="btn btn-primary"><i class="bi bi-person-fill"></i> Profil</a>
-                                    <a href="{{route('konfigurasi.index')}}" class="btn btn-primary"><i class="nav-icon fas fa-solid fa-gear"></i> Kop Surat</a>
+                                    <a href="{{route('konfigurasi-surat.index')}}" class="btn btn-primary"><i class="nav-icon fas fa-solid fa-gear"></i> Kop Surat</a>
                                 </div>
                               </div> 
                             </div>
                         </div>
                         @else
                         <div class="col-lg-8">
-                            <form action="{{route('surat.update', $surat->id)}}" method="POST">
+                            <form action="{{route('buat-surat.update', $surat->id)}}" method="POST">
                                 @method('PATCH')
                                 @csrf
                                 <div class="card border-top-info p-4">
@@ -262,5 +262,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
+</body>
     @include('layouts.bottom')
 </html>

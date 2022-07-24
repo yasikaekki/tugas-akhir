@@ -14,14 +14,14 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      @if($judul == 'Anggota' || $judul == 'Laporan Surat Keluar' || $judul == 'List Surat Keluar')
+      @if($judul == 'Anggota')
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
         <div class="navbar-search-block">
           @if($judul == 'Anggota')
-          <form action="{{route('anggota.index')}}" method="GET" class="form-inline">
+          <form action="{{route('anggota-upt-kibt-poliwangi.index')}}" method="GET" class="form-inline">
           @elseif($judul == 'Laporan Surat Keluar')
           <form action="{{route('laporan.index')}}" method="GET" class="form-inline">
           @elseif($judul == 'List Surat Keluar')

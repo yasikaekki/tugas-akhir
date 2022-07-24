@@ -4,14 +4,10 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\SuratPembuka;
-use App\Model\LaporanSurat;
-use App\Model\NomorSurat;
-use App\User;
-use Auth;
+use App\Model\KonfigurasiSurat;
 use DB;
 
-class SuratPembukaController extends Controller
+class KonfigurasiSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,16 +17,11 @@ class SuratPembukaController extends Controller
     public function index()
     {
         //
-        $judul = 'Surat Pembuka';
-        $uid = Auth::id();
-        $laporanid = SuratPembuka::all()->where('user_id', $uid);
-        $pembukaid = SuratPembuka::all()->where('user_id', $uid);
-        $pembuka = count($pembukaid);
-        $laporan = count($laporanid);
-        $isiid = SuratPembuka::all()->last()->id;
-        $isi= SuratPembuka::find($isiid);
+        $judul = 'Konfigurasi Surat';
+        $konfigurasiid = DB::table('konfigurasi_surats')->select('id')->value('id');
+        $konfigurasi = KonfigurasiSurat::find($konfigurasiid);
 
-        return view('surat.suratpembuka.index', compact('judul', 'isi','pembuka', 'laporan'));
+        return view('konfigurasi.index', compact('judul', 'konfigurasi'));
     }
 
     /**
@@ -89,25 +80,36 @@ class SuratPembukaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $suratpembuka=SuratPembuka::find($id);
-        $suratpembuka->lampiran=$request->lampiran;
-        $suratpembuka->perihal=$request->perihal;
-        $suratpembuka->kepada=$request->kepada;
-        $suratpembuka->isi_surat_pembuka=$request->isi_surat_pembuka;
+        $this->validate($request, [
+            'nama_upt'=> 'required',
+        ],
+        [
+            'nama_upt.required'=> 'Nama UPT harus diisi',
+        ]
+    );
 
-        if ($suratpembuka->lampiran == null || $suratpembuka->perihal == null || $suratpembuka->kepada == null || $suratpembuka->isi_surat_pembuka == null) {
-            
-            $suratpembuka->created_at=\Carbon\Carbon::now();
-            $suratpembuka->save();
-            
-            return redirect()->route('pembuka.index')->with('sukses', 'Surat pembuka berhasil disimpan');
-        } else {
-            
-            $suratpembuka->updated_at=\Carbon\Carbon::now();
-            $suratpembuka->save();
-            
-            return redirect()->route('pembuka.index')->with('sukses', 'Surat pembuka berhasil diperbarui');
+        $kopsurat= KonfigurasiSurat::find($id);
+
+        if ($request->hasFile('lokasi_foto')) {
+            $file = $request->file('lokasi_foto');
+            $nama_file = time() . "." . $file->getClientOriginalExtension();
+            $tujuan_upload = 'assets/logo upt/';
+            $file->move($tujuan_upload, $nama_file);
+            $kopsurat->lokasi_foto = $nama_file;
         }
+
+        if ($request->hasFile('lokasi_stempel')) {
+            $stempel = $request->file('lokasi_stempel');
+            $nama_gambar = time() . "." . $stempel->getClientOriginalExtension();
+            $lokasi_upload = 'assets/stempel/';
+            $stempel->move($lokasi_upload, $nama_gambar);
+            $kopsurat->lokasi_stempel = $nama_gambar;
+        }
+    
+        $kopsurat->nama_upt=$request->nama_upt;
+        $kopsurat->save();
+
+        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil disimpan');      
     }
 
     /**

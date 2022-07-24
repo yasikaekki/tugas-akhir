@@ -34,6 +34,7 @@ class ProfilController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -56,6 +57,7 @@ class ProfilController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -83,38 +85,25 @@ class ProfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        $this->validate($request, [
-            'gambar_profil'=> 'required',
-            'gambar_ttd'=> 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-        ],
-        [
-            'gambar_profil.required'=> 'Foto profil harus diisi',
-            'gambar_ttd.required'=> 'Foto ttd harus diisi',
-            'tempat_lahir.required'=> 'Tempat lahir harus diisi',
-            'tanggal_lahir.required'=> 'Tanggal lahir harus diisi',
-            'jenis_kelamin.required'=> 'Jenis kelamin harus diisi',
-        ]
-    );
-            
+    {            
         $user=User::find($id);
         $user->name = $request->name;
         
-        $file_foto = $request->file('gambar_profil');
-        $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
-        $upload_foto = 'assets/foto profil/';
-        $file_foto->move($upload_foto, $nama_foto);
-        $user->gambar_profil = $nama_foto;
+        if ($request->hasFile('gambar_profil')) {
+            $file_foto = $request->file('gambar_profil');
+            $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
+            $upload_foto = 'assets/foto profil/';
+            $file_foto->move($upload_foto, $nama_foto);
+            $user->gambar_profil = $nama_foto;
+        }
 
-        $file_ttd = $request->file('gambar_ttd');
-        $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
-        $upload_ttd = 'assets/foto ttd/';
-        $file_ttd->move($upload_ttd, $nama_ttd);
-        $user->gambar_ttd = $nama_ttd;
+        if ($request->hasFile('gambar_ttd')) {
+            $file_ttd = $request->file('gambar_ttd');
+            $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
+            $upload_ttd = 'assets/foto ttd/';
+            $file_ttd->move($upload_ttd, $nama_ttd);
+            $user->gambar_ttd = $nama_ttd;
+        }
 
         $user->gelar=$request->gelar;
         $user->tempat_lahir=$request->tempat_lahir;

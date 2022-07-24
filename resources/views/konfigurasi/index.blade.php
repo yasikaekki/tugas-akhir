@@ -39,55 +39,78 @@
                         </div>
                         @endif
                         <div class="col-lg-12">
-                            <form action="{{route('konfigurasi.update', $kop->id)}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('konfigurasi-surat.update', $konfigurasi->id)}}" method="post" enctype="multipart/form-data">
                                 @method('PATCH')
                                 @csrf
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
-                                        @if($kop->lokasi_foto == null)
-                                        <img class="logo-upt" id="logo-kop" src="{{asset('vendor/dist/img/upt.png')}}">
-                                        @else
-                                        <img class="logo-upt" id="logo-kop" src="/assets/logo upt/{{$kop->lokasi_foto}}">
-                                        @endif
-                                        <div class="form-group mb-3">
-                                            <label>Logo UPT</label>
-                                            <input type="file" id="preview" name="lokasi_foto" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror" onchange="previewKop(event)">
-                                            @error('lokasi_foto')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @if($konfigurasi->lokasi_foto == null)
+                                                <img class="logo-upt" id="logo-kop" src="{{asset('vendor/dist/img/upt.png')}}">
+                                                @else
+                                                <img class="logo-upt" id="logo-kop" src="/assets/logo upt/{{$konfigurasi->lokasi_foto}}">
+                                                @endif
+                                                <div class="form-group mb-3">
+                                                    <label>Logo UPT</label>
+                                                    <input type="file" name="lokasi_foto" accept="image/png, image/jpeg" class="form-control @error('lokasi_foto') is-invalid @enderror" onchange="previewKop(event)">
+                                                    @error('lokasi_foto')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+    
+                                                <script>
+                                                    var previewKop = function(event) {
+                                                        var logoKop = document.getElementById('logo-kop');
+                                                        logoKop.src = URL.createObjectURL(event.target.files[0]);
+                                                        logoKop.onload = function() {
+                                                            URL.revokeObjectURL(logoKop.src) 
+                                                        }
+                                                    };
+                                                </script>
+                                            </div>
+    
+                                            <div class="col-md-6">
+                                                @if($konfigurasi->lokasi_stempel == null)
+                                                <img class="logo-upt" id="logo-stempel" src="{{asset('vendor/dist/img/upt.png')}}">
+                                                @else
+                                                <img class="logo-upt" id="logo-stempel" src="/assets/stempel/{{$konfigurasi->lokasi_stempel}}">
+                                                @endif
+    
+                                                <div class="form-group mb-3">
+                                                    <label>Stempel</label>
+                                                    <input type="file" name="lokasi_stempel" accept="image/png, image/jpeg" class="form-control @error('lokasi_stempel') is-invalid @enderror" onchange="previewStempel(event)">
+                                                    @error('lokasi_stempel')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+    
+                                                <script>
+                                                    var previewStempel = function(event) {
+                                                        var logoStempel = document.getElementById('logo-stempel');
+                                                        logoStempel.src = URL.createObjectURL(event.target.files[0]);
+                                                        logoStempel.onload = function() {
+                                                            URL.revokeObjectURL(logoStempel.src) 
+                                                        }
+                                                    };
+                                                </script>
+                                            </div>
                                         </div>
-
-                                        <script>
-                                            var previewKop = function(event) {
-                                                var logoKop = document.getElementById('logo-kop');
-                                                logoKop.src = URL.createObjectURL(event.target.files[0]);
-                                                logoKop.onload = function() {
-                                                    URL.revokeObjectURL(logoKop.src) 
-                                                }
-                                            };
-                                        </script>
 
                                         <div class="form-group mb-3">
                                             <label>Nama UPT</label>
-                                            <input type="text" name="nama_upt" value="{{$kop->nama_upt}}" placeholder="Nama UPT" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror">
+                                            <input type="text" name="nama_upt" value="{{$konfigurasi->nama_upt}}" placeholder="Nama UPT" class="mb-3 form-control @error('nama_lengkap') is-invalid @enderror">
                                             @error('nama_upt')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <label>Nama Kementrian</label>
-                                            <input type="text" value="{{$kop->nama_mentri}}" name="nama_mentri" placeholder="Nama Kementrian" class="mb-3 form-control @error('nama_mentri') is-invalid @enderror">
-                                            @error('nama_mentri')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        @if($kop->nama_upt == null || $kop->nama_mentri == null)
+                                        @if($konfigurasi->nama_upt == null || $konfigurasi->lokasi_stempel == null)
                                         <button type="submit" class="btn btn-primary form-control mt-2"><i class="fas fa-save"></i> Simpan</button>
                                         @else
                                         <button type="submit" class="btn btn-primary form-control mt-2"><i class="bi bi-pencil-square"></i> Ubah</button>
@@ -107,5 +130,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
+</body>
     @include('layouts.bottom')
 </html>

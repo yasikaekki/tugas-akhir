@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Model\RekapitulasiSurat;
 use Illuminate\Http\Request;
-use App\Model\KonfigurasiKopSurat;
+use App\Model\KonfigurasiSurat;
 use App\Model\BuatSurat;
 use App\Model\LaporanSurat;
 use App\Model\TubuhSurat;
@@ -28,7 +28,7 @@ class CetakSuratController extends Controller
         $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
         $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
         $kop3 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop4 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
+        $kop4 = "E-mail: poliwangi@poliwangi.ac.id ; Laman : http://www.poliwangi.ac.id";
 
         $judul = 'Cetak Surat';
         $surat = BuatSurat::all();
@@ -184,7 +184,7 @@ class CetakSuratController extends Controller
 
         $surat = new BuatSurat();
         $surat->user_id = Auth::id();
-        $surat->konfigurasi_kop_surat_id = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
+        $surat->konfigurasi_surat_id = DB::table('konfigurasi_surats')->select('id')->value('id');
         $surat->save();
 
         $laporan = new LaporanSurat();

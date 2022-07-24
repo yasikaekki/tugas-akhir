@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('anggota.index')}}" class="link">Anggota</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('anggota-upt-kibt-poliwangi.index')}}" class="link">Anggota</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -39,7 +39,7 @@
             <div class="col-lg-6">
                 <div class="card border-top-info p-4">
                   <div class="card-body">
-                      <form action="{{route('anggota.store')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('anggota-upt-kibt-poliwangi.store')}}" method="post" enctype="multipart/form-data">
                           @csrf
                           <div class="form-group mb-3">
                             <div class="row">
@@ -101,6 +101,7 @@
                                 <option value="Sekretaris II">Sekretaris II</option>
                                 <option value="Bendahara I">Bendahara I</option>
                                 <option value="Bendahara II">Bendahara II</option>
+                                <option value="Anggota">Anggota</option>
                             </select>
                             @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
@@ -148,5 +149,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
-    @include('layouts.bottom')
+</body>
+@include('layouts.bottom')
 </html>

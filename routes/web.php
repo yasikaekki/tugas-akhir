@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Model\CetakSurat;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ Route::get('/', function () {
     }
 });
 
-// Auth::routes(); 
 Auth::routes([
     'register' => false, 
     'verify' => false,
@@ -32,15 +30,14 @@ Auth::routes([
 
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){ 
     Route::get('home', 'HomeController@index')->name('home'); 
-    Route::resource('surat', 'Users\BuatSuratController');
+    Route::resource('buat-surat', 'Users\BuatSuratController');
     Route::resource('surat-agenda', 'Users\TubuhSuratController');
     Route::resource('surat-cetak', 'Users\CetakSuratController');
     Route::resource('list-surat', 'Users\ListSuratController');
-    Route::get('printme', 'Users\CetakSuratController@printme')->name('cetak.print');
-    Route::get('laporan', 'Users\LaporanSuratController@index')->name('laporan.index');
+    Route::get('laporan-surat', 'Users\ListSuratController@laporan')->name('laporan.index');
     Route::get('rekapitulasi-bulan', 'Users\RekapitulasiSuratController@index')->name('rekapitulasi.bulan.index');
     Route::get('rekapitulasi-jenis-surat', 'Users\RekapitulasiSuratController@jenis_surat')->name('rekapitulasi.jenis_surat.index');
-    Route::resource('anggota', 'Users\AnggotaController');
-    Route::resource('konfigurasi', 'Users\KonfigurasiKopSuratController');
+    Route::resource('anggota-upt-kibt-poliwangi', 'Users\AnggotaController');
+    Route::resource('konfigurasi-surat', 'Users\KonfigurasiSuratController');
     Route::resource('profil', 'Users\ProfilController');
 });

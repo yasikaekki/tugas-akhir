@@ -86,21 +86,11 @@ class TubuhSuratController extends Controller
         $tubuhsurat->tanggal=$request->tanggal;
         $tubuhsurat->jam=$request->jam;
         $tubuhsurat->acara=$request->acara;                              
-        $tubuhsurat->tempat=$request->tempat;                              
+        $tubuhsurat->tempat=$request->tempat;                                   
+        $tubuhsurat->created_at=\Carbon\Carbon::now();
+        $tubuhsurat->save();
         
-        if($tubuhsurat->hari == null || $tubuhsurat->tanggal == null || $tubuhsurat->jam == null || $tubuhsurat->acara == null){
-            
-            $tubuhsurat->created_at=\Carbon\Carbon::now();
-            $tubuhsurat->save();
-            
-            return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil disimpan');
-        }else{
-            
-            $tubuhsurat->updated_at=\Carbon\Carbon::now();
-            $tubuhsurat->save();
-            
-            return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil diperbarui');
-        }     
+        return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil disimpan');    
     }
 
     /**

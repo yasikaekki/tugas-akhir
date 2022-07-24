@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKonfigurasiKopSuratsTable extends Migration
+class CreateKonfigurasiSuratsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateKonfigurasiKopSuratsTable extends Migration
      */
     public function up()
     {
-        Schema::create('konfigurasi_kop_surats', function (Blueprint $table) {
+        Schema::create('konfigurasi_surats', function (Blueprint $table) {
             $table->id();
             $table->string('nama_upt')->nullable();
-            $table->string('nama_mentri')->nullable();
             $table->string('lokasi_foto')->nullable();
+            $table->string('lokasi_stempel')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateKonfigurasiKopSuratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konfigurasi_kop_surats');
+        Schema::dropIfExists('konfigurasi_surats');
     }
 }

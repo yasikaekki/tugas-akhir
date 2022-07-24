@@ -46,7 +46,7 @@
                             <div class="card border-top-info p-4">
                                 <div class="card-body">
                                   <div class="d-grid d-md-flex justify-content-md-end">
-                                    <a href="{{route ('anggota.create')}}" class="btn btn-success mb-3"><i class="fas fa-solid fa-square-plus"></i> Tambah</a>
+                                    <a href="{{route ('anggota-upt-kibt-poliwangi.create')}}" class="btn btn-success mb-3"><i class="fas fa-solid fa-square-plus"></i> Tambah</a>
                                   </div>
                                   @if($user->count() == 0)       
                                   <table class="table table-bordered">
@@ -92,9 +92,9 @@
                                           <td>{{$users->telepon}}</td> 
                                           <td>
                                             @if($users->id == 1 || $users->status == 'Aktif')
-                                            <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                            <a href="{{route('anggota-upt-kibt-poliwangi.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                             @else
-                                            <a href="{{route('anggota.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                            <a href="{{route('anggota-upt-kibt-poliwangi.edit', Crypt::encrypt($users->id))}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah</a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$no}}"><i class="bi bi-trash3-fill"></i> Hapus</button>
                                             <div class="modal fade" id="staticBackdrop{{$no}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                               <div class="modal-dialog modal-dialog-centered">
@@ -108,7 +108,7 @@
                                                     </div>
                                                     <div class="d-flex justify-content-evenly p-3">
                                                       <button class="btn btn-primary py-3 px-4" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                                                      <form action="{{route('anggota.destroy', $users->id)}}" method="post">
+                                                      <form action="{{route('anggota-upt-kibt-poliwangi.destroy', $users->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger py-3 px-4">Hapus</button>
@@ -140,5 +140,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
-    @include('layouts.bottom')
+  </body>
+  @include('layouts.bottom')
 </html>

@@ -50,13 +50,7 @@ class ListSuratController extends Controller
         $surat = count($laporan);
         $data= LaporanSurat::find($surat);
         $nomor = NomorSurat::all();
-
-        // if ($request->fitur_cari) {
-        //     $laporan = DB::table('buat_surats')
-        //     ->where('kepada','like','%'.$request->fitur_cari.'%')
-        //     ->orderBy('created_at','desc')
-        //     ->paginate(6);
-        // }
+        
         if($request->filter_sort == 'asc'){
             $laporan = LaporanSurat::orderBy('created_at', 'asc')->paginate(6);
         }elseif ($request->filter_sort == 'desc') {
@@ -70,6 +64,32 @@ class ListSuratController extends Controller
         return view('list-surat.index', compact('judul','nomor', 'data','bulan','tahun','no', 'laporan', 'pembuka' ,'penutup'));
     }
 
+    public function laporan(Request $request)
+    {
+        //      
+        $judul = 'Laporan Surat Keluar';
+        $no = 1;
+        $laporan = LaporanSurat::paginate(6);
+        $surat = count($laporan);
+        $data= LaporanSurat::find($surat);
+        $katatahun = $request->filter_tahun;
+        $katabulan = $request->filter_bulan;
+        $bulan = Bulan::all();
+        $tahun = Tahun::all();
+
+        if($request->filter_sort == "asc"){
+            $laporan = LaporanSurat::orderBy('created_at', 'asc')->paginate(6);
+        }elseif ($request->filter_sort == "desc") {
+            $laporan = LaporanSurat::orderBy('created_at', 'desc')->paginate(6);
+        }elseif ($request->filter_bulan) {
+            $laporan= LaporanSurat::whereMonth('created_at', $request->filter_bulan)->paginate(6);
+        }elseif ($request->filter_tahun) {
+            $laporan = LaporanSurat::whereYear('created_at', $request->filter_tahun)->paginate(6);
+        }
+
+        return view('laporan.index', compact('judul','tahun','bulan' ,'surat', 'no', 'data', 'laporan'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,6 +98,7 @@ class ListSuratController extends Controller
     public function create()
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -107,7 +128,7 @@ class ListSuratController extends Controller
         $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
         $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
         $kop3 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop4 = "E-mail: poliwangi@poliwangi.ac.id : Laman : http://www.poliwangi.ac.id";
+        $kop4 = "E-mail: poliwangi@poliwangi.ac.id ; Laman : http://www.poliwangi.ac.id";
         $cetak = BuatSurat::find($data);
 
 
@@ -123,6 +144,7 @@ class ListSuratController extends Controller
     public function edit($id)
     {
         //
+        return view('errors.404');
     }
 
     /**

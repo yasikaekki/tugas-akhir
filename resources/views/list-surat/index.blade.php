@@ -170,40 +170,40 @@
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
                                                                                             @elseif($laporans->buat_surat->lampiran == "1")
-                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
                                                                                             @elseif($laporans->buat_surat->lampiran == "2")
-                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
                                                                                             @elseif($laporans->buat_surat->lampiran == "3")
-                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="4">4</option>
                                                                                             <option value="5">5</option>
                                                                                             @elseif($laporans->buat_surat->lampiran == "4")
-                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="5">5</option>
                                                                                             @elseif($laporans->buat_surat->lampiran == "5")
-                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             <option value="-">-</option>
                                                                                             <option value="1">1</option>
                                                                                             <option value="2">2</option>
                                                                                             <option value="3">3</option>
                                                                                             <option value="4">4</option>
+                                                                                            <option value="{{$laporans->buat_surat->lampiran}}" selected>{{$laporans->buat_surat->lampiran}}</option>
                                                                                             @endif
                                                                                         </select>
                                                                                         @error('lampiran')
@@ -218,7 +218,7 @@
                                                                                 <div class="form-group">
                                                                                     <div class="form-group mb-3">
                                                                                         <label>Agenda</label>
-                                                                                        <select class="form-select form-control mb-3 @error('tubuh_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="tubuh_surat_id">
+                                                                                        <select class="form-select form-control mb-3" name="tubuh_surat_id" disabled>
                                                                                             @if($laporans->buat_surat->tubuh_surat_id == null)
                                                                                             <option value="{{$laporans->buat_surat->id}}">Acara</option>
                                                                                             <option value="" selected>Tidak Ada Acara</option>
@@ -227,11 +227,6 @@
                                                                                             <option value="">Tidak Ada Acara</option>
                                                                                             @endif
                                                                                         </select>
-                                                                                        @error('tubuh_surat_id')
-                                                                                            <span class="invalid-feedback" role="alert">
-                                                                                                <strong>{{ $message }}</strong>
-                                                                                            </span>
-                                                                                        @enderror
                                                                                     </div> 
                                                                                 </div>
                                                                             </div>
@@ -365,5 +360,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
+</body>
     @include('layouts.bottom')
 </html>

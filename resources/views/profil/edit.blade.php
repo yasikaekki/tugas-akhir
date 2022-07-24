@@ -192,5 +192,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
+</body>
     @include('layouts.bottom')
 </html>

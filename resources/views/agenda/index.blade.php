@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('surat.index')}}" class="link">Buat Surat</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('buat-surat.index')}}" class="link">Buat Surat</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -87,7 +87,7 @@
                                             @enderror
                                         </div>
                                         <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
-                                            <a href="{{route('surat.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                            <a href="{{route('buat-surat.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
                                             @if($isi->tanggal == null || $isi->jam == null || $isi->acara == null || $isi->tempat == null)           
                                             <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
                                             @else
@@ -110,5 +110,6 @@
         <!-- /.content-wrapper -->
         @include('layouts.footer')
     </div>
-    @include('layouts.bottom')
+</body>
+@include('layouts.bottom')
 </html>

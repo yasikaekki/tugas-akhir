@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="text-center">
-                    <div class="error mx-auto" data-text="404">404</div>
+                    <div class="error mx-auto">404</div>
                     <p class="mb-5">Halaman Tidak Ditemukan</p>
                     <p class="mb-3">Sepertinya halaman yang anda kunjungi tidak ditemukan...</p>
                     <a href="{{route('home')}}" class="btn btn-primary">
@@ -42,6 +42,6 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('layouts.bottom')
 </body>
+@include('layouts.bottom')
 </html>

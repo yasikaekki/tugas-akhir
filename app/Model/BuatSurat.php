@@ -12,8 +12,8 @@ class BuatSurat extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function konfigurasi_kop_surat(){
-        return $this->belongsTo('App\Model\KonfigurasiKopSurat');
+    public function konfigurasi_surat(){
+        return $this->belongsTo('App\Model\KonfigurasiSurat');
     }
     public function nomor_surat(){
         return $this->belongsTo('App\NomorSurat');

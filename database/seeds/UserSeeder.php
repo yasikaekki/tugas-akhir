@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\KonfigurasiKopSurat;
+use App\Model\KonfigurasiSurat;
 use App\Model\RekapitulasiSurat;
 use App\Model\TubuhSurat;
 use App\Model\CetakSurat;
@@ -32,13 +32,13 @@ class UserSeeder extends Seeder
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->save();
 
-        $kop = new KonfigurasiKopSurat();
-        $kop->created_at = \Carbon\Carbon::now();
-        $kop->save();
+        $konfigurasi = new KonfigurasiSurat();
+        $konfigurasi->created_at = \Carbon\Carbon::now();
+        $konfigurasi->save();
 
         $surat = new BuatSurat;
         $surat->user_id = $user->id;
-        $surat->konfigurasi_kop_surat_id = $kop->id;
+        $surat->konfigurasi_surat_id = $konfigurasi->id;
         $surat->created_at = \Carbon\Carbon::now();
         $surat->save();
 

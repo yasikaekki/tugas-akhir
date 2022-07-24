@@ -42,7 +42,7 @@
                             <div class="card border-left-primary h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <a href="{{route('surat.index')}}">
+                                        <a href="{{route('buat-surat.index')}}">
                                             <div class="row">
                                                 <div class="col mr-2">
                                                     <div class="h5 mt-4 font-weight-bold text-primary text-uppercase mb-1">Buat Surat</div>
@@ -107,7 +107,7 @@
                             <div class="card border-left-warning h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center mt-2">
-                                        <a href="{{route('anggota.index')}}">
+                                        <a href="{{route('anggota-upt-kibt-poliwangi.index')}}">
                                             <div class="row">
                                                 <div class="col mr-2">
                                                     <div class="h5 font-weight-bold text-warning text-uppercase mt-4 mb-1"> Anggota</div>

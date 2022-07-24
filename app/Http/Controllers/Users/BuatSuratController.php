@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Model\KonfigurasiKopSurat;
+use App\Model\KonfigurasiSurat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Model\BuatSurat;
@@ -44,10 +44,10 @@ class BuatSuratController extends Controller
         $laporan = BuatSurat::all();
         $noid = count($laporan);
         $surat = BuatSurat::find($noid);
-        $kopid = DB::table('konfigurasi_kop_surats')->select('id')->value('id');
-        $kop =KonfigurasiKopSurat::find($kopid);
+        $konfigurasiid = DB::table('konfigurasi_surats')->select('id')->value('id');
+        $konfigurasi =KonfigurasiSurat::find($konfigurasiid);
 
-        return view('surat.index', compact('judul', 'kop','pembuka' ,'penutup','nomor','laporan','surat'));
+        return view('surat.index', compact('judul', 'konfigurasi','pembuka' ,'penutup','nomor','laporan','surat'));
     }
 
     /**
@@ -81,6 +81,7 @@ class BuatSuratController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -113,13 +114,23 @@ class BuatSuratController extends Controller
 	    $bulan = $romawi[date('n')];
 
         $surat=BuatSurat::find($id);
-        $all = BuatSurat::all();
-        $kode = count($all);
-
         $surat->nomor_surat_id=$request->nomor_surat_id;
-        $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');   
-        $surat->tubuh_surat_id = $request->tubuh_surat_id;
+        
+        if ($surat->id < 10) {
+            $noid = "0".$surat->id;
+        } else {
+            $noid = $surat->id;
+        }
+        $kode = $noid;
+
+        if($surat->nomor_surat_id < 10) {
+            $kodesurat = $kode.".0".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');
+        }else {
+            $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');
+        }
         $surat->no_surat=$kodesurat;   
+
+        $surat->tubuh_surat_id = $request->tubuh_surat_id;
         $surat->lampiran=$request->lampiran;
         $surat->perihal=$request->perihal;
         $surat->kepada=$request->kepada;
@@ -128,7 +139,7 @@ class BuatSuratController extends Controller
         $surat->created_at=\Carbon\Carbon::now();
         $surat->save();
         
-        return redirect()->route('surat.index')->with('sukses', 'Surat berhasil dibuat');
+        return redirect()->route('buat-surat.index')->with('sukses', 'Surat berhasil dibuat');
     }
 
     /**

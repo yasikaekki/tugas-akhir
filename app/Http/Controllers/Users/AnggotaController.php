@@ -22,7 +22,7 @@ class AnggotaController extends Controller
         $user = User::paginate(6);
 
         if($request->fitur_cari){
-            $user=  DB::table('users')->where('name','like','%'.$request->fitur_cari.'%')
+            $user=  User::where('name','like','%'.$request->fitur_cari.'%')
             ->orWhere('gelar','like','%'.$request->fitur_cari.'%')
             ->orWhere('jabatan','like','%'.$request->fitur_cari.'%')
             ->orderBy('created_at','desc')
@@ -77,7 +77,6 @@ class AnggotaController extends Controller
         $user=new User();
         $user->name=$request->name;
         $user->gelar=$request->gelar;
-        $user->konfigurasi_kop_surat_id = $user->id;
         $user->jabatan=$request->jabatan;
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
@@ -86,7 +85,7 @@ class AnggotaController extends Controller
         $user->created_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
+        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
     }
 
     /**
@@ -98,6 +97,7 @@ class AnggotaController extends Controller
     public function show($id)
     {
         //
+        return view('errors.404');
     }
 
     /**
@@ -137,7 +137,7 @@ class AnggotaController extends Controller
         $user->updated_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota.index')->with('sukses', 'Akun '. $user->name .' berhasil diubah');
+        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Akun '. $user->name .' berhasil diubah');
     }
 
     /**

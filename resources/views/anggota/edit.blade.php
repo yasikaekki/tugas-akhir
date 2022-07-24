@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}" class="link">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('anggota.index')}}" class="link">Anggota</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('anggota-upt-kibt-poliwangi.index')}}" class="link">Anggota</a></li>
                         <li class="breadcrumb-item active">{{$judul}}</li>
                         </ol>
                     </div><!-- /.col -->
@@ -39,7 +39,7 @@
             <div class="col-lg-6">
                 <div class="card border-top-info p-4">
                   <div class="card-body">
-                      <form action="{{route('anggota.update',$anggota->id)}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('anggota-upt-kibt-poliwangi.update',$anggota->id)}}" method="post" enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
 
@@ -214,4 +214,5 @@
         @include('layouts.footer')
     </div>
     @include('layouts.bottom')
+</body>
 </html>
