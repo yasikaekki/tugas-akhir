@@ -44,7 +44,7 @@
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     @if($akun->gambar_profil == null)
-                                                    <img class="logo-profil img-circle" src="{{ asset('vendor/dist/img/user.png')}}" id="logo-image">
+                                                    <img class="logo-profil img-circle" src="{{ asset('vendor/dist/img/logo.png')}}" id="logo-image">
                                                     @else
                                                     <img src="/assets/foto profil/{{$akun->gambar_profil}}" class="mb-4 logo-profil img-circle" id="logo-image">
                                                     @endif
@@ -80,7 +80,7 @@
         
                                                 <div class="col-md-7">
                                                     @if($akun->gambar_ttd == null)
-                                                    <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/ttd.png')}}">
+                                                    <img class="logo-ttd" id="logo-ttd" src="{{ asset('vendor/dist/img/logo.png')}}">
                                                     @else
                                                     <img class="logo-ttd" id="logo-ttd" src="/assets/foto ttd/{{$akun->gambar_ttd}}">
                                                     @endif

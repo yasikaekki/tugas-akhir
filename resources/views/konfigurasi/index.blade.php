@@ -47,7 +47,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 @if($konfigurasi->lokasi_foto == null)
-                                                <img class="logo-upt" id="logo-kop" src="{{asset('vendor/dist/img/upt.png')}}">
+                                                <img class="logo-upt" id="logo-kop" src="{{asset('vendor/dist/img/logo.png')}}">
                                                 @else
                                                 <img class="logo-upt" id="logo-kop" src="/assets/logo upt/{{$konfigurasi->lokasi_foto}}">
                                                 @endif
@@ -74,7 +74,7 @@
     
                                             <div class="col-md-6">
                                                 @if($konfigurasi->lokasi_stempel == null)
-                                                <img class="logo-upt" id="logo-stempel" src="{{asset('vendor/dist/img/upt.png')}}">
+                                                <img class="logo-upt" id="logo-stempel" src="{{asset('vendor/dist/img/logo.png')}}">
                                                 @else
                                                 <img class="logo-upt" id="logo-stempel" src="/assets/stempel/{{$konfigurasi->lokasi_stempel}}">
                                                 @endif

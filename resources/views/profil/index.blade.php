@@ -43,7 +43,7 @@
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
                                         @if($akun->gambar_profil == null)
-                                        <img src="{{ asset('vendor/dist/img/user.png')}}" class="logo-upt img-circle mb-2">   
+                                        <img src="{{ asset('vendor/dist/img/logo.png')}}" class="logo-upt img-circle mb-2">   
                                         @else    
                                         <img src="/assets/foto profil/{{$akun->gambar_profil}}" class="logo-upt img-circle mb-2"> 
                                         @endif                                
@@ -78,7 +78,7 @@
                                                 <hr>
                                                 <medium class="text-muted">TTD:</medium>
                                                 @if($akun->gambar_ttd == null)
-                                                <medium class="mb-3"><img src="{{asset('vendor/dist/img/ttd.png')}}" class="logo-ttd"></medium>
+                                                <medium class="mb-3"><img src="{{asset('vendor/dist/img/logo.png')}}" class="logo-ttd"></medium>
                                                 @else
                                                 <medium class="mb-3"><img src="/assets/foto ttd/{{$akun->gambar_ttd}}" class="logo-ttd"></medium>
                                                 @endif
