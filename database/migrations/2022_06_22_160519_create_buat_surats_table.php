@@ -23,8 +23,8 @@ class CreateBuatSuratsTable extends Migration
             $table->string('perihal')->nullable();
             $table->string('lampiran')->nullable();
             $table->string('kepada')->nullable();
-            $table->string('isi_pembuka',555)->nullable();
-            $table->string('isi_penutup',555)->nullable();
+            $table->string('isi_pembuka',1555)->nullable();
+            $table->string('isi_penutup',1555)->nullable();
             $table->timestamps();
         });
     }

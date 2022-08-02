@@ -133,7 +133,9 @@ class AnggotaController extends Controller
         $user->nip=$request->nip;
         $user->no_nip=$request->no_nip;
         $user->telepon=$request->telepon;
-        $user->status=$request->status;
+        if ($user->jabatan != "Admin") {
+            $user->status=$request->status;
+        }
         $user->updated_at=\Carbon\Carbon::now();
         $user->save();
 

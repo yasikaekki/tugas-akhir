@@ -53,7 +53,7 @@
     }
 
     .foto-ttd{
-        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->lokasi_stempel}}'),url('/assets/foto ttd/{{$cetak->user->gambar_ttd}}');
+        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->logo_stempel}}'),url('/assets/foto ttd/{{$cetak->user->foto_ttd}}');
         background-repeat: no-repeat;
         background-size: 10rem 10rem,8rem 8rem;
         background-position: 25rem 5rem,29rem 6rem;;
@@ -127,8 +127,8 @@
                         @else
                         <div class="col-lg-12">
                             <form action="{{route('surat-cetak.update', $cetak->id)}}" method="post">
-                                @method('PATCH')
                                 @csrf
+                                @method('PATCH')
                                 <div class="card border-top-info p-4">
                                     
                                     <div class="card-body">
@@ -137,7 +137,7 @@
                                             <div class="kerangka">
                                                 <table class="kop">
                                                     <tr>
-                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->lokasi_foto}}" class="mb-5"></td>
+                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->logo_upt}}" class="mb-5"></td>
                                                         <td class="garis">
                                                             <p class="fs-5" style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{{$kop1}}</p>
                                                             <p class="fs-5">{{$kop2}}</p>
@@ -188,17 +188,23 @@
                                                 <table width="65%" class="mt-3 mb-5">
                                                     <tr>
                                                         <td width="20%">Hari, Tanggal</td>
+                                                        @if ($cetak->tubuh_surat->tanggal == null)
+                                                        <td width="86%">: </td>
+                                                        @else
                                                         <td width="86%">: {{strftime("%A, %d %B %Y", strtotime($cetak->tubuh_surat->tanggal))}}</td>
+                                                        @endif
                                                     </tr>
                                                     <tr>
                                                     <tr>
                                                         <td width="20%">Jam</td>
                                                         <td width="86%">: {{$cetak->tubuh_surat->jam}}</td>
                                                     </tr>
+                                                    @if($cetak->tubuh_surat->acara != null)
                                                     <tr>
                                                         <td width="20%">Acara</td>
                                                         <td width="86%">: {{$cetak->tubuh_surat->acara}}</td>
                                                     </tr>
+                                                    @endif
                                                     <tr>
                                                         <td width="20%">Tempat</td>
                                                         <td width="86%">: {{$cetak->tubuh_surat->tempat}}</td>
@@ -231,7 +237,7 @@
                                             @else
                                             <a href="{{route('surat-agenda.index')}}" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
                                             @endif
-                                            <button type="submit" onclick="window.print()" class="btn btn-primary col-md-3"><i class="fas fa-print""></i> Cetak Surat</button>
+                                            <button type="submit" onclick="window.print()" class="btn btn-primary col-md-3"><i class="fas fa-print"></i> Cetak Surat</button>
                                         </div>
 
                                     </div>

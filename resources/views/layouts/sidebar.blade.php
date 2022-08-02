@@ -6,10 +6,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          @if(Auth::user()->gambar_profil == null)
+          @if(Auth::user()->foto_profil == null)
             <img src="{{ asset('vendor/dist/img/logo.png')}}" class="img-circle elevation-2" style="width:40px; height:40px">
           @else
-            <img src="/assets/foto profil/{{Auth::user()->gambar_profil}}" class="img-circle elevation-2" style="width:40px; height:40px">
+            <img src="{{asset('assets/foto profil/'.Auth::user()->foto_profil)}}" class="img-circle elevation-2" style="width:40px; height:40px">
           @endif
           </div>
         <div class="info">

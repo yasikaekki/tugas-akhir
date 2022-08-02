@@ -56,7 +56,7 @@
     }
 
     .foto-ttd{
-        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->lokasi_stempel}}'),url('/assets/foto ttd/{{$cetak->user->gambar_ttd}}');
+        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->logo_stempel}}'),url('/assets/foto ttd/{{$cetak->user->foto_ttd}}');
         background-repeat: no-repeat;
         background-size: 10rem 10rem,8rem 8rem;
         background-position: 25rem 5rem,29rem 6rem;;
@@ -125,7 +125,7 @@
                                         <div class="kerangka">
                                             <table class="kop">
                                                 <tr>
-                                                    <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->lokasi_foto}}" class="mb-5"></td>
+                                                    <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->logo_upt}}" class="mb-5"></td>
                                                     <td class="garis">
                                                         <p class="fs-5" style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{{$kop1}}</p>
                                                         <p class="fs-5">{{$kop2}}</p>

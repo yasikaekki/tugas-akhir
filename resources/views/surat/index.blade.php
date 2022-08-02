@@ -38,7 +38,7 @@
                             {{session()->get('sukses')}}
                         </div>
                         @endif
-                        @if(Auth::user()->gambar_ttd == null || $konfigurasi->lokasi_foto == null || $konfigurasi->lokasi_stempel == null)
+                        @if(Auth::user()->foto_ttd == null || $konfigurasi->logo_upt == null || $konfigurasi->logo_stempel == null || $konfigurasi->nama_upt == null)
                         <div class="col-lg-7">
                             <div class="card mt-4 p-5">
                               <div class="card-body p-4">
@@ -55,9 +55,141 @@
                         </div>
                         @else
                         <div class="col-lg-8">
-                            <form action="{{route('buat-surat.update', $surat->id)}}" method="POST">
-                                @method('PATCH')
+                            @if($surat->nomor_surat_id == null || $surat->lampiran == null || $surat->perihal == null || $surat->kepada == null || $surat->isi_pembuka == null || $surat->isi_penutup == null)
+                            <form action="{{route('buat-surat.submit',$surat->id)}}" method="POST">
                                 @csrf
+                                @method('PATCH')
+                                <div class="card border-top-info p-4">
+                                    <div class="card-body">
+                                        <div class="row d-flex">
+                                            <div class="col-sm-6">
+                                                <label>Nomor Surat</label>
+                                                <input type="text" placeholder="Nomor Surat" class="form-control mb-3" disabled>                                                           
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group mb-3">
+                                                    <label>Jenis Surat</label>
+                                                    <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
+                                                        <option selected hidden disabled>Pilih</option>
+                                                        @foreach($nomor as $nomors)
+                                                        <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('nomor_surat_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror   
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="form-group mb-3">
+                                                    <label>Lampiran</label>
+                                                    <select class="form-select form-control mb-3 @error('lampiran') is-invalid @enderror" id="exampleFormControlSelect1" name="lampiran">                                                   
+                                                        <option selected hidden disabled>Pilih</option>
+                                                        <option value="-">-</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>         
+                                                    </select>
+                                                    @error('lampiran')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div> 
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group mb-3">
+                                                    <label>Agenda</label>
+                                                    <select class="form-select form-control mb-3 @error('tubuh_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="tubuh_surat_id">                                                   
+                                                        <option selected hidden disabled>Pilih</option>
+                                                        <option value="{{$surat->id}}">Acara</option>
+                                                        <option value="">Tidak Ada Acara</option>
+                                                    </select>
+                                                    @error('tubuh_surat_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div> 
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group mb-3">
+                                                    <label>Perihal</label>
+                                                    <input name="perihal" value="{{old('perihal')}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                                    @error('perihal')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group mb-3">
+                                                    <label>Kepada</label>
+                                                    <input name="kepada" value="{{old('kepada')}}" type="text" placeholder="Kepada" class="form-control @error('kepada') is-invalid @enderror">
+                                                    @error('kepada')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Isi Surat Pembuka</label>
+                                                    <textarea name="isi_pembuka" placeholder="Isi Surat Pembuka" style="height:150px;" class="form-control @error('isi_pembuka') is-invalid @enderror">{{old('isi_pembuka')}}</textarea>
+                                                    @error('isi_pembuka')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Isi Surat Penutup</label>
+                                                    <textarea name="isi_penutup" placeholder="Isi Surat Penutup" style="height:150px;" class="form-control @error('isi_penutup') is-invalid @enderror">{{old('isi_penutup')}}</textarea>
+                                                    @error('isi_penutup')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Contoh Isi Surat Pembuka</label>
+                                                <textarea style="height:150px;" class="form-control" disabled>{{$pembuka}}</textarea>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Contoh Isi Surat Penutup</label>
+                                                <textarea style="height:150px;" class="form-control" disabled>{{$penutup}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2 mt-3 d-md-flex mx-auto justify-content-md-end">
+                                            <button class="col-md-3 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+
+                                            @if($surat->tubuh_surat_id == null)
+                                            <a href="{{route('surat-cetak.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                            @else
+                                            <a href="{{route('surat-agenda.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            @else
+                            <form action="{{route('buat-surat.update', $surat->id)}}" method="POST">
+                                @csrf
+                                @method('PATCH')
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
                                         <div class="row d-flex">
@@ -70,14 +202,6 @@
                                                 <div class="form-group mb-3">
                                                     <label>Jenis Surat</label>
                                                     <select class="form-select form-control @error('nomor_surat_id') is-invalid @enderror" id="exampleFormControlSelect2" name="nomor_surat_id">
-                                                    @if($surat->nomor_surat_id == null)
-                                                        <option selected hidden disabled>Pilih</option>
-                                                        @foreach($nomor as $nomors)
-                                                        <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
-                                                        @endforeach
-
-                                                    @else
-                                                    
                                                     @foreach($nomor as $nomors)
                                                         @if($surat->nomor_surat_id == $nomors->id)
                                                         <option value="{{$surat->nomor_surat_id}}" selected>{{$nomors->id}}. {{$surat->nomor_surat->jenis_surat}}</option>
@@ -85,8 +209,6 @@
                                                         <option value="{{$nomors->id}}">{{$nomors->id}}. {{$nomors->jenis_surat}}</option>
                                                         @endif
                                                     @endforeach
-
-                                                    @endif
                                                     </select>
                                                     @error('nomor_surat_id')
                                                         <span class="invalid-feedback" role="alert">
@@ -165,9 +287,8 @@
                                                     <label>Agenda</label>
                                                     <select class="form-select form-control mb-3 @error('tubuh_surat_id') is-invalid @enderror" id="exampleFormControlSelect1" name="tubuh_surat_id">                                                   
                                                         @if($surat->tubuh_surat_id == null)
-                                                        <option selected hidden disabled>Pilih</option>
                                                         <option value="{{$surat->id}}">Acara</option>
-                                                        <option value="">Tidak Ada Acara</option>
+                                                        <option value="" selected>Tidak Ada Acara</option>
                                                         @else
                                                         <option value="{{$surat->id}}" selected>Acara</option>
                                                         <option value="">Tidak Ada Acara</option>
@@ -212,9 +333,6 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-
-                                                    <label class="mt-3">Contoh Isi Surat Pembuka</label>
-                                                    <textarea style="height:150px;" class="form-control" disabled>{{$pembuka}}</textarea>
                                                 </div>
                                             </div>
 
@@ -227,18 +345,19 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-
-                                                    <label class="mt-3">Contoh Isi Surat Penutup</label>
-                                                    <textarea style="height:150px;" class="form-control" disabled>{{$penutup}}</textarea>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <label>Contoh Isi Surat Pembuka</label>
+                                                <textarea style="height:150px;" class="form-control" disabled>{{$pembuka}}</textarea>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Contoh Isi Surat Penutup</label>
+                                                <textarea style="height:150px;" class="form-control" disabled>{{$penutup}}</textarea>
+                                            </div>
                                         </div>
-                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-end">
-                                            @if($surat->nomor_surat_id == null || $surat->no_surat == null ||$surat->lampiran == null || $surat->perihal == null || $surat->kepada == null || $surat->isi_pembuka ==null || $surat->isi_penutup == null)
-                                            <button class="col-md-3 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
-                                            @else
+                                        <div class="d-grid gap-2 mt-3 d-md-flex mx-auto justify-content-md-end">
                                             <button class="col-md-3 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
-                                            @endif
 
                                             @if($surat->tubuh_surat_id == null)
                                             <a href="{{route('surat-cetak.index')}}" class="btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
@@ -249,6 +368,7 @@
                                     </div>
                                 </div>
                             </form>
+                            @endif
                         </div>
                         @endif
                     </div>

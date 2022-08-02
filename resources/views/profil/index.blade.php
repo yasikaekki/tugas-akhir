@@ -37,15 +37,19 @@
                         <div class="alert alert-success">
                             {{session()->get('sukses')}}
                         </div>
+                        @elseif(session()->get('gagal'))
+                        <div class="alert alert-success">
+                            {{session()->get('gagal')}}
+                        </div>
                         @endif
                         <div class="col-lg-8">
                             <div class="card border-top-info p-4">                      
                                 <div class="card-body">
                                     <div class="form-group text-center mb-3">
-                                        @if($akun->gambar_profil == null)
+                                        @if($akun->foto_profil == null)
                                         <img src="{{ asset('vendor/dist/img/logo.png')}}" class="logo-upt img-circle mb-2">   
                                         @else    
-                                        <img src="/assets/foto profil/{{$akun->gambar_profil}}" class="logo-upt img-circle mb-2"> 
+                                        <img src="{{asset('assets/foto profil/'.$akun->foto_profil)}}" class="logo-upt img-circle mb-2"> 
                                         @endif                                
                                         <h4 class="fs-3">{{$akun->name}}, {{$akun->gelar}}</h4>
                                         <p class="fs-5 text-muted mb-4">{{$akun->jabatan}}</p>                                        
@@ -57,7 +61,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <medium class="text-muted">Email:</medium>
-                                                <medium class="mb-3">{{$akun->email}}</medium>
+                                                <medium>{{$akun->email}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">{{$akun->nip}}:</medium>
                                                 <medium class="mb-3">{{$akun->no_nip}}</medium>
@@ -77,18 +81,18 @@
                                                 <medium class="text-primary fw-bold mb-3">{{$akun->status}}</medium>
                                                 <hr>
                                                 <medium class="text-muted">TTD:</medium>
-                                                @if($akun->gambar_ttd == null)
+                                                @if($akun->foto_ttd == null)
                                                 <medium class="mb-3"><img src="{{asset('vendor/dist/img/logo.png')}}" class="logo-ttd"></medium>
                                                 @else
-                                                <medium class="mb-3"><img src="/assets/foto ttd/{{$akun->gambar_ttd}}" class="logo-ttd"></medium>
+                                                <medium class="mb-3"><img src="{{asset('assets/foto ttd/'.$akun->foto_ttd)}}" class="logo-ttd"></medium>
                                                 @endif
-                                            </div>                                           
+                                            </div>
                                         </div>
-                                        @empty(!$akun)
+                                        @if($akun->foto_profil == null || $akun->foto_ttd == null || $akun->telepon == null || $akun->tempat_lahir == null || $akun->tanggal_lahir == null)
                                         <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Lengkapi Profil</a>
                                         @else
                                         <a href="{{route('profil.edit', Crypt::encrypt($akun->id))}}" class="mt-3 btn btn-primary"><i class="bi bi-pencil-square"></i> Ubah Profil</a>
-                                        @endempty
+                                        @endif
                                     </div>
                                 </div>
                             </div>

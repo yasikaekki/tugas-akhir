@@ -72,6 +72,31 @@ class TubuhSuratController extends Controller
         return view('errors.404');
     }
 
+    public function submit(Request $request, $id)
+    {
+        $this->validate($request, [
+            'tanggal' => 'required',
+            'jam' => 'required',
+            'tempat' => 'required',
+        ],
+        [
+            'tanggal.required'=>'Hari dan tanggal harus diisi',
+            'jam.required'=>'Jam harus diisi',
+            'tempat.required'=>'Tempat harus diisi',
+        ]
+    );
+        
+        $tubuhsurat=TubuhSurat::find($id);
+        $tubuhsurat->tanggal=$request->tanggal;
+        $tubuhsurat->jam=$request->jam;
+        $tubuhsurat->acara=$request->acara;                              
+        $tubuhsurat->tempat=$request->tempat;                                   
+        $tubuhsurat->created_at=\Carbon\Carbon::now();
+        $tubuhsurat->save();
+        
+        return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil disimpan');  
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -90,7 +115,7 @@ class TubuhSuratController extends Controller
         $tubuhsurat->created_at=\Carbon\Carbon::now();
         $tubuhsurat->save();
         
-        return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil disimpan');    
+        return redirect()->route('surat-agenda.index')->with('sukses', 'Agenda surat berhasil diubah');    
     }
 
     /**

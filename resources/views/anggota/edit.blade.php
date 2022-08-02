@@ -40,8 +40,8 @@
                 <div class="card border-top-info p-4">
                   <div class="card-body">
                       <form action="{{route('anggota-upt-kibt-poliwangi.update',$anggota->id)}}" method="post" enctype="multipart/form-data">
-                        @method('PATCH')
                         @csrf
+                        @method('PATCH')
 
                         <div class="form-group mb-3">
                             <div class="row">

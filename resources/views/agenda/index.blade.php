@@ -40,14 +40,60 @@
                         </div>
                         @endif
                         <div class="col-lg-6">
-                            {{-- @if($pembuka->lampiran == null || $pembuka->perihal == null || $pembuka->kepada == null || $pembuka->isi_surat_pembuka == null) --}}
-                            <form action="{{route('surat-agenda.update', $isi->id)}}" method="POST">
+                            @if ($isi->tanggal == null || $isi->jam == null || $isi->tempat == null)
+                            <form action="{{route('agenda-surat.submit',$isi->id)}}" method="POST">
+                                @csrf
                                 @method('PATCH')
+                                <div class="card border-top-info p-4">
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label>Hari, Tanggal</label>
+                                            <input type="date" min="{{date('Y-m-d')}}" value="{{old('tanggal')}}" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal">
+                                            @error('tanggal')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label>Jam</label>
+                                            <input type="time" name="jam" value="{{old('jam')}}" class="mb-3 form-control @error('jam') is-invalid @enderror">
+                                            @error('jam')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label>Acara</label>
+                                            <input name="acara" value="{{old('acara')}}" type="text" placeholder="Acara" class="mb-3 form-control @error('acara') is-invalid @enderror">
+                                            @error('acara')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label>Tempat</label>
+                                            <input name="tempat" value="{{old('tempat')}}" type="text" placeholder="Tempat" class="mb-3 form-control @error('tempat') is-invalid @enderror">
+                                            @error('tempat')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
+                                            <a href="{{route('buat-surat.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                            <a href="{{route('surat-cetak.index')}}" class="col-md-4 btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            @else 
+                            <form action="{{route('surat-agenda.update', $isi->id)}}" method="POST">
                                 @csrf
-                            {{-- @else
-                            <form action="{{route ('pembuka.store')}}" method="post">
-                                @csrf
-                            @endif --}}
+                                @method('PATCH')
                                 <div class="card border-top-info p-4">
                                     <div class="card-body">
                                         <div class="form-group mb-3">
@@ -88,16 +134,13 @@
                                         </div>
                                         <div class="d-grid gap-2 d-md-flex mx-auto justify-content-md-center">
                                             <a href="{{route('buat-surat.index')}}" class="col-md-4 btn btn-danger"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
-                                            @if($isi->tanggal == null || $isi->jam == null || $isi->acara == null || $isi->tempat == null)           
-                                            <button class="col-md-4 btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
-                                            @else
                                             <button class="col-md-4 btn btn-primary" type="submit"><i class="bi bi-pencil-square"></i> Perbarui</button>
-                                            @endif
                                             <a href="{{route('surat-cetak.index')}}" class="col-md-4 btn btn-warning">Lanjut <i class="fa-solid fa-chevron-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            @endif
                         </div>
                     </div>
                     <!-- /.row -->

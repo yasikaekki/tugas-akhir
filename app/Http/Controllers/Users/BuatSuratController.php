@@ -100,6 +100,60 @@ class BuatSuratController extends Controller
         return view('surat.index', compact('judul','surat'));
     }
 
+    public function submit(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nomor_surat_id'=> 'required',
+            'lampiran'=> 'required',
+            'perihal' => 'required',
+            'kepada' => 'required',
+            'isi_pembuka' => 'required|max:1555',
+            'isi_penutup' => 'required|max:1555',
+        ],
+        [
+            'nomor_surat_id.required'=>'Jenis surat harus diisi',
+            'lampiran.required'=>'Lampiran harus diisi',
+            'perihal.required'=>'Perihal harus diisi',
+            'kepada.required'=>'Kepada harus diisi',
+            'isi_pembuka.required'=>'Isi Pembuka harus diisi',
+            'isi_penutup.required'=>'Isi Penutup harus diisi',
+            'isi_pembuka.max'=>'Text tidak boleh melebihi 1555 kata',
+            'isi_penutup.max'=>'Text tidak boleh melebihi 1555 kata',
+        ]
+        );
+
+        $romawi	= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+	    $bulan = $romawi[date('n')];
+
+        $surat=BuatSurat::find($id);
+        $surat->nomor_surat_id=$request->nomor_surat_id;
+        
+        if ($surat->id < 10) {
+            $noid = "0".$surat->id;
+        } else {
+            $noid = $surat->id;
+        }
+        $kode = $noid;
+
+        if($surat->nomor_surat_id < 10) {
+            $kodesurat = $kode.".0".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');
+        }else {
+            $kodesurat = $kode.".".$surat->nomor_surat_id."/PL36/UPTKIBT/".$bulan."/".date('Y');
+        }
+        $surat->no_surat=$kodesurat;   
+
+        $surat->tubuh_surat_id = $request->tubuh_surat_id;
+        $surat->lampiran=$request->lampiran;
+        $surat->perihal=$request->perihal;
+        $surat->kepada=$request->kepada;
+        $surat->isi_pembuka=$request->isi_pembuka;   
+        $surat->isi_penutup=$request->isi_penutup;                  
+        $surat->created_at=\Carbon\Carbon::now();
+        $surat->save();
+        
+        return redirect()->route('buat-surat.index')->with('sukses', 'Surat berhasil disimpan');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,7 +193,7 @@ class BuatSuratController extends Controller
         $surat->created_at=\Carbon\Carbon::now();
         $surat->save();
         
-        return redirect()->route('buat-surat.index')->with('sukses', 'Surat berhasil dibuat');
+        return redirect()->route('buat-surat.index')->with('sukses', 'Surat berhasil diubah');
     }
 
     /**

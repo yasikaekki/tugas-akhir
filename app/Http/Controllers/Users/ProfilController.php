@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Hash;
 use DB;
 
 class ProfilController extends Controller
@@ -23,7 +24,7 @@ class ProfilController extends Controller
         $uid = Auth::id();
         $akun = User::find($uid);
 
-        return view('profil.index', compact('judul', 'akun'));
+        return view('profil.index', compact('judul', 'akun','uid'));
     }
 
     /**
@@ -46,6 +47,54 @@ class ProfilController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function submit(Request $request,$id)
+    {
+        $this->validate($request, [
+            'foto_profil' => 'required',
+            'foto_ttd' => 'required',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+        ],
+        [
+            'foto_profil.required' => 'Foto profil harus diupload',
+            'foto_ttd.required' => 'Foto ttd harus diupload',
+            'jenis_kelamin.required' => 'Kolom ini harus diisi',
+            'tempat_lahir.required' => 'Kolom ini harus diisi',
+            'tanggal_lahir.required' => 'Kolom ini harus diisi',
+        ]
+        );
+
+        $user=User::find($id);
+        $user->name = $request->name;
+
+        if ($request->hasFile('foto_profil')) {
+            $file_foto = $request->file('foto_profil');
+            $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
+            $upload_foto = 'assets/foto profil/';
+            $file_foto->move($upload_foto, $nama_foto);
+            $user->foto_profil = $nama_foto;
+        }
+
+        if ($request->hasFile('foto_ttd')) {
+            $file_ttd = $request->file('foto_ttd');
+            $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
+            $upload_ttd = 'assets/foto ttd/';
+            $file_ttd->move($upload_ttd, $nama_ttd);
+            $user->foto_ttd = $nama_ttd;
+        }
+
+        $user->gelar=$request->gelar;
+        $user->tempat_lahir=$request->tempat_lahir;
+        $user->tanggal_lahir= $request->tanggal_lahir;
+        $user->jenis_kelamin=$request->jenis_kelamin;
+        $user->telepon=$request->telepon;
+        $user->created_at=\Carbon\Carbon::now();
+        $user->save();
+
+        return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil disimpan');
     }
 
     /**
@@ -85,24 +134,24 @@ class ProfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {            
+    {       
         $user=User::find($id);
         $user->name = $request->name;
-        
-        if ($request->hasFile('gambar_profil')) {
-            $file_foto = $request->file('gambar_profil');
+
+        if ($request->hasFile('foto_profil')) {
+            $file_foto = $request->file('foto_profil');
             $nama_foto = time() . "." . $file_foto->getClientOriginalExtension();
             $upload_foto = 'assets/foto profil/';
             $file_foto->move($upload_foto, $nama_foto);
-            $user->gambar_profil = $nama_foto;
+            $user->foto_profil = $nama_foto;
         }
 
-        if ($request->hasFile('gambar_ttd')) {
-            $file_ttd = $request->file('gambar_ttd');
+        if ($request->hasFile('foto_ttd')) {
+            $file_ttd = $request->file('foto_ttd');
             $nama_ttd = time() . "." . $file_ttd->getClientOriginalExtension();
             $upload_ttd = 'assets/foto ttd/';
             $file_ttd->move($upload_ttd, $nama_ttd);
-            $user->gambar_ttd = $nama_ttd;
+            $user->foto_ttd = $nama_ttd;
         }
 
         $user->gelar=$request->gelar;
@@ -110,11 +159,10 @@ class ProfilController extends Controller
         $user->tanggal_lahir= $request->tanggal_lahir;
         $user->jenis_kelamin=$request->jenis_kelamin;
         $user->telepon=$request->telepon;
-
         $user->created_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil dilengkapi');
+        return redirect()->route('profil.index')->with('sukses', 'Akun '. $user->name .' berhasil diubah');
     }
 
     /**

@@ -31,7 +31,9 @@ Auth::routes([
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){ 
     Route::get('home', 'HomeController@index')->name('home'); 
     Route::resource('buat-surat', 'Users\BuatSuratController');
+    Route::match(['put','patch'],'buat-surat/submit/{buat_surat}', 'Users\BuatSuratController@submit')->name('buat-surat.submit');
     Route::resource('surat-agenda', 'Users\TubuhSuratController');
+    Route::match(['put','patch'],'agenda-surat/submit/{buat_surat}', 'Users\TubuhSuratController@submit')->name('agenda-surat.submit');
     Route::resource('surat-cetak', 'Users\CetakSuratController');
     Route::resource('list-surat', 'Users\ListSuratController');
     Route::get('laporan-surat', 'Users\ListSuratController@laporan')->name('laporan.index');
@@ -39,5 +41,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::get('rekapitulasi-jenis-surat', 'Users\RekapitulasiSuratController@jenis_surat')->name('rekapitulasi.jenis_surat.index');
     Route::resource('anggota-upt-kibt-poliwangi', 'Users\AnggotaController');
     Route::resource('konfigurasi-surat', 'Users\KonfigurasiSuratController');
+    Route::match(['put','patch'],'konfigurasi-surat/submit/{konfigurasi_surat}', 'Users\KonfigurasiSuratController@submit')->name('konfigurasi-surat.submit');
     Route::resource('profil', 'Users\ProfilController');
+    Route::match(['put','patch'],'profil/submit/{profil}', 'Users\ProfilController@submit')->name('profil.submit');
 });

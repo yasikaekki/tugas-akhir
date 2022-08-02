@@ -16,8 +16,8 @@ class CreateKonfigurasiSuratsTable extends Migration
         Schema::create('konfigurasi_surats', function (Blueprint $table) {
             $table->id();
             $table->string('nama_upt')->nullable();
-            $table->string('lokasi_foto')->nullable();
-            $table->string('lokasi_stempel')->nullable();
+            $table->string('logo_upt')->nullable();
+            $table->string('logo_stempel')->nullable();
             $table->timestamps();
         });
     }

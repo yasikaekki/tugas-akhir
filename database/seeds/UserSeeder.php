@@ -19,14 +19,14 @@ class UserSeeder extends Seeder
     {
         //
         $user = new User;
-        $user->name = 'super admin';
-        $user->gelar = 'S.Kom., M.Kom.';
-        $user->nip = 'NIPPPK';
-        $user->no_nip = 768787;
+        $user->name = 'Dwi Ahmad Priyadi';
+        $user->gelar = 'S.Pt., M.Sc.';
+        $user->nip = 'NIP';
+        $user->no_nip = '19910414 201903 1 010';
         $user->jabatan = 'Admin';
         $user->status = 'Aktif';
         $user->telepon = '0812222';
-        $user->email = 'admin@gmail.com';
+        $user->email = 'inkubistek@poliwangi.ac.id';
         $user->password = Hash::make('12345678');
         $user->created_at = \Carbon\Carbon::now();
         $user->email_verified_at = \Carbon\Carbon::now();

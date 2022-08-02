@@ -82,8 +82,8 @@
                                             </select>
                                             <select class="form-select col-md-2" name="filter_sort">
                                                 <option disabled hidden selected>Urutkan Menurut</option>
-                                                <option value="asc">Terbaru</option>
-                                                <option value="desc">Terlama</option>
+                                                <option value="desc">Terbaru</option>
+                                                <option value="asc">Terlama</option>
                                             </select>
                                             <button class="btn btn-primary" type="submit"><i class="bi bi-sliders"></i> Urutkan</button>
                                         </div>   
@@ -95,12 +95,11 @@
                                             <th>No.</th>
                                             <th>Nomor Surat</th>
                                             <th>Jenis Surat</th>
-                                            <th>Lampiran</th>
                                             <th>Perihal</th>
                                             <th>Agenda</th>
                                             <th>Isi Pembuka</th>
                                             <th>Isi Penutup</th>
-                                            {{-- <th>Tanggal</th> --}}
+                                            <th>Tanggal</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -112,12 +111,11 @@
                                             <th>No.</th>
                                             <th>Nomor Surat</th>
                                             <th>Jenis Surat</th>
-                                            <th>Lampiran</th>
                                             <th>Perihal</th>
                                             <th>Agenda</th>
                                             <th>Isi Pembuka</th>
                                             <th>Isi Penutup</th>
-                                            {{-- <th>Tanggal</th> --}}
+                                            <th>Tanggal</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,7 +124,6 @@
                                             <td>{{$no++}}.</td>
                                             <td>{{$laporans->buat_surat->no_surat}}</td>
                                             <td>{{$laporans->buat_surat->nomor_surat->jenis_surat}}</td>  
-                                            <td>{{$laporans->buat_surat->lampiran}}</td>
                                             <td>{{$laporans->buat_surat->perihal}}</td>
                                             @if($laporans->tubuh_surat_id != null)  
                                             <td>{{$laporans->tubuh_surat->acara}}</td>  
@@ -157,7 +154,7 @@
                                                 {{$laporans->buat_surat->isi_penutup}}
                                             </td>
                                             @endif
-                                            {{-- <td>{{$laporans->cetak_surat->created_at->translatedFormat('l, d F Y')}}</td>       --}}
+                                            <td>{{$laporans->buat_surat->created_at->translatedFormat('l, d F Y')}}</td>      
                                         </tr>
 
                                         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
