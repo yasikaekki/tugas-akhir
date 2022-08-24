@@ -20,13 +20,7 @@
           <i class="fas fa-search"></i>
         </a>
         <div class="navbar-search-block">
-          @if($judul == 'Anggota')
           <form action="{{route('anggota-upt-kibt-poliwangi.index')}}" method="GET" class="form-inline">
-          @elseif($judul == 'Laporan Surat Keluar')
-          <form action="{{route('laporan.index')}}" method="GET" class="form-inline">
-          @elseif($judul == 'List Surat Keluar')
-          <form action="{{route('list-surat.index')}}" method="GET" class="form-inline">
-          @endif
             <div class="input-group input-group-sm">
               <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="fitur_cari">
               <div class="input-group-append">

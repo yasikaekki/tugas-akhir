@@ -70,44 +70,6 @@ class KonfigurasiSuratController extends Controller
         return view('errors.404');
     }
 
-    public function submit(Request $request, $id)
-    {
-        $this->validate($request, [
-            'nama_upt'=> 'required',
-            'logo_upt'=> 'required',
-            'logo_ttd'=> 'required',
-        ],
-        [
-            'nama_upt.required'=> 'Nama UPT harus diisi',
-            'logo_upt.required'=> 'Logo UPT harus diisi',
-            'logo_stempel'=> 'Stempel harus diisi',
-        ]
-    );
-
-        $kopsurat= KonfigurasiSurat::find($id);
-
-        if ($request->hasFile('logo_upt')) {
-            $file = $request->file('logo_upt');
-            $nama_file = time() . "." . $file->getClientOriginalExtension();
-            $tujuan_upload = 'assets/logo upt/';
-            $file->move($tujuan_upload, $nama_file);
-            $kopsurat->logo_upt = $nama_file;
-        }
-
-        if ($request->hasFile('logo_stempel')) {
-            $stempel = $request->file('logo_stempel');
-            $nama_gambar = time() . "." . $stempel->getClientOriginalExtension();
-            $lokasi_upload = 'assets/stempel/';
-            $stempel->move($lokasi_upload, $nama_gambar);
-            $kopsurat->logo_stempel = $nama_gambar;
-        }
-    
-        $kopsurat->nama_upt=$request->nama_upt;
-        $kopsurat->save();
-
-        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil disimpan');
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -139,7 +101,7 @@ class KonfigurasiSuratController extends Controller
         $kopsurat->nama_upt=$request->nama_upt;
         $kopsurat->save();
 
-        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil diubah');      
+        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil disimpan');      
     }
 
     /**

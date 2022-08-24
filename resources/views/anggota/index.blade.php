@@ -104,7 +104,7 @@
                                                       <i class="bi bi-exclamation-triangle text-warning display-1"></i>
                                                     </div>
                                                     <div class="d-flex justify-content-center">
-                                                      <h3 class="mb-4">Apakah kamu yakin ingin menghapus akun {{$users->name}}?</h3>
+                                                      <h3 class="mb-4">Apakah kamu yakin ingin menghapus anggota dengan nama {{$users->name}}?</h3>
                                                     </div>
                                                     <div class="d-flex justify-content-evenly p-3">
                                                       <button class="btn btn-primary py-3 px-4" data-bs-dismiss="modal" aria-label="Close">Batal</button>

@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         $user->no_nip = '19910414 201903 1 010';
         $user->jabatan = 'Admin';
         $user->status = 'Aktif';
-        $user->telepon = '0812222';
+        $user->telepon = '08**********';
         $user->email = 'inkubistek@poliwangi.ac.id';
         $user->password = Hash::make('12345678');
         $user->created_at = \Carbon\Carbon::now();

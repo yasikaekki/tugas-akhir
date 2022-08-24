@@ -90,7 +90,7 @@
                                                         <div class="row">
                                                             <label>Nama Lengkap, Gelar</label>
                                                             <div class="col-md-6">
-                                                                <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama Lengkap">
+                                                                <input type="text" value="{{$akun->name}}" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama Lengkap">
                                                                 @error('name')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input type="text" placeholder="Gelar" value="{{old('gelar')}}" class="form-control @error('gelar') is-invalid @enderror" name="gelar">
+                                                                <input type="text" placeholder="Gelar" value="{{$akun->gelar}}" class="form-control @error('gelar') is-invalid @enderror" name="gelar">
                                                                 @error('gelar')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
 
                                                     <div class="form-group">
                                                         <label>Telepon</label>
-                                                        <input type="text" value="{{old('telepon')}}" class="mb-3 form-control @error('telepon') is-invalid @enderror" placeholder="Telepon" name="telepon">
+                                                        <input type="text" value="{{$akun->telepon}}" class="mb-3 form-control @error('telepon') is-invalid @enderror" placeholder="Telepon" name="telepon">
                                                         @error('telepon')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>

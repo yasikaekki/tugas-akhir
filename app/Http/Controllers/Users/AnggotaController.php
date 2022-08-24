@@ -25,7 +25,6 @@ class AnggotaController extends Controller
             $user=  User::where('name','like','%'.$request->fitur_cari.'%')
             ->orWhere('gelar','like','%'.$request->fitur_cari.'%')
             ->orWhere('jabatan','like','%'.$request->fitur_cari.'%')
-            ->orderBy('created_at','desc')
             ->paginate(6);
         } 
 
@@ -85,7 +84,7 @@ class AnggotaController extends Controller
         $user->created_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Akun '. $user->name .' berhasil dibuat');
+        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Anggota dengan nama '. $user->name .' berhasil dibuat');
     }
 
     /**
@@ -139,7 +138,7 @@ class AnggotaController extends Controller
         $user->updated_at=\Carbon\Carbon::now();
         $user->save();
 
-        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Akun '. $user->name .' berhasil diubah');
+        return redirect()->route('anggota-upt-kibt-poliwangi.index')->with('sukses', 'Anggota dengan nama '. $user->name .' berhasil diubah');
     }
 
     /**
@@ -153,6 +152,6 @@ class AnggotaController extends Controller
         //
         $user = User::find($id);
         $user->delete();
-        return back()->with('hapus', 'Akun '.$user->name.' berhasil dihapus');
+        return back()->with('hapus', 'Anggota dengan nama '. $user->name .' berhasil dihapus');
     }
 }
