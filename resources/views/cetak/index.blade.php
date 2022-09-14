@@ -2,85 +2,81 @@
 <html lang="en">
 <head>
   @include('layouts.top')
-  <style type="text/css">
+<style>
+table {
+    border-width: 3px;
+    margin: 0 auto;
+    padding: 2px;
+}
 
-    table {
-        border-width: 3px;
-        margin: 0 auto;
-        padding: 2px;
+table img{
+    width: 120px;
+    height: 120px;
+}
+
+.border {
+    border: 3px solid #000!important;
+    margin: 0 auto;
+    height: auto;
+    width: auto;
+}
+
+.kop {
+    border-bottom: 5px solid #000;
+    margin: 0 auto;
+    margin-right: 4rem;
+    margin-left: 4rem;
+}
+
+.kerangka{
+    font-family: arial!important;
+    width: auto;
+    margin: 0 auto;
+    background-color: #fff;
+    height: auto;
+    padding: 10px;
+}
+
+.garis{
+    text-align: center;
+    line-height: 5px;
+}
+.titik-dua {
+    margin-left: 5px;
+}
+.form-ttd{
+    padding-left: 50%;
+}
+
+.foto-ttd{
+    background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->logo_stempel}}'),url('/assets/foto ttd/{{$cetak->user->foto_ttd}}');
+    background-repeat: no-repeat;
+    background-size: 8rem 8rem,6rem 6rem;
+    background-position: 22rem 4rem,26rem 5rem;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print{
+    body * {
+        visibility: hidden;
+    }
+    .kerangka, .kerangka * {
+        visibility: visible
     }
 
-    table img{
-        width: 120px;
-        height: 120px;
+    .kerangka {
+        position: absolute;
+        top: 0px;
+        left: 0px;
     }
-
-    .border {
-        border: 3px solid #000!important;
-        margin: 0 auto;
-        height: auto;
-        width: auto;
-    }
-
-    .kop {
-        border-bottom: 5px solid #000;
-        margin: 0 auto;
-        margin-right: 4rem;
-        margin-left: 4rem;
-    }
-
-    .kerangka{
-        font-family: arial!important;
-        width: auto;
-        margin: 0 auto;
-        background-color: #fff;
-        height: auto;
-        padding: 10px;
-    }
-
-    .garis{
-        text-align: center;
-        line-height: 5px;
-    }
-    .titik-dua {
-        margin-left: 5px;
-    }
-    .fs-7 {
-        font-size: 13px;
-    }
-    .form-ttd{
-        padding-left: 65%;
-    }
-
     .foto-ttd{
-        background-image: url('/assets/stempel/{{$cetak->konfigurasi_surat->logo_stempel}}'),url('/assets/foto ttd/{{$cetak->user->foto_ttd}}');
-        background-repeat: no-repeat;
-        background-size: 10rem 10rem,8rem 8rem;
-        background-position: 25rem 5rem,29rem 6rem;;
+        -webkit-print-color-adjust: exact;
     }
-
-    @page {
-        size: A4;
-        margin: 0;
-    }
-    @media print{
-        body * {
-            visibility: hidden;
-        }
-        .kerangka, .kerangka * {
-            visibility: visible
-        }
-
-        .kerangka {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
-        .foto-ttd{
-            -webkit-print-color-adjust: exact;
-        }
-    }
-  </style>
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -137,24 +133,22 @@
                                             <div class="kerangka">
                                                 <table class="kop">
                                                     <tr>
-                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->logo_upt}}" class="mb-5"></td>
-                                                        <td class="garis">
-                                                            <p class="fs-5" style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{{$kop1}}</p>
-                                                            <p class="fs-5">{{$kop2}}</p>
-                                                            <p class="fw-bold fs-5" style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{{$cetak->konfigurasi_surat->nama_upt}}</p>
-                                                            <p class="fs-7" style="line-height: 10px;">{{$kop3}}</p>
-                                                            <p class="fs-7">{{$kop4}}</p>
-                                                        </td>
                                                         <td><img src="{{asset('vendor/dist/img/poliwangi.png')}}" class="mb-5"></td>
+                                                        <td class="garis">
+                                                            <p style="line-height: 25px; margin-bottom:10px;margin-left:4rem; margin-right:4rem;">{!!$cetak->konfigurasi_surat->kementerian!!}</p>
+                                                            <p style="line-height: 25px; margin-right:4rem; margin-left:4rem;">{!!$cetak->konfigurasi_surat->nama_upt!!}</p>
+                                                            <p style="line-height: 10px;">{!!$cetak->konfigurasi_surat->alamat_email_laman!!}</p>
+                                                        </td>
+                                                        <td><img src="/assets/logo upt/{{$cetak->konfigurasi_surat->logo_upt}}" class="mb-5"></td>
                                                     </tr>
                                                 </table>
                                         
                                                 <table width="75%" class="mt-3">
                                                     <tr>
-                                                        <td class="text-end text-right fs-6">Banyuwangi, {{$cetak->created_at->translatedFormat('d F Y')}}</td>
+                                                        <td class="text-end text-right" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;">Banyuwangi, {{$cetak->created_at->translatedFormat('d F Y')}}</td>
                                                     </tr>
                                                 </table>
-                                                <table width="75%" class="mt-3">
+                                                <table width="75%" class="mt-3" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;">
                                                     <tr>
                                                         <td>Nomor</td>
                                                         <td width="86%">: {{$cetak->no_surat}}</td>
@@ -171,7 +165,7 @@
                                                 <table class="mt-3" width="75%">
                                                     <tr>
                                                        <td>
-                                                           <p class="fs-6">Kpd yth.<br>{{$cetak->kepada}}<br>di Tempat</p>
+                                                           <p style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;">Kpd yth.<br>{{$cetak->kepada}}<br>di Tempat</p>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -179,13 +173,13 @@
                                                 <table class="mt-3" width="75%">
                                                     <tr>
                                                         <td>
-                                                            <p class="fs-6 mb-1">Dengan hormat,</p>
-                                                            <p class="fs-6">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_pembuka}}</p>
+                                                            <p class="mb-1" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;">Dengan hormat,</p>
+                                                            <p style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;text-align: justify;">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_pembuka}}</p>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 @if($cetak->tubuh_surat_id != null)
-                                                <table width="65%" class="mt-3 mb-5">
+                                                <table width="65%" class="mt-3" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;margin-left:19%;">
                                                     <tr>
                                                         <td width="20%">Hari, Tanggal</td>
                                                         @if ($cetak->tubuh_surat->tanggal == null)
@@ -194,7 +188,6 @@
                                                         <td width="86%">: {{strftime("%A, %d %B %Y", strtotime($cetak->tubuh_surat->tanggal))}}</td>
                                                         @endif
                                                     </tr>
-                                                    <tr>
                                                     <tr>
                                                         <td width="20%">Jam</td>
                                                         <td width="86%">: {{$cetak->tubuh_surat->jam}}</td>
@@ -211,21 +204,28 @@
                                                     </tr>
                                                     
                                                 </table>
-                                                @endif
-                                                <table width="75%">
+                                                <table width="75%" class="mt-4">
                                                     <tr>
                                                         <td>
-                                                            <p class="fs-6">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_penutup}}</p>
+                                                            <p style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;text-align: justify;">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_penutup}}</p>
                                                         </td>
                                                      </tr>
                                                 </table>
-                                        
-                                                <table width="75%" class="mt-5 mb-5 foto-ttd">
+                                                @else
+                                                <table width="75%">
                                                     <tr>
-                                                        <td><p class="form-ttd" style="margin-bottom: 4rem;">Hormat kami,<br>Ketua UPT Kewirausahaan dan<br>Inkubator Bisnis Teknologi Poliwangi</p></td>
+                                                        <td>
+                                                            <p style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;text-align: justify;">&emsp;&ensp;&emsp;&ensp;{{$cetak->isi_penutup}}</p>
+                                                        </td>
+                                                     </tr>
+                                                </table>
+                                                @endif
+                                                <table width="75%" class="foto-ttd mt-5">
+                                                    <tr>
+                                                        <td><p class="form-ttd" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;margin-bottom: 3rem;">Hormat kami,<br>Ketua UPT Kewirausahaan dan Inkubator Bisnis Teknologi Poliwangi</p></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><p class="form-ttd" style="margin-top: 4rem;">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
+                                                        <td><p class="form-ttd" style="font-size:{{$cetak->konfigurasi_surat->size_font_surat}}px;margin-top: 3rem;">{{$cetak->user->name}}, {{$cetak->user->gelar}}<br>{{$cetak->user->nip}}.{{$cetak->user->no_nip}}</p></td>
                                                     </tr>
                                                 </table> 
                                             </div>

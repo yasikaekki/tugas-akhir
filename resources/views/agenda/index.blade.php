@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Acara</label>
-                                            <input name="acara" value="{{old('acara')}}" type="text" placeholder="Acara" class="mb-3 form-control @error('acara') is-invalid @enderror">
+                                            <input type="text" placeholder="Acara" value="{{old('acara')}}" class="form-control @error('acara') is-invalid @enderror" name="acara">
                                             @error('acara')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Tempat</label>
-                                            <input name="tempat" value="{{old('tempat')}}" type="text" placeholder="Tempat" class="mb-3 form-control @error('tempat') is-invalid @enderror">
+                                            <input type="text" placeholder="Tempat" value="{{old('tempat')}}" class="form-control @error('tempat') is-invalid @enderror" name="tempat">
                                             @error('tempat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Acara</label>
-                                            <input name="acara" value="{{$isi->acara}}" type="text" placeholder="Acara" class="mb-3 form-control @error('acara') is-invalid @enderror">
+                                            <input type="text" placeholder="Acara" value="{{$isi->acara}}" class="form-control @error('acara') is-invalid @enderror" name="acara">
                                             @error('acara')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Tempat</label>
-                                            <input name="tempat" value="{{$isi->tempat}}" type="text" placeholder="Tempat" class="mb-3 form-control @error('tempat') is-invalid @enderror">
+                                            <input type="text" placeholder="Tempat" value="{{$isi->tempat}}" class="form-control @error('tempat') is-invalid @enderror" name="tempat">
                                             @error('tempat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

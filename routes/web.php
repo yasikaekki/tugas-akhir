@@ -41,6 +41,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function(){
     Route::get('rekapitulasi-jenis-surat', 'Users\RekapitulasiSuratController@jenis_surat')->name('rekapitulasi.jenis_surat.index');
     Route::resource('anggota-upt-kibt-poliwangi', 'Users\AnggotaController');
     Route::resource('konfigurasi-surat', 'Users\KonfigurasiSuratController');
+    Route::match(['put','patch'],'konfigurasi-surat/submit/{konfigurasi_surat}', 'Users\KonfigurasiSuratController@submit')->name('konfigurasi-surat.submit');
     Route::resource('profil', 'Users\ProfilController');
     Route::match(['put','patch'],'profil/submit/{profil}', 'Users\ProfilController@submit')->name('profil.submit');
 });

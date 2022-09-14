@@ -15,7 +15,10 @@ class CreateKonfigurasiSuratsTable extends Migration
     {
         Schema::create('konfigurasi_surats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_upt')->nullable();
+            $table->integer('size_font_surat')->nullable();
+            $table->string('kementerian',555)->nullable();
+            $table->string('nama_upt',555)->nullable();
+            $table->string('alamat_email_laman',555)->nullable();
             $table->string('logo_upt')->nullable();
             $table->string('logo_stempel')->nullable();
             $table->timestamps();

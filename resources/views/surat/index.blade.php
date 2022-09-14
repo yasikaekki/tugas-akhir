@@ -122,7 +122,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group mb-3">
                                                     <label>Perihal</label>
-                                                    <input name="perihal" value="{{old('perihal')}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                                    <input type="text" placeholder="Perihal" value="{{old('perihal')}}" class="form-control @error('perihal') is-invalid @enderror" name="perihal">
                                                     @error('perihal')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group mb-3">
                                                     <label>Kepada</label>
-                                                    <input name="kepada" value="{{old('kepada')}}" type="text" placeholder="Kepada" class="form-control @error('kepada') is-invalid @enderror">
+                                                    <input type="text" placeholder="Kepada" value="{{old('kepada')}}" class="form-control @error('kepada') is-invalid @enderror" name="kepada">
                                                     @error('kepada')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -145,7 +145,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Isi Surat Pembuka</label>
-                                                    <textarea name="isi_pembuka" placeholder="Isi Surat Pembuka" style="height:150px;" class="form-control @error('isi_pembuka') is-invalid @enderror">{{old('isi_pembuka')}}</textarea>
+                                                    <textarea style="height:150px;" class="form-control @error('isi_pembuka') is-invalid @enderror" name="isi_pembuka" placeholder="Isi Pembuka">{{old('isi_pembuka')}}</textarea>
                                                     @error('isi_pembuka')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Isi Surat Penutup</label>
-                                                    <textarea name="isi_penutup" placeholder="Isi Surat Penutup" style="height:150px;" class="form-control @error('isi_penutup') is-invalid @enderror">{{old('isi_penutup')}}</textarea>
+                                                    <textarea style="height:150px;" class="form-control @error('isi_penutup') is-invalid @enderror" name="isi_penutup" placeholder="Isi Penutup">{{old('isi_penutup')}}</textarea>
                                                     @error('isi_penutup')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -304,7 +304,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group mb-3">
                                                     <label>Perihal</label>
-                                                    <input name="perihal" value="{{$surat->perihal}}" type="text" placeholder="Perihal" class="mb-3 form-control @error('perihal') is-invalid @enderror">
+                                                    <input type="text" placeholder="Perihal" value="{{$surat->perihal}}" class="form-control @error('perihal') is-invalid @enderror" name="perihal">
                                                     @error('perihal')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -315,7 +315,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group mb-3">
                                                     <label>Kepada</label>
-                                                    <input name="kepada" value="{{$surat->kepada}}" type="text" placeholder="Kepada" class="form-control @error('kepada') is-invalid @enderror">
+                                                    <input type="text" placeholder="Kepada" value="{{$surat->kepada}}" class="form-control @error('kepada') is-invalid @enderror" name="kepada">
                                                     @error('kepada')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -327,7 +327,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Isi Surat Pembuka</label>
-                                                    <textarea name="isi_pembuka" placeholder="Isi Surat Pembuka" style="height:150px;" class="form-control @error('isi_pembuka') is-invalid @enderror">{{$surat->isi_pembuka}}</textarea>
+                                                    <textarea style="height:150px;" class="form-control @error('isi_pembuka') is-invalid @enderror" name="isi_pembuka" placeholder="Isi Pembuka">{{$surat->isi_pembuka}}</textarea>
                                                     @error('isi_pembuka')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -339,7 +339,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Isi Surat Penutup</label>
-                                                    <textarea name="isi_penutup" placeholder="Isi Surat Penutup" style="height:150px;" class="form-control @error('isi_penutup') is-invalid @enderror">{{$surat->isi_penutup}}</textarea>
+                                                    <textarea style="height:150px;" class="form-control @error('isi_penutup') is-invalid @enderror" name="isi_penutup" placeholder="Isi Penutup">{{$surat->isi_penutup}}</textarea>
                                                     @error('isi_penutup')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

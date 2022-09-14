@@ -70,6 +70,51 @@ class KonfigurasiSuratController extends Controller
         return view('errors.404');
     }
 
+    public function submit(Request $request, $id)
+    {
+        //
+        $this->validate($request, [
+            'logo_upt'=> 'required',
+            'logo_stempel'=> 'required',
+            'kementerian' => 'required',
+            'nama_upt' => 'required',
+            'alamat_email_laman' => 'required',
+        ],
+        [
+            'logo_upt.required'=>'Kolom ini harus diisi',
+            'logo_stempel.required'=>'Kolom ini harus diisi',
+            'kementerian.required'=>'Kementerian harus diisi',
+            'nama_upt.required'=>'Nama UPT harus diisi',
+            'alamat_email_laman.required' => 'Bidang ini harus diisi',
+        ]
+        );
+
+        $kopsurat= KonfigurasiSurat::find($id);
+
+        if ($request->hasFile('logo_upt')) {
+            $file = $request->file('logo_upt');
+            $nama_file = time() . "." . $file->getClientOriginalExtension();
+            $tujuan_upload = 'assets/logo upt/';
+            $file->move($tujuan_upload, $nama_file);
+            $kopsurat->logo_upt = $nama_file;
+        }
+
+        if ($request->hasFile('logo_stempel')) {
+            $stempel = $request->file('logo_stempel');
+            $nama_gambar = time() . "." . $stempel->getClientOriginalExtension();
+            $lokasi_upload = 'assets/stempel/';
+            $stempel->move($lokasi_upload, $nama_gambar);
+            $kopsurat->logo_stempel = $nama_gambar;
+        }
+        $kopsurat->size_font_surat=$request->size_font_surat;
+        $kopsurat->nama_upt=$request->nama_upt;
+        $kopsurat->kementerian=$request->kementerian;
+        $kopsurat->alamat_email_laman=$request->alamat_email_laman;
+        $kopsurat->save();
+
+        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil disimpan');      
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -97,11 +142,13 @@ class KonfigurasiSuratController extends Controller
             $stempel->move($lokasi_upload, $nama_gambar);
             $kopsurat->logo_stempel = $nama_gambar;
         }
-    
+        $kopsurat->size_font_surat=$request->size_font_surat;
         $kopsurat->nama_upt=$request->nama_upt;
+        $kopsurat->kementerian=$request->kementerian;
+        $kopsurat->alamat_email_laman=$request->alamat_email_laman;
         $kopsurat->save();
 
-        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil disimpan');      
+        return redirect()->route('konfigurasi-surat.index')->with('sukses', 'Konfigurasi surat berhasil diubah');      
     }
 
     /**

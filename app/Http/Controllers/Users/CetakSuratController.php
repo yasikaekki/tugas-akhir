@@ -25,17 +25,16 @@ class CetakSuratController extends Controller
     public function index()
     {
         //
-        $kop1 = "KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI";
-        $kop2 = "POLITEKNIK NEGERI BANYUWANGI";
-        $kop3 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
-        $kop4 = "E-mail: poliwangi@poliwangi.ac.id ; Laman : http://www.poliwangi.ac.id";
+        $kop1 = "POLITEKNIK NEGERI BANYUWANGI";
+        $kop2 = "Jl. Raya Jember Kilometer 23 Labanasem, Kabat, Banyuwangi, 68461 Telepon (0333) 636780";
+        $kop3 = "E-mail: poliwangi@poliwangi.ac.id ; Laman : http://www.poliwangi.ac.id";
 
         $judul = 'Cetak Surat';
         $surat = BuatSurat::all();
         $data = count($surat);
         $cetak = BuatSurat::find($data);
 
-        return view('cetak.index', compact('judul', 'cetak', 'kop1', 'kop2', 'kop3','kop4'));
+        return view('cetak.index', compact('judul', 'cetak', 'kop1', 'kop2', 'kop3'));
     }
 
     /**
